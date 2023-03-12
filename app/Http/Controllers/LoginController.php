@@ -32,8 +32,8 @@ class LoginController extends Controller
             ], 400);
         }
 
-        $token = $user->createToken('api', [['authenticated']]);
+        $token = $user->createToken('api', ['authenticated']);
 
-        return $user;
+        return $token;
     }
 }
