@@ -15,5 +15,14 @@ export default[
     meta:{
         requiresAuth: false,
     },
-}
+},
+
+{
+    path:"/auth/login",
+    name: "Login",
+    component: () => import("../pages/auth/login.vue"),
+    meta:{
+        requiresAuth: false,
+    },
+},
 ]
