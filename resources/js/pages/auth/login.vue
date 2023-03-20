@@ -11,14 +11,15 @@ export default {
     },
     methods: {
         handleSubmit() {
+            this.error = {};
             this.$store
                 .dispatch("postData", ["auth/login", this.form])
                 .then((result) => {
                     window.location.href = "/";
-                    //this.$router.push("/");
+                    //console.log(result);
                 })
                 .catch((error) => {
-                    if ((error.response.data.statusCode = 400)) {
+                    if (error.response.data.statusCode == 400) {
                         this.error = error.response.data;
                     } else {
                         this.error = error.response.data.messages;
@@ -28,77 +29,103 @@ export default {
     },
 };
 </script>
+
 <template>
-    <div class="container">
-        <div class="card o-hidden border-0 col-lg-7 shadow-lg my-5 mx-auto">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Login</h1>
+    <body class="bg-primary">
+        <div class="unix-login">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="login-content">
+                            <div class="login-logo">
+                                <span>Logo</span>
                             </div>
-                            <div
-                                class="alert alert-danger"
-                                v-if="error.statusCode == 400"
-                            >
-                                {{ error }}
-                            </div>
-                            <form @submit.prevent="handleSubmit" class="user">
-                                <div class="form-group">
-                                    <input
-                                        type="email"
-                                        class="form-control form-control-user"
-                                        :class="{
-                                            'is-invalid': error.email,
-                                        }"
-                                        aria-describedby="emailHelp"
-                                        placeholder="Email Address"
-                                        v-model="form.email"
-                                    />
-                                    <div
-                                        class="invalid-feedback"
-                                        v-for="(erorr, index) in error.email"
-                                        :key="index"
-                                    >
-                                        {{ erorr }}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input
-                                        type="password"
-                                        class="form-control form-control-user"
-                                        placeholder="Password"
-                                        v-model="form.password"
-                                        :class="{
-                                            'is-invalid': error.password,
-                                        }"
-                                    />
-                                    <div
-                                        class="invalid-feedback"
-                                        v-for="(erorr, index) in error.password"
-                                        :key="index"
-                                    >
-                                        {{ erorr }}
-                                    </div>
-                                </div>
-                                <button
-                                    class="btn btn-primary btn-user btn-block"
+                            <div class="login-form">
+                                <h2 class="text-center">Login</h2>
+                                <p class="text-center">
+                                    Gunakan akun anda untuk akses lebih lanjut
+                                    {{ error }}
+                                </p>
+
+                                <div
+                                    class="alert alert-danger"
+                                    v-if="error.statusCode == 400"
                                 >
-                                    Login
-                                </button>
-                            </form>
-                            <hr />
-                            <div class="text-center">
-                                <router-link to="/auth/register" class="small"
-                                    >Create an Account! Register!</router-link
+                                    {{ error.messages }}
+                                </div>
+                                <form
+                                    @submit.prevent="handleSubmit"
+                                    class="user"
                                 >
+                                    <div class="form-group">
+                                        <label class="text-capitalize"
+                                            >Email</label
+                                        >
+                                        <input
+                                            type="email"
+                                            class="form-control form-control-user"
+                                            placeholder="Email"
+                                            v-model="form.email"
+                                            :class="{
+                                                'is-invalid': error.email,
+                                            }"
+                                        />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.email"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-capitalize"
+                                            >Password</label
+                                        >
+                                        <input
+                                            type="password"
+                                            class="form-control form-control-user"
+                                            placeholder="Password"
+                                            v-model="form.password"
+                                            :class="{
+                                                'is-invalid': error.password,
+                                            }"
+                                        />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.email"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary btn-flat m-b-30 m-t-30 text-capitalize"
+                                    >
+                                        Login
+                                    </button>
+                                </form>
+
+                                <div class="text-center">
+                                    <router-link
+                                        to="/auth/register"
+                                        class="small"
+                                        ><p>
+                                            Belum punya akun? Daftar Sekarang!!
+                                        </p></router-link
+                                    >
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </body>
 </template>
