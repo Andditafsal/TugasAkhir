@@ -12,7 +12,7 @@
         rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet"> --}}
 
-    <link href="{{ asset('images/Logodashboard.png') }}">
+    {{-- <link href="{{ asset('images/Logodashboard.png') }}">
     <!-- Retina iPad Touch Icon-->
     <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
     <!-- Retina iPhone Touch Icon-->
@@ -44,9 +44,14 @@
     <link href="{{ asset('css/lib/menubar/sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lib/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lib/helper.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}">
+    <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-
     @vite('resources/css/app.css')
 </head>
 
@@ -55,7 +60,7 @@
 
 
 
-    <!-- Common -->
+    {{-- <!-- Common -->
     <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('js/lib/jquery.nanoscroller.min.js') }}"></script>
     <script src="{{ asset('js/lib/menubar/sidebar.js') }}"></script>
@@ -210,9 +215,35 @@
 
     <!--  Dashboard 1 -->
     <script src="{{ asset('js/dashboard1.js') }}"></script>
-    <script src="{{ asset('js/dashboard2.js') }}"></script>
+    <script src="{{ asset('js/dashboard2.js') }}"></script> --}}
+
+
+    <!-- Required vendors -->
+
+    <script src="{{ asset('vendor/global/global.min.js') }}" </script>
+        < script src = "{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}" >
+            <
+            /> <
+            script src = "{{ asset('vendor/chart.js/Chart.bundle.min.js') }}" >
+    </script>
+
+    <!-- Chart piety plugin files -->
+    <script src="{{ asset('vendor/peity/jquery.peity.min.js') }}"></script>
+
+    <!-- Apex Chart -->
+    <script src="{{ asset('vendor/apexchart/apexchart.js') }}"></script>
+
+    <!-- Dashboard 1 -->
+    <script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
+
+    <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
+    <script src="{{ asset('js/custom.min.js') }}"></script>
+    <script src="{{ asset('js/deznav-init.js') }}"></script>
+    <script src="{{ asset('js/demo.js') }}"></script>
+    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
 
     @vite('resources/js/app.js')
+
 
 
 </html>
