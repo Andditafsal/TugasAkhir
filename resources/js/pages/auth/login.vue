@@ -67,7 +67,7 @@ export default {
                                                 <input
                                                     type="email"
                                                     class="form-control form-control-user"
-                                                    placeholder="Email"
+                                                    placeholder="email"
                                                     v-model="form.email"
                                                     :class="{
                                                         'is-invalid':
@@ -89,7 +89,7 @@ export default {
                                             <div class="form-group">
                                                 <label class="mb-1"
                                                     ><strong
-                                                        >Password</strong
+                                                        >password</strong
                                                     ></label
                                                 >
                                                 <input

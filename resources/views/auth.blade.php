@@ -19,7 +19,7 @@
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('js/demo.js') }}"></script>
-    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
+    {{-- <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
     @vite('resources/js/app.js')
 
     {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
