@@ -25,4 +25,15 @@ export default[
         requiresAuth: false,
     },
 },
+
+{
+
+    path:"/dashboard/admin",
+    name: "Dashboard",
+    component: () => import("../pages/dashboard/admin/coba.vue"),
+    meta:{
+        requiresdashboard: false,
+    },
+
+},
 ]
