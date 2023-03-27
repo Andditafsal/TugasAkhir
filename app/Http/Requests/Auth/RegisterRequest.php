@@ -32,6 +32,7 @@ class RegisterRequest extends FormRequest
             'alamat' => 'required',
             'no_hp' => 'required',
             'password' => 'required|min:8|max:255',
+            'id_role' => 'required',
         ];
     }
     protected function failedValidation(Validator $validator)

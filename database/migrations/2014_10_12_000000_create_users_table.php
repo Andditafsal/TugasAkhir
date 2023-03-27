@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('jabatan');
             $table->integer('no_hp');
-            $table->integer('id_role');
+            $table->string('id_role');
             $table->rememberToken();
             $table->timestamps();
         });

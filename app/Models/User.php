@@ -23,8 +23,8 @@ class User extends Authenticatable
         'jabatan',
         'no_hp',
         'alamat',
-
         'password',
+        'id_role',
     ];
 
     /**
