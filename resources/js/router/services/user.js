@@ -27,6 +27,7 @@ export default [
     {
         path: "/user/:id/edit",
         name: "Edit User",
+        props: true,
         component: () => import("../../pages/user/Edit.vue"),
         meta: {
             requiresAuth: true,
