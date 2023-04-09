@@ -1,7 +1,15 @@
 import user from "./services/user"
+import arsip from "./services/arsip"
+import suratmasuk from "./services/suratmasuk"
+import suratkeluar from "./services/suratkeluar"
+
 
 export default [
     ...user,
+    ...arsip,
+    ...suratmasuk,
+    ...suratkeluar,
+
     {
         path: "/",
         name: "Dashboard",

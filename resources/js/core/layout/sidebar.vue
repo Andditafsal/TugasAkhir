@@ -60,10 +60,26 @@
                 data-parent="#accordionSidebar"
             >
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item">Surat Masuk</a>
-                    <a class="collapse-item">Surat Keluar</a>
+                    <router-link
+                        :to="{ name: 'SuratMasuk' }"
+                        class="collapse-item"
+                    >
+                        <span>Surat Masuk</span></router-link
+                    >
+                    <router-link
+                        :to="{ name: 'SuratKeluar' }"
+                        class="collapse-item"
+                    >
+                        <span>Surat Keluar</span></router-link
+                    >
                 </div>
             </div>
+        </li>
+        <li class="nav-item">
+            <router-link :to="{ name: 'Arsip' }" class="nav-link">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+                <span>Arsip</span>
+            </router-link>
         </li>
     </ul>
 </template>

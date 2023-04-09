@@ -9,18 +9,17 @@
         <!-- DataTales Example -->
         <div class="card shadow col-lg-8 mb-4">
             <div class="card-header">
-                <div
-                    class="mb-3 col-4 d-flex justify-content-between align-items-center mb-md-1"
-                >
-                    <div
+                <div class="mb-3 col-4 d-flex align-items-center mb-md-1">
+                    <router-link
+                        to="/user"
                         class="btn icon icon-shape bg-red text-white rounded-circle"
                     >
                         <i
                             class="fa fa-arrow-circle-left"
                             aria-hidden="true"
                         ></i>
-                    </div>
-                    <h5 class="mr-0 text-gray-900">Edit User</h5>
+                    </router-link>
+                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Edit User</h5>
                 </div>
             </div>
             <!-- Content -->

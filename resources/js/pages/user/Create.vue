@@ -9,9 +9,7 @@
         <!-- DataTales Example -->
         <div class="card shadow col-lg-8 mb-4">
             <div class="card-header">
-                <div
-                    class="mb-3 col-4 d-flex justify-content-between align-items-center mb-md-1"
-                >
+                <div class="mb-3 col-4 d-flex align-items-center mb-md-1">
                     <router-link
                         to="/user"
                         class="btn icon icon-shape bg-red text-white rounded-circle"
@@ -21,7 +19,7 @@
                             aria-hidden="true"
                         ></i>
                     </router-link>
-                    <h5 class="mr-0 text-gray-900">Creat User</h5>
+                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Creat User</h5>
                 </div>
             </div>
             <!-- Content -->
@@ -33,7 +31,7 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1"
-                                            >Role</label
+                                            >User Role *</label
                                         >
                                         <select
                                             class="form-control"
@@ -47,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1"
-                                            >Nama Lengkap</label
+                                            >Nama Lengkap *</label
                                         >
                                         <input
                                             type="text"
@@ -57,7 +55,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1"
-                                            >Email</label
+                                            >Email *</label
                                         >
                                         <input
                                             type="email"
@@ -67,7 +65,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1"
-                                            >Jenis Kelamin</label
+                                            >Jenis Kelamin *</label
                                         >
                                         <select
                                             class="form-control"
@@ -79,7 +77,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1"
-                                            >No Hp</label
+                                            >Nomor Telephone *</label
                                         >
                                         <input
                                             type="text"
@@ -89,7 +87,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1"
-                                            >Alamat</label
+                                            >Alamat *</label
                                         >
                                         <textarea
                                             class="form-control"
