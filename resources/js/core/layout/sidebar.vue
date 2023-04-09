@@ -1,59 +1,79 @@
 <template>
-    <!-- Start sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <!-- Start Menu Dashboard -->
-                    <li class="submenu">
-                        <router-link :to="{ name: 'Dashboard' }"
-                            ><i class="la la-dashboard"></i>
-                            <span> Dashboard</span>
-                        </router-link>
-                    </li>
-                    <!-- End Menu Dashboard -->
-                    <li class="menu-title">
-                        <span>Settings</span>
-                    </li>
-                    <!-- Start Menu User -->
-                    <li>
-                        <router-link :to="{ name: 'User' }"
-                            ><i class="la la-user-plus"></i>
-                            <span>User</span>
-                        </router-link>
-                    </li>
-                    <!-- End Menu User -->
-                    <li class="menu-title">
-                        <span>Data Surat</span>
-                    </li>
-                    <!-- Start Surat -->
-                    <li class="submenu">
-                        <a href="#"
-                            ><i class="la la-file-text"></i>
-                            <span> Surat </span>
-                            <span class="menu-arrow"></span
-                        ></a>
-                        <ul style="display: none">
-                            <li>
-                                <a href="estimates.html">Surat Masuk</a>
-                            </li>
-                            <li>
-                                <a href="invoices.html">Surat Keluar</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- End Surat -->
-                    <!-- Start Arsip -->
-                    <li>
-                        <a href="assets.html"
-                            ><i class="la la-object-ungroup"></i>
-                            <span>Arsip Surat</span></a
-                        >
-                    </li>
-                    <!-- End Arsip -->
-                </ul>
+    <ul
+        class="navbar-nav bg-side sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+    >
+        <!-- Sidebar - Brand -->
+
+        <a
+            class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="index.html"
+        >
+            <div class="sidebar-brand-text mx-3">PERSURATAN</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Dashboard' }">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></router-link
+            >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+
+        <!-- Heading -->
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'User' }">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span>User</span></router-link
+            >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <router-link
+                class="nav-link"
+                :to="{}"
+                data-toggle="collapse"
+                data-target="#collapsePages"
+                aria-expanded="true"
+                aria-controls="collapsePages"
+            >
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <span>Surat</span>
+            </router-link>
+            <div
+                id="collapsePages"
+                class="collapse show"
+                aria-labelledby="headingPages"
+                data-parent="#accordionSidebar"
+            >
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item">Surat Masuk</a>
+                    <a class="collapse-item">Surat Keluar</a>
+                </div>
             </div>
-        </div>
-    </div>
-    <!-- End sidebar -->
+        </li>
+    </ul>
 </template>
+
+<style>
+.bg-side {
+    background-color: #303137;
+}
+.fa-book {
+    background-color: black;
+    color: black;
+}
+</style>
