@@ -43,17 +43,28 @@ export default {
                     <div class="col-lg">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">
-                                    Register Acount
-                                </h1>
+                                <h1 class="h4 text-gray-900 mb-4">Daftar</h1>
+                                <h6 class="text-gray-500 mb-4">
+                                    Daftarkan akun anda untuk akses lebih
+                                    lanjut!
+                                </h6>
+                            </div>
+                            <div
+                                class="alert alert-danger"
+                                v-if="error.statusCode == 400"
+                            >
+                                {{ error }}
                             </div>
                             <form @submit.prevent="handleSubmit" class="user">
                                 <div class="form-group">
                                     <input
                                         type="teks"
                                         class="form-control form-control-user"
-                                        :class="{ 'is-invalid': error.name }"
-                                        placeholder="Full Name"
+                                        :class="{
+                                            'is-invalid': error.name,
+                                        }"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Nama Lengkap"
                                         v-model="form.name"
                                     />
                                     <div
@@ -68,8 +79,11 @@ export default {
                                     <input
                                         type="email"
                                         class="form-control form-control-user"
-                                        :class="{ 'is-invalid': error.email }"
-                                        placeholder="Email Address"
+                                        :class="{
+                                            'is-invalid': error.email,
+                                        }"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Email"
                                         v-model="form.email"
                                     />
                                     <div
@@ -82,13 +96,70 @@ export default {
                                 </div>
                                 <div class="form-group">
                                     <input
+                                        type="teks"
+                                        class="form-control form-control-user"
+                                        :class="{
+                                            'is-invalid': error.jabatan,
+                                        }"
+                                        aria-describedby=""
+                                        placeholder="Jabatan"
+                                        v-model="form.jabatan"
+                                    />
+                                    <div
+                                        class="invalid-feedback"
+                                        v-for="(erorr, index) in error.jabatan"
+                                        :key="index"
+                                    >
+                                        {{ erorr }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="int"
+                                        class="form-control form-control-user"
+                                        :class="{
+                                            'is-invalid': error.noHp,
+                                        }"
+                                        aria-describedby=""
+                                        placeholder="No hp"
+                                        v-model="form.noHp"
+                                    />
+                                    <div
+                                        class="invalid-feedback"
+                                        v-for="(erorr, index) in error.noHp"
+                                        :key="index"
+                                    >
+                                        {{ erorr }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="teks"
+                                        class="form-control form-control-user"
+                                        :class="{
+                                            'is-invalid': error.alamat,
+                                        }"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Alamat"
+                                        v-model="form.alamat"
+                                    />
+                                    <div
+                                        class="invalid-feedback"
+                                        v-for="(erorr, index) in error.alamat"
+                                        :key="index"
+                                    >
+                                        {{ erorr }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input
                                         type="password"
                                         class="form-control form-control-user"
+                                        placeholder="Password"
+                                        v-model="form.password"
                                         :class="{
                                             'is-invalid': error.password,
                                         }"
-                                        placeholder="password"
-                                        v-model="form.password"
                                     />
                                     <div
                                         class="invalid-feedback"
@@ -101,16 +172,19 @@ export default {
                                 <button
                                     class="btn btn-primary btn-user btn-block"
                                 >
-                                    Register Account
+                                    Daftar
                                 </button>
                             </form>
                             <hr />
-
                             <div class="text-center">
-                                <router-link to="/auth/login" class="small"
-                                    >Already have an account?
-                                    Login!</router-link
-                                >
+                                <span
+                                    >Sudah Punya Aku?
+                                    <router-link to="/auth/login" class="small">
+                                        <span
+                                            >Masuk Sekarang!</span
+                                        ></router-link
+                                    >
+                                </span>
                             </div>
                         </div>
                     </div>

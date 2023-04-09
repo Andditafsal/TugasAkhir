@@ -19,8 +19,9 @@
     @vite('resources/css/app.css')
 </head>
 
+
 <body class="bg-gradient-white">
-    <h1>haloo</h1>
+    <div id="auth"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -31,6 +32,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+    @vite('resources/js/app.js')
 
 </body>
 
