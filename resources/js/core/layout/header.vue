@@ -25,7 +25,7 @@
                 >
                     <img
                         class="img-profile rounded-circle"
-                        src="img/undraw_profile.svg"
+                        src="img/profile.png"
                     />
                 </a>
                 <!-- Dropdown - User Information -->
