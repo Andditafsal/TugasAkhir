@@ -25,7 +25,7 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider" />
+        <!-- <hr class="sidebar-divider" /> -->
 
         <!-- Heading -->
 
@@ -55,7 +55,7 @@
             </router-link>
             <div
                 id="collapsePages"
-                class="collapse show"
+                class="collapse"
                 aria-labelledby="headingPages"
                 data-parent="#accordionSidebar"
             >
@@ -78,7 +78,7 @@
         <li class="nav-item">
             <router-link :to="{ name: 'Arsip' }" class="nav-link">
                 <i class="fa fa-archive" aria-hidden="true"></i>
-                <span>Arsip</span>
+                <span>Disposisi</span>
             </router-link>
         </li>
     </ul>

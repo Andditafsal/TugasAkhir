@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h3 class="h3 mb-2 text-gray-800">Edit Pengguna</h3>
+            <h5 class="h5 mb-2 text-gray-800">Edit Pengguna</h5>
         </div>
 
         <!-- DataTales Example -->

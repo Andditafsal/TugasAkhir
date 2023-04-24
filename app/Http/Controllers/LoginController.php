@@ -33,6 +33,10 @@ class LoginController extends Controller
         }
 
         $token = $user->createToken('api', ['authenticated']);
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
 
         return $token;
     }

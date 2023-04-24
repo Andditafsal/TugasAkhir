@@ -5,7 +5,8 @@ export default {
             form: {
                 name: "",
                 email: "",
-                jabatan: "",
+                id_role: "",
+                jenis_kelamin: "",
                 alamat: "",
                 noHp: "",
                 password: "",
@@ -53,7 +54,7 @@ export default {
                                 class="alert alert-danger"
                                 v-if="error.statusCode == 400"
                             >
-                                {{ error }}
+                                {{ error.messages }}
                             </div>
                             <form @submit.prevent="handleSubmit" class="user">
                                 <div class="form-group">
@@ -99,15 +100,37 @@ export default {
                                         type="teks"
                                         class="form-control form-control-user"
                                         :class="{
-                                            'is-invalid': error.jabatan,
+                                            'is-invalid': error.id_role,
                                         }"
                                         aria-describedby=""
                                         placeholder="Jabatan"
-                                        v-model="form.jabatan"
+                                        v-model="form.id_role"
                                     />
                                     <div
                                         class="invalid-feedback"
-                                        v-for="(erorr, index) in error.jabatan"
+                                        v-for="(erorr, index) in error.id_role"
+                                        :key="index"
+                                    >
+                                        {{ erorr }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="teks"
+                                        class="form-control form-control-user"
+                                        :class="{
+                                            'is-invalid': error.jenis_kelamin,
+                                        }"
+                                        aria-describedby=""
+                                        placeholder="Jenis Kelamin"
+                                        v-model="form.jenis_kelamin"
+                                    />
+
+                                    <div
+                                        class="invalid-feedback"
+                                        v-for="(
+                                            erorr, index
+                                        ) in error.jenis_kelamin"
                                         :key="index"
                                     >
                                         {{ erorr }}

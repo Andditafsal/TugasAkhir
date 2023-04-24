@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticatedController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
+});
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', RegisterController::class);

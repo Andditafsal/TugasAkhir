@@ -1,4 +1,5 @@
 <script>
+import Cookies from "js-cookie";
 export default {
     data() {
         return {
@@ -14,8 +15,9 @@ export default {
             this.error = {};
             this.$store
                 .dispatch("postData", ["auth/login", this.form])
-                .then((result) => {
-                    window.location.href = "/";
+                .then((response) => {
+                    Cookies.set("token", response.token);
+                    //window.location.href = "/";
                 })
                 .catch((error) => {
                     if (error.response.data.statusCode == 400) {
@@ -47,7 +49,7 @@ export default {
                                 class="alert alert-danger"
                                 v-if="error.statusCode == 400"
                             >
-                                {{ error }}
+                                {{ error.messages }}
                             </div>
                             <form @submit.prevent="handleSubmit" class="user">
                                 <div class="form-group">

@@ -29,7 +29,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
+    {{-- <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
+    <script src="{{ asset('vendor/chart.js/Cart.min.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('js/demo/chart.js') }}"></script> --}}
+
 
     @vite('resources/js/app.js')
 

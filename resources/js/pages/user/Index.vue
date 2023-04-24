@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h3 class="h3 mb-2 text-gray-800">Pengguna</h3>
+            <h5 class="h5 mb-2 text-gray-800">Pengguna</h5>
         </div>
 
         <!-- DataTales Example -->
@@ -153,15 +153,15 @@
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
-                                                    <routerlink
-                                                        to="/user/cretae"
+                                                    <router-link
+                                                        to="/user/create"
                                                         class="btn btn-sm btn-eye m-1"
                                                     >
                                                         <i
                                                             class="fa fa-eye"
                                                             aria-hidden="true"
                                                         ></i>
-                                                    </routerlink>
+                                                    </router-link>
                                                     <button
                                                         class="btn btn-sm btn-warning m-1"
                                                     >

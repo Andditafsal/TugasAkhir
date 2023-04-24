@@ -30,6 +30,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required',
+            'jenis_kelamin' => 'required',
             'password' => 'required|min:8|max:255',
             'id_role' => 'required',
         ];

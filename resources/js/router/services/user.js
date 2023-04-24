@@ -9,6 +9,14 @@ export default [
         },
     },
     {
+        path: "/user/views",
+        name: "Views User",
+        component: () => import("../../pages/user/Views.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
         path: "/user/create",
         name: "Create User",
         component: () => import("../../pages/user/Create.vue"),

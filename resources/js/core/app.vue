@@ -2,8 +2,25 @@
 import Sidebar from "./layout/sidebar.vue";
 import Headers from "./layout/header.vue";
 import Footers from "./layout/footer.vue";
-
+import Cookies from "js-cookie";
 export default {
+    watch: {
+        "$route.params.search": {
+            handler: function (search) {
+                this.$store
+                    .dispatch("postData", ["/auth/check", {}])
+                    .then((response) => {})
+                    .catch((error) => {
+                        Cookies.remove("token");
+                    });
+                if (Cookies.get("token") == undefined) {
+                }
+                window.location.href = "/auth/login";
+            },
+            deep: true,
+            immediate: true,
+        },
+    },
     components: {
         Sidebar,
         Headers,
