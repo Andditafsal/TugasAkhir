@@ -11,14 +11,26 @@ export default {
                     .dispatch("postData", ["/auth/check", {}])
                     .then((response) => {})
                     .catch((error) => {
+                        window.location.href = "/auth/login";
                         Cookies.remove("token");
                     });
                 if (Cookies.get("token") == undefined) {
+                    window.location.href = "/auth/login";
                 }
-                window.location.href = "/auth/login";
             },
             deep: true,
             immediate: true,
+        },
+    },
+    methods: {
+        handleLogout() {
+            this.$store
+                .dispatch("postData", ["/auth/logout", {}])
+                .then((response) => {
+                    Cookies.remove("token");
+                    window.location.href = "/auth/login";
+                })
+                .catch((error) => {});
         },
     },
     components: {
@@ -104,7 +116,9 @@ export default {
                         >
                             Cancel
                         </button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-primary" @click="handleLogout()">
+                            Logout
+                        </button>
                     </div>
                 </div>
             </div>

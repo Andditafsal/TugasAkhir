@@ -17,7 +17,7 @@ export default {
                 .dispatch("postData", ["auth/login", this.form])
                 .then((response) => {
                     Cookies.set("token", response.token);
-                    //window.location.href = "/";
+                    window.location.href = "/";
                 })
                 .catch((error) => {
                     if (error.response.data.statusCode == 400) {
