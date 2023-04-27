@@ -6,18 +6,21 @@ use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserDetail;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     protected $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -29,24 +32,23 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(CreateRequest $request)
     {
         return DB::transaction(function () use ($request) {
+            $file = "";
+            if ($request->hasFile('picture')) {
+                $file = $request->file('picture')->store('profile_picture');
+            }
+
             $request->merge([
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'profile_picture' => $file
             ]);
+
             return $this->user->create($request->all());
-        }); //create db erors
+        });
     }
 
     /**
@@ -54,43 +56,50 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //$user = $this->user->findOrFail($id);
-
         return new UserDetail($user);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(string $id)
-    // {
-    //     //
-    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateRequest $request, string $id)
-
     {
         $user = $this->user->findOrFail($id);
 
+        if ($request->hasFile('picture')) {
+            if ($user->profile_picture) {
+                $path = str_replace(url('storage') . '/', '', $user->profile_picture);
+                Storage::delete($path);
+            }
+            $file = $request->file('picture')->store('profile_picture');
+
+            $request->merge([
+                'profile_picture' => $file
+            ]);
+        }
+
         if ($request->password) {
-            $request->marge([
+            $request->merge([
                 'password' => Hash::make($request->password)
             ]);
         }
+
         return DB::transaction(function () use ($request, $user) {
             return $user->update($request->all());
-        }); //create db erors
+        });
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(User $user)
     {
         return DB::transaction(function () use ($user) {
+            if ($user->profile_picture) {
+                $path = str_replace(url('storage') . '/', '', $user->profile_picture);
+                Storage::delete($path);
+            }
+
             return $user->delete();
         });
     }

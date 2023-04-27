@@ -32,6 +32,7 @@ class CreateRequest extends FormRequest
             'jenis_kelamin' => 'required',
             'password' => 'required|min:8|max:255',
             'id_role' => 'required',
+            'picture' => 'required|image|mimes:png,jpg,jpeg'
         ];
     }
     protected function failedValidation(Validator $validator)

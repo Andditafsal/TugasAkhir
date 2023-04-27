@@ -38,6 +38,7 @@ class UpdateRequest extends FormRequest
             'jenis_kelamin' => 'required',
             'password' => 'min:8|max:255',
             'id_role' => 'required',
+            'picture' => 'image|mimes:png,jpg,jpeg'
         ];
     }
     protected function failedValidation(Validator $validator)
