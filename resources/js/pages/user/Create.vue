@@ -12,32 +12,38 @@ export default {
                 password: "",
                 picture: "",
             },
+            error: {},
+            isDisabled: false,
         };
     },
     methods: {
         handleSubmit() {
+            this.isDisabled = true;
+
             let formData = new FormData();
             formData.append("name", this.form.name);
-            formData.append("name", this.form.email);
-            formData.append("name", this.form.id_role);
-            formData.append("name", this.form.jenis_kelamin);
-            formData.append("name", this.form.alamat);
-            formData.append("name", this.form.noHp);
-            formData.append("name", this.form.password);
-            formData.append("name", this.form.picture);
+            formData.append("email", this.form.email);
+            formData.append("id_role", this.form.id_role);
+            formData.append("jenis_kelamin", this.form.jenis_kelamin);
+            formData.append("alamat", this.form.alamat);
+            formData.append("no_hp", this.form.noHp);
+            formData.append("password", this.form.password);
+            formData.append("picture", this.form.picture);
 
             this.$store
                 .dispatch("postDataUpload", ["user", formData])
                 .then((result) => {
                     //this.$router.push("/auth/login");
-                    console.log(result);
+                    this.isDisabled = false;
+                    //console.log(result);
                 })
                 .catch((error) => {
-                    // this.error = error.response.data.messages;
-                    console.log(error);
+                    this.isDisabled = false;
+                    this.error = error.response.data.messages;
+                    //console.log(error);
                 });
         },
-        uploadPicture() {
+        uploadPicture(e) {
             this.form.picture = e.target.files[0];
         },
     },
@@ -48,7 +54,7 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Tamba Pengguna</h5>
+            <h5 class="h5 mb-2 text-gray-800">Tambah Pengguna</h5>
         </div>
 
         <!-- DataTales Example -->
@@ -78,17 +84,30 @@ export default {
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <label for="role">User Role *</label>
+                                        <label for="id_role">User Role *</label>
                                         <select
                                             class="form-control"
-                                            id="role"
+                                            id="id_role"
                                             v-model="form.id_role"
+                                            :class="{
+                                                'is-invalid': error.id_role,
+                                            }"
+                                            :disabled="isDisabled"
                                         >
                                             <option>Petugas</option>
                                             <option>Pemimpin</option>
                                             <option>Guru</option>
                                             <option>Siswa</option>
                                         </select>
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.id_role"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nama Lengkap *</label>
@@ -97,7 +116,18 @@ export default {
                                             class="form-control"
                                             id="name"
                                             v-model="form.name"
+                                            :class="{
+                                                'is-invalid': error.name,
+                                            }"
+                                            :disabled="isDisabled"
                                         />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(erorr, index) in error.name"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email *</label>
@@ -106,7 +136,20 @@ export default {
                                             class="form-control"
                                             id="email"
                                             v-model="form.email"
+                                            :class="{
+                                                'is-invalid': error.email,
+                                            }"
+                                            :disabled="isDisabled"
                                         />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.email"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password *</label>
@@ -115,7 +158,20 @@ export default {
                                             class="form-control"
                                             id="password"
                                             v-model="form.password"
+                                            :class="{
+                                                'is-invalid': error.password,
+                                            }"
+                                            :disabled="isDisabled"
                                         />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.password"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kelamin"
@@ -125,21 +181,46 @@ export default {
                                             class="form-control"
                                             id="kelamin"
                                             v-model="form.jenis_kelamin"
+                                            :class="{
+                                                'is-invalid':
+                                                    error.jenis_kelamin,
+                                            }"
+                                            :disabled="isDisabled"
                                         >
                                             <option>Laki-Laki</option>
                                             <option>Perempuan</option>
                                         </select>
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.jenis_kelamin"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="noHp"
+                                        <label for="Hp"
                                             >Nomor Telephone *</label
                                         >
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="noHp"
+                                            id="Hp"
                                             v-model="form.noHp"
+                                            :class="{
+                                                'is-invalid': noHp,
+                                            }"
+                                            :disabled="isDisabled"
                                         />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(erorr, index) in error.noHp"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -151,7 +232,20 @@ export default {
                                             class="form-control"
                                             id="picture"
                                             @change="uploadPicture"
+                                            :class="{
+                                                'is-invalid': noHp,
+                                            }"
+                                            :disabled="isDisabled"
                                         />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.picture"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -161,21 +255,37 @@ export default {
                                             id="alamat"
                                             rows="3"
                                             v-model="form.alamat"
+                                            :class="{
+                                                'is-invalid': alamat,
+                                            }"
+                                            :disabled="isDisabled"
                                         ></textarea>
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.alamat"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
                                     </div>
 
                                     <button
                                         type="submit"
                                         class="btn btn-primary text-center col-2 m-1"
+                                        :disabled="isDisabled"
                                     >
                                         Save
                                     </button>
-                                    <button
+                                    <router-link
+                                        :to="{ name: 'User' }"
                                         type="submit"
                                         class="btn btn-cancel text-center col-2"
+                                        :class="{ disabled: isDisabled }"
                                     >
                                         Cancle
-                                    </button>
+                                    </router-link>
                                 </form>
                             </div>
                         </div>
