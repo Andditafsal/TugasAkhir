@@ -16,19 +16,13 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.error = {};
             this.$store
                 .dispatch("postData", ["auth/register", this.form])
                 .then((result) => {
-                    window.location.href = "/";
-                    //console.log(result);
+                    this.$router.push("/auth/login");
                 })
                 .catch((error) => {
-                    if (error.response.data.statusCode == 400) {
-                        this.error = error.response.data;
-                    } else {
-                        this.error = error.response.data.messages;
-                    }
+                    this.error = error.response.data.messages;
                 });
         },
     },
