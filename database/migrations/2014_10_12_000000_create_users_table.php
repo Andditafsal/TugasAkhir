@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jenis_kelamin');
             $table->string('password');
             $table->string('alamat');
-            $table->integer('no_hp');
+            $table->string('no_hp');
             $table->string('id_role');
             $table->rememberToken();
             $table->timestamps();

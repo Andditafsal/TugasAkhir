@@ -35,6 +35,7 @@ export default {
                 .then((result) => {
                     //this.$router.push("/auth/login");
                     this.isDisabled = false;
+                    this.$router.push({ name: "User" });
                     //console.log(result);
                 })
                 .catch((error) => {

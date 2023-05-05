@@ -34,10 +34,10 @@ class UpdateRequest extends FormRequest
             ],
             'name' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => '',
             'jenis_kelamin' => 'required',
             'password' => 'min:8|max:255',
-            'id_role' => 'required',
+            'id_role' => '',
             'picture' => 'image|mimes:png,jpg,jpeg'
         ];
     }

@@ -23,15 +23,9 @@ export default [
         meta: {
             requiresAuth: true,
         },
+        props: true,
     },
-    {
-        path: "/user/delet",
-        name: "Delet User",
-        component: () => import("../../pages/user/Delet.vue"),
-        meta: {
-            requiresAuth: true,
-        },
-    },
+
     {
         path: "/user/:id/edit",
         name: "Edit User",
@@ -40,6 +34,7 @@ export default [
         meta: {
             requiresAuth: true,
         },
+        props: true,
     },
 
 ];

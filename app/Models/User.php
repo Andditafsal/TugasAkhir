@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function getProfilePictureAttribute($profilePicture)
     {
-        return asset('storage' . $profilePicture);
+        return asset('storage/' . $profilePicture);
     }
 }

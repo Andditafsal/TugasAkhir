@@ -14,7 +14,7 @@
                     <h5 class="mb-0 text-gray-900 mb-2">Daftar Surat Keluar</h5>
 
                     <router-link
-                        to="/user/create"
+                        to="/suratkeluar/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
                     >

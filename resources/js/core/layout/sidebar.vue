@@ -60,17 +60,24 @@
                 data-parent="#accordionSidebar"
             >
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="text-center">pilih surat</h6>
                     <router-link
                         :to="{ name: 'SuratMasuk' }"
-                        class="collapse-item"
-                    >
-                        <span>Surat Masuk</span></router-link
+                        class="list-group-item list-group-item-action"
+                        id="list-suratMasuk-list"
+                        data-toggle="list"
+                        role="tab"
+                        aria-controls="suratMasuk"
+                        >Surat Masuk</router-link
                     >
                     <router-link
+                        class="list-group-item list-group-item-action"
+                        id="list-suratKeluar-list"
+                        data-toggle="list"
                         :to="{ name: 'SuratKeluar' }"
-                        class="collapse-item"
-                    >
-                        <span>Surat Keluar</span></router-link
+                        role="tab"
+                        aria-controls="suratKeluar"
+                        >Surat Keluar</router-link
                     >
                 </div>
             </div>
@@ -91,5 +98,12 @@
 .fa-book {
     background-color: black;
     color: black;
+}
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #303137;
+
+    border-color: #303137;
 }
 </style>
