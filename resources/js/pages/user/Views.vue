@@ -1,132 +1,192 @@
+<script>
+export default {
+    props: ["id"],
+    data() {
+        return {
+            user: {
+                picture: "",
+            },
+            privewpicture: "",
+        };
+    },
+    mounted() {
+        this.getUser();
+    },
+    methods: {
+        getUser() {
+            this.$store
+                .dispatch("showData", ["user", this.id])
+                .then((response) => {
+                    this.user = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        uploadPicture(e) {
+            console.log("uploadPicture  ");
+            console.log(e);
+            this.user.picture = e.target.files[0];
+            const imageBlob = window.URL.createObjectURL(e.target.files[0]);
+            this.previewpicture = imageBlob;
+            console.log(this.previewpicture);
+        },
+    },
+};
+</script>
 <template>
     <div class="container-fluid">
         <!-- Page Heading -->
-        <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Pengguna</h5>
+        <div class="col-lg-6 mb-4">
+            <div class="">
+                <div class="mb-3 col-7 d-flex align-items-center mb-md-1">
+                    <router-link
+                        to="/user"
+                        class="btn icon icon-shape bg-red text-white rounded-circle"
+                    >
+                        <i
+                            class="fa fa-arrow-circle-left"
+                            aria-hidden="true"
+                        ></i>
+                    </router-link>
+                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Profile User</h5>
+                </div>
+            </div>
         </div>
 
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="card mb-3">
-                    <img
-                        class="card-img-top"
-                        src="/img/bgprofile.jpg"
-                        alt="Card image cap"
-                    />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            This is a wider card with supporting text below as a
-                            natural lead-in to additional content. This content
-                            is a little bit longer.
-                        </p>
-                        <p class="card-text">
-                            <small class="text-muted"
-                                >Last updated 3 mins ago</small
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img
+                            :src="user.profilePicture"
+                            alt="avatar"
+                            class="rounded-circle img-fluid"
+                            style="width: 300px"
+                        />
+                        <h5 class="my-3">{{ user.name }}</h5>
+
+                        <p v-if="user.jenisKelamin == 'Laki-Laki'">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-gender-male"
+                                viewBox="0 0 16 16"
                             >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"
+                                />
+                            </svg>
                         </p>
+                        <p v-else-if="user.jenisKelamin == 'Perempuan'">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-gender-female"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"
+                                />
+                            </svg>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Nama</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.name }}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.email }}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Telephone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.noHp }}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Alamat</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.alamat }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 <style>
-.btn-pengguna {
-    background-color: #303137 !important;
+.profile-view {
+    position: relative;
 }
-.btn-pengguna:hover {
-    background-color: #303137 !important;
-    color: #fefefe;
+.profile-view .profile-img-wrap {
+    height: 120px;
+    width: 120px;
 }
-.btn {
-    color: #fefefe;
+
+.profile-img-wrap {
+    height: 120px;
+    position: absolute;
+    width: 120px;
+    background: 0 0;
+    overflow: hidden;
 }
-.text-pengguna {
-    color: black;
+.profile-view .profile-img {
+    width: 120px;
+    height: 120px;
 }
-.card-header {
-    background-color: #fefefe;
+
+.profile-img {
+    cursor: pointer;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+    width: 80px;
 }
-.tabel-judul {
-    background-color: #303137 !important;
-    color: #fefefe;
+.profile-view .profile-basic {
+    margin-left: 140px;
+    padding-right: 50px;
 }
-.card-judul {
-    margin-bottom: 30px;
+.profile-info-left {
+    border-right: 2px dashed #a41c1c;
 }
-.btn-eye {
-    background-color: #1cc88a;
-    border-color: #1cc88a;
+.personal-info {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
 }
-.btn-eye:hover {
-    background-color: #1cc88a;
-    border-color: #1cc88a;
-    color: #fefefe;
-}
-.btn-warning {
-    background-color: #f1924c;
-    border-color: #f1924c;
-}
-.btn-warning:hover {
-    background-color: #f1924c;
-    border-color: #f1924c;
-    color: #fefefe;
-}
-.btn-danger {
-    background-color: #e85345;
-    border-color: #e85345;
-}
-.btn-danger:hover {
-    background-color: #e85345;
-    border-color: #e85345;
-    color: #fefefe;
-}
-.admin {
-    background-color: #303137;
-    border-color: #303137;
-}
-.admin:hover {
-    background-color: #303137;
-    border-color: #303137;
-    color: #fefefe;
-}
-.pemimpin {
-    background-color: #0f9662ce;
-    border-color: #0f9662ce;
-}
-.pemimpin:hover {
-    background-color: #0f9662ce;
-    border-color: #0f9662ce;
-    color: #fefefe;
-}
-.petugas {
-    background-color: #d41f5ece;
-    border-color: #d41f5ece;
-}
-.petugas:hover {
-    background-color: #d41f5ece;
-    border-color: #d41f5ece;
-    color: #fefefe;
-}
-.guru {
-    background-color: #981fd4ce;
-    border-color: #981fd4ce;
-}
-.guru:hover {
-    background-color: #981fd4ce;
-    border-color: #981fd4ce;
-    color: #fefefe;
-}
-.siswa {
-    background-color: #1f9bd4ce;
-    border-color: #1f9bd4ce;
-}
-.siswa:hover {
-    background-color: #1f9bd4ce;
-    border-color: #1f9bd4ce;
-    color: #fefefe;
+.personal-info li .text {
+    color: #bbc4cc;
+    display: block;
+    overflow: hidden;
 }
 </style>

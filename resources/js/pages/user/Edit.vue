@@ -30,7 +30,8 @@ export default {
                 email: user.email,
                 jenis_kelamin: user.jenisKelamin,
                 noHp: user.noHp,
-                id_role: user.idRole,
+                role: user.idrole,
+                alamat: user.alamat,
             };
             this.showPicture = user.profilePicture;
             this.previewpicture = user.profilePicture;
@@ -73,6 +74,7 @@ export default {
                 .dispatch("postDataUpload", ["user/" + this.id, formData])
                 .then((result) => {
                     //this.$router.push("/auth/login");
+                    coba.success;
                     this.isDisabled = false;
                     this.$router.push({ name: "User" });
                     //console.log(result);
@@ -127,14 +129,18 @@ export default {
                                             id="id_role"
                                             v-model="form.role"
                                             :class="{
-                                                'is-invalid': error.role,
+                                                'is-invalid': error.idrole,
                                             }"
                                             :disabled="isDisabled"
                                         >
-                                            <option>Petugas</option>
-                                            <option>Pemimpin</option>
-                                            <option>Guru</option>
-                                            <option>Siswa</option>
+                                            <option value="petugas">
+                                                Petugas
+                                            </option>
+                                            <option value="pemimpin">
+                                                Pemimpin
+                                            </option>
+                                            <option value="guru">Guru</option>
+                                            <option value="siswa">Siswa</option>
                                         </select>
                                         <div
                                             class="invalid-feedback"

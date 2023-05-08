@@ -9,12 +9,13 @@ export default [
         },
     },
     {
-        path: "/user/views",
+        path: "/user/:id/views",
         name: "Views User",
         component: () => import("../../pages/user/Views.vue"),
         meta: {
             requiresAuth: true,
         },
+        props: true,
     },
     {
         path: "/user/create",

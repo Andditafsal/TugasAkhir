@@ -234,7 +234,7 @@ export default {
                                             id="picture"
                                             @change="uploadPicture"
                                             :class="{
-                                                'is-invalid': noHp,
+                                                'is-invalid': picture,
                                             }"
                                             :disabled="isDisabled"
                                         />

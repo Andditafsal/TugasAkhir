@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             users: [],
+            successDelet: false,
         };
     },
     mounted() {
@@ -23,8 +24,12 @@ export default {
             this.$store
                 .dispatch("deleteData", ["user", this.id])
                 .then((response) => {
+                    this.successDelet = true;
                     this.getUsers();
                     $("#deletUserModal").modal("hide");
+                    setTimeout(() => {
+                        this.successDelet = false;
+                    }, 3000);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -62,6 +67,9 @@ export default {
                         <span class="btn-inner--text m-1">Tambah Pengguna</span>
                     </router-link>
                 </div>
+            </div>
+            <div v-if="successDelet" class="alert alert-success">
+                Data berhasil dihapus
             </div>
 
             <div class="card-body">
@@ -178,7 +186,12 @@ export default {
                                                 >
                                                     <router-link
                                                         class="btn btn-sm btn-eye m-1"
-                                                        to="/user/create"
+                                                        :to="{
+                                                            name: 'Views User',
+                                                            params: {
+                                                                id: user.id,
+                                                            },
+                                                        }"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
