@@ -42,7 +42,8 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Pengguna</h5>
+            <i class="fa fa-users" widht="100" aria-hidden="true"></i>
+            <span class="h5 mb-0 text-gray-800 ml-2">Pengguna </span>
         </div>
 
         <!-- DataTales Example -->
@@ -236,7 +237,7 @@ export default {
                                                         </svg>
                                                     </router-link>
                                                     <button
-                                                        class="btn btn-sm btn-danger m-1"
+                                                        class="btn btn-sm btn-hapus m-1"
                                                         data-toggle="modal"
                                                         data-target="#deletUserModal"
                                                         @click="id = user.id"
@@ -351,11 +352,11 @@ export default {
     border-color: #f1924c;
     color: #fefefe;
 }
-.btn-danger {
+.btn-hapus {
     background-color: #e85345;
     border-color: #e85345;
 }
-.btn-danger:hover {
+.btn-hapus:hover {
     background-color: #e85345;
     border-color: #e85345;
     color: #fefefe;

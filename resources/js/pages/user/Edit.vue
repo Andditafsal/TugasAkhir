@@ -13,6 +13,7 @@ export default {
                 password: "",
                 picture: "",
             },
+            role: {},
             error: {},
             isDisabled: false,
             showPicture: "",
@@ -22,6 +23,7 @@ export default {
 
     mounted() {
         this.getUser();
+        this.getRole();
     },
     methods: {
         setForm(user) {
@@ -30,7 +32,7 @@ export default {
                 email: user.email,
                 jenis_kelamin: user.jenisKelamin,
                 noHp: user.noHp,
-                role: user.idrole,
+                role: user.idRole,
                 alamat: user.alamat,
             };
             this.showPicture = user.profilePicture;
@@ -41,6 +43,16 @@ export default {
                 .dispatch("showData", ["user", this.id])
                 .then((response) => {
                     this.setForm(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getRole() {
+            this.$store
+                .dispatch("getData", ["role", this.id])
+                .then((response) => {
+                    this.role = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -74,7 +86,7 @@ export default {
                 .dispatch("postDataUpload", ["user/" + this.id, formData])
                 .then((result) => {
                     //this.$router.push("/auth/login");
-                    coba.success;
+
                     this.isDisabled = false;
                     this.$router.push({ name: "User" });
                     //console.log(result);
@@ -82,7 +94,7 @@ export default {
                 .catch((error) => {
                     this.isDisabled = false;
                     this.error = error.response.data.messages;
-                    //console.log(error);
+                    //  console.log(error);
                 });
         },
     },
@@ -133,14 +145,13 @@ export default {
                                             }"
                                             :disabled="isDisabled"
                                         >
-                                            <option value="petugas">
-                                                Petugas
+                                            <option
+                                                v-for="(role, index) in role"
+                                                :key="index"
+                                                :value="role.id"
+                                            >
+                                                {{ role.name }}
                                             </option>
-                                            <option value="pemimpin">
-                                                Pemimpin
-                                            </option>
-                                            <option value="guru">Guru</option>
-                                            <option value="siswa">Siswa</option>
                                         </select>
                                         <div
                                             class="invalid-feedback"

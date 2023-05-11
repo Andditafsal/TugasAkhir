@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h3 class="h3 mb-2 text-gray-800">Surat Keluar</h3>
+            <i class="fa fa-share" aria-hidden="true"></i>
+            <span class="h5 mb-0 text-gray-800 ml-2 mt-2">Surat Keluar </span>
         </div>
 
         <!-- DataTales Example -->

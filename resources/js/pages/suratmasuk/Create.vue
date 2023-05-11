@@ -120,7 +120,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="">Lampiran *</label>
                                             <input
-                                                type="text"
+                                                type="file"
                                                 class="form-control"
                                             />
                                         </div>

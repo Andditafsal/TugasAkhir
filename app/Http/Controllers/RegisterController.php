@@ -20,6 +20,7 @@ class RegisterController extends Controller
     {
         return DB::transaction(function () use ($request) {
             $request->merge([
+                'id_role' => 5,
                 'password' => Hash::make($request->password)
             ]);
             return $this->model->create($request->all());

@@ -24,6 +24,13 @@
             >
         </li>
 
+        <li class="nav-item">
+            <router-link :to="{ name: 'Jadwal' }" class="nav-link">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Jadwal</span></router-link
+            >
+        </li>
+
         <!-- Divider -->
         <!-- <hr class="sidebar-divider" /> -->
 
@@ -60,7 +67,7 @@
                 data-parent="#accordionSidebar"
             >
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="text-center">pilih surat</h6>
+                    <h6 class="text-center">Surat</h6>
                     <router-link
                         :to="{ name: 'SuratMasuk' }"
                         class="list-group-item list-group-item-action"
