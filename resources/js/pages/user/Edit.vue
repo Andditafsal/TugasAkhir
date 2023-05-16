@@ -6,7 +6,7 @@ export default {
             form: {
                 name: "",
                 email: "",
-                id_role: "",
+                role: "",
                 jenis_kelamin: "",
                 alamat: "",
                 noHp: "",
@@ -134,33 +134,6 @@ export default {
                                     @submit.prevent="handleSubmit"
                                     method="post"
                                 >
-                                    <div class="form-group">
-                                        <label for="id_role">User Role *</label>
-                                        <select
-                                            class="form-control"
-                                            id="id_role"
-                                            v-model="form.role"
-                                            :class="{
-                                                'is-invalid': error.idrole,
-                                            }"
-                                            :disabled="isDisabled"
-                                        >
-                                            <option
-                                                v-for="(role, index) in role"
-                                                :key="index"
-                                                :value="role.id"
-                                            >
-                                                {{ role.name }}
-                                            </option>
-                                        </select>
-                                        <div
-                                            class="invalid-feedback"
-                                            v-for="(erorr, index) in error.role"
-                                            :key="index"
-                                        >
-                                            {{ erorr }}
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label for="name">Nama Lengkap *</label>
                                         <input

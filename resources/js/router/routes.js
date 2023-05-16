@@ -2,6 +2,9 @@ import user from "./services/user"
 import arsip from "./services/arsip"
 import suratmasuk from "./services/suratmasuk"
 import suratkeluar from "./services/suratkeluar"
+import disposisi from "./services/disposisi"
+import jadwal from "./services/jadwal"
+
 
 
 export default [
@@ -9,6 +12,10 @@ export default [
     ...arsip,
     ...suratmasuk,
     ...suratkeluar,
+    ...disposisi,
+    ...jadwal,
+
+
 
     {
         path: "/",

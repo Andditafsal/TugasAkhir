@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 
 const router = createRouter({
     history: createWebHistory(),
+    linkActiveClass: 'active',
     routes,
 })
 

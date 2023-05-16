@@ -12,31 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jenis_surat', function (Blueprint $table) {
-            //Surat
             $table->id();
-            $table->integer('nomor_surat');
-            $table->date('tanggal_surat');
+            $table->string('nomor_surat');
             $table->string('nama');
-            $table->integer('lampiran');
-            $table->string('perial');
-
-            //Kegiatan
-            $table->string('nama_kegiatan');
-            $table->string('hari_kegiatan');
-            $table->date('tanggal_kegiatan');
-            $table->time('waktu_kegitan');
-            $table->string('tempat_kegiatan');
-            $table->text('keterangan_kegiatan');
-            //ttd
-            $table->string('jabatan');
-            $table->string('position');
-            $table->integer('nip');
-            //form  siswa
-
-
-
-
-
             $table->timestamps();
         });
     }

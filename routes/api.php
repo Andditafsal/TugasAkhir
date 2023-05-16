@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthenticatedController;
+use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +26,31 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+//Router SuratMasuk
+Route::prefix('jenissurat')->group(function () {
+    Route::get('/', [JenisSuratController::class, 'index']);
+    Route::post('/', [JenisSuratController::class, 'store']);
+    Route::get('/{jenissurat}', [JenisSuratController::class, 'show']);
+    Route::put('/{id}', [JenisSuratController::class, 'update']);
+    Route::delete('/{jenissurat}', [JenisSuratController::class, 'destroy']);
+});
+
+
+
+Route::prefix('role')->group(function () {
+    Route::get('/',  RoleController::class);
+});
+
+//Router SuratMasuk
+Route::prefix('suratmasuk')->group(function () {
+    Route::get('/', [SuratMasukController::class, 'index']);
+    Route::post('/', [SuratMasukController::class, 'store']);
+    Route::get('/{suratmasuk}', [SuratMasukController::class, 'show']);
+    Route::put('/{id}', [SuratMasukController::class, 'update']);
+    Route::delete('/{suratmasuk}', [SuratMasukController::class, 'destroy']);
+});
+
 
 //Router User
 Route::prefix('user')->group(function () {
@@ -45,4 +74,6 @@ Route::prefix('auth')->group(function () {
         Route::post('logout', LogoutController::class);
     });
 });
+
+
 //end

@@ -5,7 +5,7 @@ export default {
             form: {
                 name: "",
                 email: "",
-                id_role: "",
+                role: "",
                 jenis_kelamin: "",
                 alamat: "",
                 noHp: "",
@@ -23,7 +23,7 @@ export default {
             let formData = new FormData();
             formData.append("name", this.form.name);
             formData.append("email", this.form.email);
-            formData.append("id_role", this.form.id_role);
+            formData.append("role", this.form.role);
             formData.append("jenis_kelamin", this.form.jenis_kelamin);
             formData.append("alamat", this.form.alamat);
             formData.append("no_hp", this.form.noHp);
@@ -85,13 +85,13 @@ export default {
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <label for="id_role">User Role *</label>
+                                        <label for="role">User Role *</label>
                                         <select
                                             class="form-control"
-                                            id="id_role"
-                                            v-model="form.id_role"
+                                            id="role"
+                                            v-model="form.role"
                                             :class="{
-                                                'is-invalid': error.id_role,
+                                                'is-invalid': error.role,
                                             }"
                                             :disabled="isDisabled"
                                         >
@@ -102,9 +102,7 @@ export default {
                                         </select>
                                         <div
                                             class="invalid-feedback"
-                                            v-for="(
-                                                erorr, index
-                                            ) in error.id_role"
+                                            v-for="(erorr, index) in error.role"
                                             :key="index"
                                         >
                                             {{ erorr }}
