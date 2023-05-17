@@ -1,19 +1,22 @@
 import user from "./services/user"
-import arsip from "./services/arsip"
+
 import suratmasuk from "./services/suratmasuk"
 import suratkeluar from "./services/suratkeluar"
 import disposisi from "./services/disposisi"
 import jadwal from "./services/jadwal"
+import jenissurat from "./services/jenissurat"
+import arsipsurat from "./services/arsipsurat"
 
 
 
 export default [
     ...user,
-    ...arsip,
+    ...arsipsurat,
     ...suratmasuk,
     ...suratkeluar,
     ...disposisi,
     ...jadwal,
+    ...jenissurat,
 
 
 
