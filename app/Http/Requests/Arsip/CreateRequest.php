@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Arsip;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\JsonResponse;
+
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRequest extends FormRequest
 {
@@ -25,14 +26,11 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users',
-            'name' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'jenis_kelamin' => 'required',
-            'password' => 'required|min:8|max:255',
-            'role' => 'required',
-            'picture' => 'required|image|mimes:png,jpg,jpeg'
+            'tanggal_surat',
+            'nama',
+            'lampiran',
+            'perihal',
+            'tahun_ajaran',
         ];
     }
     protected function failedValidation(Validator $validator)

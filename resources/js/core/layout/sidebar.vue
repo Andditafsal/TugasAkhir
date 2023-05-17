@@ -24,12 +24,12 @@
             >
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <router-link :to="{ name: 'Jadwal' }" class="nav-link">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <span>Jadwal</span></router-link
             >
-        </li>
+        </li> -->
 
         <!-- Divider -->
         <!-- <hr class="sidebar-divider" /> -->
@@ -37,12 +37,6 @@
         <!-- Heading -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'User' }">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                <span>User</span></router-link
-            >
-        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
@@ -69,6 +63,16 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="text-center">Surat</h6>
                     <router-link
+                        class="list-group-item list-group-item-action"
+                        id="list-jenissurat-list"
+                        data-toggle="list"
+                        :to="{ name: 'JenisSurat' }"
+                        role="tab"
+                        aria-controls="jenissurat"
+                    >
+                        Jenis Surat
+                    </router-link>
+                    <router-link
                         :to="{ name: 'SuratMasuk' }"
                         class="list-group-item list-group-item-action"
                         id="list-suratMasuk-list"
@@ -89,11 +93,18 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <router-link :to="{ name: 'Disposisi' }" class="nav-link">
                 <i class="fa fa-archive" aria-hidden="true"></i>
                 <span>Disposisi</span>
             </router-link>
+        </li> -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'User' }">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span>User</span></router-link
+            >
         </li>
     </ul>
 </template>
