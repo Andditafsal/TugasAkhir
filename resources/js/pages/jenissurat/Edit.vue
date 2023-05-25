@@ -1,29 +1,51 @@
 <script>
 export default {
+    props: ["id"],
     data() {
         return {
             form: {
                 nama: "",
                 nomorSurat: "",
             },
-            error: {},
+            erorr: {},
             isDisabled: false,
         };
     },
+    mounted() {
+        this.getJenissurat();
+    },
     methods: {
+        setForm(jenissurats) {
+            this.form = {
+                nomorSurat: jenissurats.nomorSurat,
+                nama: jenissurats.nama,
+            };
+        },
+        getJenissurat() {
+            this.$store
+                .dispatch("showData", ["jenissurat", this.id])
+                .then((response) => {
+                    this.setForm(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         handleSubmit() {
             this.isDisabled = true;
 
             let formData = new FormData();
+            formData.append("_method", "put");
             formData.append("nama", this.form.nama);
             formData.append("nomor_surat", this.form.nomorSurat);
 
             this.$store
-                .dispatch("postDataUpload", ["jenissurat", formData])
+                .dispatch("postDataUpload", ["jenissurat/" + this.id, formData])
                 .then((result) => {
                     this.isDisabled = false;
                     this.$router.push({ name: "JenisSurat" });
-                    //console.log(result);
+                    console.log(result);
+                    console.log("ada");
                 })
                 .catch((error) => {
                     this.isDisabled = false;
@@ -34,12 +56,13 @@ export default {
     },
 };
 </script>
+
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Tambah Jenis Surat</h5>
+            <h5 class="h5 mb-2 text-gray-800">Edit Jenis Surat</h5>
         </div>
 
         <!-- DataTales Example -->
@@ -56,7 +79,7 @@ export default {
                         ></i>
                     </router-link>
                     <h5 class="mb-0 mr-0 text-gray-900 px-2">
-                        Creat Jenis Surat
+                        Edit Jenis Surat
                     </h5>
                 </div>
             </div>
@@ -76,21 +99,9 @@ export default {
                                             type="text"
                                             class="form-control"
                                             id="name"
-                                            v-model="form.nomorSurat"
-                                            :class="{
-                                                'is-invalid': error.nomorSurat,
-                                            }"
+                                            v-model="form.nama"
                                             :disabled="isDisabled"
                                         />
-                                        <div
-                                            class="invalid-feedback"
-                                            v-for="(
-                                                erorr, index
-                                            ) in error.nomorSurat"
-                                            :key="index"
-                                        >
-                                            {{ erorr }}
-                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="text">Nama Surat *</label>
@@ -98,19 +109,9 @@ export default {
                                             type="text"
                                             class="form-control"
                                             id="name"
-                                            v-model="form.nama"
-                                            :class="{
-                                                'is-invalid': error.nama,
-                                            }"
+                                            v-model="form.nomorSurat"
                                             :disabled="isDisabled"
                                         />
-                                        <div
-                                            class="invalid-feedback"
-                                            v-for="(erorr, index) in error.nama"
-                                            :key="index"
-                                        >
-                                            {{ erorr }}
-                                        </div>
                                     </div>
 
                                     <button

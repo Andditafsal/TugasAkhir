@@ -25,8 +25,7 @@ class JenisSuratUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' =>                 'required',
-
+            'nama' => 'required',
             'nomor_surat' => 'required'
         ];
     }

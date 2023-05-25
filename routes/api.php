@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\AuthenticatedController;
+use App\Http\Controllers\CetakSuratController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WordController;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +31,22 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-//Router SuratMasuk
+///Cetak Surat
+Route::prefix('cetak')->group(function () {
+});
+
+
+//Arsip Surat
+Route::prefix('arsipsurat')->group(function () {
+    Route::get('/', [ArsipSuratController::class, 'index']);
+    Route::post('/', [ArsipSuratController::class, 'store']);
+    Route::get('/{arsipsurat}', [ArsipSuratController::class, 'show']);
+    Route::put('/{id}', [ArsipSuratController::class, 'update']);
+    Route::delete('/{arsipsurat}', [ArsipSuratController::class, 'destroy']);
+    Route::get('/cetak/{arsipsurat}', [ArsipSuratController::class, 'cetak']);
+});
+
+//Router Jenis Surat
 Route::prefix('jenissurat')->group(function () {
     Route::get('/', [JenisSuratController::class, 'index']);
     Route::post('/', [JenisSuratController::class, 'store']);
@@ -36,8 +55,13 @@ Route::prefix('jenissurat')->group(function () {
     Route::delete('/{jenissurat}', [JenisSuratController::class, 'destroy']);
 });
 
+//Route Coba PHPWORD
+Route::prefix('word')->group(function () {
+    Route::get('/word',  WordController::class);
+});
 
 
+//Router Role
 Route::prefix('role')->group(function () {
     Route::get('/',  RoleController::class);
 });
@@ -49,6 +73,15 @@ Route::prefix('suratmasuk')->group(function () {
     Route::get('/{suratmasuk}', [SuratMasukController::class, 'show']);
     Route::put('/{id}', [SuratMasukController::class, 'update']);
     Route::delete('/{suratmasuk}', [SuratMasukController::class, 'destroy']);
+});
+
+//Router SuratKeluar
+Route::prefix('suratkeluar')->group(function () {
+    Route::get('/', [SuratKeluarController::class, 'index']);
+    Route::post('/', [SuratKeluarController::class, 'store']);
+    Route::get('/{suratkeluar}', [SuratKeluarController::class, 'show']);
+    Route::put('/{id}', [SuratKeluarController::class, 'update']);
+    Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
 });
 
 
