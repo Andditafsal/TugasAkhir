@@ -14,4 +14,13 @@ export default [{
             requiresAuth: true,
         },
     },
+    {
+        path: "/cetak_surat/:id",
+
+        name: "CetakSuratKeluar",
+        component: () => import("../../pages/template/surat_audit.vue"),
+        meta: {
+            requiresAuth: true
+        }
+    }
 ];

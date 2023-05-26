@@ -48,229 +48,55 @@
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="">No Agenda *</label>
+                                            <label for="">Tanggal *</label>
                                             <input
-                                                type="int"
+                                                type="text"
                                                 class="form-control"
                                             />
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="">Jenis Surat *</label>
-                                            <select class="form-control">
-                                                <option>
-                                                    Surat Tugas Monitoring PKL
-                                                </option>
-                                                <option>
-                                                    Surat Penarikan Peserta PKL
-                                                </option>
-                                                <option>
-                                                    Surat Pengantar PKL
-                                                </option>
-                                                <option>
-                                                    Surat Panggilan Orang Tua
-                                                </option>
-
-                                                <option>
-                                                    Surat Izin Atasan
-                                                </option>
-                                                <option>
-                                                    Surat Dispen Siswa
-                                                </option>
-                                                <option>
-                                                    Surat Akrif Siswa
-                                                </option>
-                                                <option>Surat Diterima</option>
-
-                                                <option>
-                                                    Surat Pengambilan Raport
-                                                </option>
-                                                <option>
-                                                    Surat Undangan Brefing
-                                                </option>
-                                                <option>
-                                                    Surat Rapat Koordinasi
-                                                </option>
-                                                <option>
-                                                    Surat Pengesian E-Raport
-                                                </option>
-                                                <option>
-                                                    Permohonan Surat Keluar
-                                                </option>
-                                            </select>
+                                            <label for="">Asal Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                            />
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Nomor Surat *</label>
                                             <input
-                                                type="int"
+                                                type="string"
                                                 class="form-control"
                                             />
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for=""
-                                                >Tanggal Surat *</label
-                                            >
+                                            <label for="">Perial *</label>
                                             <input
-                                                type="date"
+                                                type="string"
                                                 class="form-control"
                                             />
                                         </div>
                                     </div>
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">Lampiran *</label>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Upload Surat *</label>
                                             <input
                                                 type="file"
                                                 class="form-control"
                                             />
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Perihal *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                            />
-                                        </div>
-
-                                        <fieldset class="form-group col-12">
-                                            <div class="row">
-                                                <legend
-                                                    class="col-form-label col-sm-2 pt-0"
-                                                >
-                                                    Diajukan Kepada:
-                                                </legend>
-                                                <div class="col-sm-10">
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios1"
-                                                            value="option1"
-                                                            checked
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios1"
-                                                        >
-                                                            Kepala Sekolah
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios2"
-                                                            value="option2"
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios2"
-                                                        >
-                                                            Guru
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <div class="row col-12">
-                                            <div class="col-md-0">
-                                                <div class="col-sm-6 mb-3">
-                                                    <div
-                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
-                                                    >
-                                                        <i
-                                                            class="fa fa-folder"
-                                                            aria-hidden="true"
-                                                        ></i>
-                                                        <label
-                                                            for=""
-                                                            class="px-1 mb-0"
-                                                            >Kegiatan</label
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Tanggal Kegiatan *</label>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >Waktu Kegiatan (Mulai) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                placeholder="1234 Main St"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >Waktu Kegiatan (Akhir) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-sm-6 mb-3">
-                                            <div
-                                                class="d-flex px-12 align-items-center margin-100px-bottom"
-                                            >
-                                                <i
-                                                    class="fa fa-folder"
-                                                    aria-hidden="true"
-                                                ></i>
-                                                <label for="" class="px-1 mb-0"
-                                                    >Pengirim</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Pengirim *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Email *</label>
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-
                                     <button
                                         type="submit"
-                                        class="btn btn-primary mt-3"
+                                        class="btn btn-primary text-center col-1 m-1"
                                     >
-                                        Create Surat
+                                        Save
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        class="btn btn-cancel text-center col-1"
+                                    >
+                                        Cancle
                                     </button>
                                 </form>
                             </div>
@@ -304,5 +130,9 @@
 .text-white {
     color: white !important;
     background-color: #303137;
+}
+.btn-cancel {
+    background-color: #7a7a7a;
+    color: white !important;
 }
 </style>
