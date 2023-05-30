@@ -208,7 +208,7 @@
                                                         </svg>
                                                     </button>
                                                     <button
-                                                        class="btn btn-sm btn-danger m-1"
+                                                        class="btn btn-sm btn-print m-1"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -289,11 +289,11 @@
     border-color: #1cc88a;
     color: #fefefe;
 }
-.btn-danger {
+.btn-print {
     background-color: #4ba3f0;
     border-color: #4ba3f0;
 }
-.btn-danger:hover {
+.btn-print:hover {
     background-color: #4ba3f0;
     border-color: #4ba3f0;
     color: #fefefe;

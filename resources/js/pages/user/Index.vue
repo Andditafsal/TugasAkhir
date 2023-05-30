@@ -426,4 +426,14 @@ export default {
     margin-left: 30%;
     margin-top: 50%;
 }
+.btn-danger {
+    background-color: #f90d0d;
+    border-color: #f90d0d;
+    color: #fefefe;
+}
+.btn-danger:hover {
+    background-color: #f90d0d;
+    border-color: #f90d0d;
+    color: #fefefe;
+}
 </style>

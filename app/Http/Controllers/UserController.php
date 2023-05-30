@@ -6,6 +6,7 @@ use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserDetail;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,9 +43,12 @@ class UserController extends Controller
                 $file = $request->file('picture')->store('profile_picture');
             }
 
+            $role = Role::where("name", $request->role)->first();
+
             $request->merge([
                 'password' => Hash::make($request->password),
-                'profile_picture' => $file
+                'profile_picture' => $file,
+                'id_role' => $role->id
             ]);
 
             return $this->user->create($request->all());

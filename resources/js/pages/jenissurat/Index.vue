@@ -25,8 +25,9 @@ export default {
                 .dispatch("deleteData", ["jenissurat", this.id])
                 .then((response) => {
                     this.successDelet = true;
+
                     this.getJenisSurats();
-                    $("#deletUserModal").modal("hide");
+                    $("#deletJenissuratModal").modal("hide");
                     setTimeout(() => {
                         this.successDelet = false;
                     }, 3000);
@@ -72,7 +73,9 @@ export default {
                     </router-link>
                 </div>
             </div>
-
+            <div v-if="successDelet" class="alert alert-success">
+                Data berhasil dihapus
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <div
@@ -338,6 +341,16 @@ export default {
 .btn-signature:hover {
     background-color: #0c0b0e;
     border-color: #0b0e0d;
+    color: #fefefe;
+}
+.btn-danger {
+    background-color: #f90d0d;
+    border-color: #f90d0d;
+    color: #fefefe;
+}
+.btn-danger:hover {
+    background-color: #f90d0d;
+    border-color: #f90d0d;
     color: #fefefe;
 }
 </style>

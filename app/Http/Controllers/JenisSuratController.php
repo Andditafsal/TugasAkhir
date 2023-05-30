@@ -31,6 +31,13 @@ class JenisSuratController extends Controller
      */
     public function store(CreateRequest $request)
     {
+        $file = "";
+        if ($request->hasFile('documen')) {
+            $file = $request->file('document')->store('file_document');
+        }
+        $request->merge([
+            'file_document' => $file
+        ]);
 
         return $this->jenissurat->create($request->all());
     }

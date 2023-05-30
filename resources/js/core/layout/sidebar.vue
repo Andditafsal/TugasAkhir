@@ -93,6 +93,12 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Arsip' }">
+                <i class="fas fa-archive"></i>
+                <span>Arsip Surat</span></router-link
+            >
+        </li>
         <!-- <li class="nav-item">
             <router-link :to="{ name: 'Disposisi' }" class="nav-link">
                 <i class="fa fa-archive" aria-hidden="true"></i>
