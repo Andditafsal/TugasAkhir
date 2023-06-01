@@ -10,6 +10,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@casl/ability": "^6.5.0",
+        "@casl/vue": "^2.2.1",
         "@vitejs/plugin-vue": "^4.0.0",
         "bootstrap-icons": "^1.10.5",
         "camelcase-keys": "^8.0.2",

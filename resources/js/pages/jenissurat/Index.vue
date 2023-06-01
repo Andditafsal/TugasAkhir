@@ -1,4 +1,5 @@
 <script>
+import Cookies from "js-cookie";
 export default {
     data() {
         return {
@@ -8,6 +9,7 @@ export default {
     },
     mounted() {
         this.getJenisSurats();
+        this.getUser();
     },
     methods: {
         getJenisSurats() {
@@ -36,6 +38,12 @@ export default {
                     console.log(error);
                 });
         },
+        getUser() {
+            const data = Cookies.get("user");
+            const parsing = JSON.parse(data);
+            const role = parsing.data.idRole;
+            console.log(role);
+        },
     },
 };
 </script>
@@ -45,7 +53,11 @@ export default {
         <div class="col-12 card-judul">
             <i class="fa fa-folder" aria-hidden="true"></i>
 
-            <span class="h5 mb-0 text-gray-800 ml-2 mt-2">Jenis Surat </span>
+            <span
+                class="h5 mb-0 text-gray-800 ml-2 mt-2"
+                v-if="$can('action', 'Admin')"
+                >Jenis Surat
+            </span>
         </div>
 
         <!-- DataTales Example -->

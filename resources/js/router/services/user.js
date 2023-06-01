@@ -1,3 +1,7 @@
+import {
+    checkRoles,
+    roles
+} from "../../Middleware/protect";
 export default [
 
     {
@@ -34,6 +38,7 @@ export default [
         component: () => import("../../pages/user/Edit.vue"),
         meta: {
             requiresAuth: true,
+            middleware: checkRoles(roles.admin)
         },
         props: true,
     },

@@ -13,22 +13,18 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-    let token = Cookies.get("token");
-
-    if (to.meta.requiresAuth) {
-        if (!token) {
-            window.location.href = "/auth/login"
+    const token = Cookies.get("token");
+    if (to.path !== '/auth/login' && !token) {
+        window.location.href = "/auth/login";
+    } else if (to.path === "/auth/login" && token) {
+        to.name = "Dashboard";
+    } else {
+        const middleware = to.meta.middleware;
+        if (middleware) {
+            middleware(to, from, next);
         } else {
             next();
         }
     }
-    if (!to.meta.requiresAuth) {
-        if (token) {
-            window.location.href = "/"
-        } else {
-            next();
-        }
-    }
-    next();
 });
 export default router;

@@ -1,5 +1,6 @@
 <script>
 import Cookies from "js-cookie";
+import { Result } from "postcss";
 export default {
     data() {
         return {
@@ -16,15 +17,12 @@ export default {
             this.$store
                 .dispatch("postData", ["auth/login", this.form])
                 .then((response) => {
-                    Cookies.set("token", response.token);
+                    Cookies.set("token", response.data.token);
+                    Cookies.set("user", JSON.stringify(response));
                     window.location.href = "/";
                 })
                 .catch((error) => {
-                    if (error.response.data.statusCode == 400) {
-                        this.error = error.response.data;
-                    } else {
-                        this.error = error.response.data.messages;
-                    }
+                    console.log(error);
                 });
         },
     },

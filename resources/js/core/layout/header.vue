@@ -1,3 +1,15 @@
+<script>
+import Cookies from "js-cookie";
+export default {
+    methods: {
+        logout() {
+            Cookies.remove("user");
+            window.location = "/login";
+        },
+    },
+};
+</script>
+
 <template>
     <nav
         class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
@@ -79,7 +91,7 @@
                         <i
                             class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                         ></i>
-                        Logout
+                        logout
                     </a>
                 </div>
             </li>

@@ -33,9 +33,9 @@ class LoginController extends Controller
         }
 
         $token = $user->createToken('api', ['authenticated']);
+        $user['token'] = $token->plainTextToken;
         return response()->json([
-            'user' => $user,
-            'token' => $token->plainTextToken
+            "message" => "berasil login", "data" => $user
         ]);
     }
 }

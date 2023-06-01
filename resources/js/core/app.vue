@@ -3,6 +3,7 @@ import Sidebar from "./layout/sidebar.vue";
 import Headers from "./layout/header.vue";
 import Footers from "./layout/footer.vue";
 import Cookies from "js-cookie";
+
 export default {
     watch: {
         "$route.params.search": {
@@ -33,6 +34,11 @@ export default {
                 .catch((error) => {});
         },
     },
+    computed: {
+        bebas() {
+            return this.$route.name != "CetakSuratKeluar";
+        },
+    },
     components: {
         Sidebar,
         Headers,
@@ -46,7 +52,7 @@ export default {
         <!-- Page Wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
-            <sidebar />
+            <sidebar v-if="bebas" />
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -54,7 +60,7 @@ export default {
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Topbar -->
-                    <headers />
+                    <headers v-if="bebas" />
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -68,7 +74,7 @@ export default {
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-                <Footers />
+                <Footers v-if="bebas" />
                 <!-- End of Footer -->
             </div>
             <!-- End of Content Wrapper -->
