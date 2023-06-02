@@ -31,6 +31,7 @@ class UpdateRequest extends FormRequest
             'perihal_masuk' => 'required',
             'tanggal_surat' => 'required',
             'nomor_masuk' => 'required',
+            'dokumen_surat' => 'file|mimes:doc,pdf,docx|max:2048',
         ];
     }
     protected function failedValidation(Validator $validator)

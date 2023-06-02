@@ -29,7 +29,7 @@ export default {};
                         style="
                             margin: 0;
                             padding: 0;
-                            font-size: 15px;
+                            font-size: 14px;
                             text-transform: uppercase;
                         "
                     >

@@ -25,7 +25,8 @@ export default [
         name: "Dashboard",
         component: () => import("../pages/dashboard/index.vue"),
         meta: {
-            requiresAuth: true,
+
+
         },
     },
 

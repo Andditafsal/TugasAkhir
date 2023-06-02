@@ -1,9 +1,9 @@
+<script></script>
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content mb-4">
-            <i class="fas fa-fw fa-tachometer-alt mb-1"></i>
-            <span class="h5 mb-0 text-gray-800 ml-2">Dashboard Admin</span>
+            <span class="h5 mb-0 text-gray-800 ml-2">Selamat Datang</span>
         </div>
         <!-- Tab -->
         <div class="row">
@@ -70,7 +70,7 @@
                                 <div
                                     class="text-xs font-weight-bold text-success text-uppercase mb-1"
                                 >
-                                    Disposisi
+                                    Arsip Surat
                                 </div>
                                 <div
                                     class="h5 mb-0 font-weight-bold text-gray-800"

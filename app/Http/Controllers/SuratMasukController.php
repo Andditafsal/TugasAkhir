@@ -7,6 +7,7 @@ use App\Http\Requests\suratmasuk\UpdateRequest;
 use App\Http\Resources\SuratMasuk\SuratMasukCollection;
 use App\Http\Resources\SuratMasuk\SuratMasukDetail;
 use App\Models\SuratMasuk;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -38,7 +39,18 @@ class SuratMasukController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        return $this->suratmasuk->create($request->all());
+        return DB::transaction(
+            function () use ($request) {
+                $file = "";
+                if ($request->hasFile('dokumen_surat')) {
+                    $file = $request->file('dokumen_surat')->store('dokumen');
+                }
+                $request->merge([
+                    'dokumen' => $file
+                ]);
+                return $this->suratmasuk->create($request->all());
+            }
+        );
     }
 
     /**
@@ -56,7 +68,24 @@ class SuratMasukController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $suratmasuk = $this->suratmasuk->findOrFail($id);
-        return $this->suratmasuk->update($request->all());
+
+        //return $this->suratmasuk->update($request->all());
+
+        if ($request->hasFile('dokumen_surat')) {
+            if ($suratmasuk->dokumen) {
+                $path = str_replace(url('storage') . '/', '', $suratmasuk->dokumen);
+                Storage::delete($path);
+            }
+            $file = $request->file('dokumen_surat')->store('dokumen');
+
+            $request->merge([
+                'dokumen' => $file
+            ]);
+        }
+
+        return DB::transaction(function () use ($request, $suratmasuk) {
+            return $suratmasuk->update($request->all());
+        });
     }
 
     /**

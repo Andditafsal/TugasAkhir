@@ -211,7 +211,7 @@ export default {
                                                         </svg>
                                                     </router-link>
                                                     <router-link
-                                                        class="btn btn-sm btn-warning m-1"
+                                                        class="btn btn-sm btn-create m-1"
                                                         :to="{
                                                             name: 'Edit User',
                                                             params: {
@@ -247,6 +247,12 @@ export default {
                                                         data-toggle="modal"
                                                         data-target="#deletUserModal"
                                                         @click="id = user.id"
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Admin'
+                                                            )
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -349,11 +355,11 @@ export default {
     border-color: #1cc88a;
     color: #fefefe;
 }
-.btn-warning {
+.btn-create {
     background-color: #f1924c;
     border-color: #f1924c;
 }
-.btn-warning:hover {
+.btn-create:hover {
     background-color: #f1924c;
     border-color: #f1924c;
     color: #fefefe;
