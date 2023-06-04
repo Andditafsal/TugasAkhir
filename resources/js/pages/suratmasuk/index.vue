@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <div class="container-fluid">
         <!-- Page Heading -->

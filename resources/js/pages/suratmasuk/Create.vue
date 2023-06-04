@@ -1,3 +1,56 @@
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                alamatSurat: "",
+                nama: "",
+                nomorMasuk: "",
+                perihalMasuk: "",
+                tanggal: "",
+                tanggalSurat: "",
+                dokumenSurat: "",
+            },
+            error: {},
+            isDisabled: false,
+        };
+    },
+
+    methods: {
+        handleSubmit() {
+            this.isDisabled = true;
+            let formData = new FormData();
+            formData.append("nama", this.form.nama);
+            formData.append("alamat_surat", this.form.alamatSurat);
+            formData.append("nomor_masuk", this.form.nomorMasuk);
+            formData.append("perihal_masuk", this.form.perihalMasuk);
+            formData.append("tanggal", this.form.tanggal);
+            formData.append("tanggal_surat", this.form.tanggalSurat);
+            formData.append("dokumen_surat", this.form.dokumenSurat);
+            console.log(this.formData);
+            console.log(this.form);
+
+            this.$store
+                .dispatch("postDataUpload", ["suratmasuk", formData])
+                .then((result) => {
+                    this.isDisabled = false;
+                    console.log(result);
+                    this.$router.push({ name: "SuratMasuk" });
+                    //console.log(result);
+                })
+                .catch((error) => {
+                    this.isDisabled = false;
+
+                    this.error = error.response.data.messages;
+                });
+        },
+        uploadDokumen(e) {
+            this.form.dokumenSurat = e.target.files[0];
+            console.log(this.form.dokumenSurat);
+        },
+    },
+};
+</script>
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
@@ -38,57 +91,174 @@
                                         aria-hidden="true"
                                     ></i>
                                     <label for="" class="px-1 mb-0"
-                                        >Data Surat</label
+                                        >Data Surat Masuk</label
                                     >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <form>
+                                <form
+                                    @submit.prevent="handleSubmit"
+                                    method="post"
+                                >
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="">Tanggal *</label>
+                                            <label for=""
+                                                >Tanggal Surat Masuk*</label
+                                            >
                                             <input
-                                                type="text"
+                                                type="date"
                                                 class="form-control"
+                                                id="tanggal"
+                                                v-model="form.tanggal"
+                                                :class="{
+                                                    'is-invalid': error.tanggal,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tanggal"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Asal Surat *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                id="nomorSurat"
+                                                v-model="form.alamatSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.alamatSurat,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.asalSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Nomor Surat *</label>
                                             <input
                                                 type="string"
                                                 class="form-control"
+                                                id="nomorSurat"
+                                                v-model="form.nomorMasuk"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.nomorMasuk,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.nomorMasuk"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="">Perial *</label>
+                                            <label for=""
+                                                >Tanggal Surat *</label
+                                            >
                                             <input
-                                                type="string"
+                                                type="date"
                                                 class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.tanggalSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tanggalSurat,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tanggalSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Nama Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.nama"
+                                                :class="{
+                                                    'is-invalid': error.nama,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.nama"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Perihal *</label>
+                                            <input
+                                                type=""
+                                                class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.perihalMasuk"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.perihalMasuk,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.perihalMasuk"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
 
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
                                             <label for="">Upload Surat *</label>
                                             <input
                                                 type="file"
                                                 class="form-control"
+                                                id="upload dokumen"
+                                                @change="uploadDokumen"
                                             />
                                         </div>
                                     </div>
+
                                     <button
                                         type="submit"
                                         class="btn btn-primary text-center col-1 m-1"
+                                        :disabled="isDisabled"
                                     >
                                         Save
                                     </button>

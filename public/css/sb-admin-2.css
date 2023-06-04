@@ -2,6 +2,7 @@
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)
  * Copyright 2013-2021 Start Bootstrap
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin-2/blob/master/LICENSE)
+ update
  */
 
 /*!
@@ -1607,8 +1608,6 @@ pre code {
 }
 
 .table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #e3e6f0;
 }
 
 .table tbody + tbody {
@@ -1626,6 +1625,7 @@ pre code {
 
 .table-bordered th,
 .table-bordered td {
+    border: 0px solid #e3e6f0;
 }
 
 .table-bordered thead th,
@@ -11340,7 +11340,7 @@ form.user .custom-checkbox.small label {
 
 form.user .form-control-user {
     font-size: 0.8rem;
-    border-radius: 5rem;
+    border-radius: 10rem;
     padding: 1.5rem 1rem;
 }
 
