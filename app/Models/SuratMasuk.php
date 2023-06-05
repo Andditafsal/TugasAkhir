@@ -12,7 +12,6 @@ class SuratMasuk extends Model
     protected $table = 'table_surat_masuk';
 
     protected  $fillable = [
-        'nama',
         'tanggal',
         'alamat_surat',
         'perihal_masuk',

@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
             'tanggal' => 'required',
             'alamat_surat' => 'required',
             'perihal_masuk' => 'required',
