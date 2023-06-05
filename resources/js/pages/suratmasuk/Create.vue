@@ -4,7 +4,7 @@ export default {
         return {
             form: {
                 alamatSurat: "",
-                nama: "",
+
                 nomorMasuk: "",
                 perihalMasuk: "",
                 tanggal: "",
@@ -20,7 +20,7 @@ export default {
         handleSubmit() {
             this.isDisabled = true;
             let formData = new FormData();
-            formData.append("nama", this.form.nama);
+
             formData.append("alamat_surat", this.form.alamatSurat);
             formData.append("nomor_masuk", this.form.nomorMasuk);
             formData.append("perihal_masuk", this.form.perihalMasuk);
@@ -40,13 +40,12 @@ export default {
                 })
                 .catch((error) => {
                     this.isDisabled = false;
-
                     this.error = error.response.data.messages;
                 });
         },
         uploadDokumen(e) {
             this.form.dokumenSurat = e.target.files[0];
-            console.log(this.form.dokumenSurat);
+            //console.log(this.form.dokumenSurat);
         },
     },
 };
@@ -198,10 +197,10 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <!-- <div class="form-group col-md-6">
                                             <label for="">Nama Surat *</label>
                                             <input
-                                                type="text"
+                                                type="text"s
                                                 class="form-control"
                                                 id="perihalMasuk"
                                                 v-model="form.nama"
@@ -219,7 +218,7 @@ export default {
                                             >
                                                 {{ erorr }}
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group col-md-6">
                                             <label for="">Perihal *</label>
                                             <input
@@ -263,8 +262,10 @@ export default {
                                         Save
                                     </button>
                                     <button
+                                        to="/suratmasuk"
                                         type="submit"
                                         class="btn btn-cancel text-center col-1"
+                                        :class="{ disabled: isDisabled }"
                                     >
                                         Cancle
                                     </button>
