@@ -4,7 +4,6 @@ export default {
         return {
             form: {
                 alamatSurat: "",
-
                 nomorMasuk: "",
                 perihalMasuk: "",
                 tanggal: "",
@@ -26,9 +25,12 @@ export default {
             formData.append("perihal_masuk", this.form.perihalMasuk);
             formData.append("tanggal", this.form.tanggal);
             formData.append("tanggal_surat", this.form.tanggalSurat);
-            formData.append("dokumen_surat", this.form.dokumenSurat);
-            console.log(this.formData);
-            console.log(this.form);
+
+            if (this.form.dokumenSurat) {
+                formData.append("dokumen_surat", this.form.dokumenSurat);
+            }
+            //console.log(this.formData);
+            //console.log(this.form);
 
             this.$store
                 .dispatch("postDataUpload", ["suratmasuk", formData])

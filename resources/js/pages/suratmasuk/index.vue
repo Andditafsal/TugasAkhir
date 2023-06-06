@@ -1,4 +1,67 @@
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            suratmasuks: [],
+            successDelet: false,
+        };
+    },
+    mounted() {
+        this.getSuratMasuks();
+    },
+    methods: {
+        getSuratMasuks() {
+            this.$store
+                .dispatch("getData", ["suratmasuk", {}])
+                .then((response) => {
+                    //console.log(response);
+                    this.suratmasuks = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        handleDelet() {
+            this.$store
+                .dispatch("deleteData", ["/suratmasuk", this.id])
+                .then((response) => {
+                    this.successDelet = true;
+
+                    this.getSuratMasuks();
+                    $("#deletSuratMasukModal").modal("hide");
+                    setTimeout(() => {
+                        this.successDelet = false;
+                    }, 3000);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        showDokumenSurat() {
+            let modalBody = document.getElementById("showDokumenSurat");
+
+            // Menambahkan dokumen PDF
+            let embedPDF = document.createElement("embed");
+            embedPDF.src = "path_ke_file_dokumen.pdf";
+            embedPDF.type = "application/pdf";
+            modalBody.append(embedPDF);
+
+            // Menambahkan dokumen DOC
+            let embedDOC = document.createElement("embed");
+            embedDOC.src = "path_ke_file_dokumen.doc";
+            embedDOC.type = "application/msword";
+            modalBody.append(embedDOC);
+
+            // Menambahkan dokumen DOCX
+            let embedDOCX = document.createElement("embed");
+            embedDOCX.src = "path_ke_file_dokumen.docx";
+            embedDOCX.type =
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            modalBody.append(embedDOCX);
+        },
+    },
+};
+</script>
 <template>
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -31,7 +94,9 @@
                     </router-link>
                 </div>
             </div>
-
+            <div v-if="successDelet" class="alert alert-success">
+                Data berhasil dihapus
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <div
@@ -76,7 +141,7 @@
                                                 aria-colindex="1"
                                                 class=""
                                                 style="
-                                                    width: 10%;
+                                                    width: 5%;
                                                     text-align: center;
                                                 "
                                             >
@@ -92,7 +157,7 @@
                                                 aria-label="Number: activate to sort column descending"
                                                 style="width: 15%"
                                             >
-                                                Tanggal
+                                                Tanggal Diterima
                                             </th>
                                             <th
                                                 class="sorting"
@@ -124,7 +189,7 @@
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 20%"
+                                                style="width: 15%"
                                             >
                                                 Tanggal Surat
                                             </th>
@@ -135,7 +200,7 @@
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 20%"
+                                                style="width: 40%"
                                             >
                                                 Perihal
                                             </th>
@@ -153,20 +218,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd">
-                                            <td>001</td>
-                                            <td>18-10-2023</td>
-                                            <td>andita.aa.aa</td>
-                                            <td>Pelaksanaan Rapat</td>
-                                            <td>Pelaksanaan Rapat</td>
-                                            <td>Surat Undangan</td>
+                                        <tr
+                                            class="odd"
+                                            v-for="(
+                                                suratmasuks, index
+                                            ) in suratmasuks"
+                                            :key="index"
+                                        >
+                                            <td v-html="index + 1"></td>
+                                            <td
+                                                v-html="suratmasuks.tanggal"
+                                            ></td>
+                                            <td
+                                                v-html="suratmasuks.alamatSurat"
+                                            ></td>
+                                            <td
+                                                v-html="suratmasuks.nomorMasuk"
+                                            ></td>
+                                            <td
+                                                v-html="
+                                                    suratmasuks.tanggalSurat
+                                                "
+                                            ></td>
+                                            <td
+                                                v-html="
+                                                    suratmasuks.perihalMasuk
+                                                "
+                                            ></td>
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
                                                     <routerlink
-                                                        to="/user/cretae"
                                                         class="btn btn-sm btn-eye m-1"
+                                                        data-toggle="modal"
+                                                        data-target="#showDokumenSurat"
+                                                        @click="
+                                                            ($event) =>
+                                                                showDokumenSurat(
+                                                                    suratmasuks.dokumen
+                                                                )
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -185,46 +277,12 @@
                                                         </svg>
                                                     </routerlink>
                                                     <button
-                                                        class="btn btn-sm btn-create m-1"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="16"
-                                                            height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-pencil-square"
-                                                            viewBox="0 0 16 16"
-                                                        >
-                                                            <path
-                                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                                                            />
-                                                            <path
-                                                                fill-rule="evenodd"
-                                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                                                            />
-                                                        </svg>
-                                                    </button>
-                                                    <button
-                                                        class="btn btn-sm btn-print m-1"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="16"
-                                                            height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-printer"
-                                                            viewBox="0 0 16 16"
-                                                        >
-                                                            <path
-                                                                d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"
-                                                            />
-                                                            <path
-                                                                d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"
-                                                            />
-                                                        </svg>
-                                                    </button>
-                                                    <button
                                                         class="btn btn-sm btn-hapus m-1"
+                                                        data-toggle="modal"
+                                                        data-target="#deletSuratMasukModal"
+                                                        @click="
+                                                            id = suratmasuks.id
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -247,6 +305,87 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="deletSuratMasukModal"
+        tabindex="-1"
+        aria-labelledby="deletSuratMasukModallabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="deletSuratMasukModallabel">
+                        Apakah Anda Yakin??
+                    </h5>
+                </div> -->
+                <div class="modal-body">
+                    <h5 class="modal-title" id="deletSuratMasukModallabel">
+                        Apakah anda yakin ingin menghapus data tersebut?
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-pengguna"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="
+                            ($event) => showDokumenSurat(suratmasuks.dokumen)
+                        "
+                    >
+                        Delet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="showDokumenSuratModal"
+        tabindex="-1"
+        aria-labelledby="showDokumenSuratModallabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="showDokumenSuratModallabel">
+                        Apakah Anda Yakin??
+                    </h5>
+                </div> -->
+                <div class="modal-body">
+                    <h5 class="modal-title" id="showDokumenSuratModallabel">
+                        Apakah anda yakin ingin menghapus data tersebut?
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-pengguna"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="showDokumenSurat"
+                    >
+                        Delet
+                    </button>
                 </div>
             </div>
         </div>
