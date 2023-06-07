@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'name'  => 'admin',
             'email'  => 'admin@gmail.com',
             'jenis_kelamin'  => 'laki-laki',
-            'password'  => Hash::make('developer'),
+            'password'  => bcrypt("developer"),
             'alamat'  => 'Indramayu',
             'no_hp'  => '0813334445',
             'id_role' => '1'
