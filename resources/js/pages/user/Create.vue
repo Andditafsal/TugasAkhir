@@ -71,7 +71,9 @@ export default {
                             aria-hidden="true"
                         ></i>
                     </router-link>
-                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Creat User</h5>
+                    <h5 class="mb-0 mr-0 text-gray-900 px-2">
+                        Tambah Data User
+                    </h5>
                 </div>
             </div>
             <!-- Content -->

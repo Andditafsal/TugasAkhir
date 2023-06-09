@@ -20,7 +20,7 @@
                         ></i>
                     </router-link>
                     <h5 class="mb-0 mr-0 text-gray-900 px-3">
-                        Creat Surat Keluar
+                        Tambah Data Surat Keluar
                     </h5>
                 </div>
             </div>

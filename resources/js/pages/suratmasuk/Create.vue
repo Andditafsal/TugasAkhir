@@ -1,4 +1,7 @@
 <script>
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+
 export default {
     data() {
         return {
@@ -14,7 +17,9 @@ export default {
             isDisabled: false,
         };
     },
-
+    mounted() {
+        this.dateNow();
+    },
     methods: {
         handleSubmit() {
             this.isDisabled = true;
@@ -49,6 +54,10 @@ export default {
             this.form.dokumenSurat = e.target.files[0];
             //console.log(this.form.dokumenSurat);
         },
+        dateNow() {
+            let ms = dayjs().locale("id");
+            this.form.tanggal = ms.format("YYYY-MM-DD");
+        },
     },
 };
 </script>
@@ -74,7 +83,7 @@ export default {
                         ></i>
                     </router-link>
                     <h5 class="mb-0 mr-0 text-gray-900 px-3">
-                        Creat Surat Masuk
+                        Tambah Data Surat Masuk
                     </h5>
                 </div>
             </div>
@@ -110,6 +119,7 @@ export default {
                                             >
                                             <input
                                                 type="date"
+                                                rows="3"
                                                 class="form-control"
                                                 id="tanggal"
                                                 v-model="form.tanggal"
@@ -128,6 +138,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
+
                                         <div class="form-group col-md-6">
                                             <label for="">Asal Surat *</label>
                                             <input
@@ -222,7 +233,9 @@ export default {
                                             </div>
                                         </div> -->
                                         <div class="form-group col-md-6">
-                                            <label for="">Perihal *</label>
+                                            <label for=""
+                                                >Diajukan Kepada *</label
+                                            >
                                             <input
                                                 type=""
                                                 class="form-control"
@@ -253,6 +266,30 @@ export default {
                                                 id="upload dokumen"
                                                 @change="uploadDokumen"
                                             />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alamat"
+                                            >Perihal Surat *</label
+                                        >
+                                        <textarea
+                                            class="form-control"
+                                            id="alamat"
+                                            rows="3"
+                                            v-model="form.perihalMasuk"
+                                            :class="{
+                                                'is-invalid': perihalMasuk,
+                                            }"
+                                            :disabled="isDisabled"
+                                        ></textarea>
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.perihalMasuk"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
                                         </div>
                                     </div>
 
