@@ -60,8 +60,11 @@ class SuratKeluarController extends Controller
 
     public function cetak(string $id)
     {
-        $pdf = Pdf::loadview('cetakSurat.SuratKeluar.audit');
-        return $pdf->download();
-        ///return view('cetakSurat.SuratKeluar.audit');
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./coba.docx");
+        $template->setValues([
+            "nama" =>  "cada laaaaaagi"
+        ]);
+        $template->saveAs('dokumen/coba.docx');
+        return response()->download(public_path('dokumen/coba.docx'));
     }
 }
