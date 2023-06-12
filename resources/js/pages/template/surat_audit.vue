@@ -3,7 +3,7 @@ export default {};
 </script>
 
 <template>
-    <body class="cetak">
+    <body class="cetak my-component">
         <div>
             <div
                 style="
@@ -12,6 +12,11 @@ export default {};
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.4em;
+                    word-spacing: 1px;
+                    letter-spacing: 0.2px;
                 "
             >
                 <div style="margin-right: 12px">
@@ -68,11 +73,11 @@ export default {};
                             Indramayu</strong
                         >
                     </p>
-                    <p style="margin: 0; padding: 0; font-size: 8px">
+                    <p style="margin: 0; padding: 0; font-size: 9px">
                         Jalan Raya Pabean Nomor 15 (0234) 276308 Faximile : 0234
                         276308
                     </p>
-                    <p style="margin: 0; padding: 0; font-size: 8px">
+                    <p style="margin: 0; padding: 0; font-size: 9px">
                         Website : www.smknduaindramayu.sch.id E-mail :
                         adm@smknduaindramayu.sch.id
                     </p>
@@ -225,5 +230,15 @@ export default {};
     height: 297mm;
     margin: 0 auto;
     padding: 0mm;
+}
+</style>
+
+<style scoped>
+@media print {
+    .my-component {
+        background-color: #f1f1f1;
+        font-size: 16px;
+        color: #333;
+    }
 }
 </style>

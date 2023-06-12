@@ -1,3 +1,76 @@
+<script>
+export default {
+    props: ["id"],
+    data() {
+        return {
+            form: {
+                alamatSurat: "",
+                nomorMasuk: "",
+                perihalMasuk: "",
+                tanggal: "",
+                tanggalSurat: "",
+                dokumenSurat: "",
+            },
+            error: {},
+            isDisabled: false,
+            showdokumenSurat: "",
+            previewdokumenSurat: "",
+        };
+    },
+    mounted() {
+        this.getSuratMasuk();
+    },
+    methods: {
+        setForm(suratmasuks) {
+            this.form = {
+                tanggal: suratmasuks.tanggal,
+                alamatSurat: suratmasuks.alamatSurat,
+                nomorMasuk: suratmasuks.nomorMasuk,
+                perihalMasuk: suratmasuks.perihalMasuk,
+                tanggalSurat: suratmasuks.tanggalSurat,
+            };
+            this.showdokumenSurat = suratmasuks.dokumen;
+            this.previewdokumenSurat = suratmasuks.dokumen;
+        },
+
+        getSuratMasuk() {
+            this.$store
+                .dispatch("showData", ["suratmasuk", this.id])
+                .then((response) => {
+                    this.setForm(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        handleSubmit() {
+            this.isDisabled = true;
+
+            let formData = new FormData();
+            formData.append("_method", "put");
+            formData.append("alamat_surat", this.form.alamatSurat);
+            formData.append("nomor_masuk", this.form.nomorMasuk);
+            formData.append("perihal_masuk", this.form.perihalMasuk);
+            formData.append("tanggal", this.form.tanggal);
+            formData.append("tanggal_surat", this.form.tanggalSurat);
+            formData.append("dokumen_surat", this.form.dokumenSurat);
+
+            this.$store
+                .dispatch("postDataUpload", ["suratmasuk", formData])
+                .then((result) => {
+                    this.isDisabled = false;
+                    console.log(result);
+                    this.$router.push({ name: "SuratMasuk" });
+                    //console.log(result);
+                })
+                .catch((error) => {
+                    this.isDisabled = false;
+                    this.error = error.response.data.messages;
+                });
+        },
+    },
+};
+</script>
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
@@ -45,65 +118,80 @@
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <form>
+                                <form
+                                    @submit.prevent="handleSubmit"
+                                    method="post"
+                                >
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="">No Agenda *</label>
+                                            <label for=""
+                                                >Tanggal Surat Masuk*</label
+                                            >
                                             <input
-                                                type="int"
+                                                type="date"
                                                 class="form-control"
+                                                id="tanggal"
+                                                v-model="form.tanggal"
+                                                :class="{
+                                                    'is-invalid': error.tanggal,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tanggal"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="">Jenis Surat *</label>
-                                            <select class="form-control">
-                                                <option>
-                                                    Surat Tugas Monitoring PKL
-                                                </option>
-                                                <option>
-                                                    Surat Penarikan Peserta PKL
-                                                </option>
-                                                <option>
-                                                    Surat Pengantar PKL
-                                                </option>
-                                                <option>
-                                                    Surat Panggilan Orang Tua
-                                                </option>
-
-                                                <option>
-                                                    Surat Izin Atasan
-                                                </option>
-                                                <option>
-                                                    Surat Dispen Siswa
-                                                </option>
-                                                <option>
-                                                    Surat Akrif Siswa
-                                                </option>
-                                                <option>Surat Diterima</option>
-
-                                                <option>
-                                                    Surat Pengambilan Raport
-                                                </option>
-                                                <option>
-                                                    Surat Undangan Brefing
-                                                </option>
-                                                <option>
-                                                    Surat Rapat Koordinasi
-                                                </option>
-                                                <option>
-                                                    Surat Pengesian E-Raport
-                                                </option>
-                                                <option>
-                                                    Permohonan Surat Keluar
-                                                </option>
-                                            </select>
+                                            <label for="">Asal Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="nomorSurat"
+                                                v-model="form.alamatSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.alamatSurat,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.asalSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Nomor Surat *</label>
                                             <input
-                                                type="int"
+                                                type="string"
                                                 class="form-control"
+                                                id="nomorSurat"
+                                                v-model="form.nomorMasuk"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.nomorMasuk,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.nomorMasuk"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for=""
@@ -112,165 +200,95 @@
                                             <input
                                                 type="date"
                                                 class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.tanggalSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tanggalSurat,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tanggalSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">Lampiran *</label>
+                                        <!-- <div class="form-group col-md-6">
+                                            <label for="">Nama Surat *</label>
                                             <input
-                                                type="text"
+                                                type="text"s
                                                 class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.nama"
+                                                :class="{
+                                                    'is-invalid': error.nama,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
-                                        </div>
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.nama"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div> -->
                                         <div class="form-group col-md-6">
                                             <label for="">Perihal *</label>
                                             <input
-                                                type="text"
+                                                type=""
                                                 class="form-control"
+                                                id="perihalMasuk"
+                                                v-model="form.perihalMasuk"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.perihalMasuk,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.perihalMasuk"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
 
-                                        <fieldset class="form-group col-12">
-                                            <div class="row">
-                                                <legend
-                                                    class="col-form-label col-sm-2 pt-0"
-                                                >
-                                                    Diajukan Kepada:
-                                                </legend>
-                                                <div class="col-sm-10">
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios1"
-                                                            value="option1"
-                                                            checked
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios1"
-                                                        >
-                                                            Kepala Sekolah
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios2"
-                                                            value="option2"
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios2"
-                                                        >
-                                                            Guru
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <div class="row col-12">
-                                            <div class="col-md-0">
-                                                <div class="col-sm-6 mb-3">
-                                                    <div
-                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
-                                                    >
-                                                        <i
-                                                            class="fa fa-folder"
-                                                            aria-hidden="true"
-                                                        ></i>
-                                                        <label
-                                                            for=""
-                                                            class="px-1 mb-0"
-                                                            >Kegiatan</label
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Kegiatan *</label>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Upload Surat *</label>
                                             <input
-                                                type="text"
+                                                type="file"
                                                 class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Tanggal Kegiatan *</label>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >Waktu Kegiatan (Mulai) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                placeholder="1234 Main St"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >Waktu Kegiatan (Akhir) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-sm-6 mb-3">
-                                            <div
-                                                class="d-flex px-12 align-items-center margin-100px-bottom"
-                                            >
-                                                <i
-                                                    class="fa fa-folder"
-                                                    aria-hidden="true"
-                                                ></i>
-                                                <label for="" class="px-1 mb-0"
-                                                    >Pengirim</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Pengirim *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Email *</label>
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                required
+                                                id="upload dokumen"
+                                                @change="uploadDokumen"
                                             />
                                         </div>
                                     </div>
 
                                     <button
                                         type="submit"
-                                        class="btn btn-primary mt-3"
+                                        class="btn btn-primary text-center col-1 m-1"
+                                        :disabled="isDisabled"
                                     >
-                                        Edit Surat
+                                        Save
+                                    </button>
+                                    <button
+                                        to="/suratmasuk"
+                                        type="submit"
+                                        class="btn btn-cancel text-center col-1"
+                                        :class="{ disabled: isDisabled }"
+                                    >
+                                        Cancle
                                     </button>
                                 </form>
                             </div>

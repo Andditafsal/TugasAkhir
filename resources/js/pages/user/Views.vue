@@ -62,7 +62,7 @@ export default {
                         <img
                             :src="user.profilePicture"
                             alt="avatar"
-                            class="rounded-circle img-fluid"
+                            class="coba img-fluid"
                             style="width: 300px"
                         />
                         <h5 class="my-3">{{ user.name }}</h5>
@@ -188,5 +188,8 @@ export default {
     color: #bbc4cc;
     display: block;
     overflow: hidden;
+}
+.coba {
+    border-radius: 5%;
 }
 </style>

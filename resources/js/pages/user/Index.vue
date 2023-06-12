@@ -10,6 +10,20 @@ export default {
         this.getUsers();
     },
     methods: {
+        search() {
+            axios
+                .get("/api/search", {
+                    params: {
+                        name: this.name,
+                    },
+                })
+                .then((response) => {
+                    this.results = response.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
         getUsers() {
             this.$store
                 .dispatch("getData", ["user", {}])
@@ -58,6 +72,7 @@ export default {
                         to="/user/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
+                        v-if="$can('action', 'Admin')"
                     >
                         <span class="btn-inner--icon m-1"
                             ><i
@@ -91,6 +106,7 @@ export default {
                                         email=""
                                         placeholder="Nama & Email"
                                         class="form-control form-control-sm"
+                                        v-html="this.name"
                                     />
                                 </div>
                             </div>

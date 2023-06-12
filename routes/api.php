@@ -11,6 +11,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WordController;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -31,8 +32,15 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+// //Search
+// Route::get('/search', 'SearchController@search');
+
+
 ///Cetak Surat
 Route::prefix('cetak')->group(function () {
+    Route::prefix('suratkeluar')->group(function () {
+        Route::get('download/{id}', [SuratKeluarController::class, 'cetak']);
+    });
 });
 
 

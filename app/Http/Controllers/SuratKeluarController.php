@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuratKeluar\SuratKeluarCollection;
 use App\Models\SuratKeluar;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class SuratKeluarController extends Controller
@@ -54,5 +55,13 @@ class SuratKeluarController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function cetak(string $id)
+    {
+        $pdf = Pdf::loadview('cetakSurat.SuratKeluar.audit');
+        return $pdf->download();
+        ///return view('cetakSurat.SuratKeluar.audit');
     }
 }
