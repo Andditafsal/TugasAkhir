@@ -1,9 +1,13 @@
+import {
+    checkRoles,
+    roles
+} from "../../Middleware/protect"
 export default [{
         path: "/jenissurat",
         name: "JenisSurat",
         component: () => import("../../pages/jenissurat/Index.vue"),
         meta: {
-            requiresAuth: true,
+            middleware: checkRoles(roles.admin)
         },
     },
     {
