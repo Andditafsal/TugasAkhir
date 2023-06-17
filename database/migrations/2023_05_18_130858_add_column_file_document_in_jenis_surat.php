@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('jenis_surat', function (Blueprint $table) {
-            $table->string('file_document')->after('nama');
+            $table->string('file_document')->nullable()->after('nomor_surat');
         });
     }
 

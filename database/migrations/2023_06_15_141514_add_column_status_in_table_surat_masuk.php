@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_surat_keluar', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomor_surat');
-            $table->string('lampiran');
-            $table->string('perihal');
-            $table->string('kepada');
-            $table->timestamps();
+        Schema::table('table_surat_masuk', function (Blueprint $table) {
+
+            $table->integer("status")->default(0)->after('dokumen');
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_surat_keluar');
+        Schema::table('table_surat_masuk', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };

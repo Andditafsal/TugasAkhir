@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return asset('storage/' . $profilePicture);
     }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'id_role');
+    }
 }

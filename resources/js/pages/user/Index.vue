@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             users: [],
+            search: "",
             successDelet: false,
         };
     },
@@ -10,23 +11,10 @@ export default {
         this.getUsers();
     },
     methods: {
-        search() {
-            axios
-                .get("/api/search", {
-                    params: {
-                        name: this.name,
-                    },
-                })
-                .then((response) => {
-                    this.results = response.data;
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
         getUsers() {
+            const params = [`search=${this.search}`].join("&");
             this.$store
-                .dispatch("getData", ["user", {}])
+                .dispatch("getData", ["user", params])
                 .then((response) => {
                     this.users = response.data;
                 })
@@ -48,6 +36,9 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        onSearch() {
+            this.getUsers();
         },
     },
 };
@@ -102,11 +93,10 @@ export default {
                                     <label for="" class="px-1 mb-0">Cari</label>
                                     <input
                                         type="text"
-                                        name=""
-                                        email=""
                                         placeholder="Nama & Email"
                                         class="form-control form-control-sm"
-                                        v-html="this.name"
+                                        v-model="search"
+                                        @input="onSearch"
                                     />
                                 </div>
                             </div>
@@ -294,43 +284,42 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Modal -->
-    <div
-        class="modal fade"
-        id="deletUserModal"
-        tabindex="-1"
-        aria-labelledby="deletUserModallabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- <div class="modal-header">
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="deletUserModal"
+            tabindex="-1"
+            aria-labelledby="deletUserModallabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
                     <h5 class="modal-title" id="deletUserModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                <div class="modal-body">
-                    <h5 class="modal-title" id="deletUserModallabel">
-                        Apakah anda yakin ingin menghapus data tersebut?
-                    </h5>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-pengguna"
-                        data-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="handleDelet"
-                    >
-                        Delet
-                    </button>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="deletUserModallabel">
+                            Apakah anda yakin ingin menghapus data tersebut?
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-pengguna"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            @click="handleDelet"
+                        >
+                            Delet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

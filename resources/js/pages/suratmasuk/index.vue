@@ -37,28 +37,28 @@ export default {
                     console.log(error);
                 });
         },
-        showDokumenSurat() {
-            let modalBody = document.getElementById("showDokumenSurat");
+        // showDokumenSurat() {
+        //     let modalBody = document.getElementById("showDokumenSurat");
 
-            // Menambahkan dokumen PDF
-            let embedPDF = document.createElement("embed");
-            embedPDF.src = "path_ke_file_dokumen.pdf";
-            embedPDF.type = "application/pdf";
-            modalBody.append(embedPDF);
+        //     // Menambahkan dokumen PDF
+        //     let embedPDF = document.createElement("embed");
+        //     embedPDF.src = "path_ke_file_dokumen.pdf";
+        //     embedPDF.type = "application/pdf";
+        //     modalBody.append(embedPDF);
 
-            // Menambahkan dokumen DOC
-            let embedDOC = document.createElement("embed");
-            embedDOC.src = "path_ke_file_dokumen.doc";
-            embedDOC.type = "application/msword";
-            modalBody.append(embedDOC);
+        //     // Menambahkan dokumen DOC
+        //     let embedDOC = document.createElement("embed");
+        //     embedDOC.src = "path_ke_file_dokumen.doc";
+        //     embedDOC.type = "application/msword";
+        //     modalBody.append(embedDOC);
 
-            // Menambahkan dokumen DOCX
-            let embedDOCX = document.createElement("embed");
-            embedDOCX.src = "path_ke_file_dokumen.docx";
-            embedDOCX.type =
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-            modalBody.append(embedDOCX);
-        },
+        //     // Menambahkan dokumen DOCX
+        //     let embedDOCX = document.createElement("embed");
+        //     embedDOCX.src = "path_ke_file_dokumen.docx";
+        //     embedDOCX.type =
+        //         "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        //     modalBody.append(embedDOCX);
+        // },
     },
 };
 </script>
@@ -210,6 +210,17 @@ export default {
                                                 aria-controls="dataTable"
                                                 rowspan="1"
                                                 colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 40%"
+                                            >
+                                                Status
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
                                                 style="width: 5%"
                                             >
@@ -246,19 +257,37 @@ export default {
                                                 "
                                             ></td>
                                             <td>
+                                                <button
+                                                    class="btn btn-sm btn-baca m-1"
+                                                    v-if="
+                                                        suratmasuks.status == 1
+                                                    "
+                                                >
+                                                    Dibaca
+                                                </button>
+                                                <button
+                                                    v-if="
+                                                        suratmasuks.status == 0
+                                                    "
+                                                    class="btn btn-sm btn-panding m-1"
+                                                >
+                                                    Panding
+                                                </button>
+                                            </td>
+                                            <td>
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
-                                                    <routerlink
+                                                    <router-link
                                                         class="btn btn-sm btn-eye m-1"
                                                         data-toggle="modal"
                                                         data-target="#showDokumenSurat"
-                                                        @click="
-                                                            ($event) =>
-                                                                showDokumenSurat(
-                                                                    suratmasuks.dokumen
-                                                                )
-                                                        "
+                                                        :to="{
+                                                            name: 'ViewsSuratMasuk',
+                                                            params: {
+                                                                id: suratmasuks.id,
+                                                            },
+                                                        }"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +304,7 @@ export default {
                                                                 d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
                                                             />
                                                         </svg>
-                                                    </routerlink>
+                                                    </router-link>
                                                     <button
                                                         class="btn btn-sm btn-hapus m-1"
                                                         data-toggle="modal"
@@ -308,84 +337,82 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div
-        class="modal fade"
-        id="deletSuratMasukModal"
-        tabindex="-1"
-        aria-labelledby="deletSuratMasukModallabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- <div class="modal-header">
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="deletSuratMasukModal"
+            tabindex="-1"
+            aria-labelledby="deletSuratMasukModallabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
                     <h5 class="modal-title" id="deletSuratMasukModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                <div class="modal-body">
-                    <h5 class="modal-title" id="deletSuratMasukModallabel">
-                        Apakah anda yakin ingin menghapus data tersebut?
-                    </h5>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-pengguna"
-                        data-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="
-                            ($event) => showDokumenSurat(suratmasuks.dokumen)
-                        "
-                    >
-                        Delet
-                    </button>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="deletSuratMasukModallabel">
+                            Apakah anda yakin ingin menghapus data tersebut?
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-pengguna"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            @click="handleDelet"
+                        >
+                            Delet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal -->
-    <div
-        class="modal fade"
-        id="showDokumenSuratModal"
-        tabindex="-1"
-        aria-labelledby="showDokumenSuratModallabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- <div class="modal-header">
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="showDokumenSuratModal"
+            tabindex="-1"
+            aria-labelledby="showDokumenSuratModallabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
                     <h5 class="modal-title" id="showDokumenSuratModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                <div class="modal-body">
-                    <h5 class="modal-title" id="showDokumenSuratModallabel">
-                        Apakah anda yakin ingin menghapus data tersebut?
-                    </h5>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-pengguna"
-                        data-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="showDokumenSurat"
-                    >
-                        Delet
-                    </button>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="showDokumenSuratModallabel">
+                            Apakah anda yakin ingin menghapus data tersebut?
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-pengguna"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            @click="showDokumenSurat"
+                        >
+                            Delet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -463,6 +490,26 @@ export default {
 .btn-create:hover {
     background-color: #f1924c;
     border-color: #f1924c;
+    color: #fefefe;
+}
+.btn-baca {
+    background-color: #0f7872;
+    border-color: #0f7872;
+    color: #fefefe;
+}
+.btn-baca:hover {
+    background-color: #0f7872;
+    border-color: #0f7872;
+    color: #fefefe;
+}
+.btn-panding {
+    background-color: #090d0d;
+    border-color: #090d0d;
+    color: #fefefe;
+}
+.btn-panding:hover {
+    background-color: #090d0d;
+    border-color: #090d0d;
     color: #fefefe;
 }
 </style>

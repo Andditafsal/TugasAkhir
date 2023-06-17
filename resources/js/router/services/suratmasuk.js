@@ -17,12 +17,21 @@ export default [{
     },
 
     {
-        path: "/suratmasuk/edit",
-        name: "Edit Surat",
+        path: "/suratmasuk/:id/edit",
+        name: "EditSuratMasuk",
         component: () => import("../../pages/suratmasuk/Edit.vue"),
         meta: {
             requiresAuth: true,
         },
+    },
+    {
+        path: "/suratmasuk/:id/views",
+        name: "ViewsSuratMasuk",
+        component: () => import("../../pages/suratmasuk/views.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+        props: true,
     },
 
 ];

@@ -75,7 +75,7 @@ Route::prefix('role')->group(function () {
 });
 
 //Router SuratMasuk
-Route::prefix('suratmasuk')->group(function () {
+Route::prefix('suratmasuk')->middleware("auth:sanctum")->group(function () {
     Route::get('/', [SuratMasukController::class, 'index']);
     Route::post('/', [SuratMasukController::class, 'store']);
     Route::get('/{suratmasuk}', [SuratMasukController::class, 'show']);

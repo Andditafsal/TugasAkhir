@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratMasukController extends Controller
 
@@ -58,6 +59,16 @@ class SuratMasukController extends Controller
      */
     public function show(SuratMasuk $suratmasuk)
     {
+        if (auth()->user()->id_role == 3 && $suratmasuk->status == 0) {
+            $suratmasuk->update([
+                "status" => 1
+            ]);
+        }
+        // if ((auth()->user()->id_role == 3 || auth()->user()->id_role == 2) && $suratmasuk->status == 0) {
+        //     $suratmasuk->update([
+        //         "status" => 1
+        //     ]);
+        // }
         return new SuratMasukDetail($suratmasuk);
     }
 
