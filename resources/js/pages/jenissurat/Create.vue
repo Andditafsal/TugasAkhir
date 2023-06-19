@@ -56,7 +56,7 @@ export default {
                         ></i>
                     </router-link>
                     <h5 class="mb-0 mr-0 text-gray-900 px-2">
-                        Creat Jenis Surat
+                        Tambah Data Jenis-Jenis Surat
                     </h5>
                 </div>
             </div>
@@ -112,22 +112,29 @@ export default {
                                             {{ erorr }}
                                         </div>
                                     </div>
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary text-center col-2 m-1"
-                                        :disabled="isDisabled"
-                                    >
-                                        Save
-                                    </button>
-                                    <router-link
-                                        :to="{ name: 'JenisSurat' }"
-                                        type="submit"
-                                        class="btn btn-cancel text-center col-2"
-                                        :class="{ disabled: isDisabled }"
-                                    >
-                                        Cancle
-                                    </router-link>
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
+                                        <div class="col-4 col-md-2">
+                                            <router-link
+                                                :to="{ name: 'JenisSurat' }"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                            >
+                                                Cancle
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

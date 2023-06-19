@@ -293,21 +293,29 @@ export default {
                                         </div>
                                     </div>
 
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary text-center col-1 m-1"
-                                        :disabled="isDisabled"
-                                    >
-                                        Save
-                                    </button>
-                                    <button
-                                        to="/suratmasuk"
-                                        type="submit"
-                                        class="btn btn-cancel text-center col-1"
-                                        :class="{ disabled: isDisabled }"
-                                    >
-                                        Cancle
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
+                                        <div class="col-4 col-md-2">
+                                            <router-link
+                                                to="/suratmasuk"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                            >
+                                                Cancel
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -55,7 +55,6 @@ export default {
 
             <span
                 class="h5 mb-0 text-gray-800 ml-2 mt-2"
-                v-if="$can('action', 'Admin')"
                 >Jenis Surat
             </span>
         </div>
@@ -145,7 +144,7 @@ export default {
                                                 aria-label="Number: activate to sort column descending"
                                                 style="width: 10%"
                                             >
-                                                Nama
+                                                Nama Surat
                                             </th>
                                             <th
                                                 class="sorting"
@@ -191,7 +190,7 @@ export default {
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
-                                                    <router-link
+                                                    <!-- <router-link
                                                         class="btn btn-sm btn-warning m-1"
                                                         :to="{
                                                             name: 'Edit Jenis',
@@ -216,7 +215,7 @@ export default {
                                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                                                             />
                                                         </svg>
-                                                    </router-link>
+                                                    </router-link> -->
                                                     <button
                                                         class="btn btn-sm btn-hapus m-1"
                                                         data-toggle="modal"
@@ -249,42 +248,42 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div
-        class="modal fade"
-        id="deletJenissuratModal"
-        tabindex="-1"
-        aria-labelledby="deletJenissuratModallabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- <div class="modal-header">
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="deletJenissuratModal"
+            tabindex="-1"
+            aria-labelledby="deletJenissuratModallabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
                     <h5 class="modal-title" id="deletJenissuratModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                <div class="modal-body">
-                    <h5 class="modal-title" id="deletJenissuratModallabel">
-                        Apakah anda yakin ingin menghapus data tersebut?
-                    </h5>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-pengguna"
-                        data-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="handleDelet"
-                    >
-                        Delet
-                    </button>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="deletJenissuratModallabel">
+                            Apakah anda yakin ingin menghapus data tersebut?
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-pengguna"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            @click="handleDelet"
+                        >
+                            Delet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

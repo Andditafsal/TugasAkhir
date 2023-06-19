@@ -301,22 +301,31 @@ export default {
                                             {{ erorr }}
                                         </div>
                                     </div>
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary text-center col-2 m-1"
-                                        :disabled="isDisabled"
-                                    >
-                                        Save
-                                    </button>
-                                    <router-link
-                                        :to="{ name: 'User' }"
-                                        type="submit"
-                                        class="btn btn-cancel text-center col-2"
-                                        :class="{ disabled: isDisabled }"
-                                    >
-                                        Cancle
-                                    </router-link>
+                                    <div class="row">
+                                        <div class="col-6 col-md-3">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                                style="display: block"
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <router-link
+                                                :to="{ name: 'User' }"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                                style="display: block"
+                                            >
+                                                Cancel
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
