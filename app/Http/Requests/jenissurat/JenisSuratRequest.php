@@ -14,7 +14,7 @@ class JenisSuratRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,10 @@ class JenisSuratRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'nama|required',
-            'nomor_surat' => 'nomor_surat|required'
+            'kode_surat' => 'required',
+            'kode_sekolah' => 'required',
+            'tahun_surat' => 'required',
+
         ];
     }
 

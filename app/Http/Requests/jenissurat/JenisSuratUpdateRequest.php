@@ -25,8 +25,10 @@ class JenisSuratUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
-            'nomor_surat' => 'required'
+            'kode_surat' => 'required',
+            'kode_sekolah' => 'required',
+            'tahun_surat' => 'required',
+
         ];
     }
     protected function failedValidation(Validator $validator)

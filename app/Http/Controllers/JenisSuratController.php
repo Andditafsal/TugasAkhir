@@ -31,15 +31,26 @@ class JenisSuratController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $file = "";
-        if ($request->hasFile('documen')) {
-            $file = $request->file('document')->store('file_document');
-        }
-        $request->merge([
-            'file_document' => $file
-        ]);
-
-        return $this->jenissurat->create($request->all());
+        // $file = "";
+        // if ($request->hasFile('document')) {
+        //     $file = $request->file('document')->store('file_document');
+        // }
+        // $request->merge([
+        //     'file_document' => $file
+        // ]);
+        // return $this->jenissurat->create($request->all());
+        return DB::transaction(
+            function () use ($request) {
+                $file = "";
+                if ($request->hasFile('template_dokumen')) {
+                    $file = $request->file('template_dokumen')->store('dokumen');
+                }
+                $request->merge([
+                    'dokumen' => $file
+                ]);
+                return $this->jenissurat->create($request->all());
+            }
+        );
     }
 
     /**
