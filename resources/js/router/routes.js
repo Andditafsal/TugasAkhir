@@ -31,7 +31,7 @@ export default [
     },
 
     {
-        path: "/auth/register",
+        path: "/auth/registol",
         name: "Register",
         component: () => import("../pages/auth/register.vue"),
         meta: {

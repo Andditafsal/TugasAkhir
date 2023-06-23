@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <ul
         class="navbar-nav bg-side sidebar sidebar-dark accordion"
@@ -69,6 +70,7 @@
                         :to="{ name: 'JenisSurat' }"
                         role="tab"
                         aria-controls="jenissurat"
+                        v-if="$can('action', 'Admin')"
                     >
                         Jenis Surat
                     </router-link>

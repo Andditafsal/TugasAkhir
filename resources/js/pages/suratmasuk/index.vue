@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             suratmasuks: [],
+            search: "",
             successDelet: false,
         };
     },
@@ -11,8 +12,9 @@ export default {
     },
     methods: {
         getSuratMasuks() {
+            const params = [`search=${this.search}`].join("&");
             this.$store
-                .dispatch("getData", ["suratmasuk", {}])
+                .dispatch("getData", ["suratmasuk", params])
                 .then((response) => {
                     //console.log(response);
                     this.suratmasuks = response.data;
@@ -59,6 +61,9 @@ export default {
         //         "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
         //     modalBody.append(embedDOCX);
         // },
+        onSearch() {
+            this.getSuratMasuks();
+        },
     },
 };
 </script>
@@ -66,7 +71,9 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <i class="fa fa-reply" aria-hidden="true"></i>
+            <router-link to="/">
+                <i class="fa fa-reply" aria-hidden="true"></i>
+            </router-link>
 
             <span class="h5 mb-0 text-gray-800 ml-2 mt-2">Surat Masuk </span>
         </div>
@@ -115,8 +122,10 @@ export default {
                                         type="text"
                                         name=""
                                         email=""
-                                        placeholder="Masukan Data Surat"
+                                        placeholder="Asal  Surat & Tanggal Surat Masuk"
                                         class="form-control form-control-sm"
+                                        v-model="search"
+                                        @input="onSearch"
                                     />
                                 </div>
                             </div>
@@ -155,7 +164,7 @@ export default {
                                                 colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Number: activate to sort column descending"
-                                                style="width: 15%"
+                                                style="width: 17%"
                                             >
                                                 Tanggal Diterima
                                             </th>
@@ -511,5 +520,11 @@ export default {
     background-color: #090d0d;
     border-color: #090d0d;
     color: #fefefe;
+}
+.fa-reply {
+    color: #858796;
+}
+.fa-reply:hover {
+    color: #858796;
 }
 </style>

@@ -47,7 +47,16 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <i class="fa fa-users" widht="100" aria-hidden="true"></i>
+            <router-link to="/">
+                <i class="fa fa-users" widht="100" aria-hidden="true"></i>
+            </router-link>
+            <!-- <router-link
+                :to="{ name: 'Dashboard' }"
+                type="button"
+                class="btn icon"
+            >
+                <i class="fa fa-users" widht="100" aria-hidden="true"></i>
+            </router-link> -->
             <span class="h5 mb-0 text-gray-800 ml-2">Pengguna </span>
         </div>
 
@@ -327,6 +336,12 @@ export default {
 </template>
 
 <style>
+.fa-users {
+    color: #858796;
+}
+.fa-users:hover {
+    color: #858796;
+}
 .btn-pengguna {
     background-color: #303137 !important;
     color: #fefefe;

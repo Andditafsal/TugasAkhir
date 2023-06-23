@@ -1,3 +1,55 @@
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                kodeSurat: "",
+                kodeSekolah: "",
+                tahunSurat: "",
+            },
+            jenissurat: [],
+            error: {},
+            isDisabled: false,
+        };
+    },
+    mounted() {
+        this.getData();
+    },
+    methods: {
+        handleSubmit() {
+            this.isDisabled = true;
+
+            let formData = new FormData();
+            formData.append("kode_surat", this.form.kodeSurat);
+            formData.append("kode_sekolah", this.form.kodeSekolah);
+            formData.append("tahun_surat", this.form.tahunSurat);
+
+            this.$store
+                .dispatch("postDataUpload", ["suratkeluar", formData])
+                .then((result) => {
+                    // this.isDisabled = false;
+                    this.$router.push({ name: "SuratKeluar" });
+                    //console.log(result);
+                })
+                .catch((error) => {
+                    //this.isDisabled = false;
+                    //console.log(error);
+                    this.error = error.response.data.messages;
+                });
+        },
+        getData() {
+            this.$store
+                .dispatch("getData", ["jenissurat", {}])
+                .then((response) => {
+                    this.jenissurat = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
+};
+</script>
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
@@ -30,100 +82,141 @@
                     <div>
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <div
+                                <!-- <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
                                     <i
-                                        class="fa fa-folder"
+                                        class="fa fa-envelope"
                                         aria-hidden="true"
                                     ></i>
                                     <label for="" class="px-1 mb-0"
-                                        >Data Surat</label
+                                        >Pilih Surat</label
                                     >
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <form>
+                                <form
+                                    @submit.prevent="handleSubmit"
+                                    method="post"
+                                >
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">No Agenda *</label>
-                                            <input
-                                                type="int"
-                                                class="form-control"
-                                            />
-                                        </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
+                                            {{ jenissurat }}
                                             <label for="">Jenis Surat *</label>
                                             <select class="form-control">
-                                                <option>
-                                                    Surat Tugas Monitoring PKL
-                                                </option>
-                                                <option>
-                                                    Surat Penarikan Peserta PKL
-                                                </option>
-                                                <option>
-                                                    Surat Pengantar PKL
-                                                </option>
-                                                <option>
-                                                    Surat Panggilan Orang Tua
-                                                </option>
-
-                                                <option>
-                                                    Surat Izin Atasan
-                                                </option>
-                                                <option>
-                                                    Surat Dispen Siswa
-                                                </option>
-                                                <option>
-                                                    Surat Akrif Siswa
-                                                </option>
-                                                <option>Surat Diterima</option>
-
-                                                <option>
-                                                    Surat Pengambilan Raport
-                                                </option>
-                                                <option>
-                                                    Surat Undangan Brefing
-                                                </option>
-                                                <option>
-                                                    Surat Rapat Koordinasi
-                                                </option>
-                                                <option>
-                                                    Surat Pengesian E-Raport
-                                                </option>
-                                                <option>
-                                                    Permohonan Surat Keluar
-                                                </option>
+                                                <option
+                                                    v-for="(
+                                                        jenissurat, index
+                                                    ) in jenissurat"
+                                                    :key="index"
+                                                    v-html="jenissurat.name"
+                                                ></option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="">Nomor Surat *</label>
-                                            <input
-                                                type="int"
-                                                class="form-control"
-                                            />
+                                        <div class="row col-12">
+                                            <div class="col-md-0">
+                                                <div class="col-sm-6 mb-3">
+                                                    <div
+                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
+                                                    >
+                                                        <i
+                                                            class="fa fa-folder"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        <label
+                                                            for=""
+                                                            class="px-1 mb-0"
+                                                            >Data</label
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label for=""
-                                                >Tanggal Surat *</label
+                                                >Penomoran Surat :</label
                                             >
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                            />
                                         </div>
-                                    </div>
 
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">Lampiran *</label>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                id="name"
+                                                v-model="form.tahunSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.kodeSurat,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.kodeSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
                                         </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Kode Sekolah *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                v-model="form.KodeSekolah"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.KodeSekolah,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.KodeSekolah"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Tahun Ajaran*</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                v-model="form.kodeSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tahunSurat,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tahunSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group col-md-12">
+                                            <label for=""
+                                                >Data-Data Surat :</label
+                                            >
+                                        </div> -->
+                                    </div>
+
+                                    <!-- <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="">Perihal *</label>
                                             <input
@@ -131,49 +224,24 @@
                                                 class="form-control"
                                             />
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="file">Lampiran *</label>
+                                            <input
+                                                type="file"
+                                                class="form-control"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="">Jenis Surat *</label>
+                                            <select class="form-control">
+                                                <option>
+                                                    Kepala Sekolah SMK Negeri 2
+                                                    Indramayu
+                                                </option>
+                                                <option>Wakil Kesiswaan</option>
+                                            </select>
+                                        </div>
 
-                                        <fieldset class="form-group col-12">
-                                            <div class="row">
-                                                <legend
-                                                    class="col-form-label col-sm-2 pt-0"
-                                                >
-                                                    Diajukan Kepada:
-                                                </legend>
-                                                <div class="col-sm-10">
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios1"
-                                                            value="option1"
-                                                            checked
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios1"
-                                                        >
-                                                            Kepala Sekolah
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="radio"
-                                                            name="gridRadios"
-                                                            id="gridRadios2"
-                                                            value="option2"
-                                                        />
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="gridRadios2"
-                                                        >
-                                                            Guru
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
                                         <div class="row col-12">
                                             <div class="col-md-0">
                                                 <div class="col-sm-6 mb-3">
@@ -211,7 +279,7 @@
                                                 required
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-6 mb-3">
                                             <label
                                                 >Waktu Kegiatan (Mulai) *</label
                                             >
@@ -221,7 +289,7 @@
                                                 placeholder="1234 Main St"
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-6 mb-3">
                                             <label
                                                 >Waktu Kegiatan (Akhir) *</label
                                             >
@@ -230,6 +298,30 @@
                                                 class="form-control"
                                                 required
                                             />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Tempat Kegiatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Tujuan Kegiatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label>Catatan *</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="Catatan"
+                                                rows="3"
+                                            ></textarea>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -242,7 +334,7 @@
                                                     aria-hidden="true"
                                                 ></i>
                                                 <label for="" class="px-1 mb-0"
-                                                    >Pengirim</label
+                                                    >Pengaju Surat</label
                                                 >
                                             </div>
                                         </div>
@@ -264,14 +356,47 @@
                                                 required
                                             />
                                         </div>
-                                    </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Jabatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label>NIP *</label>
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                    </div> -->
 
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary mt-3"
-                                    >
-                                        Create Surat
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-4 col-md-2">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
+                                        <div class="col-4 col-md-2">
+                                            <router-link
+                                                to="/suratkeluar"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                            >
+                                                Cancel
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

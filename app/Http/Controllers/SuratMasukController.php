@@ -27,7 +27,17 @@ class SuratMasukController extends Controller
      */
     public function index(Request $request)
     {
-        $suratmasuks = $this->suratmasuk->paginate();
+        // $suratmasuks = $this->suratmasuk->paginate($request->per_page);
+
+        $query = $this->suratmasuk->query();
+
+        if ($request->has('search')) {
+            $query->where("tanggal", "like", "%" . $request->search . "%")
+                ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
+        }
+
+        $suratmasuks = $query->paginate($request->per_page);
+
 
         return new SuratMasukCollection($suratmasuks);
 
@@ -69,6 +79,13 @@ class SuratMasukController extends Controller
         //         "status" => 1
         //     ]);
         // }
+
+        if (auth()->user()->id_role == 3 && $suratmasuk->diajukan == 0) {
+            $suratmasuk->update([
+                "diajukan" => 1
+            ]);
+        }
+
         return new SuratMasukDetail($suratmasuk);
     }
 

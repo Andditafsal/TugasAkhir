@@ -27,7 +27,13 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = $this->user->paginate($request->per_page);
+        $query = $this->user->query();
+
+        if ($request->has('search')) {
+            $query->where("name", "like", "%" . $request->search . "%")
+                ->orWhere("email", "like", "%" . $request->search . "%");
+        }
+        $users = $query->paginate($request->per_page);
 
         return new UserCollection($users);
     }

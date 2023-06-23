@@ -62,15 +62,6 @@ export default {
         <div class="card shadow col-lg-6 mb-4">
             <div class="card-header">
                 <div class="mb-3 col-7 d-flex align-items-center mb-md-1">
-                    <router-link
-                        to="/user"
-                        class="btn icon icon-shape bg-red text-white rounded-circle"
-                    >
-                        <i
-                            class="fa fa-arrow-circle-left"
-                            aria-hidden="true"
-                        ></i>
-                    </router-link>
                     <h5 class="mb-0 mr-0 text-gray-900 px-2">
                         Tambah Data User
                     </h5>
