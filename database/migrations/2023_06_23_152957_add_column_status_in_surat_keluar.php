@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('table_surat_keluar', function (Blueprint $table) {
-            $table->string('dokumen')->nullable()->after('perihal');
+        Schema::table('surat_keluar', function (Blueprint $table) {
+            $table->integer("status")->default(0)->after('id_jenis_surat');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('table_surat_keluar', function (Blueprint $table) {
-            $table->dropColumn('dokumen');
+        Schema::table('surat_keluar', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 };

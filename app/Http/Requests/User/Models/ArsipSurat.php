@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SuratKeluar extends Model
+class ArsipSurat extends Model
 {
     use HasFactory;
 
-    protected $table = 'surat_keluar';
+
+    protected $table  = 'arsip_surat';
+
 
     protected $fillable = [
+        'tanggal_surat',
+        'nama',
+        'lampiran',
         'perihal',
-        'id_jenis_surat',
-        'dittutju',
-        'status'
+        'tahun_ajaran',
     ];
 }

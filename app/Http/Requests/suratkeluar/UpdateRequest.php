@@ -25,9 +25,12 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tanggal' => 'required',
+
+            // 'dokumen_surat' => 'required|file|mimes:doc,pdf,docx|max:2048',
             'perihal' => 'required',
-            'nama' => 'required',
+            'id_jenis_surat' => 'required',
+            'dittutju' => 'required',
+            'status' => 'required'
         ];
     }
     protected function failedValidation(Validator $validator)

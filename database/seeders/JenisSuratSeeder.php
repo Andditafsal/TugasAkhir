@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\JenisSurat;
 use Illuminate\Database\Seeder;
+use App\Models\JenisSurat;
 
 class JenisSuratSeeder extends Seeder
 {

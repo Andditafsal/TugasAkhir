@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 ///Cetak Surat
 Route::prefix('cetak')->group(function () {
     Route::prefix('suratkeluar')->group(function () {
-        Route::get('download/{id}', [SuratKeluarController::class, 'cetak']);
+        Route::post('download/{id}', [SuratKeluarController::class, 'cetak']);
     });
 });
 

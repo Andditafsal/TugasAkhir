@@ -7,6 +7,12 @@ const permisionsByRole = {
     "1": [
         'action_Admin'
     ],
+    // "2":[
+    //     'action_PemimpinWadir'
+    // ],
+    // "3":[
+    //     'action_PemimpinWadir'
+    // ]
 
 }
 export default defineAbility(can => {

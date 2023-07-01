@@ -28,6 +28,7 @@ class JenisSuratUpdateRequest extends FormRequest
             'kode_surat' => 'required',
             'kode_sekolah' => 'required',
             'tahun_surat' => 'required',
+            'name' => 'required',
 
         ];
     }

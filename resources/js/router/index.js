@@ -15,7 +15,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = Cookies.get("token");
     if (to.path !== '/auth/login' && !token) {
-        window.location.href = "/auth/login";
+        next()
     } else if (to.path === "/auth/login" && token) {
         to.name = "Dashboard";
     } else {

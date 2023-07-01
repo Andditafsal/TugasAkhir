@@ -2,16 +2,12 @@
 
 namespace Database\Seeders;
 
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-
-
 class UserSeeder extends Seeder
-
 {
     /**
      * Run the database seeds.
@@ -49,6 +45,17 @@ class UserSeeder extends Seeder
             'alamat'  => 'Indramayu',
             'no_hp'  => '0813344645',
             'id_role' => '3'
+
+        ]);
+        User::create([
+
+            'name'  => 'wakasek',
+            'email'  => 'wakasek@gmail.com',
+            'jenis_kelamin'  => 'laki-laki',
+            'password'  => bcrypt("developer"),
+            'alamat'  => 'Indramayu',
+            'no_hp'  => '0819344645',
+            'id_role' => '4'
 
         ]);
     }

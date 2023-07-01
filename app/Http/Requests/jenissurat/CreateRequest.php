@@ -27,8 +27,11 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required',
-            'nomor_surat' => 'required'
+            'kode_surat' => 'required',
+            'kode_sekolah' => 'required',
+            'tahun_surat' => 'required',
+            'name' => 'required',
+
         ];
     }
 

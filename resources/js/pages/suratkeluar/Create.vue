@@ -10,6 +10,7 @@ export default {
             jenissurat: [],
             error: {},
             isDisabled: false,
+            datacheck: {},
         };
     },
     mounted() {
@@ -25,7 +26,10 @@ export default {
             formData.append("tahun_surat", this.form.tahunSurat);
 
             this.$store
-                .dispatch("postDataUpload", ["suratkeluar", formData])
+                .dispatch("postDataUpload", [
+                    "cetak/suratkeluar/download/" + this.datacheck.id,
+                    formData,
+                ])
                 .then((result) => {
                     // this.isDisabled = false;
                     this.$router.push({ name: "SuratKeluar" });
@@ -47,6 +51,16 @@ export default {
                     console.log(error);
                 });
         },
+        chooseSurat(e) {
+            this.$store
+                .dispatch("showData", ["jenissurat", e.target.value])
+                .then((response) => {
+                    this.datacheck = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
 };
 </script>
@@ -63,7 +77,7 @@ export default {
             <div class="card-header">
                 <div class="mb-3 col-8 d-flex align-items-center mb-md-1">
                     <router-link
-                        to="/suratmasuk"
+                        to="/suratkeluar"
                         class="btn icon icon-shape bg-red text-white rounded-circle"
                     >
                         <i
@@ -103,15 +117,18 @@ export default {
                                 >
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            {{ jenissurat }}
                                             <label for="">Jenis Surat *</label>
-                                            <select class="form-control">
+                                            <select
+                                                class="form-control"
+                                                @change="chooseSurat($event)"
+                                            >
                                                 <option
                                                     v-for="(
-                                                        jenissurat, index
+                                                        surat, index
                                                     ) in jenissurat"
                                                     :key="index"
-                                                    v-html="jenissurat.name"
+                                                    v-html="surat.name"
+                                                    :value="surat.id"
                                                 ></option>
                                             </select>
                                         </div>
@@ -146,12 +163,12 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 id="name"
-                                                v-model="form.tahunSurat"
+                                                :value="datacheck.kodeSurat"
                                                 :class="{
                                                     'is-invalid':
                                                         error.kodeSurat,
                                                 }"
-                                                :disabled="isDisabled"
+                                                disabled
                                             />
                                             <div
                                                 class="invalid-feedback"
@@ -169,12 +186,12 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 id="name"
-                                                v-model="form.KodeSekolah"
+                                                :value="datacheck.kodeSekolah"
                                                 :class="{
                                                     'is-invalid':
-                                                        error.KodeSekolah,
+                                                        error.kodeSekolah,
                                                 }"
-                                                :disabled="isDisabled"
+                                                disabled
                                             />
                                             <div
                                                 class="invalid-feedback"
@@ -192,12 +209,12 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 id="name"
-                                                v-model="form.kodeSurat"
+                                                :value="datacheck.tahunSurat"
                                                 :class="{
                                                     'is-invalid':
                                                         error.tahunSurat,
                                                 }"
-                                                :disabled="isDisabled"
+                                                disabled
                                             />
                                             <div
                                                 class="invalid-feedback"
@@ -209,14 +226,14 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group col-md-12">
+                                        <div class="form-group col-md-12">
                                             <label for=""
                                                 >Data-Data Surat :</label
                                             >
-                                        </div> -->
+                                        </div>
                                     </div>
 
-                                    <!-- <div class="form-row">
+                                    <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="">Perihal *</label>
                                             <input
@@ -230,16 +247,6 @@ export default {
                                                 type="file"
                                                 class="form-control"
                                             />
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label for="">Jenis Surat *</label>
-                                            <select class="form-control">
-                                                <option>
-                                                    Kepala Sekolah SMK Negeri 2
-                                                    Indramayu
-                                                </option>
-                                                <option>Wakil Kesiswaan</option>
-                                            </select>
                                         </div>
 
                                         <div class="row col-12">
@@ -372,7 +379,7 @@ export default {
                                                 required
                                             />
                                         </div>
-                                    </div> -->
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-4 col-md-2">
@@ -429,5 +436,13 @@ export default {
 .text-white {
     color: white !important;
     background-color: #303137;
+}
+.btn-cancel {
+    background-color: #7a7a7a;
+    color: white !important;
+}
+.btn-cancel:hover {
+    background-color: #7a7a7a;
+    color: white !important;
 }
 </style>

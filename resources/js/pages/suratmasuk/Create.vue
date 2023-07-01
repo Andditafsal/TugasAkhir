@@ -12,6 +12,7 @@ export default {
                 tanggal: "",
                 tanggalSurat: "",
                 dokumenSurat: "",
+                diajukan: "",
             },
             error: {},
             isDisabled: false,
@@ -30,6 +31,7 @@ export default {
             formData.append("perihal_masuk", this.form.perihalMasuk);
             formData.append("tanggal", this.form.tanggal);
             formData.append("tanggal_surat", this.form.tanggalSurat);
+            formData.append("diajukan", this.form.diajukan);
 
             if (this.form.dokumenSurat) {
                 formData.append("dokumen_surat", this.form.dokumenSurat);
@@ -57,6 +59,7 @@ export default {
         dateNow() {
             let ms = dayjs().locale("id");
             this.form.tanggal = ms.format("YYYY-MM-DD");
+            this.form.tanggalSurat = ms.format("YYYY-MM-DD");
         },
     },
 };
@@ -236,17 +239,19 @@ export default {
                                             <label for=""
                                                 >Diajukan Kepada *</label
                                             >
-                                            <input
-                                                type=""
+                                            <select
                                                 class="form-control"
-                                                id="perihalMasuk"
-                                                v-model="form.perihalMasuk"
+                                                id="pengajuan"
+                                                v-model="form.diajukan"
                                                 :class="{
                                                     'is-invalid':
-                                                        error.perihalMasuk,
+                                                        error.diajukan,
                                                 }"
                                                 :disabled="isDisabled"
-                                            />
+                                            >
+                                                <option>Kepala Sekolah</option>
+                                                <option>Wakil Kesiswaan</option>
+                                            </select>
                                             <div
                                                 class="invalid-feedback"
                                                 v-for="(

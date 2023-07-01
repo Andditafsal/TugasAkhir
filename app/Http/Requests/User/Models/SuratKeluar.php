@@ -12,9 +12,14 @@ class SuratKeluar extends Model
     protected $table = 'surat_keluar';
 
     protected $fillable = [
-        'perihal',
-        'id_jenis_surat',
-        'dittutju',
-        'status'
+
+        'kode_surat',
+        'kode_sekolah',
+        'tahun_surat',
+
     ];
+    // public function getDokumenAttribute($dokumen)
+    // {
+    //     return asset('storage/' . $dokumen);
+    // }
 }

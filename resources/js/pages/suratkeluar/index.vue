@@ -1,3 +1,6 @@
+<script>
+export default {};
+</script>
 <template>
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -133,6 +136,17 @@
                                                 aria-controls="dataTable"
                                                 rowspan="1"
                                                 colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 20%"
+                                            >
+                                                Status
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
                                                 style="width: 5%"
                                             >
@@ -147,6 +161,23 @@
                                             <td>andita.aa.aa</td>
                                             <td>43.3334/33/smk</td>
                                             <td>Surat Undangan</td>
+                                            <td>
+                                                <button
+                                                    class="btn btn-sm btn-primary m-1"
+                                                >
+                                                    diproses
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-danger m-1"
+                                                >
+                                                    dibatalkan
+                                                </button>
+                                                <button
+                                                    class="btn btn-sm btn-warning m-1"
+                                                >
+                                                    disetujui
+                                                </button>
+                                            </td>
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"
