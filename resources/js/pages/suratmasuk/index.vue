@@ -230,6 +230,17 @@ export default {
                                                 aria-controls="dataTable"
                                                 rowspan="1"
                                                 colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 40%"
+                                            >
+                                                Disposisi
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
                                                 style="width: 5%"
                                             >
@@ -283,6 +294,7 @@ export default {
                                                     Panding
                                                 </button>
                                             </td>
+                                            <td>-</td>
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"

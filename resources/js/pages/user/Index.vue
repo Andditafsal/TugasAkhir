@@ -95,7 +95,24 @@ export default {
                         class="dataTables_wrapper dt-bootstrap4"
                     >
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
+                            <div
+                                class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-3"
+                            >
+                                <div
+                                    class="d-flex px-12 align-items-center margin-100px-bottom"
+                                >
+                                    <label for="" class="px-1 mb-0">Show</label>
+                                    <select
+                                        name="dataTable_length"
+                                        aria-controls="dataTable"
+                                        class="custom-select custom-select-sm form-control form-control-sm"
+                                    >
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
@@ -289,6 +306,78 @@ export default {
                                 </table>
                             </div>
                         </div>
+
+                        <div
+                            class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
+                        >
+                            <h5 class="mb-0 text-gray-900 mb-2"></h5>
+
+                            <div
+                                class="dataTables_paginate paging_simple_numbers"
+                                id="dataTable_paginate"
+                            >
+                                <ul class="pagination">
+                                    <li
+                                        class="paginate_button page-item previous disabled"
+                                        id="dataTable_previous"
+                                    >
+                                        <a
+                                            href="#"
+                                            aria-controls="dataTable"
+                                            data-dt-idx="0"
+                                            tabindex="0"
+                                            class="page-link"
+                                            >Previous</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="paginate_button page-item active"
+                                    >
+                                        <a
+                                            href="#"
+                                            aria-controls="dataTable"
+                                            data-dt-idx="1"
+                                            tabindex="0"
+                                            class="page-link"
+                                            >1</a
+                                        >
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a
+                                            href="#"
+                                            aria-controls="dataTable"
+                                            data-dt-idx="2"
+                                            tabindex="0"
+                                            class="page-link"
+                                            >2</a
+                                        >
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a
+                                            href="#"
+                                            aria-controls="dataTable"
+                                            data-dt-idx="3"
+                                            tabindex="0"
+                                            class="page-link"
+                                            >3</a
+                                        >
+                                    </li>
+                                    <li
+                                        class="paginate_button page-item next"
+                                        id="dataTable_next"
+                                    >
+                                        <a
+                                            href="#"
+                                            aria-controls="dataTable"
+                                            data-dt-idx="4"
+                                            tabindex="0"
+                                            class="page-link"
+                                            >Next</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,6 +425,29 @@ export default {
 </template>
 
 <style>
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #252628;
+    border-color: #252628;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #1c1d21;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+.page-link:hover {
+    z-index: 2;
+    color: #1c1d21;
+    text-decoration: none;
+    background-color: #eaecf4;
+    border-color: #dddfeb;
+}
 .fa-users {
     color: #858796;
 }

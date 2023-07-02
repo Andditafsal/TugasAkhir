@@ -133,7 +133,7 @@ export default {
                             <div class="row">
                                 <div class="container">
                                     <div class="col-lg-12">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <div
                                                 class="custom-control custom-checkbox my-1 mr-sm-2"
                                             >
@@ -149,7 +149,7 @@ export default {
                                                 >
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <div
                                                 class="custom-control custom-checkbox my-1 mr-sm-2"
                                             >
@@ -199,6 +199,16 @@ export default {
 </template>
 
 <style>
+.btn-primary {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
+.btn-primary:hover {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
 .btn-pengguna {
     background-color: #303137 !important;
     color: #fefefe;
