@@ -1,22 +1,43 @@
 <script>
+import paginate from "../../core/layout/paginate.vue";
+
 export default {
     data() {
         return {
             users: [],
             search: "",
             successDelet: false,
+
+            paginate: {
+                total: 0,
+                perPage: 10,
+                currentPage: 1,
+                lastPage: 0,
+                page: 0,
+            },
         };
+    },
+    components: {
+        paginate,
     },
     mounted() {
         this.getUsers();
     },
     methods: {
         getUsers() {
-            const params = [`search=${this.search}`].join("&");
+            const params = [
+                `search=${this.search}`,
+                `page=${this.paginate.page}`,
+                `per_page=${this.paginate.perPage}`,
+            ].join("&");
             this.$store
                 .dispatch("getData", ["user", params])
                 .then((response) => {
                     this.users = response.data;
+                    this.paginate.total = response.meta.total;
+                    this.paginate.perPage = response.meta.perPage;
+                    this.paginate.currentPage = response.meta.currentPage;
+                    this.paginate.lastPage = response.meta.lastPage;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -38,6 +59,10 @@ export default {
                 });
         },
         onSearch() {
+            this.getUsers();
+        },
+        onPageChange(page) {
+            this.paginate.page = page;
             this.getUsers();
         },
     },
@@ -87,13 +112,12 @@ export default {
             <div v-if="successDelet" class="alert alert-success">
                 Data berhasil dihapus
             </div>
-
+            <div v-if="successDelet" class="alert alert-success">
+                Data berhasil diambakan
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <div
-                        id="dataTable_wrapper"
-                        class="dataTables_wrapper dt-bootstrap4"
-                    >
+                    <div>
                         <div class="row">
                             <div
                                 class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-3"
@@ -131,8 +155,7 @@ export default {
                         <div class="row">
                             <div class="col-sm-12">
                                 <table
-                                    class="table table-bordered dataTable"
-                                    id="dataTable"
+                                    class="table table-bordered"
                                     width="100%"
                                     cellspacing="0"
                                     role="grid"
@@ -306,77 +329,16 @@ export default {
                                 </table>
                             </div>
                         </div>
-
                         <div
                             class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
                         >
                             <h5 class="mb-0 text-gray-900 mb-2"></h5>
-
-                            <div
-                                class="dataTables_paginate paging_simple_numbers"
-                                id="dataTable_paginate"
-                            >
-                                <ul class="pagination">
-                                    <li
-                                        class="paginate_button page-item previous disabled"
-                                        id="dataTable_previous"
-                                    >
-                                        <a
-                                            href="#"
-                                            aria-controls="dataTable"
-                                            data-dt-idx="0"
-                                            tabindex="0"
-                                            class="page-link"
-                                            >Previous</a
-                                        >
-                                    </li>
-                                    <li
-                                        class="paginate_button page-item active"
-                                    >
-                                        <a
-                                            href="#"
-                                            aria-controls="dataTable"
-                                            data-dt-idx="1"
-                                            tabindex="0"
-                                            class="page-link"
-                                            >1</a
-                                        >
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a
-                                            href="#"
-                                            aria-controls="dataTable"
-                                            data-dt-idx="2"
-                                            tabindex="0"
-                                            class="page-link"
-                                            >2</a
-                                        >
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a
-                                            href="#"
-                                            aria-controls="dataTable"
-                                            data-dt-idx="3"
-                                            tabindex="0"
-                                            class="page-link"
-                                            >3</a
-                                        >
-                                    </li>
-                                    <li
-                                        class="paginate_button page-item next"
-                                        id="dataTable_next"
-                                    >
-                                        <a
-                                            href="#"
-                                            aria-controls="dataTable"
-                                            data-dt-idx="4"
-                                            tabindex="0"
-                                            class="page-link"
-                                            >Next</a
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
+                            <paginate
+                                :currentPage="paginate.currentPage"
+                                :rowsTotal="paginate.total"
+                                :lastPage="paginate.lastPage"
+                                @onPageChange="onPageChange($event)"
+                            />
                         </div>
                     </div>
                 </div>

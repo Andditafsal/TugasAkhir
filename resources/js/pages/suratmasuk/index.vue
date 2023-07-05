@@ -91,6 +91,7 @@ export default {
                         to="/suratmasuk/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
+                        v-if="$can('action', 'Admin Petugas')"
                     >
                         <span class="btn-inner--icon m-1"
                             ><i
@@ -234,7 +235,13 @@ export default {
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
-                                                style="width: 1%"
+                                                style="width: 3%"
+                                                v-if="
+                                                    $can(
+                                                        'action',
+                                                        'Admin Petugas Pemimpin'
+                                                    )
+                                                "
                                             >
                                                 Aksi
                                             </th>
@@ -289,12 +296,21 @@ export default {
                                                 <button
                                                     v-if="suratmasuks.disposisi"
                                                     class="btn btn-sm btn-warning m-1"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal"
                                                 >
                                                     Lihat Disposisi
                                                 </button>
                                             </td>
 
-                                            <td>
+                                            <td
+                                                v-if="
+                                                    $can(
+                                                        'action',
+                                                        'Admin Petugas Pemimpin'
+                                                    )
+                                                "
+                                            >
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
@@ -308,6 +324,12 @@ export default {
                                                                 id: suratmasuks.id,
                                                             },
                                                         }"
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Admin Petugas'
+                                                            )
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -331,6 +353,12 @@ export default {
                                                         data-target="#deletSuratMasukModal"
                                                         @click="
                                                             id = suratmasuks.id
+                                                        "
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Admin Petugas'
+                                                            )
                                                         "
                                                     >
                                                         <svg
@@ -431,6 +459,72 @@ export default {
                             @click="showDokumenSurat"
                         >
                             Delet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modaldetaildisposisi -->
+
+        <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            New message
+                        </h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label
+                                    for="recipient-name"
+                                    class="col-form-label"
+                                    >Recipient:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="recipient-name"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label"
+                                    >Message:</label
+                                >
+                                <textarea
+                                    class="form-control"
+                                    id="message-text"
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            Send message
                         </button>
                     </div>
                 </div>

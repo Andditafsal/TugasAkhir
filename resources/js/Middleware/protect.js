@@ -16,4 +16,7 @@ export const roles = {
     admin: '1',
     petugas: '2',
     pemimpin: '3',
+    wakasek: '4',
+    adminPetugas: ['1', '2'],
+
 };

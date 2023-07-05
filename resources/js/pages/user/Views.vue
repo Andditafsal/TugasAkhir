@@ -38,7 +38,7 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-lg-6 mb-4">
-            <div class="">
+            <div class="card-headercoba">
                 <div class="mb-3 col-7 d-flex align-items-center mb-md-1">
                     <router-link
                         to="/user"
@@ -191,5 +191,12 @@ export default {
 }
 .coba {
     border-radius: 5%;
+}
+.card-headercoba {
+    border-bottom: 0px;
+}
+.card-headercoba {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
 }
 </style>

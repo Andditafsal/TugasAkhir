@@ -5,14 +5,21 @@ import Cookie from "js-cookie";
 
 const permisionsByRole = {
     "1": [
-        'action_Admin'
+        'action_Admin',
+        'action_Admin Petugas',
+        'action_Admin Petugas Pemimpin'
     ],
-    // "2":[
-    //     'action_PemimpinWadir'
-    // ],
-    // "3":[
-    //     'action_PemimpinWadir'
-    // ]
+    "2": [
+
+        'action_Admin Petugas',
+        'action_Admin Petugas Pemimpin'
+    ],
+    "3": [
+
+        'action_Admin Petugas Pemimpin'
+    ],
+
+
 
 }
 export default defineAbility(can => {

@@ -1,3 +1,7 @@
+import {
+    checkRoles,
+    roles
+} from "../../Middleware/protect"
 export default [{
         path: "/suratmasuk",
         name: "SuratMasuk",
@@ -12,7 +16,8 @@ export default [{
         name: "SuratMasukCreate",
         component: () => import("../../pages/suratmasuk/Create.vue"),
         meta: {
-            requiresAuth: true,
+
+            middleware: checkRoles(roles.adminPetugas)
         },
     },
 
@@ -33,5 +38,4 @@ export default [{
         },
         props: true,
     },
-
 ];
