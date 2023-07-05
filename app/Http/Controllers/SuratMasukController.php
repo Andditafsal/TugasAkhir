@@ -36,6 +36,7 @@ class SuratMasukController extends Controller
                 ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
         }
 
+        $query->with("disposisi");
         $suratmasuks = $query->paginate($request->per_page);
 
 
@@ -43,6 +44,7 @@ class SuratMasukController extends Controller
 
         ////return 'berhasil';
     }
+
 
 
     /**
@@ -80,11 +82,11 @@ class SuratMasukController extends Controller
         //     ]);
         // }
 
-        if (auth()->user()->id_role == 3 && $suratmasuk->diajukan == 0) {
-            $suratmasuk->update([
-                "diajukan" => 1
-            ]);
-        }
+        // if (auth()->user()->id_role == 3 && $suratmasuk->diajukan == 0) {
+        //     $suratmasuk->update([
+        //         "diajukan" => 1
+        //     ]);
+        // }
 
         return new SuratMasukDetail($suratmasuk);
     }

@@ -5,6 +5,7 @@ export default {
             suratmasuks: [],
             search: "",
             successDelet: false,
+            disposisi: {},
         };
     },
     mounted() {
@@ -213,14 +214,16 @@ export default {
                                             >
                                                 Perihal
                                             </th>
+
                                             <th
-                                                class="sorting"
+                                                class="sorting sorting_asc"
                                                 tabindex="0"
                                                 aria-controls="dataTable"
                                                 rowspan="1"
                                                 colspan="1"
-                                                aria-label="teks: activate to sort column ascending"
-                                                style="width: 40%"
+                                                aria-sort="ascending"
+                                                aria-label="Number: activate to sort column descending"
+                                                style="width: 10%"
                                             >
                                                 Status
                                             </th>
@@ -230,19 +233,8 @@ export default {
                                                 aria-controls="dataTable"
                                                 rowspan="1"
                                                 colspan="1"
-                                                aria-label="teks: activate to sort column ascending"
-                                                style="width: 40%"
-                                            >
-                                                Disposisi
-                                            </th>
-                                            <th
-                                                class="sorting"
-                                                tabindex="0"
-                                                aria-controls="dataTable"
-                                                rowspan="1"
-                                                colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
-                                                style="width: 5%"
+                                                style="width: 1%"
                                             >
                                                 Aksi
                                             </th>
@@ -276,7 +268,7 @@ export default {
                                                     suratmasuks.perihalMasuk
                                                 "
                                             ></td>
-                                            <td>
+                                            <td class="coba">
                                                 <button
                                                     class="btn btn-sm btn-baca m-1"
                                                     v-if="
@@ -293,8 +285,15 @@ export default {
                                                 >
                                                     Panding
                                                 </button>
+
+                                                <button
+                                                    v-if="suratmasuks.disposisi"
+                                                    class="btn btn-sm btn-warning m-1"
+                                                >
+                                                    Lihat Disposisi
+                                                </button>
                                             </td>
-                                            <td>-</td>
+
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"
@@ -538,5 +537,8 @@ export default {
 }
 .fa-reply:hover {
     color: #858796;
+}
+.coba {
+    width: 100px;
 }
 </style>

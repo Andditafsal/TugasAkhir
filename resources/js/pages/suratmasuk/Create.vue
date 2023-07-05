@@ -250,7 +250,6 @@ export default {
                                                 :disabled="isDisabled"
                                             >
                                                 <option>Kepala Sekolah</option>
-                                                <option>Wakil Kesiswaan</option>
                                             </select>
                                             <div
                                                 class="invalid-feedback"

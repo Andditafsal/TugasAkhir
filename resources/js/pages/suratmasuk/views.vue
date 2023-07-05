@@ -3,13 +3,29 @@ export default {
     props: ["id"],
     data() {
         return {
+            form: {
+                user_id: "",
+                catatan: "",
+            },
             suratmasuk: {},
+            users: {},
         };
     },
     mounted() {
         this.getSuratMasuk();
+        this.getUser();
     },
     methods: {
+        getUser() {
+            this.$store
+                .dispatch("getData", ["user", ""])
+                .then((response) => {
+                    this.users = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         getSuratMasuk() {
             this.$store
                 .dispatch("showData", ["suratmasuk", this.id])
@@ -18,6 +34,26 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                });
+        },
+        handleDisposisi() {
+            this.$store
+                .dispatch("postData", [
+                    "/suratmasuk/" + this.id + "/disposisi",
+                    this.form,
+                ])
+                .then((result) => {
+                    //this.isDisabled = false;
+                    //console.log("ada");
+                    //console.log(result);
+                    $("#disposisiModal").modal("hide");
+                    this.$router.push({ name: "SuratMasuk" });
+                    //console.log(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    //this.isDisabled = false;
+                    this.error = error.response.data.messages;
                 });
         },
     },
@@ -58,8 +94,8 @@ export default {
                         <h5 class="mb-0 mb-1">Detail Surat Masuk</h5>
                         <button
                             data-toggle="modal"
-                            data-target="#exampleModal"
-                            data-whatever="@getbootstrap"
+                            data-target="#disposisiModal"
+                            @click="id = suratmasuk.id"
                             type="button"
                             class="btn btn btn-sm btn-round btn-icon btn-pengguna"
                         >
@@ -103,17 +139,18 @@ export default {
                 </div>
             </div>
         </div>
+        modal 1
         <div
             class="modal fade"
-            id="exampleModal"
+            id="disposisiModal"
             tabindex="-1"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="disposisiModalLabel"
             aria-hidden="true"
         >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
+                        <h5 class="modal-title" id="disposisiModalLabel">
                             Ajukan Disposisi
                         </h5>
                         <button
@@ -126,48 +163,34 @@ export default {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <label for="recipient-name" class="col-form-label"
-                                >Disposisi Kepada :</label
-                            >
-                            <div class="row">
-                                <div class="container">
-                                    <div class="col-lg-12">
-                                        <div class="col-lg-12">
-                                            <div
-                                                class="custom-control custom-checkbox my-1 mr-sm-2"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="custom-control-input"
-                                                    id="customControlInline"
-                                                />
-                                                <label
-                                                    class="custom-control-label"
-                                                    for="customControlInline"
-                                                    >Wakil Kesiswaan</label
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div
-                                                class="custom-control custom-checkbox my-1 mr-sm-2"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="custom-control-input"
-                                                    id="customControlInline"
-                                                />
-                                                <label
-                                                    class="custom-control-label"
-                                                    for="customControlInline"
-                                                    >Wakil Kesiswaan</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <form @submit.prevent="handleDisposisi" method="post">
+                            <div class="form-group">
+                                <label
+                                    for="recipient-name"
+                                    class="col-form-label"
+                                    >Dieruskan Kepada :</label
+                                >
+                                <select
+                                    class="form-control"
+                                    v-model="form.user_id"
+                                >
+                                    <option
+                                        v-for="(user, index) in users"
+                                        :key="index"
+                                        :value="user.id"
+                                    >
+                                        {{ user.name }}
+                                    </option>
+                                </select>
                             </div>
+                            <!-- <div class="form-group">
+                                <label>Sifat Surat</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="disposisi.tindakLanjut"
+                                />
+                            </div> -->
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1"
                                     >Catatan :</label
@@ -176,25 +199,27 @@ export default {
                                     class="form-control"
                                     id="exampleFormControlTextarea1"
                                     rows="3"
+                                    v-model="form.catatan"
                                 ></textarea>
                             </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                >
+                                    Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Kirim
+                                </button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                        >
-                            Batal
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            Kirim
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        modal 3
     </div>
 </template>
 
