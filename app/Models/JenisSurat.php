@@ -10,10 +10,16 @@ class JenisSurat extends Model
 {
 
     protected $table  = 'jenis_surat';
-    public function suratmasuks()
-    {
-        return $this->hasMany(SuratMasuk::class);
-    }
+
+
+    // public function suratKeluar()
+    // {
+    //     return $this->hasMany(SuratKeluar::class);
+    // }
+    // public function suratmasuks()
+    // {
+    //     return $this->hasMany(SuratMasuk::class);
+    // }
 
     protected $fillable = [
         'kode_surat',

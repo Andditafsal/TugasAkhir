@@ -11,6 +11,11 @@ class SuratKeluar extends Model
 
     protected $table = 'surat_keluar';
 
+    public function jenisSurat()
+    {
+        return $this->belongsTo(JenisSurat::class);
+    }
+
     protected $fillable = [
         'perihal',
         'id_jenis_surat',

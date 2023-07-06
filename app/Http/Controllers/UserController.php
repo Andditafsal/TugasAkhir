@@ -33,7 +33,7 @@ class UserController extends Controller
             $query->where("name", "like", "%" . $request->search . "%")
                 ->orWhere("email", "like", "%" . $request->search . "%");
         }
-        $users = $query->paginate($request->per_page);
+        $users = $query->where('id_role', '!=', 1)->where('id_role', '!=', 3)->paginate($request->per_page);
 
         return new UserCollection($users);
     }

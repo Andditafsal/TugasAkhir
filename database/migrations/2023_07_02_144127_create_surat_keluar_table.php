@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('surat_keluar', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_jenis_surat');
-            $table->string('perihal');
-            $table->integer('dituju');
+            $table->unsignedBigInteger('jenis_surat_id');
+            $table->foreign('jenis_surat_id')->references('id')->on('jenis_surat');
 
             $table->timestamps();
         });
