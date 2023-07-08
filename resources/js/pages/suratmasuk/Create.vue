@@ -122,7 +122,6 @@ export default {
                                             >
                                             <input
                                                 type="date"
-                                                rows="3"
                                                 class="form-control"
                                                 id="tanggal"
                                                 v-model="form.tanggal"
@@ -239,23 +238,22 @@ export default {
                                             <label for=""
                                                 >Diajukan Kepada *</label
                                             >
-                                            <select
+                                            <input
+                                                type="text"
                                                 class="form-control"
-                                                id="pengajuan"
+                                                id="diajukan"
                                                 v-model="form.diajukan"
                                                 :class="{
                                                     'is-invalid':
                                                         error.diajukan,
                                                 }"
                                                 :disabled="isDisabled"
-                                            >
-                                                <option>Kepala Sekolah</option>
-                                            </select>
+                                            />
                                             <div
                                                 class="invalid-feedback"
                                                 v-for="(
                                                     erorr, index
-                                                ) in error.perihalMasuk"
+                                                ) in error.diajukan"
                                                 :key="index"
                                             >
                                                 {{ erorr }}

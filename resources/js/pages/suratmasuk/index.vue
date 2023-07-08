@@ -327,7 +327,7 @@ export default {
                                                         v-if="
                                                             $can(
                                                                 'action',
-                                                                'Admin Petugas'
+                                                                'Admin Petugas Pemimpin'
                                                             )
                                                         "
                                                     >
