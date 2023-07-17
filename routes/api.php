@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\AuthenticatedController;
 use App\Http\Controllers\CetakSuratController;
+use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -13,7 +14,9 @@ use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WordController;
+use App\Models\Disposisi;
 use App\Models\Role;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,11 @@ use Illuminate\Support\Facades\Route;
 
 // //Search
 // Route::get('/search', 'SearchController@search');
+
+Route::prefix('suratmasuk')->group(function () {
+
+    Route::post('/{id}/disposisi', DisposisiController::class);
+});
 
 
 ///Cetak Surat

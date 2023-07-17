@@ -5,6 +5,7 @@ import {
 import routes from "./routes";
 import Cookies from "js-cookie";
 
+
 const router = createRouter({
     history: createWebHistory(),
     linkActiveClass: 'active',
