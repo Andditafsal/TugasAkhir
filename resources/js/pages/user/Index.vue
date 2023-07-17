@@ -1,13 +1,12 @@
 <script>
+import loading from "../../core/layout/table-loading.vue";
 import paginate from "../../core/layout/paginate.vue";
-
+import iziToast from "izitoast";
 export default {
     data() {
         return {
             users: [],
             search: "",
-            successDelet: false,
-
             paginate: {
                 total: 0,
                 perPage: 10,
@@ -15,10 +14,12 @@ export default {
                 lastPage: 0,
                 page: 0,
             },
+            isLoading: false,
         };
     },
     components: {
         paginate,
+        loading,
     },
     mounted() {
         this.getUsers();
@@ -30,6 +31,7 @@ export default {
                 `page=${this.paginate.page}`,
                 `per_page=${this.paginate.perPage}`,
             ].join("&");
+            this.isLoading = true;
             this.$store
                 .dispatch("getData", ["user", params])
                 .then((response) => {
@@ -38,21 +40,25 @@ export default {
                     this.paginate.perPage = response.meta.perPage;
                     this.paginate.currentPage = response.meta.currentPage;
                     this.paginate.lastPage = response.meta.lastPage;
+                    this.isLoading = false;
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         handleDelet() {
+            this.successDelet = true;
             this.$store
                 .dispatch("deleteData", ["user", this.id])
                 .then((response) => {
-                    this.successDelet = true;
+                    iziToast.success({
+                        title: "success",
+                        message: "data berhasil dihapus",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
                     this.getUsers();
                     $("#deletUserModal").modal("hide");
-                    setTimeout(() => {
-                        this.successDelet = false;
-                    }, 3000);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -108,12 +114,6 @@ export default {
                         <span class="btn-inner--text m-1">Tambah Pengguna</span>
                     </router-link>
                 </div>
-            </div>
-            <div v-if="successDelet" class="alert alert-success">
-                Data berhasil dihapus
-            </div>
-            <div v-if="successDelet" class="alert alert-success">
-                Data berhasil diambakan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -225,7 +225,10 @@ export default {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody v-if="isLoading">
+                                        <loading />
+                                    </tbody>
+                                    <tbody v-else>
                                         <tr
                                             class="odd"
                                             v-for="(user, index) in users"
@@ -393,6 +396,7 @@ export default {
     background-color: #252628;
     border-color: #252628;
 }
+
 .page-link {
     position: relative;
     display: block;
@@ -403,6 +407,7 @@ export default {
     background-color: #fff;
     border: 1px solid #dddfeb;
 }
+
 .page-link:hover {
     z-index: 2;
     color: #1c1d21;
@@ -410,103 +415,128 @@ export default {
     background-color: #eaecf4;
     border-color: #dddfeb;
 }
+
 .fa-users {
     color: #858796;
 }
+
 .fa-users:hover {
     color: #858796;
 }
+
 .btn-pengguna {
     background-color: #303137 !important;
     color: #fefefe;
 }
+
 .btn-pengguna:hover {
     background-color: #303137 !important;
     color: #fefefe;
 }
+
 .btn {
     color: #fefefe;
 }
+
 .text-pengguna {
     color: black;
 }
+
 .card-header {
     background-color: #fefefe;
 }
+
 .tabel-judul {
     background-color: #303137 !important;
     color: #fefefe;
 }
+
 .card-judul {
     margin-bottom: 30px;
 }
+
 .btn-eye {
     background-color: #1cc88a;
     border-color: #1cc88a;
 }
+
 .btn-eye:hover {
     background-color: #1cc88a;
     border-color: #1cc88a;
     color: #fefefe;
 }
+
 .btn-create {
     background-color: #f1924c;
     border-color: #f1924c;
 }
+
 .btn-create:hover {
     background-color: #f1924c;
     border-color: #f1924c;
     color: #fefefe;
 }
+
 .btn-hapus {
     background-color: #e85345;
     border-color: #e85345;
 }
+
 .btn-hapus:hover {
     background-color: #e85345;
     border-color: #e85345;
     color: #fefefe;
 }
+
 .admin {
     background-color: #303137;
     border-color: #303137;
 }
+
 .admin:hover {
     background-color: #303137;
     border-color: #303137;
     color: #fefefe;
 }
+
 .pemimpin {
     background-color: #0f9662ce;
     border-color: #0f9662ce;
 }
+
 .pemimpin:hover {
     background-color: #0f9662ce;
     border-color: #0f9662ce;
     color: #fefefe;
 }
+
 .petugas {
     background-color: #d41f5ece;
     border-color: #d41f5ece;
 }
+
 .petugas:hover {
     background-color: #d41f5ece;
     border-color: #d41f5ece;
     color: #fefefe;
 }
+
 .guru {
     background-color: #981fd4ce;
     border-color: #981fd4ce;
 }
+
 .guru:hover {
     background-color: #981fd4ce;
     border-color: #981fd4ce;
     color: #fefefe;
 }
+
 .siswa {
     background-color: #1f9bd4ce;
     border-color: #1f9bd4ce;
 }
+
 .siswa:hover {
     background-color: #1f9bd4ce;
     border-color: #1f9bd4ce;
@@ -517,6 +547,7 @@ export default {
     background-color: rgba(15, 183, 107, 0.12) !important;
     color: #26af48 !important;
 }
+
 .modal-footer {
     display: flex;
     flex-wrap: wrap;
@@ -527,16 +558,19 @@ export default {
     border-bottom-right-radius: calc(0.3rem - 1px);
     border-bottom-left-radius: calc(0.3rem - 1px);
 }
+
 .modal-content {
     width: 80%;
     margin-left: 30%;
     margin-top: 50%;
 }
+
 .btn-danger {
     background-color: #f90d0d;
     border-color: #f90d0d;
     color: #fefefe;
 }
+
 .btn-danger:hover {
     background-color: #f90d0d;
     border-color: #f90d0d;

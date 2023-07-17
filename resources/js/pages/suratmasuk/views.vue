@@ -139,7 +139,7 @@ export default {
                 </div>
             </div>
         </div>
-        modal 1
+
         <div
             class="modal fade"
             id="disposisiModal"
@@ -183,14 +183,6 @@ export default {
                                     </option>
                                 </select>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Sifat Surat</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    v-model="disposisi.tindakLanjut"
-                                />
-                            </div> -->
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1"
                                     >Catatan :</label
@@ -219,7 +211,6 @@ export default {
                 </div>
             </div>
         </div>
-        modal 3
     </div>
 </template>
 

@@ -12,9 +12,11 @@ import {
     abilitiesPlugin
 } from "@casl/vue";
 import ability from "./store/services/abilities";
+import iziToast from 'izitoast';
+import '../../node_modules/izitoast/dist/css/izitoast.css'
 
 
-createApp(App).use(router).use(store).use(abilitiesPlugin, ability, {
+createApp(App).use(router).use(store).use(iziToast).use(abilitiesPlugin, ability, {
     useGlobalProperties: true
 }).mount("#app");
 createApp(Auth).use(router).use(store).mount("#auth");

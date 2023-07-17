@@ -1,4 +1,6 @@
 <script>
+import iziToast from "izitoast";
+
 export default {
     data() {
         return {
@@ -30,18 +32,25 @@ export default {
             formData.append("password", this.form.password);
             formData.append("picture", this.form.picture);
 
+            this.isSuccess = true;
             this.$store
                 .dispatch("postDataUpload", ["user", formData])
                 .then((result) => {
-                    //this.$router.push("/auth/login");
                     this.isDisabled = false;
-                    this.$router.push({ name: "User" });
+                    iziToast.success({
+                        title: "success",
+                        message: "berhasil tambah data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "User" });
+                    }, 1000);
                     //console.log(result);
                 })
                 .catch((error) => {
                     this.isDisabled = false;
                     this.error = error.response.data.messages;
-                    //console.log(error);
                 });
         },
         uploadPicture(e) {
@@ -57,7 +66,6 @@ export default {
         <div class="col-12 card-judul">
             <h5 class="h5 mb-2 text-gray-800">Tambah Pengguna</h5>
         </div>
-
         <!-- DataTales Example -->
         <div class="card shadow col-lg-6 mb-4">
             <div class="card-header">
@@ -304,20 +312,24 @@ export default {
 .card-judul {
     margin-bottom: 30px;
 }
+
 .btn-primary {
     background-color: #303137 !important;
     color: #fefefe;
     border-color: #303137;
 }
+
 .btn-primary:hover {
     background-color: #303137 !important;
     color: #fefefe;
     border-color: #303137;
 }
+
 .text-white {
     color: white !important;
     background-color: #303137;
 }
+
 .btn-cancel {
     background-color: #7a7a7a;
     color: white !important;

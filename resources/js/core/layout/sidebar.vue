@@ -63,17 +63,7 @@
             >
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="text-center">Surat</h6>
-                    <router-link
-                        class="list-group-item list-group-item-action"
-                        id="list-jenissurat-list"
-                        data-toggle="list"
-                        :to="{ name: 'JenisSurat' }"
-                        role="tab"
-                        aria-controls="jenissurat"
-                        v-if="$can('action', 'Admin')"
-                    >
-                        Jenis Surat
-                    </router-link>
+
                     <router-link
                         :to="{ name: 'SuratMasuk' }"
                         class="list-group-item list-group-item-action"

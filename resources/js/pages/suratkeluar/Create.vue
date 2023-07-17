@@ -25,21 +25,22 @@ export default {
             formData.append("kode_sekolah", this.form.kodeSekolah);
             formData.append("tahun_surat", this.form.tahunSurat);
 
-            this.$store
-                .dispatch("postDataUpload", [
-                    "cetak/suratkeluar/download/" + this.datacheck.id,
-                    formData,
-                ])
-                .then((result) => {
-                    // this.isDisabled = false;
-                    this.$router.push({ name: "SuratKeluar" });
-                    //console.log(result);
-                })
-                .catch((error) => {
-                    //this.isDisabled = false;
-                    //console.log(error);
-                    this.error = error.response.data.messages;
-                });
+            console.log(formData);
+            // this.$store
+            //     .dispatch("postDataUpload", [
+            //         "cetak/suratkeluar/download/" + this.datacheck.id,
+            //         formData,
+            //     ])
+            //     .then((result) => {
+            //         // this.isDisabled = false;
+            //         this.$router.push({ name: "SuratKeluar" });
+            //         //console.log(result);
+            //     })
+            //     .catch((error) => {
+            //         //this.isDisabled = false;
+            //         //console.log(error);
+            //         this.error = error.response.data.messages;
+            //     });
         },
         getData() {
             this.$store

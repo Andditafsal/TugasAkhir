@@ -159,7 +159,11 @@ export default {};
                                             <td>001</td>
                                             <td>18-10-2023</td>
                                             <td>andita.aa.aa</td>
-                                            <td>43.3334/33/smk</td>
+                                            <td>
+                                                <span>cobaee</span>
+                                                <span>cobaa</span>
+                                                <span>rrr</span>
+                                            </td>
                                             <td>Surat Undangan</td>
                                             <td>
                                                 <button
