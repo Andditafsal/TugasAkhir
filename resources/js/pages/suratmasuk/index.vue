@@ -139,23 +139,33 @@ export default {
             </div>
 
             <div class="card-body">
-                <div class="table-responsive table-bordered">
-                    <div
-                        id="dataTable_wrapper"
-                        class="dataTables_wrapper dt-bootstrap4"
-                    >
+                <div class="table-responsive">
+                    <div>
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
+                            <div
+                                class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-3"
+                            >
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
-                                    <label for="" class="px-3 mb-0"
-                                        >Cari
-                                    </label>
+                                    <label for="" class="px-1 mb-0">Show</label>
+                                    <select
+                                        name="dataTable_length"
+                                        aria-controls="dataTable"
+                                        class="custom-select custom-select-sm form-control form-control-sm"
+                                    >
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="d-flex px-12 align-items-center margin-100px-bottom"
+                                >
+                                    <label for="" class="px-1 mb-0">Cari</label>
                                     <input
                                         type="text"
-                                        name=""
-                                        email=""
                                         placeholder="Asal  Surat & Tanggal Surat Masuk"
                                         class="form-control form-control-sm"
                                         v-model="search"
@@ -167,416 +177,403 @@ export default {
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="table-responsive">
-                                    <table
-                                        class="table table-bordered"
-                                        width="100%"
-                                        id="dataTable"
-                                        cellspacing="0"
-                                        role="grid"
-                                        aria-describedby="dataTable_info"
-                                        style="width: 100%"
-                                    >
-                                        <thead>
-                                            <tr role="row" class="tabel-judul">
-                                                <th
-                                                    role="rol"
-                                                    scope="col"
-                                                    aria-colindex="1"
-                                                    class=""
-                                                    style="
-                                                        width: 5%;
-                                                        text-align: center;
-                                                    "
-                                                >
-                                                    No
-                                                </th>
-                                                <th
-                                                    class="sorting sorting_asc"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-sort="ascending"
-                                                    aria-label="Number: activate to sort column descending"
-                                                    style="width: 17%"
-                                                >
-                                                    Tanggal Diterima
-                                                </th>
-                                                <th
-                                                    class="sorting"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="name: activate to sort column ascending"
-                                                    style="width: 20%"
-                                                >
-                                                    Asal Surat
-                                                </th>
-
-                                                <th
-                                                    class="sorting"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="teks: activate to sort column ascending"
-                                                    style="width: 20%"
-                                                >
-                                                    Nomor Surat
-                                                </th>
-                                                <th
-                                                    class="sorting"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="teks: activate to sort column ascending"
-                                                    style="width: 15%"
-                                                >
-                                                    Tanggal Surat
-                                                </th>
-                                                <th
-                                                    class="sorting"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="teks: activate to sort column ascending"
-                                                    style="width: 40%"
-                                                >
-                                                    Perihal
-                                                </th>
-
-                                                <th
-                                                    class="sorting sorting_asc"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-sort="ascending"
-                                                    aria-label="Number: activate to sort column descending"
-                                                    style="width: 100%"
-                                                >
-                                                    Status
-                                                </th>
-                                                <th
-                                                    class="sorting"
-                                                    tabindex="0"
-                                                    aria-controls="dataTable"
-                                                    rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Salary: activate to sort column ascending"
-                                                    style="width: 3%"
-                                                    v-if="
-                                                        $can(
-                                                            'action',
-                                                            'Admin Petugas Pemimpin'
-                                                        )
-                                                    "
-                                                >
-                                                    Aksi
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody v-if="isLoading">
-                                            <loading />
-                                        </tbody>
-                                        <tbody>
-                                            <tr
-                                                class="odd"
-                                                v-for="(
-                                                    suratmasuks, index
-                                                ) in suratmasuks"
-                                                :key="index"
+                                <table
+                                    class="table table-bordered"
+                                    width="100%"
+                                    id="dataTable"
+                                    cellspacing="0"
+                                    role="grid"
+                                    aria-describedby="dataTable_info"
+                                    style="width: 100%"
+                                >
+                                    <thead>
+                                        <tr role="row" class="tabel-judul">
+                                            <th
+                                                role="rol"
+                                                scope="col"
+                                                aria-colindex="1"
+                                                class=""
+                                                style="
+                                                    width: 5%;
+                                                    text-align: center;
+                                                "
                                             >
-                                                <td v-html="index + 1"></td>
-                                                <td
-                                                    v-html="suratmasuks.tanggal"
-                                                ></td>
-                                                <td
-                                                    v-html="
-                                                        suratmasuks.alamatSurat
-                                                    "
-                                                ></td>
-                                                <td
-                                                    v-html="
-                                                        suratmasuks.nomorMasuk
-                                                    "
-                                                ></td>
-                                                <td
-                                                    v-html="
-                                                        suratmasuks.tanggalSurat
-                                                    "
-                                                ></td>
-                                                <td
-                                                    v-html="
-                                                        suratmasuks.perihalMasuk
-                                                    "
-                                                ></td>
-                                                <td class="coba">
-                                                    <button
-                                                        class="badge bg-inverse-statuss"
-                                                        v-if="
-                                                            suratmasuks.status ==
-                                                            1
-                                                        "
-                                                    >
-                                                        Dibaca
-                                                    </button>
+                                                No
+                                            </th>
+                                            <th
+                                                class="sorting sorting_asc"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Number: activate to sort column descending"
+                                                style="width: 17%"
+                                            >
+                                                Tanggal Diterima
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="name: activate to sort column ascending"
+                                                style="width: 20%"
+                                            >
+                                                Asal Surat
+                                            </th>
 
-                                                    <button
-                                                        v-if="
-                                                            suratmasuks.status ==
-                                                            0
-                                                        "
-                                                        class="badge bg-inverse-status"
-                                                    >
-                                                        Diproses
-                                                    </button>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 20%"
+                                            >
+                                                Nomor Surat
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 15%"
+                                            >
+                                                Tanggal Surat
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 40%"
+                                            >
+                                                Perihal
+                                            </th>
 
-                                                    <button
-                                                        v-if="
-                                                            suratmasuks.disposisi
-                                                        "
-                                                        class="badge bg-inverse-disposisi"
-                                                        data-toggle="modal"
-                                                        data-target="#disposisiModal"
-                                                        @click="
-                                                            disposisiSuratMasuk =
-                                                                suratmasuks
-                                                        "
-                                                    >
-                                                        Lihat Disposisi
-                                                    </button>
-                                                </td>
-
-                                                <td
+                                            <th
+                                                class="sorting sorting_asc"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Number: activate to sort column descending"
+                                                style="width: 100%"
+                                            >
+                                                Status
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="Salary: activate to sort column ascending"
+                                                style="width: 3%"
+                                                v-if="
+                                                    $can(
+                                                        'action',
+                                                        'Admin Petugas Pemimpin'
+                                                    )
+                                                "
+                                            >
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="isLoading">
+                                        <loading />
+                                    </tbody>
+                                    <tbody>
+                                        <tr
+                                            class="odd"
+                                            v-for="(
+                                                suratmasuks, index
+                                            ) in suratmasuks"
+                                            :key="index"
+                                        >
+                                            <td v-html="index + 1"></td>
+                                            <td
+                                                v-html="suratmasuks.tanggal"
+                                            ></td>
+                                            <td
+                                                v-html="suratmasuks.alamatSurat"
+                                            ></td>
+                                            <td
+                                                v-html="suratmasuks.nomorMasuk"
+                                            ></td>
+                                            <td
+                                                v-html="
+                                                    suratmasuks.tanggalSurat
+                                                "
+                                            ></td>
+                                            <td
+                                                v-html="
+                                                    suratmasuks.perihalMasuk
+                                                "
+                                            ></td>
+                                            <td class="coba">
+                                                <button
+                                                    class="badge bg-inverse-statuss"
                                                     v-if="
-                                                        $can(
-                                                            'action',
-                                                            'Admin Petugas Pemimpin'
-                                                        )
+                                                        suratmasuks.status == 1
                                                     "
                                                 >
-                                                    <div
-                                                        class="d-flex alignt-items-start"
+                                                    Dibaca
+                                                </button>
+
+                                                <button
+                                                    v-if="
+                                                        suratmasuks.status == 0
+                                                    "
+                                                    class="badge bg-inverse-status"
+                                                >
+                                                    Diproses
+                                                </button>
+
+                                                <button
+                                                    v-if="suratmasuks.disposisi"
+                                                    class="badge bg-inverse-disposisi"
+                                                    data-toggle="modal"
+                                                    data-target="#disposisiModal"
+                                                    @click="
+                                                        disposisiSuratMasuk =
+                                                            suratmasuks
+                                                    "
+                                                >
+                                                    Lihat Disposisi
+                                                </button>
+                                            </td>
+
+                                            <td
+                                                v-if="
+                                                    $can(
+                                                        'action',
+                                                        'Admin Petugas Pemimpin'
+                                                    )
+                                                "
+                                            >
+                                                <div
+                                                    class="d-flex alignt-items-start"
+                                                >
+                                                    <router-link
+                                                        class="btn btn-sm btn-eye m-1"
+                                                        data-toggle="modal"
+                                                        data-target="#showDokumenSurat"
+                                                        :to="{
+                                                            name: 'ViewsSuratMasuk',
+                                                            params: {
+                                                                id: suratmasuks.id,
+                                                            },
+                                                        }"
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Admin Petugas Pemimpin'
+                                                            )
+                                                        "
                                                     >
-                                                        <router-link
-                                                            class="btn btn-sm btn-eye m-1"
-                                                            data-toggle="modal"
-                                                            data-target="#showDokumenSurat"
-                                                            :to="{
-                                                                name: 'ViewsSuratMasuk',
-                                                                params: {
-                                                                    id: suratmasuks.id,
-                                                                },
-                                                            }"
-                                                            v-if="
-                                                                $can(
-                                                                    'action',
-                                                                    'Admin Petugas Pemimpin'
-                                                                )
-                                                            "
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="16"
+                                                            height="16"
+                                                            fill="currentColor"
+                                                            class="bi bi-eye"
+                                                            viewBox="0 0 16 16"
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                width="16"
-                                                                height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-eye"
-                                                                viewBox="0 0 16 16"
-                                                            >
-                                                                <path
-                                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
-                                                                />
-                                                                <path
-                                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
-                                                                />
-                                                            </svg>
-                                                        </router-link>
-                                                        <button
-                                                            class="btn btn-sm btn-hapus m-1"
-                                                            data-toggle="modal"
-                                                            data-target="#deletSuratMasukModal"
-                                                            @click="
-                                                                id =
-                                                                    suratmasuks.id
-                                                            "
-                                                            v-if="
-                                                                $can(
-                                                                    'action',
-                                                                    'Admin Petugas'
-                                                                )
-                                                            "
+                                                            <path
+                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                                                            />
+                                                            <path
+                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                                                            />
+                                                        </svg>
+                                                    </router-link>
+                                                    <button
+                                                        class="btn btn-sm btn-hapus m-1"
+                                                        data-toggle="modal"
+                                                        data-target="#deletSuratMasukModal"
+                                                        @click="
+                                                            id = suratmasuks.id
+                                                        "
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Admin Petugas'
+                                                            )
+                                                        "
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="16"
+                                                            height="16"
+                                                            fill="currentColor"
+                                                            class="bi bi-trash3"
+                                                            viewBox="0 0 16 16"
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                width="16"
-                                                                height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-trash3"
-                                                                viewBox="0 0 16 16"
-                                                            >
-                                                                <path
-                                                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
-                                                                />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                            <path
+                                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div
-                            class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
-                        >
-                            <h5 class="mb-0 text-gray-900 mb-2"></h5>
-                            <paginate
-                                :currentPage="paginate.currentPage"
-                                :rowsTotal="paginate.total"
-                                :lastPage="paginate.lastPage"
-                                @onPageChange="onPageChange($event)"
-                            />
-                        </div>
+                    </div>
+                    <div
+                        class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
+                    >
+                        <h5 class="mb-0 text-gray-900 mb-2"></h5>
+                        <paginate
+                            :currentPage="paginate.currentPage"
+                            :rowsTotal="paginate.total"
+                            :lastPage="paginate.lastPage"
+                            @onPageChange="onPageChange($event)"
+                        />
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Modal -->
-        <div
-            class="modal fade"
-            id="deletSuratMasukModal"
-            tabindex="-1"
-            aria-labelledby="deletSuratMasukModallabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
+    </div>
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="deletSuratMasukModal"
+        tabindex="-1"
+        aria-labelledby="deletSuratMasukModallabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
                     <h5 class="modal-title" id="deletSuratMasukModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                    <div class="modal-body">
-                        <h5 class="modal-title" id="deletSuratMasukModallabel">
-                            Apakah anda yakin ingin menghapus data tersebut?
-                        </h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-pengguna"
-                            data-dismiss="modal"
-                        >
-                            Close
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-danger"
-                            @click="handleDelet"
-                        >
-                            Delet
-                        </button>
-                    </div>
+                <div class="modal-body">
+                    <h5 class="modal-title" id="deletSuratMasukModallabel">
+                        Apakah anda yakin ingin menghapus data tersebut?
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-pengguna"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="handleDelet"
+                    >
+                        Delet
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal -->
-        <div
-            class="modal fade"
-            id="showDokumenSuratModal"
-            tabindex="-1"
-            aria-labelledby="showDokumenSuratModallabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="showDokumenSuratModal"
+        tabindex="-1"
+        aria-labelledby="showDokumenSuratModallabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
                     <h5 class="modal-title" id="showDokumenSuratModallabel">
                         Apakah Anda Yakin??
                     </h5>
                 </div> -->
-                    <div class="modal-body">
-                        <h5 class="modal-title" id="showDokumenSuratModallabel">
-                            Apakah anda yakin ingin menghapus data tersebut?
-                        </h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-pengguna"
-                            data-dismiss="modal"
-                        >
-                            Close
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-danger"
-                            @click="showDokumenSurat"
-                        >
-                            Delet
-                        </button>
-                    </div>
+                <div class="modal-body">
+                    <h5 class="modal-title" id="showDokumenSuratModallabel">
+                        Apakah anda yakin ingin menghapus data tersebut?
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-pengguna"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="showDokumenSurat"
+                    >
+                        Delet
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modaldetaildisposisi -->
+    <!-- Modaldetaildisposisi -->
 
-        <div
-            class="modal fade"
-            id="disposisiModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="disposisiModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="disposisiModalLabel">
-                            Detail Disposisi
-                        </h5>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <iframe
-                                    :src="disposisiSuratMasuk.dokumen"
-                                    class="embed-responsive-item"
-                                    frameborder="0"
-                                    style="width: 470px; height: 400px"
-                                ></iframe>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label"
-                                    >Catatan
-                                </label>
-                                <textarea
-                                    class="form-control"
-                                    id="message-text"
-                                    :value="
-                                        disposisiSuratMasuk.disposisi?.catatan
-                                    "
-                                    disabled
-                                ></textarea>
-                            </div>
-                        </form>
-                    </div>
+    <div
+        class="modal fade"
+        id="disposisiModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="disposisiModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="disposisiModalLabel">
+                        Detail Disposisi
+                    </h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <iframe
+                                :src="disposisiSuratMasuk.dokumen"
+                                class="embed-responsive-item"
+                                frameborder="0"
+                                style="width: 470px; height: 400px"
+                            ></iframe>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label"
+                                >Catatan
+                            </label>
+                            <textarea
+                                class="form-control"
+                                id="message-text"
+                                :value="disposisiSuratMasuk.disposisi?.catatan"
+                                disabled
+                            ></textarea>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

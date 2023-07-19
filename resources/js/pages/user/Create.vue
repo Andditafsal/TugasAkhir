@@ -86,7 +86,7 @@ export default {
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <label for="role">User Role *</label>
+                                        <label for="role">Jabatan *</label>
                                         <select
                                             class="form-control"
                                             id="role"
@@ -96,10 +96,7 @@ export default {
                                             }"
                                             :disabled="isDisabled"
                                         >
-                                            <option>Petugas</option>
-                                            <option>Pemimpin</option>
                                             <option>Guru</option>
-                                            <option>Siswa</option>
                                         </select>
                                         <div
                                             class="invalid-feedback"

@@ -1,6 +1,7 @@
 <script>
 import dayjs from "dayjs";
 import "dayjs/locale/id";
+import iziToast from "izitoast";
 
 export default {
     data() {
@@ -43,9 +44,16 @@ export default {
                 .dispatch("postDataUpload", ["suratmasuk", formData])
                 .then((result) => {
                     this.isDisabled = false;
-                    console.log(result);
-                    this.$router.push({ name: "SuratMasuk" });
-                    //console.log(result);
+                    iziToast.success({
+                        title: "success",
+                        message: "berhasil tambah data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "SuratMasuk" });
+                        //console.log(result);
+                    });
                 })
                 .catch((error) => {
                     this.isDisabled = false;
