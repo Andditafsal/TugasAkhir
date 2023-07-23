@@ -3,7 +3,18 @@
     <!-- Start Component -->
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content mb-4">
-            <span class="h5 mb-0 text-gray-800 ml-2">Selamat Datang</span>
+            <span class="h5 mb-0 text-gray-800 ml-2">
+                <b v-if="$can('action', 'Admin')">Selamat Datang Admin</b>
+                <b v-if="$can('action', 'Petugas')">Selamat Datang Petugas</b>
+                <b v-if="$can('action', 'Pemimpin')"
+                    >Selamat Datang Kepala Sekolah</b
+                >
+                <b v-if="$can('action', 'Wakasek')"
+                    >Selamat Datang Wakil Kesiswaan</b
+                >
+                <b v-if="$can('action', 'Guru')">Selamat Datang Pengguna</b>
+                <i style="font-size: 24px" class="far">&#xf259;</i>
+            </span>
         </div>
         <!-- Tab -->
         <div class="row">

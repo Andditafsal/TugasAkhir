@@ -6,6 +6,9 @@ import disposisi from "./services/disposisi"
 import jadwal from "./services/jadwal"
 import jenissurat from "./services/jenissurat"
 import arsipsurat from "./services/arsipsurat"
+import profile from "./services/profile"
+
+
 
 
 
@@ -15,6 +18,7 @@ export default [
     ...suratmasuk,
     ...suratkeluar,
     ...disposisi,
+    ...profile,
     ...jadwal,
     ...jenissurat,
 
@@ -43,6 +47,14 @@ export default [
         path: "/auth/login",
         name: "Login",
         component: () => import("../pages/auth/login.vue"),
+        meta: {
+            requiresAuth: false,
+        },
+    },
+    {
+        path: "/export-data",
+        name: "ExportData",
+        component: () => import("../pages/excel/ExportData.vue"),
         meta: {
             requiresAuth: false,
         },

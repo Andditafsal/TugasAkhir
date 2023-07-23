@@ -99,6 +99,9 @@ export default {
             this.paginate.page = page;
             this.getgetSuratMasuks();
         },
+        exportData() {
+            window.location.href = "/exportsuratmasuk";
+        },
     },
 };
 </script>
@@ -120,7 +123,7 @@ export default {
                     class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
                 >
                     <h5 class="mb-0 text-gray-900 mb-2">Daftar Surat Masuk</h5>
-
+                    <div class="mb-0 mb-md-3"></div>
                     <router-link
                         to="/suratmasuk/create"
                         type="button"
@@ -143,12 +146,32 @@ export default {
                     <div>
                         <div class="row">
                             <div
-                                class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-3"
+                                class="mb-6 col-12 d-flex justify-content-between align-items-center mb-md-1"
                             >
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
-                                    <label for="" class="px-1 mb-0">Show</label>
+                                    <button
+                                        @click="exportData"
+                                        class="d-flex px-12 align-items-center margin-100px-bottom exportData"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-file-earmark-arrow-down-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z"
+                                            />
+                                        </svg>
+                                        <span class="btn-inner--text m-1"
+                                            >Excel</span
+                                        >
+                                    </button>
+                                    <label for="" class="px-1 mb-0"></label>
                                     <select
                                         name="dataTable_length"
                                         aria-controls="dataTable"
@@ -160,13 +183,16 @@ export default {
                                         <option value="100">100</option>
                                     </select>
                                 </div>
+
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
-                                    <label for="" class="px-1 mb-0">Cari</label>
+                                    <label for="" class="px-10 mb-0"
+                                        >Cari</label
+                                    >
                                     <input
                                         type="text"
-                                        placeholder="Asal  Surat & Tanggal Surat Masuk"
+                                        placeholder="Asal & Tanggal Surat"
                                         class="form-control form-control-sm"
                                         v-model="search"
                                         @input="onSearch"
@@ -327,6 +353,10 @@ export default {
                                                         suratmasuks.status == 1
                                                     "
                                                 >
+                                                    <i
+                                                        class="fa fa-check"
+                                                        aria-hidden="true"
+                                                    ></i>
                                                     Dibaca
                                                 </button>
 
@@ -336,6 +366,10 @@ export default {
                                                     "
                                                     class="badge bg-inverse-status"
                                                 >
+                                                    <i
+                                                        class="fa fa-spinner"
+                                                        aria-hidden="true"
+                                                    ></i>
                                                     Diproses
                                                 </button>
 
@@ -349,6 +383,10 @@ export default {
                                                             suratmasuks
                                                     "
                                                 >
+                                                    <i
+                                                        class="fa fa-eye"
+                                                        aria-hidden="true"
+                                                    ></i>
                                                     Lihat Disposisi
                                                 </button>
                                             </td>
@@ -724,5 +762,31 @@ export default {
     background-color: green !important;
     color: white !important;
     border-color: green;
+}
+.exportData {
+    background-color: #04aa6d;
+    color: #fff;
+    border-color: #04aa6d;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 0;
+
+    border: 1px solid #04aa6d;
+    border-radius: 8%;
+}
+.exportData:hover {
+    background-color: #04aa6d;
+    color: #fff;
+    border-color: #04aa6d;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8%;
+    margin-left: -1px;
+    line-height: 0;
+
+    border: 1px solid #04aa6d;
 }
 </style>

@@ -27,10 +27,16 @@ class UpdateRequest extends FormRequest
         return [
 
             // 'dokumen_surat' => 'required|file|mimes:doc,pdf,docx|max:2048',
+
+            'jenis_surat_id' => 'required',
             'perihal' => 'required',
-            'id_jenis_surat' => 'required',
-            'dittutju' => 'required',
-            'status' => 'required'
+            'lampiran' => 'file|mimes:pdf|max:2048',
+            'kepada' => 'required',
+            'hari_kegiatan' => 'required',
+            'tanggal_kegiatan' => 'required',
+            'waktu_kegiatan' => 'required',
+            'tempat_kegiatan' => 'required',
+
         ];
     }
     protected function failedValidation(Validator $validator)

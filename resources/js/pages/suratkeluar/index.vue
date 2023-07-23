@@ -1,5 +1,62 @@
 <script>
-export default {};
+import iziToast from "izitoast";
+import loading from "../../core/layout/table-loading.vue";
+import paginate from "../../core/layout/paginate.vue";
+export default {
+    data() {
+        return {
+            suratkeluars: [],
+            paginate: {
+                total: 0,
+                perPage: 10,
+                currentPage: 1,
+                lastPage: 0,
+                page: 1,
+            },
+            isLoading: false,
+            search: "",
+        };
+    },
+    components: {
+        paginate,
+        loading,
+    },
+    mounted() {
+        this.getSuratKeluars();
+    },
+    methods: {
+        getSuratKeluars() {
+            const params = [
+                `search=${this.search}`,
+                `page=${this.paginate.page}`,
+                `per_page=${this.paginate.perPage}`,
+            ].join("&");
+            this.isLoading = true;
+            this.$store
+                .dispatch("getData", ["suratkeluar", params])
+                .then((response) => {
+                    //console.log(response);
+                    this.suratkeluars = response.data;
+                    this.paginate.total = response.meta.total;
+                    this.paginate.perPage = response.meta.perPage;
+                    this.paginate.currentPage = response.meta.currentPage;
+                    this.paginate.lastPage = response.meta.lastPage;
+                    this.isLoading = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    //er
+                });
+        },
+        onSearch() {
+            this.getSuratKeluars();
+        },
+        onPageChange(page) {
+            this.paginate.page = page;
+            this.getSuratKeluars();
+        },
+    },
+};
 </script>
 <template>
     <div class="container-fluid">
@@ -92,7 +149,7 @@ export default {};
                                                 colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Number: activate to sort column descending"
-                                                style="width: 15%"
+                                                style="width: 17%"
                                             >
                                                 Tanggal
                                             </th>
@@ -115,7 +172,7 @@ export default {};
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 20%"
+                                                style="width: 25%"
                                             >
                                                 Nomor Surat
                                             </th>
@@ -126,9 +183,9 @@ export default {};
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 20%"
+                                                style="width: 15%"
                                             >
-                                                Perihal
+                                                Tanggal Surat
                                             </th>
                                             <th
                                                 class="sorting"
@@ -137,7 +194,20 @@ export default {};
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 20%"
+                                                style="width: 40%"
+                                            >
+                                                Perihal
+                                            </th>
+
+                                            <th
+                                                class="sorting sorting_asc"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Number: activate to sort column descending"
+                                                style="width: 100%"
                                             >
                                                 Status
                                             </th>
@@ -148,17 +218,38 @@ export default {};
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
-                                                style="width: 5%"
+                                                style="width: 3%"
+                                                v-if="
+                                                    $can(
+                                                        'action',
+                                                        'Admin Petugas Pemimpin'
+                                                    )
+                                                "
                                             >
                                                 Aksi
                                             </th>
                                         </tr>
                                     </thead>
+
+                                    <tbody v-if="isLoading">
+                                        <loading />
+                                    </tbody>
                                     <tbody>
-                                        <tr class="odd">
-                                            <td>001</td>
-                                            <td>18-10-2023</td>
-                                            <td>andita.aa.aa</td>
+                                        <tr
+                                            class="odd"
+                                            v-for="(
+                                                suratkeluars, index
+                                            ) in suratkeluars"
+                                            :key="index"
+                                        >
+                                            <td v-html="index + 1"></td>
+                                            <td>Tangal Surat</td>
+                                            <td
+                                                v-html="suratkeluars.kepada"
+                                            ></td>
+                                            <td
+                                                v-html="suratkeluars.perihal"
+                                            ></td>
                                             <td>
                                                 <span>cobaee</span>
                                                 <span>cobaa</span>
@@ -230,7 +321,7 @@ export default {};
                                                             />
                                                         </svg>
                                                     </routerlink>
-                                                    <router-link
+                                                    <!-- <router-link
                                                         :to="{
                                                             name: 'CetakSuratKeluar',
                                                             params: { id: 2 },
@@ -253,8 +344,8 @@ export default {};
                                                                 d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"
                                                             />
                                                         </svg>
-                                                    </router-link>
-                                                    <button
+                                                    </router-link> -->
+                                                    <!-- <button
                                                         class="btn btn-sm btn-signature m-1"
                                                     >
                                                         <svg
@@ -269,8 +360,8 @@ export default {};
                                                                 d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
                                                             />
                                                         </svg>
-                                                    </button>
-                                                    <button
+                                                    </button> -->
+                                                    <!-- <button
                                                         class="btn btn-sm btn-signature m-1"
                                                     >
                                                         <svg
@@ -290,7 +381,7 @@ export default {};
                                                                 d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"
                                                             />
                                                         </svg>
-                                                    </button>
+                                                    </button> -->
                                                     <button
                                                         class="btn btn-sm btn-hapus m-1"
                                                     >

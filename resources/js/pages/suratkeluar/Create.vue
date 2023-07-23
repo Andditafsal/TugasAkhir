@@ -1,11 +1,17 @@
 <script>
+import iziToast from "izitoast";
 export default {
     data() {
         return {
             form: {
-                kodeSurat: "",
-                kodeSekolah: "",
-                tahunSurat: "",
+                perihal: "",
+                lampiranSurat: "",
+                kepada: "",
+                hariKegiatan: "",
+                tanggalKegiatan: "",
+                waktuKegiatan: "",
+                tempatKegiatan: "",
+                jenis_surat_id: "",
             },
             jenissurat: [],
             error: {},
@@ -21,26 +27,37 @@ export default {
             this.isDisabled = true;
 
             let formData = new FormData();
-            formData.append("kode_surat", this.form.kodeSurat);
-            formData.append("kode_sekolah", this.form.kodeSekolah);
-            formData.append("tahun_surat", this.form.tahunSurat);
 
-            console.log(formData);
-            // this.$store
-            //     .dispatch("postDataUpload", [
-            //         "cetak/suratkeluar/download/" + this.datacheck.id,
-            //         formData,
-            //     ])
-            //     .then((result) => {
-            //         // this.isDisabled = false;
-            //         this.$router.push({ name: "SuratKeluar" });
-            //         //console.log(result);
-            //     })
-            //     .catch((error) => {
-            //         //this.isDisabled = false;
-            //         //console.log(error);
-            //         this.error = error.response.data.messages;
-            //     });
+            formData.append("jenis_surat_id", this.datacheck.id);
+            formData.append("perihal", this.form.perihal);
+            formData.append("lampiran", this.form.lampiranSurat);
+            formData.append("kepada", this.form.kepada);
+            formData.append("hari_kegiatan", this.form.hariKegiatan);
+            formData.append("tanggal_kegiatan", this.form.tanggalKegiatan);
+            formData.append("waktu_kegiatan", this.form.waktuKegiatan);
+            formData.append("tempat_kegiatan", this.form.tempatKegiatan);
+
+            //console.log(formData);
+            this.$store
+                .dispatch("postDataUpload", ["suratkeluar", formData])
+                .then((result) => {
+                    this.isDisabled = false;
+                    iziToast.success({
+                        title: "success",
+                        message: "berhasil tambah data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "SuratKeluar" });
+                    });
+                    //console.log(result);
+                })
+                .catch((error) => {
+                    this.isDisabled = false;
+                    //console.log(error);
+                    this.error = error.response.data.messages;
+                });
         },
         getData() {
             this.$store
@@ -61,6 +78,10 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        uploadDokumen(e) {
+            this.form.lampiranSurat = e.target.files[0];
+            //console.log(this.form.dokumenSurat);
         },
     },
 };
@@ -240,6 +261,11 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                v-model="form.perihal"
+                                                :class="{
+                                                    'is-invalid': error.perihal,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
                                         </div>
                                         <div class="form-group col-md-6">
@@ -247,9 +273,9 @@ export default {
                                             <input
                                                 type="file"
                                                 class="form-control"
+                                                @change="uploadDokumen"
                                             />
                                         </div>
-
                                         <div class="row col-12">
                                             <div class="col-md-0">
                                                 <div class="col-sm-6 mb-3">
@@ -277,6 +303,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.namaKegiatan"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
@@ -285,6 +312,7 @@ export default {
                                                 type="date"
                                                 class="form-control"
                                                 required
+                                                v-model="form.tanggalKegiatan"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -292,9 +320,17 @@ export default {
                                                 >Waktu Kegiatan (Mulai) *</label
                                             >
                                             <input
-                                                type="time"
+                                                type="text"
                                                 class="form-control"
-                                                placeholder="1234 Main St"
+                                                v-model="form.hariKegiatan"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Kepada *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="form.kepada"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -304,7 +340,7 @@ export default {
                                             <input
                                                 type="time"
                                                 class="form-control"
-                                                required
+                                                v-model="form.waktuKegiatan"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -312,27 +348,27 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                required
+                                                v-model="form.tempatKegiatan"
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <!-- <div class="col-md-6 mb-3">
                                             <label>Tujuan Kegiatan *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
                                                 required
                                             />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
+                                        </div> -->
+                                        <!-- <div class="col-md-12 mb-3">
                                             <label>Catatan *</label>
                                             <textarea
                                                 class="form-control"
                                                 id="Catatan"
                                                 rows="3"
                                             ></textarea>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div class="row mt-3">
+                                    <!-- <div class="row mt-3">
                                         <div class="col-sm-6 mb-3">
                                             <div
                                                 class="d-flex px-12 align-items-center margin-100px-bottom"
@@ -395,6 +431,29 @@ export default {
                                         <div class="col-4 col-md-2">
                                             <router-link
                                                 to="/suratkeluar"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                            >
+                                                Cancel
+                                            </router-link>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-6 col-md-3">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                            >
+                                                Save
+                                            </button>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <router-link
+                                                :to="{ name: 'SuratKeluar' }"
                                                 type="submit"
                                                 class="btn btn-cancel text-center w-100 my-1"
                                                 :class="{

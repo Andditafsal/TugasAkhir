@@ -17,9 +17,13 @@ class SuratKeluar extends Model
     }
 
     protected $fillable = [
+        'jenis_surat_id',
         'perihal',
-        'id_jenis_surat',
-        'dittutju',
-        'status'
+        'lampiran',
+        'kepada',
+        'hari_kegiatan',
+        'tanggal_kegiatan',
+        'waktu_kegiatan',
+        'tempat_kegiatan',
     ];
 }

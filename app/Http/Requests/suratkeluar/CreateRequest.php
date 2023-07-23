@@ -28,11 +28,15 @@ class CreateRequest extends FormRequest
 
             // 'dokumen_surat' => 'required|file|mimes:doc,pdf,docx|max:2048',
 
-            'perihal' => 'required',
-            'id_jenis_surat' => 'required',
-            'dittutju' => 'required',
-            'status' => 'required'
 
+            'jenis_surat_id' => 'required',
+            'perihal' => 'required',
+            'lampiran' => 'file|mimes:pdf|max:2048',
+            'kepada' => 'required',
+            'hari_kegiatan' => 'required',
+            'tanggal_kegiatan' => 'required',
+            'waktu_kegiatan' => 'required',
+            'tempat_kegiatan' => 'required',
 
 
         ];

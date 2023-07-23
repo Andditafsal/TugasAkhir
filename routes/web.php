@@ -3,6 +3,10 @@
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SuratMasukController;
+use App\Http\Controllers\DataExcelController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +22,19 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome'); //route default
 // });
 
-Route::get('/{any}', [PageController::class, 'app'])->where('any', '^(?!auth).*$'); //tampilan methodnya app
+Route::get('/{any}', [PageController::class, 'app'])->where('any', '^(?!auth|exportsuratmasuk).*$'); //tampilan methodnya app
 Route::get('auth/{any}', [PageController::class, 'auth']); //tampilan methodnya ke auth
+
+Route::post('import', 'App\Http\Controllers\ExcelController@import')->name('import');
+Route::get('export', 'App\Http\Controllers\ExcelController@export')->name('export');
+
+//qrcode
+Route::get('/', [DataController::class, 'index']);
+Route::post('/', [DataController::class, 'store'])->name('store');
+Route::get('qrcode/{id}', [DataController::class, 'generate'])->name('generate');
+
+
+
+//export excel suratmasuk
+
+Route::get('/exportsuratmasuk', [SuratMasukController::class, 'suratmasukexport'])->name('exportsuratmasuk');

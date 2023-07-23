@@ -38,19 +38,28 @@ class SuratKeluarController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        // $this->suratKeluar = new SuratKeluar();
-        // return DB::transaction(
-        //     function () use ($request) {
-        //         $file = "";
-        //         if ($request->hasFile('dokumen_surat')) {
-        //             $file = $request->file('dokumen_surat')->store('dokumen');
-        //         }
-        //         $request->merge([
-        //             'dokumen' => $file
-        //         ]);
-        //         return $this->suratKeluar->create($request->all());
-        //     }
-        // );
+
+        return DB::transaction(
+            function () use ($request) {
+                $file = "";
+                if ($request->hasFile('lampiran_surat')) {
+                    $file = $request->file('lampiran_surat')->store('lampiran');
+                }
+                $request->merge([
+                    'lampiran' => $file
+                ]);
+                return $this->suratkeluar->create($request->all());
+            }
+        );
+
+        $jenisSurat = JenisSurat::find($request->jenis_surat_id);
+
+        $suratKeluar = new SuratKeluar;
+
+        $suratKeluar->diajukan = $request->diajukan;
+        $suratKeluar->perihal = $request->perihal;
+
+        $jenisSurat->suratKeluar()->save($suratKeluar);
 
         return $this->suratkeluar->create($request->all());
     }

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SuratMasukExport;
 use App\Http\Requests\suratmasuk\CreateRequest;
 use App\Http\Requests\suratmasuk\UpdateRequest;
 use App\Http\Resources\SuratMasuk\SuratMasukCollection;
 use App\Http\Resources\SuratMasuk\SuratMasukDetail;
 use App\Models\SuratMasuk;
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuratMasukController extends Controller
 
@@ -45,6 +46,11 @@ class SuratMasukController extends Controller
         ////return 'berhasil';
     }
 
+    //export excel
+    public function suratmasukexport()
+    {
+        return Excel::download(new SuratMasukExport, 'suratmasuk.xlsx');
+    }
 
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuratKeluarController;
@@ -38,6 +39,15 @@ use Illuminate\Support\Facades\Route;
 // //Search
 // Route::get('/search', 'SearchController@search');
 
+//profile
+Route::prefix('profile')->middleware("auth:sanctum")->group(function () {
+    Route::get('/', [ProfileController::class, 'index']);
+    Route::put('/', [ProfileController::class, 'get_profil']);
+    Route::put('/ubah', [ProfileController::class, "update_profile"]);
+    //
+});
+
+//disposisi
 Route::prefix('suratmasuk')->group(function () {
 
     Route::post('/{id}/disposisi', DisposisiController::class);
