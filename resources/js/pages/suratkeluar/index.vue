@@ -48,12 +48,33 @@ export default {
                     //er
                 });
         },
+        handleDelet() {
+            this.successDelet = true;
+            this.$store
+                .dispatch("deleteData", ["/suratkeluar", this.id])
+                .then((response) => {
+                    iziToast.success({
+                        title: "success",
+                        message: "data berhasil dihapus",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    this.getSuratKeluars();
+                    $("#deletSuratMasukModal").modal("hide");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         onSearch() {
             this.getSuratKeluars();
         },
         onPageChange(page) {
             this.paginate.page = page;
             this.getSuratKeluars();
+        },
+        exportData() {
+            window.location.href = "/exportsuratkeluar";
         },
     },
 };
@@ -98,19 +119,55 @@ export default {
                         class="dataTables_wrapper dt-bootstrap4"
                     >
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
+                            <div
+                                class="mb-6 col-12 d-flex justify-content-between align-items-center mb-md-1"
+                            >
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
-                                    <label for="" class="px-3 mb-0"
-                                        >Cari
-                                    </label>
+                                    <button
+                                        @click="exportData"
+                                        class="d-flex px-12 align-items-center margin-100px-bottom exportData"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-file-earmark-arrow-down-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z"
+                                            />
+                                        </svg>
+                                        <span class="btn-inner--text m-1"
+                                            >Excel</span
+                                        >
+                                    </button>
+                                    <label for="" class="px-1 mb-0"></label>
+                                    <select
+                                        name="dataTable_length"
+                                        aria-controls="dataTable"
+                                        class="custom-select custom-select-sm form-control form-control-sm"
+                                    >
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+
+                                <div
+                                    class="d-flex px-12 align-items-center margin-100px-bottom"
+                                >
+                                    <label for="" class="px-2 mb-0">Cari</label>
                                     <input
                                         type="text"
-                                        name=""
-                                        email=""
-                                        placeholder="Masukan Data Surat"
+                                        placeholder="Perihal "
                                         class="form-control form-control-sm"
+                                        v-model="search"
+                                        @input="onSearch"
                                     />
                                 </div>
                             </div>
@@ -258,19 +315,41 @@ export default {
                                             <td>Surat Undangan</td>
                                             <td>
                                                 <button
-                                                    class="btn btn-sm btn-primary m-1"
+                                                    class="badge bg-inverse-statuss"
                                                 >
-                                                    diproses
+                                                    <i
+                                                        class="fa fa-check"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Dibaca
+                                                </button>
+
+                                                <button
+                                                    class="badge bg-inverse-status"
+                                                >
+                                                    <i
+                                                        class="fa fa-spinner"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Diproses
                                                 </button>
                                                 <button
-                                                    class="btn btn-sm btn-danger m-1"
+                                                    class="badge bg-inverse-lanjut"
                                                 >
-                                                    dibatalkan
+                                                    <i
+                                                        class="fa fa-arrow-up"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Ditindaklanjuti
                                                 </button>
                                                 <button
-                                                    class="btn btn-sm btn-warning m-1"
+                                                    class="badge bg-inverse-batal"
                                                 >
-                                                    disetujui
+                                                    <i
+                                                        class="fa fa-times"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Dibatalkan
                                                 </button>
                                             </td>
                                             <td>
@@ -384,6 +463,11 @@ export default {
                                                     </button> -->
                                                     <button
                                                         class="btn btn-sm btn-hapus m-1"
+                                                        data-toggle="modal"
+                                                        data-target="#deletSuratMasukModal"
+                                                        @click="
+                                                            id = suratkeluars.id
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -406,6 +490,56 @@ export default {
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="mb-3 col-12 d-flex justify-content-between align-items-center mb-md-0"
+                    >
+                        <h5 class="mb-0 text-gray-900 mb-2"></h5>
+                        <paginate
+                            :currentPage="paginate.currentPage"
+                            :rowsTotal="paginate.total"
+                            :lastPage="paginate.lastPage"
+                            @onPageChange="onPageChange($event)"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="deletSuratMasukModal"
+        tabindex="-1"
+        aria-labelledby="deletSuratMasukModallabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="deletSuratMasukModallabel">
+                        Apakah Anda Yakin??
+                    </h5>
+                </div> -->
+                <div class="modal-body">
+                    <h5 class="modal-title" id="deletSuratMasukModallabel">
+                        Apakah anda yakin ingin menghapus data tersebut?
+                    </h5>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-pengguna"
+                        data-dismiss="modal"
+                    >
+                        Tutup
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="handleDelet"
+                    >
+                        Delet
+                    </button>
                 </div>
             </div>
         </div>
@@ -484,5 +618,56 @@ export default {
     background-color: #f1924c;
     border-color: #f1924c;
     color: #fefefe;
+}
+.bg-inverse-disposisi {
+    background-color: rgb(162, 162, 59) !important;
+    color: white !important;
+    border-color: rgb(162, 162, 59);
+}
+.bg-inverse-statuss {
+    background-color: rgb(48, 141, 255) !important;
+    color: white !important;
+    border-color: rgb(48, 141, 255);
+}
+.bg-inverse-status {
+    background-color: green !important;
+    color: white !important;
+    border-color: green;
+}
+.exportData {
+    background-color: #04aa6d;
+    color: #fff;
+    border-color: #04aa6d;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 0;
+
+    border: 1px solid #04aa6d;
+    border-radius: 8%;
+}
+.exportData:hover {
+    background-color: #04aa6d;
+    color: #fff;
+    border-color: #04aa6d;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8%;
+    margin-left: -1px;
+    line-height: 0;
+
+    border: 1px solid #04aa6d;
+}
+.bg-inverse-lanjut {
+    background-color: #e7e117 !important;
+    color: white !important;
+    border-color: #e7e117;
+}
+.bg-inverse-batal {
+    background-color: red !important;
+    color: white !important;
+    border-color: red;
 }
 </style>

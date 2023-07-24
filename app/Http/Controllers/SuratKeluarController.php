@@ -12,6 +12,8 @@ use App\Models\SuratMasuk;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SuratKeluarExport;
 
 class SuratKeluarController extends Controller
 {
@@ -26,9 +28,22 @@ class SuratKeluarController extends Controller
 
     public function index(Request $request)
     {
-        $suratkeluars = $this->suratkeluar->paginate($request->per_paage);
+        //$suratkeluars = $this->suratkeluar->paginate($request->per_paage);
+        $query = $this->suratkeluar->query();
+
+        if ($request->has('search')) {
+            $query->where("Kepada", "like", "%" . $request->search . "%")
+                ->orWhere("Perihal", "like", "%" . $request->search . "%");
+        }
+
+        $suratkeluars = $query->paginate($request->per_page);
         return new SuratKeluarCollection($suratkeluars);
         //return 'berhasil';
+    }
+
+    public function suratkeluarexport()
+    {
+        return Excel::download(new SuratKeluarExport, 'suratkeluarcobaa.xlsx');
     }
 
 
@@ -190,4 +205,5 @@ class SuratKeluarController extends Controller
     //     $template->saveAs('dokumen/coba.docx');
     //     return response()->download(public_path('dokumen/coba.docx'));
     // }
+
 }
