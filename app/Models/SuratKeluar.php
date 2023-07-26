@@ -21,9 +21,13 @@ class SuratKeluar extends Model
         'perihal',
         'lampiran',
         'kepada',
+        'tanggal_surat',
         'hari_kegiatan',
         'tanggal_kegiatan',
-        'waktu_kegiatan',
+        'waktu_mulai_kegiatan',
+        'waktu_selesai_kegiatan',
         'tempat_kegiatan',
+        'catatan_kegiatan',
+        'masalah_kegiatan',
     ];
 }

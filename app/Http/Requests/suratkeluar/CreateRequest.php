@@ -33,10 +33,14 @@ class CreateRequest extends FormRequest
             'perihal' => 'required',
             'lampiran' => 'file|mimes:pdf|max:2048',
             'kepada' => 'required',
-            'hari_kegiatan' => 'required',
-            'tanggal_kegiatan' => 'required',
-            'waktu_kegiatan' => 'required',
-            'tempat_kegiatan' => 'required',
+            'tanggal_surat' => 'required',
+            'hari_kegiatan' => '',
+            'tanggal_kegiatan' => '',
+            'waktu_mulai_kegiatan' => '',
+            'waktu_selesai_kegiatan' => '',
+            'tempat_kegiatan' => '',
+            'catatan_kegiatan' => '',
+            'masalah_kegiatan' => '',
 
 
         ];

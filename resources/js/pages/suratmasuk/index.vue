@@ -187,9 +187,7 @@ export default {
                                 <div
                                     class="d-flex px-12 align-items-center margin-100px-bottom"
                                 >
-                                    <label for="" class="px-10 mb-0"
-                                        >Cari</label
-                                    >
+                                    <label for="" class="px-2 mb-0">Cari</label>
                                     <input
                                         type="text"
                                         placeholder="Asal & Tanggal Surat"
@@ -551,14 +549,14 @@ export default {
                         class="btn btn-pengguna"
                         data-dismiss="modal"
                     >
-                        Close
+                        Tutup
                     </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="showDokumenSurat"
                     >
-                        Delet
+                        Hapus
                     </button>
                 </div>
             </div>

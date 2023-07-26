@@ -276,12 +276,6 @@ export default {
                                                 colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
                                                 style="width: 3%"
-                                                v-if="
-                                                    $can(
-                                                        'action',
-                                                        'Admin Petugas Pemimpin'
-                                                    )
-                                                "
                                             >
                                                 Aksi
                                             </th>
@@ -669,5 +663,30 @@ export default {
     background-color: red !important;
     color: white !important;
     border-color: red;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #252628;
+    border-color: #252628;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #1c1d21;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #1c1d21;
+    text-decoration: none;
+    background-color: #eaecf4;
+    border-color: #dddfeb;
 }
 </style>

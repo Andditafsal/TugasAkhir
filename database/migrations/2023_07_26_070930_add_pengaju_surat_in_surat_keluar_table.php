@@ -12,12 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('surat_keluar', function (Blueprint $table) {
-            $table->string('perihal');
-            $table->string('kepada');
-            $table->string('hari_kegiatan');
-            $table->date('tanggal_kegiatan');
-            $table->string('waktu_kegiatan');
-            $table->string('tempat_kegiatan');
+            //
         });
     }
 
@@ -27,6 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('surat_keluar', function (Blueprint $table) {
+            //
         });
     }
 };

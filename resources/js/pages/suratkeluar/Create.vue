@@ -133,6 +133,7 @@ export default {
                         </div>
                         <div class="row">
                             <div class="col-sm">
+                                <p>Pilih Jenis Surat :</p>
                                 <form
                                     @submit.prevent="handleSubmit"
                                     method="post"
@@ -257,9 +258,37 @@ export default {
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
+                                            <label for=""
+                                                >Ditujukan Kepada *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="form.perihal"
+                                                :class="{
+                                                    'is-invalid': error.perihal,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label for="">Perihal *</label>
                                             <input
                                                 type="text"
+                                                class="form-control"
+                                                v-model="form.perihal"
+                                                :class="{
+                                                    'is-invalid': error.perihal,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""
+                                                >Tanggal Surat *</label
+                                            >
+                                            <input
+                                                type="date"
                                                 class="form-control"
                                                 v-model="form.perihal"
                                                 :class="{
@@ -306,6 +335,23 @@ export default {
                                                 v-model="form.namaKegiatan"
                                             />
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Tempat Kegiatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="form.tempatKegiatan"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Hari Kegiatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.namaKegiatan"
+                                            />
+                                        </div>
                                         <div class="col-md-6 mb-6">
                                             <label>Tanggal Kegiatan *</label>
                                             <input
@@ -320,17 +366,9 @@ export default {
                                                 >Waktu Kegiatan (Mulai) *</label
                                             >
                                             <input
-                                                type="text"
+                                                type="time"
                                                 class="form-control"
-                                                v-model="form.hariKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Kepada *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="form.kepada"
+                                                v-model="form.waktuKegiatan"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -344,31 +382,18 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>Tempat Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="form.tempatKegiatan"
-                                            />
-                                        </div>
-                                        <!-- <div class="col-md-6 mb-3">
-                                            <label>Tujuan Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div> -->
-                                        <!-- <div class="col-md-12 mb-3">
                                             <label>Catatan *</label>
-                                            <textarea
+                                            <input
                                                 class="form-control"
                                                 id="Catatan"
-                                                rows="3"
-                                            ></textarea>
-                                        </div> -->
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Masalah *</label>
+                                            <input class="form-control" />
+                                        </div>
                                     </div>
-                                    <!-- <div class="row mt-3">
+                                    <div class="row mt-3">
                                         <div class="col-sm-6 mb-3">
                                             <div
                                                 class="d-flex px-12 align-items-center margin-100px-bottom"
@@ -378,14 +403,14 @@ export default {
                                                     aria-hidden="true"
                                                 ></i>
                                                 <label for="" class="px-1 mb-0"
-                                                    >Pengaju Surat</label
+                                                    >Pengaju Surat :</label
                                                 >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label>Nama Pengirim *</label>
+                                            <label>Nama Pengaju *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -393,15 +418,23 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>Email *</label>
+                                            <label>Nip Pengaju *</label>
                                             <input
-                                                type="email"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label>Jabatan Pengaju *</label>
+                                            <input
+                                                type="text"
                                                 class="form-control"
                                                 required
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>Jabatan *</label>
+                                            <label>Pangkat Pengaju *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -409,40 +442,26 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>NIP *</label>
+                                            <label>gol Pengaju *</label>
                                             <input
-                                                type="email"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label
+                                                >No Handphone Pengaju *</label
+                                            >
+                                            <input
+                                                type="text"
                                                 class="form-control"
                                                 required
                                             />
                                         </div>
                                     </div>
-
                                     <div class="row">
-                                        <div class="col-4 col-md-2">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary text-center w-100 my-1"
-                                                :disabled="isDisabled"
-                                            >
-                                                Save
-                                            </button>
-                                        </div>
-                                        <div class="col-4 col-md-2">
-                                            <router-link
-                                                to="/suratkeluar"
-                                                type="submit"
-                                                class="btn btn-cancel text-center w-100 my-1"
-                                                :class="{
-                                                    disabled: isDisabled,
-                                                }"
-                                            >
-                                                Cancel
-                                            </router-link>
-                                        </div>
-                                    </div> -->
-                                    <div class="row">
-                                        <div class="col-6 col-md-3">
+                                        <div class="col-6 col-md-3 mt-3">
                                             <button
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
@@ -451,7 +470,7 @@ export default {
                                                 Simpan
                                             </button>
                                         </div>
-                                        <div class="col-6 col-md-3">
+                                        <div class="col-6 col-md-3 mt-3">
                                             <router-link
                                                 :to="{ name: 'SuratKeluar' }"
                                                 type="submit"

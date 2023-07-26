@@ -280,7 +280,7 @@ export default {
                                         class="btn btn-primary text-center col-1 m-1"
                                         :disabled="isDisabled"
                                     >
-                                        Save
+                                        Simpan
                                     </button>
                                     <button
                                         to="/suratmasuk"
@@ -288,7 +288,7 @@ export default {
                                         class="btn btn-cancel text-center col-1"
                                         :class="{ disabled: isDisabled }"
                                     >
-                                        Cancle
+                                        Batal
                                     </button>
                                 </form>
                             </div>
