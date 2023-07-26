@@ -1,4 +1,5 @@
 <script>
+import iziToast from "izitoast";
 export default {
     props: ["id"],
     data() {
@@ -34,6 +35,9 @@ export default {
                 noHp: user.noHp,
                 role: user.idRole,
                 alamat: user.alamat,
+                password: user.password,
+                previewpicture: user.previewpicture,
+                showPicture: user.profilePicture,
             };
             this.showPicture = user.profilePicture;
             this.previewpicture = user.profilePicture;
@@ -81,14 +85,23 @@ export default {
             if (this.form.picture) {
                 formData.append("picture", this.form.picture);
             }
-
+            this.isSuccess = true;
             this.$store
                 .dispatch("postDataUpload", ["user/" + this.id, formData])
                 .then((result) => {
                     //this.$router.push("/auth/login");
 
                     this.isDisabled = false;
-                    this.$router.push({ name: "User" });
+                    iziToast.success({
+                        title: "success",
+                        message: "Berhasil Edit Data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "User" });
+                    }, 1000);
+                    //this.$router.push({ name: "User" });
                     //console.log(result);
                 })
                 .catch((error) => {
@@ -176,7 +189,7 @@ export default {
                                             {{ erorr }}
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="password">Password *</label>
                                         <input
                                             type="password"
@@ -197,7 +210,7 @@ export default {
                                         >
                                             {{ erorr }}
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label for="kelamin"
                                             >Jenis Kelamin *</label
@@ -309,7 +322,7 @@ export default {
                                                 :disabled="isDisabled"
                                                 style="display: block"
                                             >
-                                                Save
+                                                Simpan
                                             </button>
                                         </div>
                                         <div class="col-6 col-md-3">
@@ -322,7 +335,7 @@ export default {
                                                 }"
                                                 style="display: block"
                                             >
-                                                Cancel
+                                                Batal
                                             </router-link>
                                         </div>
                                     </div>

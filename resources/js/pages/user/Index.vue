@@ -53,7 +53,7 @@ export default {
                 .then((response) => {
                     iziToast.success({
                         title: "success",
-                        message: "data berhasil dihapus",
+                        message: "Berhasil Hapus Data",
                         position: "topRight",
                         timeout: 1000,
                     });

@@ -39,7 +39,7 @@ export default {
                     this.isDisabled = false;
                     iziToast.success({
                         title: "success",
-                        message: "berhasil tambah data",
+                        message: "Berhasil Tambah Data",
                         position: "topRight",
                         timeout: 1000,
                     });
@@ -283,7 +283,7 @@ export default {
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
                                             >
-                                                Save
+                                                Simpan
                                             </button>
                                         </div>
                                         <div class="col-6 col-md-3">
@@ -295,7 +295,7 @@ export default {
                                                     disabled: isDisabled,
                                                 }"
                                             >
-                                                Cancel
+                                                Batal
                                             </router-link>
                                         </div>
                                     </div>
