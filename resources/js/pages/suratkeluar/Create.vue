@@ -33,6 +33,7 @@ export default {
     },
     methods: {
         lihatSurat(event) {
+            cobaa;
             const selected = event.target.value;
             console.log(selected);
 
