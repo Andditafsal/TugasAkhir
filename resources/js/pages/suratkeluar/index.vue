@@ -80,6 +80,7 @@ export default {
 };
 </script>
 <template>
+    {{ suratkeluars }}
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
@@ -206,7 +207,7 @@ export default {
                                                 colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Number: activate to sort column descending"
-                                                style="width: 17%"
+                                                style="width: 13%"
                                             >
                                                 Tanggal
                                             </th>
@@ -275,7 +276,7 @@ export default {
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
-                                                style="width: 3%"
+                                                style="width: 1%"
                                             >
                                                 Aksi
                                             </th>
@@ -294,19 +295,25 @@ export default {
                                             :key="index"
                                         >
                                             <td v-html="index + 1"></td>
-                                            <td>Tangal Surat</td>
+                                            <td
+                                                v-html="
+                                                    suratkeluars.tanggalSurat
+                                                "
+                                            ></td>
                                             <td
                                                 v-html="suratkeluars.kepada"
                                             ></td>
+                                            <td>Nomor Surat Belom</td>
+
+                                            <td
+                                                v-html="
+                                                    suratkeluars.tanggalSurat
+                                                "
+                                            ></td>
+
                                             <td
                                                 v-html="suratkeluars.perihal"
                                             ></td>
-                                            <td>
-                                                <span>cobaee</span>
-                                                <span>cobaa</span>
-                                                <span>rrr</span>
-                                            </td>
-                                            <td>Surat Undangan</td>
                                             <td>
                                                 <button
                                                     class="badge bg-inverse-statuss"
@@ -350,7 +357,7 @@ export default {
                                                 <div
                                                     class="d-flex alignt-items-start"
                                                 >
-                                                    <routerlink
+                                                    <router-link
                                                         to="/user/cretae"
                                                         class="btn btn-sm btn-eye m-1"
                                                     >
@@ -369,12 +376,14 @@ export default {
                                                                 d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
                                                             />
                                                         </svg>
-                                                    </routerlink>
-                                                    <routerlink
+                                                    </router-link>
+                                                    <router-link
                                                         class="btn btn-sm btn-create m-1"
                                                         :to="{
-                                                            name: 'Edit User',
-                                                            params: {},
+                                                            name: 'Edit Surat Keluar',
+                                                            params: {
+                                                                id: suratkeluars.id,
+                                                            },
                                                         }"
                                                     >
                                                         <svg
@@ -393,7 +402,7 @@ export default {
                                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                                                             />
                                                         </svg>
-                                                    </routerlink>
+                                                    </router-link>
                                                     <!-- <router-link
                                                         :to="{
                                                             name: 'CetakSuratKeluar',

@@ -1,17 +1,24 @@
 <script>
+import dayjs from "dayjs";
+import "dayjs/locale/id";
 import iziToast from "izitoast";
 export default {
     data() {
         return {
+            showForm: false,
             form: {
+                jenis_surat_id: "",
                 perihal: "",
                 lampiranSurat: "",
                 kepada: "",
-                hariKegiatan: "",
+                tanggalSurat: "",
+                namaKegiatan: "",
                 tanggalKegiatan: "",
-                waktuKegiatan: "",
+                waktuMulaiKegiatan: "",
+                waktuSelesaiKegiatan: "",
                 tempatKegiatan: "",
-                jenis_surat_id: "",
+                ctatanKegiatan: "",
+                masalahKegiatan: "",
             },
             jenissurat: [],
             error: {},
@@ -21,8 +28,24 @@ export default {
     },
     mounted() {
         this.getData();
+        this.dateNow();
+        this.timeNow();
     },
     methods: {
+        lihatSurat(event) {
+            const selected = event.target.value;
+            console.log(selected);
+
+            // Cari jenis surat berdasarkan nilai selected
+            const jenisSurat = this.jenissurat.find(
+                (surat) => surat.id === selected
+            );
+
+            console.log(jenisSurat);
+
+            // Atur nilai showForm berdasarkan hasil pencarian
+            this.showForm = jenisSurat && jenisSurat.id === 2;
+        },
         handleSubmit() {
             this.isDisabled = true;
 
@@ -30,13 +53,26 @@ export default {
 
             formData.append("jenis_surat_id", this.datacheck.id);
             formData.append("perihal", this.form.perihal);
-            formData.append("lampiran", this.form.lampiranSurat);
+
             formData.append("kepada", this.form.kepada);
+            formData.append("tanggal_surat", this.form.tanggalSurat);
+            formData.append("nama_kegiatan", this.form.namaKegiatan);
             formData.append("hari_kegiatan", this.form.hariKegiatan);
             formData.append("tanggal_kegiatan", this.form.tanggalKegiatan);
-            formData.append("waktu_kegiatan", this.form.waktuKegiatan);
-            formData.append("tempat_kegiatan", this.form.tempatKegiatan);
-
+            formData.append(
+                "waktu_mulai_kegiatan",
+                this.form.waktuMulaiKegiatan
+            );
+            formData.append(
+                "waktu_selesai_kegitan",
+                this.form.waktuSelesaiKegiatan
+            );
+            formData.append("tempat_kegiatan", this.form.kepada);
+            formData.append("catatan_kegiatan", this.form.ctatanKegiatan);
+            formData.append("masalah_Kegiatan", this.form.masalahKegiatan);
+            if (this.form.lampiranSurat) {
+                formData.append("lampiran_surat", this.form.lampiranSurat);
+            }
             //console.log(formData);
             this.$store
                 .dispatch("postDataUpload", ["suratkeluar", formData])
@@ -83,6 +119,16 @@ export default {
             this.form.lampiranSurat = e.target.files[0];
             //console.log(this.form.dokumenSurat);
         },
+        dateNow() {
+            let ms = dayjs().locale("id");
+            this.form.tanggalKegiatan = ms.format("YYYY-MM-DD");
+            this.form.tanggalSurat = ms.format("YYYY-MM-DD");
+        },
+        timeNow() {
+            let ms = dayjs().locale("id");
+            this.form.waktuMulaiKegiatan = ms.format("HH:mm");
+            this.form.waktuSelesaiKegiatan = ms.format("HH:mm");
+        },
     },
 };
 </script>
@@ -91,7 +137,7 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Tambah Surat Masuk</h5>
+            <h5 class="h5 mb-2 text-gray-800">Tambah Surat Keluar</h5>
         </div>
 
         <!-- DataTales Example -->
@@ -256,7 +302,7 @@ export default {
                                         </div>
                                     </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row" v-if="chooseForm">
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Ditujukan Kepada *</label
@@ -264,9 +310,9 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                v-model="form.perihal"
+                                                v-model="form.kepada"
                                                 :class="{
-                                                    'is-invalid': error.perihal,
+                                                    'is-invalid': error.kepada,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -290,9 +336,10 @@ export default {
                                             <input
                                                 type="date"
                                                 class="form-control"
-                                                v-model="form.perihal"
+                                                v-model="form.tanggalSurat"
                                                 :class="{
-                                                    'is-invalid': error.perihal,
+                                                    'is-invalid':
+                                                        error.tanggalSurat,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -325,75 +372,98 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                                v-model="form.namaKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Tempat Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="form.tempatKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Hari Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                                v-model="form.namaKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Tanggal Kegiatan *</label>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                required
-                                                v-model="form.tanggalKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label
-                                                >Waktu Kegiatan (Mulai) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                v-model="form.waktuKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label
-                                                >Waktu Kegiatan (Akhir) *</label
-                                            >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                v-model="form.waktuKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Catatan *</label>
-                                            <input
-                                                class="form-control"
-                                                id="Catatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Masalah *</label>
-                                            <input class="form-control" />
+                                    <div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label>Nama Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.namaKegiatan"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Tempat Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.tempatKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Hari Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.hariKegiatan"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label
+                                                    >Tanggal Kegiatan *</label
+                                                >
+                                                <input
+                                                    type="date"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="
+                                                        form.tanggalKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label
+                                                    >Waktu Kegiatan (Mulai)
+                                                    *</label
+                                                >
+                                                <input
+                                                    type="time"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.waktuMulaiKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label
+                                                    >Waktu Kegiatan (Akhir)
+                                                    *</label
+                                                >
+                                                <input
+                                                    type="time"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.waktuSelesaiKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Catatan *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.ctatanKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Masalah *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.masalahKegiatan
+                                                    "
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-3">
+                                    <!-- <div class="row mt-3">
                                         <div class="col-sm-6 mb-3">
                                             <div
                                                 class="d-flex px-12 align-items-center margin-100px-bottom"
@@ -459,7 +529,7 @@ export default {
                                                 required
                                             />
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="col-6 col-md-3 mt-3">
                                             <button
