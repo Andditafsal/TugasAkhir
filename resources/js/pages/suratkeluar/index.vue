@@ -80,7 +80,6 @@ export default {
 };
 </script>
 <template>
-    {{ suratkeluars }}
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">

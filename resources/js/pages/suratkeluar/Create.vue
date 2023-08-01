@@ -24,16 +24,18 @@ export default {
             error: {},
             isDisabled: false,
             datacheck: {},
+            test: [],
         };
     },
     mounted() {
         this.getData();
         this.dateNow();
         this.timeNow();
+        this.getQr();
     },
     methods: {
         lihatSurat(event) {
-            cobaa;
+            // cobaa;
             const selected = event.target.value;
             console.log(selected);
 
@@ -130,10 +132,27 @@ export default {
             this.form.waktuMulaiKegiatan = ms.format("HH:mm");
             this.form.waktuSelesaiKegiatan = ms.format("HH:mm");
         },
+        convert(svgCode) {
+            return `data:image/svg+xml;base64,${btoa(svgCode)}`;
+        },
+        getQr() {
+            let type = "getData";
+            let url = ["qrcode", {}];
+            this.$store
+                .dispatch(type, url)
+                .then((result) => {
+                    this.test = result;
+                    console.log(result);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
 };
 </script>
 <template>
+
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -185,7 +204,7 @@ export default {
                                     @submit.prevent="handleSubmit"
                                     method="post"
                                 >
-                                    <div class="form-row">
+                                  <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="">Jenis Surat *</label>
                                             <select
@@ -278,7 +297,7 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                id="name"
+
                                                 :value="datacheck.tahunSurat"
                                                 :class="{
                                                     'is-invalid':
@@ -303,7 +322,7 @@ export default {
                                         </div>
                                     </div>
 
-                                    <div class="form-row" v-if="chooseForm">
+                                    <div class="form-row" >
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Ditujukan Kepada *</label
