@@ -1,4 +1,5 @@
 <script>
+import iziToast from "izitoast";
 export default {
     props: ["id"],
     data() {
@@ -18,7 +19,7 @@ export default {
         };
     },
     mounted() {
-        this.getSuratMasuk();
+        this.getsuratMasuk();
     },
     methods: {
         setForm(suratmasuks) {
@@ -33,7 +34,7 @@ export default {
             this.previewdokumenSurat = suratmasuks.dokumen;
         },
 
-        getSuratMasuk() {
+        getsuratMasuk() {
             this.$store
                 .dispatch("showData", ["suratmasuk", this.id])
                 .then((response) => {
@@ -56,12 +57,18 @@ export default {
             formData.append("dokumen_surat", this.form.dokumenSurat);
 
             this.$store
-                .dispatch("postDataUpload", ["suratmasuk", formData])
+                .dispatch("postDataUpload", ["suratmasuk/", +this.id, formData])
                 .then((result) => {
                     this.isDisabled = false;
-                    console.log(result);
-                    this.$router.push({ name: "SuratMasuk" });
-                    //console.log(result);
+                    iziToast.success({
+                        title: "success",
+                        message: "Berhasil Edit Data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "SuratMasuk" });
+                    }, 1000);
                 })
                 .catch((error) => {
                     this.isDisabled = false;
@@ -271,25 +278,38 @@ export default {
                                                 class="form-control"
                                                 id="upload dokumen"
                                                 @change="uploadDokumen"
+                                                :class="{
+                                                'is-invalid': dokumenSurat,
+                                            }"
+                                            :disabled="isDisabled"
                                             />
                                         </div>
                                     </div>
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary text-center col-1 m-1"
-                                        :disabled="isDisabled"
-                                    >
-                                        Simpan
-                                    </button>
-                                    <button
-                                        to="/suratmasuk"
-                                        type="submit"
-                                        class="btn btn-cancel text-center col-1"
-                                        :class="{ disabled: isDisabled }"
-                                    >
-                                        Batal
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-6 col-md-3">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                                style="display: block"
+                                            >
+                                                Simpan
+                                            </button>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <router-link
+                                                :to="{ name: 'SuratMasuk' }"
+                                                type="submit"
+                                                class="btn btn-cancel text-center w-100 my-1"
+                                                :class="{
+                                                    disabled: isDisabled,
+                                                }"
+                                                style="display: block"
+                                            >
+                                                Batal
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -322,5 +342,13 @@ export default {
 .text-white {
     color: white !important;
     background-color: #303137;
+}
+.btn-cancel {
+    background-color: #7a7a7a;
+    color: white !important;
+}
+.btn-cancel:hover {
+    background-color: #7a7a7a;
+    color: white !important;
 }
 </style>
