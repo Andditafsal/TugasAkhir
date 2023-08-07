@@ -102,12 +102,10 @@ export default {
         exportData() {
             window.location.href = "/exportsuratmasuk";
         },
-
     },
 };
 </script>
 <template>
-
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
@@ -594,7 +592,6 @@ export default {
     <!-- Modaldetaildisposisi -->
 
     <div
-
         class="modal fade"
         id="disposisiModal"
         tabindex="-1"
@@ -619,7 +616,6 @@ export default {
                 </div>
                 <div class="modal-body">
                     <form>
-
                         <div class="form-group">
                             <iframe
                                 :src="disposisiSuratMasuk.dokumen"
@@ -633,10 +629,10 @@ export default {
                             <input
                                 type="text"
                                 class="form-control"
-
-                                placeholder="wakasek"
+                                :value="
+                                    disposisiSuratMasuk.disposisi?.users.name
+                                "
                                 disabled
-
                             />
                         </div>
                         <div class="form-group">
@@ -644,12 +640,9 @@ export default {
                             <input
                                 type="text"
                                 class="form-control"
-
                                 disabled
                                 placeholder="Kepala Sekolah"
-
                             />
-
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label"

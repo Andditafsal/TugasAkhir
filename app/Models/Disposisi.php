@@ -20,7 +20,7 @@ class Disposisi extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function suratmasuk()

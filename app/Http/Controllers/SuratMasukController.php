@@ -37,7 +37,7 @@ class SuratMasukController extends Controller
                 ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
         }
 
-        $query->with("disposisi");
+        $query->with("disposisi.users");
         $suratmasuks = $query->paginate($request->per_page);
 
 
@@ -119,8 +119,12 @@ class SuratMasukController extends Controller
             ]);
         }
 
+        // return DB::transaction(function () use ($request, $suratmasuk) {
+        //     return $suratmasuk->update($request->all());
+        // });
         return DB::transaction(function () use ($request, $suratmasuk) {
-            return $suratmasuk->update($request->all());
+            $suratmasuk->update($request->all());
+            DB::commit(); // Menyimpan perubahan pada database
         });
     }
 
