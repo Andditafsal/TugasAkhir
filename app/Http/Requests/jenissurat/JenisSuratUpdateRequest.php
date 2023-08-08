@@ -30,6 +30,7 @@ class JenisSuratUpdateRequest extends FormRequest
             'tahun_surat' => 'required',
             'name' => 'required',
 
+
         ];
     }
     protected function failedValidation(Validator $validator)

@@ -20,7 +20,13 @@ class JenisSuratController extends Controller
     }
     public function index()
     {
-        $jenissurats = $this->jenissurat->get();
+        $query = $this->jenissurat->query();
+
+        if (auth()->user()->id_role == 5) {
+            $query->whereIn("id", [1, 3]);
+        }
+
+        $jenissurats = $query->get();
 
         return new JenisSuratCollection($jenissurats);
     }

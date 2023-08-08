@@ -22,6 +22,7 @@ class SuratKeluar extends Model
         'lampiran',
         'kepada',
         'tanggal_surat',
+        'nama_kegiatan',
         'hari_kegiatan',
         'tanggal_kegiatan',
         'waktu_mulai_kegiatan',
@@ -29,5 +30,14 @@ class SuratKeluar extends Model
         'tempat_kegiatan',
         'catatan_kegiatan',
         'masalah_kegiatan',
+        'nama_industri',
+        'alamat_industri',
+        'kelas_siswa',
+        'jurusan_siswa',
+        'tahun_ajaran',
+        'nip',
+        'pangkat',
+        'jabatan',
+        'gol',
     ];
 }

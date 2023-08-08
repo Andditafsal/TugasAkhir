@@ -34,6 +34,7 @@ class CreateRequest extends FormRequest
             'lampiran' => 'file|mimes:pdf|max:2048',
             'kepada' => 'required',
             'tanggal_surat' => 'required',
+            'nama_kegitan' => '',
             'hari_kegiatan' => '',
             'tanggal_kegiatan' => '',
             'waktu_mulai_kegiatan' => '',
@@ -41,6 +42,15 @@ class CreateRequest extends FormRequest
             'tempat_kegiatan' => '',
             'catatan_kegiatan' => '',
             'masalah_kegiatan' => '',
+            'nama_industri' => '',
+            'alamat_industri' => '',
+            'kelas_siswa' => '',
+            'jurusan_siswa' => '',
+            'tahun_ajaran' => '',
+            'nip' => '',
+            'pangkat'  => '',
+            'jabatan'  => '',
+            'gol'  => '',
 
 
         ];

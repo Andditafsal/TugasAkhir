@@ -20,6 +20,7 @@ export default {
                 ctatanKegiatan: "",
                 masalahKegiatan: "",
             },
+            suratId: 1,
             jenissurat: [],
             error: {},
             isDisabled: false,
@@ -34,21 +35,21 @@ export default {
         this.getQr();
     },
     methods: {
-        lihatSurat(event) {
-            // cobaa;
-            const selected = event.target.value;
-            console.log(selected);
+        // lihatSurat(event) {
+        //     // cobaa;
+        //     const selected = event.target.value;
+        //     console.log(selected);
 
-            // Cari jenis surat berdasarkan nilai selected
-            const jenisSurat = this.jenissurat.find(
-                (surat) => surat.id === selected
-            );
+        //     // Cari jenis surat berdasarkan nilai selected
+        //     const jenisSurat = this.jenissurat.find(
+        //         (surat) => surat.id === selected
+        //     );
 
-            console.log(jenisSurat);
+        //     console.log(jenisSurat);
 
-            // Atur nilai showForm berdasarkan hasil pencarian
-            this.showForm = jenisSurat && jenisSurat.id === 2;
-        },
+        //     // Atur nilai showForm berdasarkan hasil pencarian
+        //     this.showForm = jenisSurat && jenisSurat.id === 2;
+        // },
         handleSubmit() {
             this.isDisabled = true;
 
@@ -109,6 +110,7 @@ export default {
                 });
         },
         chooseSurat(e) {
+            this.suratId = e.target.value;
             this.$store
                 .dispatch("showData", ["jenissurat", e.target.value])
                 .then((response) => {
@@ -152,7 +154,6 @@ export default {
 };
 </script>
 <template>
-
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -199,18 +200,25 @@ export default {
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <p>Pilih Jenis Surat :</p>
                                 <form
                                     @submit.prevent="handleSubmit"
                                     method="post"
                                 >
-                                  <div class="form-row">
+                                    <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="">Jenis Surat *</label>
                                             <select
                                                 class="form-control"
                                                 @change="chooseSurat($event)"
                                             >
+                                                <option
+                                                    value=""
+                                                    disabled
+                                                    selected
+                                                >
+                                                    Pilih Jenis Surat Yang
+                                                    Dibuat
+                                                </option>
                                                 <option
                                                     v-for="(
                                                         surat, index
@@ -293,11 +301,10 @@ export default {
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="">Tahun Ajaran*</label>
+                                            <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
-
                                                 :value="datacheck.tahunSurat"
                                                 :class="{
                                                     'is-invalid':
@@ -321,8 +328,7 @@ export default {
                                             >
                                         </div>
                                     </div>
-
-                                    <div class="form-row" >
+                                    <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Ditujukan Kepada *</label
@@ -372,6 +378,212 @@ export default {
                                                 @change="uploadDokumen"
                                             />
                                         </div>
+
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 2"
+                                        >
+                                            <label
+                                                >Nama Orang Tua Siswa atau Wali
+                                                *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label
+                                                >Nama Lengkap Pegawai *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label>Nip Pegawai *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label>Jabatan Pegawai *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 2"
+                                        >
+                                            <label>Kelas *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="form.tempatKegiatan"
+                                            />
+                                        </div>
+                                        <div
+                                            class="form-group col-md-12"
+                                            v-show="suratId == 1"
+                                        >
+                                            <label for="">Tahun Ajaran *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Gunakan format penulisan 2023/2024"
+                                            />
+                                        </div>
+                                        <div
+                                            class="row col-12"
+                                            v-show="suratId == 3"
+                                        >
+                                            <div class="col-md-0">
+                                                <div class="col-sm-6 mb-3">
+                                                    <div
+                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
+                                                    >
+                                                        <i
+                                                            class="fa fa-folder"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        <label
+                                                            for=""
+                                                            class="px-1 mb-0"
+                                                            >Menugaskan,kepada:</label
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Nama *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.namaKegiatan"
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Nip*</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.tempatKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Pangkat *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.hariKegiatan"
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-6"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Golongan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Jabatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Jurusan *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="row col-12"
+                                            v-show="suratId == 3"
+                                        >
+                                            <div class="col-md-0">
+                                                <div class="col-sm-6 mb-3">
+                                                    <div
+                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
+                                                    >
+                                                        <i
+                                                            class="fa fa-folder"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        <label
+                                                            for=""
+                                                            class="px-1 mb-0"
+                                                            >Ditugaskan
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 3"
+                                        >
+                                            <label>Nama Industri *</label>
+                                            <input
+                                                class="form-control"
+                                                type="text"
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 3"
+                                        >
+                                            <label>Alamat Industri *</label>
+                                            <input
+                                                class="form-control"
+                                                type="text"
+                                            />
+                                        </div>
                                         <div class="row col-12">
                                             <div class="col-md-0">
                                                 <div class="col-sm-6 mb-3">
@@ -392,6 +604,7 @@ export default {
                                             </div>
                                         </div>
                                     </div>
+
                                     <div>
                                         <div class="form-row">
                                             <div class="col-md-6 mb-3">
@@ -448,30 +661,10 @@ export default {
                                                     "
                                                 />
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label
-                                                    >Waktu Kegiatan (Akhir)
-                                                    *</label
-                                                >
-                                                <input
-                                                    type="time"
-                                                    class="form-control"
-                                                    v-model="
-                                                        form.waktuSelesaiKegiatan
-                                                    "
-                                                />
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Catatan *</label>
-                                                <input
-                                                    class="form-control"
-                                                    type="text"
-                                                    v-model="
-                                                        form.ctatanKegiatan
-                                                    "
-                                                />
-                                            </div>
-                                            <div class="col-md-6 mb-3">
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 2"
+                                            >
                                                 <label>Masalah *</label>
                                                 <input
                                                     class="form-control"
@@ -481,9 +674,22 @@ export default {
                                                     "
                                                 />
                                             </div>
+                                            <!-- <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 2"
+                                            >
+                                                <label>Catatan *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.ctatanKegiatan
+                                                    "
+                                                />
+                                            </div> -->
                                         </div>
                                     </div>
-                                    <!-- <div class="row mt-3">
+                                    <div class="row mt-3">
                                         <div class="col-sm-6 mb-3">
                                             <div
                                                 class="d-flex px-12 align-items-center margin-100px-bottom"
@@ -493,14 +699,15 @@ export default {
                                                     aria-hidden="true"
                                                 ></i>
                                                 <label for="" class="px-1 mb-0"
-                                                    >Pengaju Surat :</label
+                                                    >Pemohon Pengajuan Surat
+                                                    :</label
                                                 >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label>Nama Pengaju *</label>
+                                            <label>Nama Lengkap *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -508,7 +715,7 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>Nip Pengaju *</label>
+                                            <label>Nip *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -516,7 +723,7 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>Jabatan Pengaju *</label>
+                                            <label>Jabatan *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -524,32 +731,14 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>Pangkat Pengaju *</label>
+                                            <label>No Hp *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
                                                 required
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>gol Pengaju *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >No Handphone Pengaju *</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                    </div> -->
+                                    </div>
                                     <div class="row">
                                         <div class="col-6 col-md-3 mt-3">
                                             <button

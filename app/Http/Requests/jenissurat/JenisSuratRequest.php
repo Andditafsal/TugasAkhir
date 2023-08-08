@@ -31,6 +31,7 @@ class JenisSuratRequest extends FormRequest
             'name' => 'required',
 
 
+
         ];
     }
 

@@ -28,5 +28,6 @@ class JenisSurat extends Model
         'name',
         'id_jenis_surat',
 
+
     ];
 }

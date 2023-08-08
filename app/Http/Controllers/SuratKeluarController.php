@@ -14,12 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SuratKeluarExport;
+use Illuminate\Support\Facades\Storage;
 
 class SuratKeluarController extends Controller
 {
     protected $suratkeluar, $jenissurat;
 
-    public function __construct(SuratKeluar $suratkeluar, JenisSurat $jenissurat)
+    public function __construct(SuratKeluar $suratkeluar, JenisSurat $jenissurat,)
     {
         $this->suratkeluar = $suratkeluar;
         $this->jenissurat = $jenissurat;
@@ -84,11 +85,11 @@ class SuratKeluarController extends Controller
      */
     public function show(SuratKeluar $suratkeluar)
     {
-        if (auth()->user()->id_role == 3 && $suratkeluar->status == 0) {
-            $suratkeluar->update([
-                "status" => 1
-            ]);
-        }
+        // if (auth()->user()->id_role == 3 && $suratkeluar->status == 0) {
+        //     $suratkeluar->update([
+        //         "status" => 1
+        //     ]);
+        // }
 
         return new SuratKeluarDetail($suratkeluar);
     }
@@ -99,21 +100,19 @@ class SuratKeluarController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-        // $suratkeluar = $this->suratKeluar->findOrFail($id);
-
-        // return DB::transaction(
-        //     function () use ($request, $suratkeluar) {
-
-        //         return $this->suratKeluar->update($request->all());
-        //     }
-        // );
 
         $suratkeluar = $this->suratkeluar->findOrFail($id);
+        if ($request->hasFile('lampiran_surat')) {
+            if ($suratkeluar->lampiran) {
+                $path = str_replace(url('storage') . '/', '', $suratkeluar->lampiran);
+                Storage::delete($path);
+            }
+            $file = $request->file('lampiran_surat')->store('lampiran');
 
-        //return $this->suratmasuk->update($request->all());
-
-
-
+            $request->merge([
+                'lampiran' => $file
+            ]);
+        }
         return DB::transaction(function () use ($request, $suratkeluar) {
             return $suratkeluar->update($request->all());
         });

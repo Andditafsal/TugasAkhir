@@ -28,11 +28,12 @@ class UpdateRequest extends FormRequest
 
             // 'dokumen_surat' => 'required|file|mimes:doc,pdf,docx|max:2048',
 
-            'jenis_surat_id' => 'required',
-            'perihal' => 'required',
+            'jenis_surat_id' => '',
+            'perihal' => '',
             'lampiran' => 'file|mimes:pdf|max:2048',
-            'kepada' => 'required',
-            'tanggal_surat' => 'required',
+            'kepada' => '',
+            'tanggal_surat' => '',
+            'nama_kegitan' => '',
             'hari_kegiatan' => '',
             'tanggal_kegiatan' => '',
             'waktu_mulai_kegiatan' => '',
@@ -40,6 +41,15 @@ class UpdateRequest extends FormRequest
             'tempat_kegiatan' => '',
             'catatan_kegiatan' => '',
             'masalah_kegiatan' => '',
+            'nama_industri' => '',
+            'alamat_industri' => '',
+            'kelas_siswa' => '',
+            'jurusan_siswa' => '',
+            'tahun_ajaran' => '',
+            'nip' => '',
+            'pangkat'  => '',
+            'jabatan'  => '',
+            'gol'  => '',
         ];
     }
     protected function failedValidation(Validator $validator)
