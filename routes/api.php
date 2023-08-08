@@ -11,6 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\PemohonController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
@@ -38,6 +40,30 @@ use Illuminate\Support\Facades\Route;
 
 // //Search
 // Route::get('/search', 'SearchController@search');
+
+//Router Pemohon
+Route::prefix('pemohon')->group(function () {
+    Route::get('/', [PemohonController::class, 'index']);
+    Route::post('/', [PemohonController::class, 'store']);
+    Route::get('/{pemohon}', [PemohonController::class, 'show']);
+
+    Route::delete('/{pemohon}', [PemohonController::class, 'destroy']);
+});
+
+//qrcode
+Route::prefix('qrcode')->group(function () {
+    Route::get('/', [DataController::class, 'index']);
+    Route::post('/', [DataController::class, 'store']);
+});
+
+
+//api dashboard
+Route::prefix('dashboard')->middleware("auth:sanctum")->group(function () {
+    Route::get('/', [ProfileController::class, 'jml_pengguna']);
+
+    //
+});
+
 
 //profile
 Route::prefix('profile')->middleware("auth:sanctum")->group(function () {
@@ -73,7 +99,7 @@ Route::prefix('arsipsurat')->group(function () {
 });
 
 //Router Jenis Surat
-Route::prefix('jenissurat')->group(function () {
+Route::prefix('jenissurat')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [JenisSuratController::class, 'index']);
     Route::post('/', [JenisSuratController::class, 'store']);
     Route::get('/{jenissurat}', [JenisSuratController::class, 'show']);
