@@ -28,7 +28,9 @@ export default [{
         meta: {
             requiresAuth: true,
         },
+        props: true,
     },
+
     {
         path: "/suratmasuk/:id/views",
         name: "ViewsSuratMasuk",

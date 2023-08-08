@@ -13,6 +13,16 @@ export default [{
         meta: {
             requiresAuth: true,
         },
+        props: true,
+    },
+    {
+        path: "/suratkeluar/:id/edit",
+        name: "Edit Surat Keluar",
+        component: () => import("../../pages/suratkeluar/Edit.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+        props: true,
     },
     {
         path: "/cetak_surat/:id",
