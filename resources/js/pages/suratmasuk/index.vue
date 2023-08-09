@@ -332,7 +332,7 @@ export default {
                                                 v-html="suratmasuks.alamatSurat"
                                             ></td>
                                             <td
-                                                v-html="suratmasuks.nomorMasuk"
+                                                v-html="suratmasuks.nomorSurat"
                                             ></td>
                                             <td
                                                 v-html="
@@ -340,9 +340,7 @@ export default {
                                                 "
                                             ></td>
                                             <td
-                                                v-html="
-                                                    suratmasuks.perihalMasuk
-                                                "
+                                                v-html="suratmasuks.perihal"
                                             ></td>
                                             <td class="coba">
                                                 <button

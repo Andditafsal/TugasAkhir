@@ -24,9 +24,9 @@ class SuratMasuk extends Model
     protected  $fillable = [
         'tanggal',
         'alamat_surat',
-        'perihal_masuk',
+        'perihal',
         'tanggal_surat',
-        'nomor_masuk',
+        'nomor_surat',
         'dokumen',
         'diajukan',
         'status',

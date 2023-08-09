@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\AuthenticatedController;
 use App\Http\Controllers\CetakSuratController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
@@ -158,6 +159,10 @@ Route::prefix('auth')->group(function () {
 
         Route::post('logout', LogoutController::class);
     });
+});
+
+Route::prefix("count")->group(function () {
+    Route::get("/surat_masuk", [DashboardController::class, "surat_masuk"]);
 });
 
 

@@ -6,8 +6,8 @@ export default {
         return {
             form: {
                 alamatSurat: "",
-                nomorMasuk: "",
-                perihalMasuk: "",
+                nomorSurat: "",
+                perihal: "",
                 tanggal: "",
                 tanggalSurat: "",
                 dokumenSurat: "",
@@ -26,8 +26,8 @@ export default {
             this.form = {
                 tanggal: suratmasuks.tanggal,
                 alamatSurat: suratmasuks.alamatSurat,
-                nomorMasuk: suratmasuks.nomorMasuk,
-                perihalMasuk: suratmasuks.perihalMasuk,
+                nomorSurat: suratmasuks.nomorSurat,
+                perihal: suratmasuks.perihal,
                 tanggalSurat: suratmasuks.tanggalSurat,
             };
             this.showdokumenSurat = suratmasuks.dokumen;
@@ -50,8 +50,8 @@ export default {
             let formData = new FormData();
             formData.append("_method", "put");
             formData.append("alamat_surat", this.form.alamatSurat);
-            formData.append("nomor_masuk", this.form.nomorMasuk);
-            formData.append("perihal_masuk", this.form.perihalMasuk);
+            formData.append("nomor_surat", this.form.nomorSurat);
+            formData.append("perihal", this.form.perihalMasuk);
             formData.append("tanggal", this.form.tanggal);
             formData.append("tanggal_surat", this.form.tanggalSurat);
             formData.append("dokumen_surat", this.form.dokumenSurat);
@@ -183,10 +183,10 @@ export default {
                                                 type="string"
                                                 class="form-control"
                                                 id="nomorSurat"
-                                                v-model="form.nomorMasuk"
+                                                v-model="form.nomorSurat"
                                                 :class="{
                                                     'is-invalid':
-                                                        error.nomorMasuk,
+                                                        error.nomorSurat,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -194,7 +194,7 @@ export default {
                                                 class="invalid-feedback"
                                                 v-for="(
                                                     erorr, index
-                                                ) in error.nomorMasuk"
+                                                ) in error.nomorSurat"
                                                 :key="index"
                                             >
                                                 {{ erorr }}
@@ -253,10 +253,9 @@ export default {
                                                 type=""
                                                 class="form-control"
                                                 id="perihalMasuk"
-                                                v-model="form.perihalMasuk"
+                                                v-model="form.perihal"
                                                 :class="{
-                                                    'is-invalid':
-                                                        error.perihalMasuk,
+                                                    'is-invalid': error.perihal,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -264,7 +263,7 @@ export default {
                                                 class="invalid-feedback"
                                                 v-for="(
                                                     erorr, index
-                                                ) in error.perihalMasuk"
+                                                ) in error.perihal"
                                                 :key="index"
                                             >
                                                 {{ erorr }}
@@ -272,16 +271,18 @@ export default {
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="">Upload Surat *</label>
+                                            <label for=""
+                                                >Upload Surat Jika Perlu*</label
+                                            >
                                             <input
                                                 type="file"
                                                 class="form-control"
                                                 id="upload dokumen"
                                                 @change="uploadDokumen"
                                                 :class="{
-                                                'is-invalid': dokumenSurat,
-                                            }"
-                                            :disabled="isDisabled"
+                                                    'is-invalid': dokumenSurat,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
                                         </div>
                                     </div>

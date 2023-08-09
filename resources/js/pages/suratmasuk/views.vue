@@ -60,7 +60,6 @@ export default {
 };
 </script>
 <template>
-
     <div class="card-headercoba">
         <div class="mb-3 col-12 col-md-8 d-flex align-items-center mb-md-1">
             <router-link
@@ -127,12 +126,12 @@ export default {
                                 <tr>
                                     <td>Nomor Surat</td>
                                     <td>:</td>
-                                    <td>{{ suratmasuk.nomorMasuk }}</td>
+                                    <td>{{ suratmasuk.nomorSurat }}</td>
                                 </tr>
                                 <tr>
                                     <td>Perihal</td>
                                     <td>:</td>
-                                    <td>{{ suratmasuk.perihalMasuk }}</td>
+                                    <td>{{ suratmasuk.perihal }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -142,7 +141,6 @@ export default {
         </div>
 
         <div
-
             class="modal fade"
             id="disposisiModal"
             tabindex="-1"

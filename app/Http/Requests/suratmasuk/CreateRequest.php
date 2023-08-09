@@ -27,9 +27,9 @@ class CreateRequest extends FormRequest
         return [
             'tanggal' => 'required',
             'alamat_surat' => 'required',
-            'perihal_masuk' => 'required',
+            'perihal' => 'required',
             'tanggal_surat' => 'required',
-            'nomor_masuk' => 'required',
+            'nomor_surat' => 'required',
             'diajukan' => 'required',
             'dokumen_surat' => 'required|file|mimes:pdf|max:2048',
         ];

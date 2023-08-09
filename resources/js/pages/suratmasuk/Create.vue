@@ -8,8 +8,8 @@ export default {
         return {
             form: {
                 alamatSurat: "",
-                nomorMasuk: "",
-                perihalMasuk: "",
+                nomorSurat: "",
+                perihal: "",
                 tanggal: "",
                 tanggalSurat: "",
                 dokumenSurat: "",
@@ -28,8 +28,8 @@ export default {
             let formData = new FormData();
 
             formData.append("alamat_surat", this.form.alamatSurat);
-            formData.append("nomor_masuk", this.form.nomorMasuk);
-            formData.append("perihal_masuk", this.form.perihalMasuk);
+            formData.append("nomor_surat", this.form.nomorSurat);
+            formData.append("perihal", this.form.perihal);
             formData.append("tanggal", this.form.tanggal);
             formData.append("tanggal_surat", this.form.tanggalSurat);
             formData.append("diajukan", this.form.diajukan);
@@ -178,10 +178,10 @@ export default {
                                                 type="string"
                                                 class="form-control"
                                                 id="nomorSurat"
-                                                v-model="form.nomorMasuk"
+                                                v-model="form.nomorSurat"
                                                 :class="{
                                                     'is-invalid':
-                                                        error.nomorMasuk,
+                                                        error.nomorSurat,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -189,7 +189,7 @@ export default {
                                                 class="invalid-feedback"
                                                 v-for="(
                                                     erorr, index
-                                                ) in error.nomorMasuk"
+                                                ) in error.nomorSurat"
                                                 :key="index"
                                             >
                                                 {{ erorr }}
@@ -286,9 +286,9 @@ export default {
                                             class="form-control"
                                             id="alamat"
                                             rows="3"
-                                            v-model="form.perihalMasuk"
+                                            v-model="form.perihal"
                                             :class="{
-                                                'is-invalid': perihalMasuk,
+                                                'is-invalid': perihal,
                                             }"
                                             :disabled="isDisabled"
                                         ></textarea>
@@ -296,7 +296,7 @@ export default {
                                             class="invalid-feedback"
                                             v-for="(
                                                 erorr, index
-                                            ) in error.perihalMasuk"
+                                            ) in error.perihal"
                                             :key="index"
                                         >
                                             {{ erorr }}
