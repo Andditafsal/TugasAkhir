@@ -13,12 +13,23 @@ export default {
                 kepada: "",
                 tanggalSurat: "",
                 namaKegiatan: "",
+                hariKegiatan: "",
                 tanggalKegiatan: "",
                 waktuMulaiKegiatan: "",
                 waktuSelesaiKegiatan: "",
                 tempatKegiatan: "",
-                ctatanKegiatan: "",
+                catatanKegiatan: "",
                 masalahKegiatan: "",
+                namaIndustri: "",
+                alamatIndustri: "",
+                kelasSiswa: "",
+                jurusanSiswa: "",
+                tahunAjaran: "",
+                nip: "",
+                pangkat: "",
+                jabatan: "",
+                gol: "",
+                namaOrtu: "",
             },
             suratId: 1,
             jenissurat: [],
@@ -57,7 +68,6 @@ export default {
 
             formData.append("jenis_surat_id", this.datacheck.id);
             formData.append("perihal", this.form.perihal);
-
             formData.append("kepada", this.form.kepada);
             formData.append("tanggal_surat", this.form.tanggalSurat);
             formData.append("nama_kegiatan", this.form.namaKegiatan);
@@ -71,9 +81,19 @@ export default {
                 "waktu_selesai_kegitan",
                 this.form.waktuSelesaiKegiatan
             );
-            formData.append("tempat_kegiatan", this.form.kepada);
-            formData.append("catatan_kegiatan", this.form.ctatanKegiatan);
+            formData.append("tempat_kegiatan", this.form.tempatKegiatan);
+            formData.append("catatan_kegiatan", this.form.catatanKegiatan);
             formData.append("masalah_Kegiatan", this.form.masalahKegiatan);
+            formData.append("nama_industri", this.form.namaIndustri);
+            formData.append("alamat_industri", this.form.alamatIndustri);
+            formData.append("jurusan_siswa", this.form.jurusanSiswa);
+            formData.append("tahun_ajaran", this.form.tahunAjaran);
+            formData.append("nip", this.form.nip);
+            formData.append("pangkat", this.form.pangkat);
+            formData.append("jabatan", this.form.jabatan);
+            formData.append("gol", this.form.gol);
+            formData.append("nama_ortu", this.form.namaOrtu);
+
             if (this.form.lampiranSurat) {
                 formData.append("lampiran_surat", this.form.lampiranSurat);
             }
@@ -154,6 +174,10 @@ export default {
 };
 </script>
 <template>
+    <div v-for="data in test" :key="data.id">
+        <img :src="convert(data.qr)" />
+    </div>
+
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -388,6 +412,12 @@ export default {
                                                 *</label
                                             >
                                             <input
+                                                v-model="form.namaOrtu"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.namaOrtu,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
                                                 class="form-control"
                                                 required
@@ -404,6 +434,11 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.kepada"
+                                                :class="{
+                                                    'is-invalid': error.kepada,
+                                                }"
+                                                :disabled="isDisabled"
                                             />
                                         </div>
                                         <div
@@ -412,6 +447,11 @@ export default {
                                         >
                                             <label>Nip Pegawai *</label>
                                             <input
+                                                v-model="form.nip"
+                                                :class="{
+                                                    'is-invalid': error.nip,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
                                                 class="form-control"
                                                 required
@@ -423,6 +463,11 @@ export default {
                                         >
                                             <label>Jabatan Pegawai *</label>
                                             <input
+                                                v-model="form.jabatan"
+                                                :class="{
+                                                    'is-invalid': error.jabatan,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
                                                 class="form-control"
                                                 required
@@ -434,9 +479,15 @@ export default {
                                         >
                                             <label>Kelas *</label>
                                             <input
+                                                v-model="form.kelasSiswa"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.kelasSiswa,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="form.tempatKegiatan"
+                                                required
                                             />
                                         </div>
                                         <div
@@ -445,9 +496,16 @@ export default {
                                         >
                                             <label for="">Tahun Ajaran *</label>
                                             <input
+                                                placeholder="Gunakan format penulisan 2023/2024"
+                                                v-model="form.tahunAjaran"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tahunAjaran,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Gunakan format penulisan 2023/2024"
+                                                required
                                             />
                                         </div>
                                         <div
@@ -479,10 +537,15 @@ export default {
                                             >
                                                 <label>Nama *</label>
                                                 <input
+                                                    v-model="form.kepada"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.kepada,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
                                                     class="form-control"
                                                     required
-                                                    v-model="form.namaKegiatan"
                                                 />
                                             </div>
                                             <div
@@ -491,11 +554,14 @@ export default {
                                             >
                                                 <label>Nip*</label>
                                                 <input
+                                                    v-model="form.nip"
+                                                    :class="{
+                                                        'is-invalid': error.nip,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
                                                     class="form-control"
-                                                    v-model="
-                                                        form.tempatKegiatan
-                                                    "
+                                                    required
                                                 />
                                             </div>
                                             <div
@@ -504,10 +570,15 @@ export default {
                                             >
                                                 <label>Pangkat *</label>
                                                 <input
+                                                    v-model="form.pangkat"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.kepada,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
                                                     class="form-control"
                                                     required
-                                                    v-model="form.hariKegiatan"
                                                 />
                                             </div>
                                             <div
@@ -516,6 +587,11 @@ export default {
                                             >
                                                 <label>Golongan *</label>
                                                 <input
+                                                    v-model="form.gol"
+                                                    :class="{
+                                                        'is-invalid': error.gol,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
                                                     class="form-control"
                                                     required
@@ -527,8 +603,15 @@ export default {
                                             >
                                                 <label>Jabatan *</label>
                                                 <input
+                                                    v-model="form.jabatan"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.jabatan,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
                                                     class="form-control"
+                                                    required
                                                 />
                                             </div>
                                             <div
@@ -537,8 +620,15 @@ export default {
                                             >
                                                 <label>Jurusan *</label>
                                                 <input
-                                                    class="form-control"
+                                                    v-model="form.jurusanSiswa"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.jurusanSiswa,
+                                                    }"
+                                                    :disabled="isDisabled"
                                                     type="text"
+                                                    class="form-control"
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -570,8 +660,15 @@ export default {
                                         >
                                             <label>Nama Industri *</label>
                                             <input
-                                                class="form-control"
+                                                v-model="form.namaIndustri"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.namaIndustri,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
+                                                class="form-control"
+                                                required
                                             />
                                         </div>
                                         <div
@@ -580,8 +677,15 @@ export default {
                                         >
                                             <label>Alamat Industri *</label>
                                             <input
-                                                class="form-control"
+                                                v-model="form.alamatIndustri"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.alamatIndustri,
+                                                }"
+                                                :disabled="isDisabled"
                                                 type="text"
+                                                class="form-control"
+                                                required
                                             />
                                         </div>
                                         <div class="row col-12">
@@ -740,7 +844,7 @@ export default {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6 col-md-3 mt-3">
+                                        <div class="col-6 col-md-2 mt-3">
                                             <button
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
@@ -749,7 +853,7 @@ export default {
                                                 Simpan
                                             </button>
                                         </div>
-                                        <div class="col-6 col-md-3 mt-3">
+                                        <div class="col-6 col-md-2 mt-3">
                                             <router-link
                                                 :to="{ name: 'SuratKeluar' }"
                                                 type="submit"

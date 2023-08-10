@@ -6,18 +6,25 @@ use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Data;
 
-class GenerateController extends Controller
+class DataController extends Controller
 {
     public function index()
     {
         $data = Data::all();
-        return view('welcome', ['data' => $data]);
+
+        return response()->json($data);
+        // return view('welcome', ['data' => $data]);
     }
     public function store(Request $request)
     {
         $data = new Data;
         $data->name = $request->name;
+        $data->qr = QrCode::size(200)->generate($request->name);
         $data->save();
+
+
+
+        //$data->update();
         return back();
     }
     public function generate($id)

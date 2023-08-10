@@ -32,6 +32,7 @@ class CreateRequest extends FormRequest
             'tahun_surat' => 'required',
             'name' => 'required',
 
+
         ];
     }
 

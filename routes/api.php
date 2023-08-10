@@ -42,6 +42,15 @@ use Illuminate\Support\Facades\Route;
 // //Search
 // Route::get('/search', 'SearchController@search');
 
+
+Route::prefix("count")->group(function () {
+    Route::get("/surat_masuk", [DashboardController::class, "surat_masuk"]);
+    Route::get("/surat_keluar", [DashboardController::class, "surat_keluar"]);
+    Route::get("user", [DashboardController::class, "user"]);
+    Route::get('all', [DashboardController::class, 'dashboard']);
+});
+
+
 //Router Pemohon
 Route::prefix('pemohon')->group(function () {
     Route::get('/', [PemohonController::class, 'index']);
@@ -59,11 +68,11 @@ Route::prefix('qrcode')->group(function () {
 
 
 //api dashboard
-Route::prefix('dashboard')->middleware("auth:sanctum")->group(function () {
-    Route::get('/', [ProfileController::class, 'jml_pengguna']);
+// Route::prefix('dashboard')->middleware("auth:sanctum")->group(function () {
+//     Route::get('/', [ProfileController::class, 'jml_pengguna']);
 
-    //
-});
+//     //
+// });
 
 
 //profile

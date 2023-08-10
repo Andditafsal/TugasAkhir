@@ -40,11 +40,11 @@ export default {
             <div class="mb-3 col-7 d-flex align-items-center mb-md-1">
                 <router-link
                     to="/user"
-                    class="btn icon icon-shape bg-red text-white rounded-circle"
+                    class="btn icon icon-shape bg-red text-white rounded-circle hitam"
                 >
                     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 </router-link>
-                <h5 class="mb-0 mr-0 text-gray-900 px-2">Pengguna</h5>
+                <h5 class="mb-0 mr-0 text-gray-900 px-2">Detail Pengguna</h5>
             </div>
         </div>
         <!-- Content -->
@@ -191,6 +191,16 @@ export default {
     border-color: #303137;
 }
 .btn-primary:hover {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
+.hitam {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
+.hitam:hover {
     background-color: #303137 !important;
     color: #fefefe;
     border-color: #303137;

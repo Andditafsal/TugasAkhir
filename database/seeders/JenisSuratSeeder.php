@@ -18,6 +18,7 @@ class JenisSuratSeeder extends Seeder
             'kode_sekolah' => 'SMKN2-CadisdikWil.IXSMKN2-CadisdikWil.IX',
             'tahun_surat' => '2023',
             'name' => 'Surat Undangan Persiapan Audit Internal ',
+
         ]);
         JenisSurat::create([
             'kode_surat' => '005',

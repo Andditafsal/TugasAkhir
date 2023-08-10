@@ -28,7 +28,7 @@ class SuratMasukController extends Controller
      */
     public function index(Request $request)
     {
-        // $suratmasuks = $this->suratmasuk->paginate($request->per_page);
+
 
         $query = $this->suratmasuk->query();
 
@@ -37,13 +37,16 @@ class SuratMasukController extends Controller
                 ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
         }
 
+        // $query->with("disposisi.users");
+        // $suratmasuks = $query->where("status", "1")->paginate($request->per_page);
+
+
+        $query->with("disposisi");
         $query->with("disposisi.users");
         $suratmasuks = $query->paginate($request->per_page);
-
+        //return 'berhasil';
 
         return new SuratMasukCollection($suratmasuks);
-
-        ////return 'berhasil';
     }
 
     //export excel

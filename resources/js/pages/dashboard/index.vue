@@ -1,4 +1,39 @@
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            all: [],
+        };
+    },
+    created() {
+        //this.SuratMasukCount();
+        //this.SuratKeluarCount();
+        this.UserCount();
+    },
+    methods: {
+        UserCount() {
+            this.$store
+                .dispatch("getData", ["count/all"])
+                .then((response) => {
+                    this.all = response.data;
+                    //console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            // .get("/surat_masuk")
+            // .then((response) => {
+            //     // this.count = response.data.count;
+            //     console.log(response.data);
+            // })
+            // .catch((error) => {
+            //     console.error(error);
+            // });
+        },
+    },
+};
+</script>
 <template>
     <!-- Start Component -->
     <div class="container-fluid">
@@ -31,8 +66,10 @@
                                 </div>
                                 <div
                                     class="h5 mb-0 font-weight-bold text-gray-800"
+                                    v-for="data in all"
+                                    :key="data"
                                 >
-                                    20
+                                    {{ data.suratMasuk }}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -58,8 +95,10 @@
                                 </div>
                                 <div
                                     class="h5 mb-0 font-weight-bold text-gray-800"
+                                    v-for="data in all"
+                                    :key="data"
                                 >
-                                    0
+                                    {{ data.suratKeluar }}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -81,39 +120,16 @@
                                 <div
                                     class="text-xs font-weight-bold text-success text-uppercase mb-1"
                                 >
-                                    Arsip Surat
-                                </div>
-                                <div
-                                    class="h5 mb-0 font-weight-bold text-gray-800"
-                                >
-                                    0
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i
-                                    class="fas fa-archive fa-2x text-gray-300"
-                                ></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div
-                                    class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-                                >
                                     Pengguna
                                 </div>
                                 <div
                                     class="h5 mb-0 font-weight-bold text-gray-800"
+                                    v-for="data in all"
+                                    :key="data"
                                 >
-                                    18
+                                    <p>
+                                        {{ data.user }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -123,9 +139,12 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Pending Requests Card Example -->
         </div>
-        <div class="card-body"></div>
-        <!-- chart -->
     </div>
+
+    <!-- chart -->
+
     <!-- end Component -->
 </template>

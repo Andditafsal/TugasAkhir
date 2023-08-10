@@ -11,12 +11,23 @@ export default {
                 kepada: "",
                 tanggalSurat: "",
                 namaKegiatan: "",
+                hariKegiatan: "",
                 tanggalKegiatan: "",
                 waktuMulaiKegiatan: "",
                 waktuSelesaiKegiatan: "",
                 tempatKegiatan: "",
-                ctatanKegiatan: "",
+                catatanKegiatan: "",
                 masalahKegiatan: "",
+                namaIndustri: "",
+                alamatIndustri: "",
+                kelasSiswa: "",
+                jurusanSiswa: "",
+                tahunAjaran: "",
+                nip: "",
+                pangkat: "",
+                jabatan: "",
+                gol: "",
+                namaOrtu: "",
             },
             error: {},
             isDisabled: false,
@@ -25,7 +36,7 @@ export default {
         };
     },
     created() {
-        this.suratKeluar();
+        this.getsuratKeluar();
     },
     methods: {
         setForm(suratkeluars) {
@@ -42,18 +53,24 @@ export default {
                 waktu_selesai_kegiatan: suratkeluars.waktuSelesaiKegiatan,
                 tempat_kegiatan: suratkeluars.tempatKegiatan,
                 catatan_kegiatan: suratkeluars.catatanKegiatan,
-
                 masalah_kegiatan: suratkeluars.masalahKegiatan,
+                nama_industri: suratkeluars.namaIndustri,
+                alamat_industri: suratkeluars.alamatIndustri,
+                jurusan_siswa: suratkeluars.jurusanSiswa,
+                tahun_ajaran: suratkeluars.tahunAjaran,
+                nip: suratkeluars.nip,
+                pangkat: suratkeluars.pangkat,
+                jabatan: suratkeluars.jabatan,
+                gol: suratkeluars.gol,
+                nama_ortu: suratkeluars.namaOrtu,
             };
         },
-        suratKeluar() {
-            let type = "getData";
-            let url = [`suratkeluar/${this.id}`, {}];
+        getsuratKeluar() {
             this.$store
-                .dispatch(type, url)
+                .dispatch("showData", ["suratkeluar", this.id])
                 .then((response) => {
                     console.log(response);
-                    this.form = response.data;
+                    this.setForm = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -75,7 +92,6 @@ export default {
             formData.append("_method", "put");
             formData.append("jenis_surat_id", this.datacheck.id);
             formData.append("perihal", this.form.perihal);
-
             formData.append("kepada", this.form.kepada);
             formData.append("tanggal_surat", this.form.tanggalSurat);
             formData.append("nama_kegiatan", this.form.namaKegiatan);
@@ -89,9 +105,18 @@ export default {
                 "waktu_selesai_kegitan",
                 this.form.waktuSelesaiKegiatan
             );
-            formData.append("tempat_kegiatan", this.form.kepada);
+            formData.append("tempat_kegiatan", this.form.tempatKegiatan);
             formData.append("catatan_kegiatan", this.form.catatanKegiatan);
             formData.append("masalah_Kegiatan", this.form.masalahKegiatan);
+            formData.append("nama_industri", this.form.namaIndustri);
+            formData.append("alamat_industri", this.form.alamatIndustri);
+            formData.append("jurusan_siswa", this.form.jurusanSiswa);
+            formData.append("tahun_ajaran", this.form.tahunAjaran);
+            formData.append("nip", this.form.nip);
+            formData.append("pangkat", this.form.pangkat);
+            formData.append("jabatan", this.form.jabatan);
+            formData.append("gol", this.form.gol);
+            formData.append("nama_ortu", this.form.namaOrtu);
             if (this.form.lampiranSurat) {
                 formData.append("lampiran_surat", this.form.lampiranSurat);
             }
@@ -134,7 +159,6 @@ export default {
 </script>
 
 <template>
-    {{ form }}
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -182,13 +206,20 @@ export default {
                                                 @change="chooseSurat($event)"
                                             >
                                                 <option
+                                                    value=""
+                                                    disabled
+                                                    selected
+                                                >
+                                                    Pilih Jenis Surat Yang
+                                                    Dibuat
+                                                </option>
+                                                <option
                                                     v-for="(
                                                         surat, index
                                                     ) in jenissurat"
                                                     :key="index"
                                                     v-html="surat.name"
                                                     :value="surat.id"
-                                                    @click="lihat(surat.id)"
                                                 ></option>
                                             </select>
                                         </div>
@@ -264,11 +295,10 @@ export default {
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="">Tahun Ajaran*</label>
+                                            <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                id="name"
                                                 :value="datacheck.tahunSurat"
                                                 :class="{
                                                     'is-invalid':
@@ -292,7 +322,6 @@ export default {
                                             >
                                         </div>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for=""
@@ -343,6 +372,292 @@ export default {
                                                 @change="uploadDokumen"
                                             />
                                         </div>
+
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 2"
+                                        >
+                                            <label
+                                                >Nama Orang Tua Siswa atau Wali
+                                                *</label
+                                            >
+                                            <input
+                                                v-model="form.namaOrtu"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.namaOrtu,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label
+                                                >Nama Lengkap Pegawai *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.kepada"
+                                                :class="{
+                                                    'is-invalid': error.kepada,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label>Nip Pegawai *</label>
+                                            <input
+                                                v-model="form.nip"
+                                                :class="{
+                                                    'is-invalid': error.nip,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 4"
+                                        >
+                                            <label>Jabatan Pegawai *</label>
+                                            <input
+                                                v-model="form.jabatan"
+                                                :class="{
+                                                    'is-invalid': error.jabatan,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 2"
+                                        >
+                                            <label>Kelas *</label>
+                                            <input
+                                                v-model="form.kelasSiswa"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.kelasSiswa,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="form-group col-md-12"
+                                            v-show="suratId == 1"
+                                        >
+                                            <label for="">Tahun Ajaran *</label>
+                                            <input
+                                                placeholder="Gunakan format penulisan 2023/2024"
+                                                v-model="form.tahunAjaran"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tahunAjaran,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="row col-12"
+                                            v-show="suratId == 3"
+                                        >
+                                            <div class="col-md-0">
+                                                <div class="col-sm-6 mb-3">
+                                                    <div
+                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
+                                                    >
+                                                        <i
+                                                            class="fa fa-folder"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        <label
+                                                            for=""
+                                                            class="px-1 mb-0"
+                                                            >Menugaskan,kepada:</label
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Nama *</label>
+                                                <input
+                                                    v-model="form.kepada"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.kepada,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Nip*</label>
+                                                <input
+                                                    v-model="form.nip"
+                                                    :class="{
+                                                        'is-invalid': error.nip,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Pangkat *</label>
+                                                <input
+                                                    v-model="form.pangkat"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.kepada,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-6"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Golongan *</label>
+                                                <input
+                                                    v-model="form.gol"
+                                                    :class="{
+                                                        'is-invalid': error.gol,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Jabatan *</label>
+                                                <input
+                                                    v-model="form.jabatan"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.jabatan,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 3"
+                                            >
+                                                <label>Jurusan *</label>
+                                                <input
+                                                    v-model="form.jurusanSiswa"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.jurusanSiswa,
+                                                    }"
+                                                    :disabled="isDisabled"
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="row col-12"
+                                            v-show="suratId == 3"
+                                        >
+                                            <div class="col-md-0">
+                                                <div class="col-sm-6 mb-3">
+                                                    <div
+                                                        class="d-flex px-12 align-items-center margin-100px-bottom"
+                                                    >
+                                                        <i
+                                                            class="fa fa-folder"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        <label
+                                                            for=""
+                                                            class="px-1 mb-0"
+                                                            >Ditugaskan
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 3"
+                                        >
+                                            <label>Nama Industri *</label>
+                                            <input
+                                                v-model="form.namaIndustri"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.namaIndustri,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                        <div
+                                            class="col-md-6 mb-3"
+                                            v-show="suratId == 3"
+                                        >
+                                            <label>Alamat Industri *</label>
+                                            <input
+                                                v-model="form.alamatIndustri"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.alamatIndustri,
+                                                }"
+                                                :disabled="isDisabled"
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
                                         <div class="row col-12">
                                             <div class="col-md-0">
                                                 <div class="col-sm-6 mb-3">
@@ -363,84 +678,92 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label>Nama Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                                v-model="form.namaKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Tempat Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                v-model="form.tempatKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Hari Kegiatan *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                                v-model="form.hariKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>Tanggal Kegiatan *</label>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                required
-                                                v-model="form.tanggalKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label
-                                                >Waktu Kegiatan (Mulai) *</label
+
+                                    <div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label>Nama Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.namaKegiatan"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Tempat Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.tempatKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Hari Kegiatan *</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="form.hariKegiatan"
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label
+                                                    >Tanggal Kegiatan *</label
+                                                >
+                                                <input
+                                                    type="date"
+                                                    class="form-control"
+                                                    required
+                                                    v-model="
+                                                        form.tanggalKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label
+                                                    >Waktu Kegiatan (Mulai)
+                                                    *</label
+                                                >
+                                                <input
+                                                    type="time"
+                                                    class="form-control"
+                                                    v-model="
+                                                        form.waktuMulaiKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 2"
                                             >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                v-model="
-                                                    form.waktuMulaiKegiatan
-                                                "
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label
-                                                >Waktu Kegiatan (Akhir) *</label
+                                                <label>Masalah *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.masalahKegiatan
+                                                    "
+                                                />
+                                            </div>
+                                            <!-- <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 2"
                                             >
-                                            <input
-                                                type="time"
-                                                class="form-control"
-                                                v-model="
-                                                    form.waktuSelesaiKegiatan
-                                                "
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Catatan *</label>
-                                            <input
-                                                class="form-control"
-                                                type="text"
-                                                v-model="form.ctatanKegiatan"
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Masalah *</label>
-                                            <input
-                                                class="form-control"
-                                                type="text"
-                                                v-model="form.masalahKegiatan"
-                                            />
+                                                <label>Catatan *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.ctatanKegiatan
+                                                    "
+                                                />
+                                            </div> -->
                                         </div>
                                     </div>
-                                    <!-- <div class="row mt-3">
+                                    <div class="row mt-3">
                                         <div class="col-sm-6 mb-3">
                                             <div
                                                 class="d-flex px-12 align-items-center margin-100px-bottom"
@@ -450,14 +773,15 @@ export default {
                                                     aria-hidden="true"
                                                 ></i>
                                                 <label for="" class="px-1 mb-0"
-                                                    >Pengaju Surat :</label
+                                                    >Pemohon Pengajuan Surat
+                                                    :</label
                                                 >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label>Nama Pengaju *</label>
+                                            <label>Nama Lengkap *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -465,7 +789,7 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>Nip Pengaju *</label>
+                                            <label>Nip *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -473,7 +797,7 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label>Jabatan Pengaju *</label>
+                                            <label>Jabatan *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
@@ -481,34 +805,16 @@ export default {
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>Pangkat Pengaju *</label>
+                                            <label>No Hp *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
                                                 required
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label>gol Pengaju *</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label
-                                                >No Handphone Pengaju *</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                required
-                                            />
-                                        </div>
-                                    </div> -->
+                                    </div>
                                     <div class="row">
-                                        <div class="col-6 col-md-3 mt-3">
+                                        <div class="col-6 col-md-2 mt-3">
                                             <button
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
@@ -517,7 +823,7 @@ export default {
                                                 Simpan
                                             </button>
                                         </div>
-                                        <div class="col-6 col-md-3 mt-3">
+                                        <div class="col-6 col-md-2 mt-3">
                                             <router-link
                                                 :to="{ name: 'SuratKeluar' }"
                                                 type="submit"

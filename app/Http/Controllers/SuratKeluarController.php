@@ -90,6 +90,11 @@ class SuratKeluarController extends Controller
         //         "status" => 1
         //     ]);
         // }
+        if (auth()->user()->id_role == 2 && $suratkeluar->status == 0) {
+            $suratkeluar->update([
+                "status" => 1
+            ]);
+        }
 
         return new SuratKeluarDetail($suratkeluar);
     }

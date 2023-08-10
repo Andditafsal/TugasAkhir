@@ -16,7 +16,8 @@
                 <td>{{ $suratmasuk->id }}</td>
                 <td>{{ $suratmasuk->tanggal }}</td>
                 <td>{{ $suratmasuk->alamat_surat }}</td>
-                <td>{{ $suratmasuk->perihal_masuk }}</td>
+                <td>{{ $suratmasuk->nomor_surat }}</td>
+                <td>{{ $suratmasuk->perihal }}</td>
                 <td>{{ $suratmasuk->tanggal_surat }}</td>
                 <td>{{ $suratmasuk->diajukan }}</td>
             </tr>

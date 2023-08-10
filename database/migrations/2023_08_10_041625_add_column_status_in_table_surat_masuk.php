@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_surat_masuk', function (Blueprint $table) {
-            $table->id();
-            $table->string('tanggal');
-            $table->string('alamat_surat');
-            $table->string('tanggal_surat');
-            $table->timestamps();
-            //update
+        Schema::table('table_surat_masuk', function (Blueprint $table) {
+            $table->integer("status")->default(0)->after('nama_ortu');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_surat_masuk');
+        Schema::table('table_surat_masuk', function (Blueprint $table) {
+            //
+        });
     }
 };
