@@ -8,6 +8,7 @@
             <th>Tanggal Surat</th>
             <th>Perihal</th>
             <th>Diajukan Kepada</th>
+            <th>Ket</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
                 <td>{{ $suratmasuk->perihal }}</td>
                 <td>{{ $suratmasuk->tanggal_surat }}</td>
                 <td>{{ $suratmasuk->diajukan }}</td>
+                <td>{{ $suratmasuk->keterangan_surat }}</td>
             </tr>
         @endforeach
     </tbody>

@@ -32,6 +32,7 @@ class CreateRequest extends FormRequest
             'nomor_surat' => 'required',
             'diajukan' => 'required',
             'dokumen_surat' => 'required|file|mimes:pdf|max:2048',
+            'keterangan_surat' => 'required',
         ];
     }
     protected function failedValidation(Validator $validator)

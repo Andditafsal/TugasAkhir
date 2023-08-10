@@ -27,15 +27,15 @@ class UpdateRequest extends FormRequest
     {
         return [
             'email' => [
-                'required',
+                '',
                 'email',
                 Rule::unique('users')->ignore(request('id'))
 
             ],
-            'name' => 'required',
-            'alamat' => 'required',
+            'name' => '',
+            'alamat' => '',
             'no_hp' => '',
-            'jenis_kelamin' => 'required',
+            'jenis_kelamin' => '',
             'password' => 'min:8|max:255',
             'id_role' => '',
             'picture' => 'image|mimes:png,jpg,jpeg'

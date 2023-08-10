@@ -30,6 +30,7 @@ class SuratMasuk extends Model
         'dokumen',
         'diajukan',
         'status',
+        'keterangan_surat'
     ];
     public function getDokumenAttribute($dokumen)
     {

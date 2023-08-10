@@ -30,10 +30,6 @@ Route::get('auth/{any}', [PageController::class, 'auth']); //tampilan methodnya 
 Route::post('import', 'App\Http\Controllers\ExcelController@import')->name('import');
 Route::get('export', 'App\Http\Controllers\ExcelController@export')->name('export');
 
-//qrcode
-Route::get('/', [DataController::class, 'index']);
-Route::post('/', [DataController::class, 'store'])->name('store');
-Route::get('qrcode/{id}', [DataController::class, 'generate'])->name('generate');
 
 
 
