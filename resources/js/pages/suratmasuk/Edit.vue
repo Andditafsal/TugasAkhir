@@ -42,7 +42,8 @@ export default {
             this.$store
                 .dispatch("showData", ["suratmasuk", this.id])
                 .then((response) => {
-                    this.setForm(response.data);
+                    // this.setForm(response.data);
+                    this.form = response.data
                 })
                 .catch((error) => {
                     console.log(error);
@@ -351,6 +352,9 @@ export default {
             </div>
         </div>
     </div>
+    <a :href="form.dokumen" target="_blank">
+        aaa
+    </a>
     <!-- end Component -->
 </template>
 

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('surat_keluar', function (Blueprint $table) {
-            $table->string('nama_ortu')->nullable()->after('gol');
-        });
+        // Schema::table('surat_keluar', function (Blueprint $table) {
+        //     $table->string('')->nullable()->after('gol');
+        // });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('surat_keluar', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('surat_keluar', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

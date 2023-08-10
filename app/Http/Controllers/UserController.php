@@ -47,13 +47,14 @@ class UserController extends Controller
             $file = "";
             if ($request->hasFile('picture')) {
                 $file = $request->file('picture')->store('profile_picture');
+                $profilePictureUrl = url('/storage/' . $file);
             }
 
             $role = Role::where("name", $request->role)->first();
 
             $request->merge([
                 'password' => Hash::make($request->password),
-                'profile_picture' => $file,
+                'profile_picture' => $profilePictureUrl,
                 'id_role' => $role->id
             ]);
 
@@ -82,9 +83,10 @@ class UserController extends Controller
                 Storage::delete($path);
             }
             $file = $request->file('picture')->store('profile_picture');
+            $profilePictureUrl = url('/storage/' . $file); // Construct the URL
 
             $request->merge([
-                'profile_picture' => $file
+                'profile_picture' => $profilePictureUrl
             ]);
         }
 

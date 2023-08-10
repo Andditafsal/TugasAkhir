@@ -291,6 +291,7 @@ export default {
                                             {{ erorr }}
                                         </div>
                                     </div>
+                                    <img :src="form.showPicture">
 
                                     <div class="form-group">
                                         <label for="alamat">Alamat *</label>
@@ -347,6 +348,7 @@ export default {
             </div>
         </div>
     </div>
+    {{ form }}
     <!-- end Component -->
 </template>
 

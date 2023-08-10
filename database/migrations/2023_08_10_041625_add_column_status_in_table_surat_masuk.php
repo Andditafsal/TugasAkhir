@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('table_surat_masuk', function (Blueprint $table) {
-            $table->integer("status")->default(0)->after('nama_ortu');
-        });
+        // Schema::table('table_surat_masuk', function (Blueprint $table) {
+        //     $table->integer("status")->default(0)->after('nama_ortu');
+        // });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('table_surat_masuk', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('table_surat_masuk', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

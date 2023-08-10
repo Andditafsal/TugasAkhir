@@ -66,9 +66,11 @@ class SuratMasukController extends Controller
                 $file = "";
                 if ($request->hasFile('dokumen_surat')) {
                     $file = $request->file('dokumen_surat')->store('dokumen');
+                    $profilePictureUrl = url('/storage/' . $file); // Construct the URL
+
                 }
                 $request->merge([
-                    'dokumen' => $file
+                    'dokumen' => $profilePictureUrl
                 ]);
                 return $this->suratmasuk->create($request->all());
             }
@@ -112,7 +114,7 @@ class SuratMasukController extends Controller
 
         if ($request->hasFile('dokumen_surat')) {
             if ($suratmasuk->dokumen) {
-                $path = str_replace(url('storage') . '/', '', $suratmasuk->dokumen);
+                $path = str_replace(url('storage') . '/storage/', '', $suratmasuk->dokumen);
                 Storage::delete($path);
             }
             $file = $request->file('dokumen_surat')->store('dokumen');
