@@ -25,13 +25,14 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tanggal' => 'required',
-            'alamat_surat' => 'required',
-            'perihal' => 'required',
-            'tanggal_surat' => 'required',
-            'nomor_surat' => 'required',
-            'diajukan' => 'required',
+            'tanggal' => '',
+            'alamat_surat' => '',
+            'perihal' => '',
+            'tanggal_surat' => '',
+            'nomor_surat' => '',
+            'diajukan' => '',
             'dokumen_surat' => 'file|mimes:pdf|max:2048',
+            'keterangan_surat' => '',
         ];
     }
     protected function failedValidation(Validator $validator)

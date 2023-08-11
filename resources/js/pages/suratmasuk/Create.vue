@@ -14,6 +14,7 @@ export default {
                 tanggalSurat: "",
                 dokumenSurat: "",
                 diajukan: "",
+                keteranganSurat: "",
             },
             error: {},
             isDisabled: false,
@@ -33,6 +34,7 @@ export default {
             formData.append("tanggal", this.form.tanggal);
             formData.append("tanggal_surat", this.form.tanggalSurat);
             formData.append("diajukan", this.form.diajukan);
+            formData.append("keterangan_surat", this.form.keteranganSurat);
 
             if (this.form.dokumenSurat) {
                 formData.append("dokumen_surat", this.form.dokumenSurat);
@@ -220,28 +222,6 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group col-md-6">
-                                            <label for="">Nama Surat *</label>
-                                            <input
-                                                type="text"s
-                                                class="form-control"
-                                                id="perihalMasuk"
-                                                v-model="form.nama"
-                                                :class="{
-                                                    'is-invalid': error.nama,
-                                                }"
-                                                :disabled="isDisabled"
-                                            />
-                                            <div
-                                                class="invalid-feedback"
-                                                v-for="(
-                                                    erorr, index
-                                                ) in error.nama"
-                                                :key="index"
-                                            >
-                                                {{ erorr }}
-                                            </div>
-                                        </div> -->
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Diajukan Kepada *</label
@@ -267,7 +247,55 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-
+                                        <div class="form-group col-md-6">
+                                            <label for=""
+                                                >Perihal Surat *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="perihal"
+                                                v-model="form.perihal"
+                                                :class="{
+                                                    'is-invalid': error.perihal,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.perihal"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""
+                                                >Keterangan Surat *</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="perihal"
+                                                v-model="form.keteranganSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.keteranganSurat,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.perihal"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Upload Surat *</label>
                                             <input
@@ -278,31 +306,6 @@ export default {
                                             />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="alamat"
-                                            >Perihal Surat *</label
-                                        >
-                                        <textarea
-                                            class="form-control"
-                                            id="alamat"
-                                            rows="3"
-                                            v-model="form.perihal"
-                                            :class="{
-                                                'is-invalid': perihal,
-                                            }"
-                                            :disabled="isDisabled"
-                                        ></textarea>
-                                        <div
-                                            class="invalid-feedback"
-                                            v-for="(
-                                                erorr, index
-                                            ) in error.perihal"
-                                            :key="index"
-                                        >
-                                            {{ erorr }}
-                                        </div>
-                                    </div>
-
                                     <div class="row">
                                         <div class="col-4 col-md-2">
                                             <button

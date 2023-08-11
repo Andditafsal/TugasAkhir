@@ -133,6 +133,11 @@ export default {
                                     <td>:</td>
                                     <td>{{ suratmasuk.perihal }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Keterangan Surat</td>
+                                    <td>:</td>
+                                    <td>{{ suratmasuk.keteranganSurat }}</td>
+                                </tr>
                             </table>
                         </div>
                     </div>

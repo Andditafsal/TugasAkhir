@@ -36,14 +36,12 @@ export default {
             error: {},
             isDisabled: false,
             datacheck: {},
-            test: [],
         };
     },
     mounted() {
         this.getData();
         this.dateNow();
         this.timeNow();
-        this.getQr();
     },
     methods: {
         // lihatSurat(event) {
@@ -155,29 +153,29 @@ export default {
             this.form.waktuMulaiKegiatan = ms.format("HH:mm");
             this.form.waktuSelesaiKegiatan = ms.format("HH:mm");
         },
-        convert(svgCode) {
-            return `data:image/svg+xml;base64,${btoa(svgCode)}`;
-        },
-        getQr() {
-            let type = "getData";
-            let url = ["qrcode", {}];
-            this.$store
-                .dispatch(type, url)
-                .then((result) => {
-                    this.test = result;
-                    console.log(result);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
+        // convert(svgCode) {
+        //     return `data:image/svg+xml;base64,${btoa(svgCode)}`;
+        // },
+        // getQr() {
+        //     let type = "getData";
+        //     let url = ["qrcode", {}];
+        //     this.$store
+        //         .dispatch(type, url)
+        //         .then((result) => {
+        //             this.test = result;
+        //             console.log(result);
+        //         })
+        //         .catch((err) => {
+        //             console.log(err);
+        //         });
+        // },
     },
 };
 </script>
 <template>
-    <div v-for="data in test" :key="data.id">
+    <!-- <div v-for="data in test" :key="data.id">
         <img :src="convert(data.qr)" />
-    </div>
+    </div> -->
 
     <!-- Start Component -->
     <div class="container-fluid">
@@ -777,7 +775,7 @@ export default {
                                                     "
                                                 />
                                             </div>
-                                            <!-- <div
+                                            <div
                                                 class="col-md-6 mb-3"
                                                 v-show="suratId == 2"
                                             >
@@ -789,7 +787,7 @@ export default {
                                                         form.ctatanKegiatan
                                                     "
                                                 />
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -808,7 +806,7 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <!-- <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <label>Nama Lengkap *</label>
                                             <input
@@ -841,7 +839,7 @@ export default {
                                                 required
                                             />
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">
                                             <button

@@ -95,7 +95,7 @@ export default {
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <label for="role">Jabatan *</label>
+                                        <label for="role">Role *</label>
                                         <select
                                             class="form-control"
                                             id="role"

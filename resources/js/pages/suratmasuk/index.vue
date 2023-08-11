@@ -281,7 +281,17 @@ export default {
                                             >
                                                 Perihal
                                             </th>
-
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 5%"
+                                            >
+                                                Keterangan Surat
+                                            </th>
                                             <th
                                                 class="sorting sorting_asc"
                                                 tabindex="0"
@@ -341,6 +351,11 @@ export default {
                                             ></td>
                                             <td
                                                 v-html="suratmasuks.perihal"
+                                            ></td>
+                                            <td
+                                                v-html="
+                                                    suratmasuks.keteranganSurat
+                                                "
                                             ></td>
                                             <td class="coba">
                                                 <button

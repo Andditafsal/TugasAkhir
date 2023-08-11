@@ -15,6 +15,7 @@ export default {
             },
             isLoading: false,
             search: "",
+            jenissurat: [],
         };
     },
     components: {
@@ -302,7 +303,7 @@ export default {
                                             <td
                                                 v-html="suratkeluars.kepada"
                                             ></td>
-                                            <td>Nomor Surat Belom</td>
+                                            <td>belomm</td>
 
                                             <td
                                                 v-html="
