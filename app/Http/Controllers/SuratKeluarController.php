@@ -94,6 +94,7 @@ class SuratKeluarController extends Controller
                 ]);
             }
         }
+        $suratkeluar->load(["jenisSurat"]);
         return new SuratKeluarDetail($suratkeluar);
     }
 
@@ -135,13 +136,13 @@ class SuratKeluarController extends Controller
 
     public function cetak(string $id, Request $request)
     {
-        $jenissurat = $this->jenissurat->findOrFail($id);
+        $suratKeluar = $this->suratkeluar->findOrFail($id);
 
-        // $nomor_surat = '123/2023';
-        // $lampiran = 'Lampiran Surat';
-        // $perihal = 'Perihal Surat';
+        $nomor_surat = '123/2023';
+        $lampiran = 'Lampiran Surat';
+        $perihal = 'Perihal Surat';
 
-        // $kepada = 'Penerima Surat';
+        $kepada = 'Penerima Surat';
         //   'kode_surat',
         // 'kode_sekolah',
         // 'tahun_surat',
@@ -156,9 +157,10 @@ class SuratKeluarController extends Controller
         // $jabatan = 'Jabatan';
         // $nip = '123456789';
 
-        // if ($jenissurat->kode_surat == "800") {
-        //     return $this->cetakSuratPanggilanPegawai($jenissurat, $request);
-        // }
+        if ($suratKeluar->jenisSurat->kode_surat == "005") {
+
+            return $this->cetakSuratPanggilanOrangTua($suratKeluar->jenisSurat, $suratKeluar, $request);
+        }
         // else if ($databse->hemalsasb) {
         //     # code...
         // }
@@ -170,6 +172,7 @@ class SuratKeluarController extends Controller
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
             // surat
+
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
@@ -195,6 +198,7 @@ class SuratKeluarController extends Controller
     {
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_Orang_Tua.docx");
         $template->setValues([
+            'id' => $suratkeluar->id,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
