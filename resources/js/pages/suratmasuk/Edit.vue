@@ -329,6 +329,9 @@ export default {
                                             >
                                                 Simpan
                                             </button>
+                                            <a :href="form.dokumen" class="btn btn-sm btn-danger" target="_blank">
+                                                lihat surat
+                                            </a>
                                         </div>
                                         <div class="col-6 col-md-3">
                                             <router-link
@@ -352,9 +355,7 @@ export default {
             </div>
         </div>
     </div>
-    <a :href="form.dokumen" target="_blank">
-        aaa
-    </a>
+    
     <!-- end Component -->
 </template>
 

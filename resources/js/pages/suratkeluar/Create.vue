@@ -62,6 +62,7 @@ export default {
         //     this.showForm = jenisSurat && jenisSurat.id === 2;
         // },
         handleSubmit() {
+            console.log("ada");
             this.isDisabled = true;
 
             let formData = new FormData();
@@ -225,8 +226,6 @@ export default {
                         <div class="row">
                             <div class="col-sm">
                                 <form
-                                    @submit.prevent="handleSubmit"
-                                    method="post"
                                 >
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
@@ -849,6 +848,7 @@ export default {
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
+                                                @click="handleSubmit"
                                             >
                                                 Simpan
                                             </button>

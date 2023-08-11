@@ -70,7 +70,7 @@ class SuratMasukController extends Controller
 
                 }
                 $request->merge([
-                    'dokumen' => $profilePictureUrl
+                    'dokumen' => $file
                 ]);
                 return $this->suratmasuk->create($request->all());
             }

@@ -94,11 +94,17 @@ class UserController extends Controller
             $request->merge([
                 'password' => Hash::make($request->password)
             ]);
+        } else {
+            $request->offsetUnset('password');
         }
 
-        return DB::transaction(function () use ($request, $user) {
-            return $user->update($request->all());
+        return DB::transaction(function() use($request, $user){
+            return $user->update($request->except('password'));
         });
+
+        // return DB::transaction(function () use ($request, $user) {
+        //     return $user->update($request->all());
+        // });
     }
 
     /**
