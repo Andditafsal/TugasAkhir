@@ -32,5 +32,14 @@ export default [{
         meta: {
             requiresAuth: true
         }
-    }
+    },
+    {
+        path: "/suratkeluar/:id/views",
+        name: "ViewsSuratKeluar",
+        component: () => import("../../pages/suratkeluar/views.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+        props: true,
+    },
 ];

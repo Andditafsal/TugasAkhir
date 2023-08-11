@@ -43,7 +43,7 @@ export default {
                 .dispatch("showData", ["suratmasuk", this.id])
                 .then((response) => {
                     // this.setForm(response.data);
-                    this.form = response.data
+                    this.form = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -307,6 +307,16 @@ export default {
                                             <label for=""
                                                 >Upload Surat Jika Perlu*</label
                                             >
+                                            <span class="px-2">
+                                                <a
+                                                    :href="form.dokumen"
+                                                    class="btn btn-sm btn-danger"
+                                                    target="_blank"
+                                                >
+                                                    lihat surat
+                                                </a></span
+                                            >
+
                                             <input
                                                 type="file"
                                                 class="form-control"
@@ -329,9 +339,6 @@ export default {
                                             >
                                                 Simpan
                                             </button>
-                                            <a :href="form.dokumen" class="btn btn-sm btn-danger" target="_blank">
-                                                lihat surat
-                                            </a>
                                         </div>
                                         <div class="col-6 col-md-3">
                                             <router-link
@@ -355,7 +362,7 @@ export default {
             </div>
         </div>
     </div>
-    
+
     <!-- end Component -->
 </template>
 

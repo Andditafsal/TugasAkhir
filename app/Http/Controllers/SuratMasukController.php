@@ -32,9 +32,25 @@ class SuratMasukController extends Controller
 
         $query = $this->suratmasuk->query();
 
-        if ($request->has('search')) {
-            $query->where("tanggal", "like", "%" . $request->search . "%")
-                ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
+        if (auth()->user()->id_role == 5) {
+            $query->where(function ($query) {
+                $query->whereHas("disposisi.users", function ($query) {
+                    $query->where("id_role", 5);
+                });
+            });
+        }
+        if (auth()->user()->id_role == 4) {
+            $query->where(function ($query) {
+                $query->whereHas("disposisi.users", function ($query) {
+                    $query->where("id_role", 4);
+                });
+            });
+        }
+        if ($request->search) {
+            $query->where(function ($query) use ($request) {
+                $query->where("tanggal", "like", "%" . $request->search . "%")
+                    ->orWhere("alamat_surat", "like", "%" . $request->search . "%");
+            });
         }
 
         // $query->with("disposisi.users");

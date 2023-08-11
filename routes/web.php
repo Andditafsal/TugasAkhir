@@ -24,7 +24,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 //     return view('welcome'); //route default
 // });
 
-Route::get('/{any}', [PageController::class, 'app'])->where('any', '^(?!auth|exportsuratmasuk|exportsuratkeluar).*$'); //tampilan methodnya app
+Route::get('/{any}', [PageController::class, 'app'])->where('any', '^(?!auth|exportsuratmasuk|exportsuratkeluar|cetak).*$'); //tampilan methodnya app
 Route::get('auth/{any}', [PageController::class, 'auth']); //tampilan methodnya ke auth
 
 Route::post('import', 'App\Http\Controllers\ExcelController@import')->name('import');
@@ -39,3 +39,6 @@ Route::get('/exportsuratmasuk', [SuratMasukController::class, 'suratmasukexport'
 
 //export excel suratKeluar
 Route::get('/exportsuratkeluar', [SuratKeluarController::class, 'suratkeluarexport'])->name('exportsuratkeluar');
+
+//surat keluar cetak
+Route::get('cetak/{id}', [SuratKeluarController::class, 'cetak']);

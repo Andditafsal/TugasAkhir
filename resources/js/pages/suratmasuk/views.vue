@@ -60,6 +60,7 @@ export default {
 };
 </script>
 <template>
+    {{ suratmasuk }}
     <div class="card-headercoba">
         <div class="mb-3 col-12 col-md-8 d-flex align-items-center mb-md-1">
             <router-link
