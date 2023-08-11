@@ -19,19 +19,18 @@ class ProfileController extends Controller
 
             $user = User::where("id", Auth::user()->id)->first();
 
-            return response()->json($user);
-            // echo "ada";
+            return GetProfilResource::collection($user);
         });
     }
     public function update_profile(Request $request)
     {
         return DB::transaction(function () use ($request) {
-            if ($request->file("profile_picture")) {
+            if ($request->file("picture")) {
                 if ($request->gambarLama) {
                     Storage::delete($request->gambarLama);
                 }
 
-                $nama_gambar = $request->file("profile_picture")->store("picture");
+                $nama_gambar = $request->file("picture")->store("foto");
 
                 $data = url("/storage/" . $nama_gambar);
             } else {
@@ -44,7 +43,7 @@ class ProfileController extends Controller
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
-                "profile_picture" => $data
+                "picture" => $data
             ]);
 
             return response()->json(["pesan" => "data berhasil diubah"]);
