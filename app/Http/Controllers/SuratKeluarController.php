@@ -85,19 +85,18 @@ class SuratKeluarController extends Controller
      */
     public function show(SuratKeluar $suratkeluar)
     {
-        // if (auth()->user()->id_role == 3 && $suratkeluar->status == 0) {
-        //     $suratkeluar->update([
-        //         "status" => 1
-        //     ]);
-        // }
-        if (auth()->user()->id_role == 2 && $suratkeluar->status == 0) {
-            $suratkeluar->update([
-                "status" => 1
-            ]);
-        }
+        if (auth()->check()) {
+            $user = auth()->user();
 
+            if ($user->id_role === 2 && $suratkeluar->status === 0) {
+                $suratkeluar->update([
+                    "status" => 1
+                ]);
+            }
+        }
         return new SuratKeluarDetail($suratkeluar);
     }
+
 
 
     /**
