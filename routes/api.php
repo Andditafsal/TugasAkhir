@@ -43,10 +43,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/search', 'SearchController@search');
 
 
+
 Route::prefix("count")->group(function () {
     Route::get("/surat_masuk", [DashboardController::class, "surat_masuk"]);
     Route::get("/surat_keluar", [DashboardController::class, "surat_keluar"]);
     Route::get("user", [DashboardController::class, "user"]);
+    Route::get("disposisi", [DashboardController::class, "disposisi"]);
     Route::get('all', [DashboardController::class, 'dashboard']);
 });
 

@@ -1,34 +1,59 @@
+<script>
+export default {
+    data() {
+        return {
+            user: {
+                profilePicture: "/img/profile.png",
+            },
+        };
+    },
+};
+</script>
 <template>
     <div class="container-fluid">
         <!-- Page Heading -->
-        <div class="col-lg-6 mb-4">
+        <!-- <div class="col-lg-6 mb-4">
             <div class="card-headercoba">
                 <div class="mb-3 col-7 d-flex align-items-center mb-md-1">
                     <router-link
-                        to="/user"
-                        class="btn icon icon-shape bg-red text-white rounded-circle"
+                        to="/"
+                        class="btn icon icon-shape bg-red text-white rounded-circle hitam"
                     >
                         <i
                             class="fa fa-arrow-circle-left"
                             aria-hidden="true"
                         ></i>
                     </router-link>
-                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Profile User</h5>
+                    <h5 class="mb-0 mr-0 text-gray-900 px-2">Profile</h5>
+                </div>
+            </div>
+        </div> -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <h5 class="page-title">Profile User</h5>
+                    <ul class="">
+                        <p class="breadcrumb-item">
+                            <router-link to="/">Dashboard</router-link>
+                            <span>/</span>
+                            <span></span>
+                            <a href="">Edit Profile</a>
+                        </p>
+                    </ul>
                 </div>
             </div>
         </div>
-
         <!-- DataTales Example -->
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <!-- <img
-                            :src="user.profilePicture"
-                            alt="avatar"
-                            class="coba img-fluid"
-                            style="width: 300px"
-                        /> -->
+                        <img
+                            class="img-fluid coba"
+                            style="width: 150px"
+                            src="/img/profile.png"
+                        />
+
                         <h5 class="my-3">nama</h5>
 
                         <!-- <p v-if="user.jenisKelamin == 'Laki-Laki'">
@@ -108,3 +133,28 @@
         </div>
     </div>
 </template>
+
+<style>
+.hitam {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
+.hitam:hover {
+    background-color: #303137 !important;
+    color: #fefefe;
+    border-color: #303137;
+}
+.coba {
+    border-radius: 5%;
+}
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 0.35rem;
+}
+</style>

@@ -157,57 +157,114 @@ class SuratKeluarController extends Controller
         // $jabatan = 'Jabatan';
         // $nip = '123456789';
 
-        if ($jenissurat->kode_surat == "800") {
-            return $this->cetakSuratPanggilanPegawai($jenissurat, $request);
-        }
+        // if ($jenissurat->kode_surat == "800") {
+        //     return $this->cetakSuratPanggilanPegawai($jenissurat, $request);
+        // }
         // else if ($databse->hemalsasb) {
         //     # code...
         // }
 
 
     }
-
-    protected function cetakSuratPanggilanPegawai($jenissurat, $request)
+    protected function cetakSuratUndangan($jenissurat, $suratkeluar, $request)
     {
-        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_pegawai.docx");
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
-            // Surat
+            // surat
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
+            //detailsurat
+            'perihal' => $suratkeluar->perihal,
+            'lampiran' => $suratkeluar->lampiran,
+            'tahun_ajaran' => $suratkeluar->tahun_ajaran,
+            'nama_kegiatan' => $suratkeluar->nama_kegiatan,
+            'kepada' => $suratkeluar->kepada,
+
+            'hari_kegiatan' => $suratkeluar->hari_kegiatan,
+            'tanggal_kegiatan' => $suratkeluar->tanggal_kegiatan,
+            'waktu_mulai_kegiatan' => $suratkeluar->waktu_mulai_kegiatan,
+            'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
+
+        ]);
+
+        $template->saveAs('arsip/Surat_Undangan.docx');
+        return response()->download(public_path('arsip/Surat_Undangan.docx'));
+    }
+
+    protected function cetakSuratPanggilanOrangTua($jenissurat, $suratkeluar, $request)
+    {
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_Orang_Tua.docx");
+        $template->setValues([
+            'kode_surat' => $jenissurat->kode_surat,
+            'kode_sekolah' => $jenissurat->kode_sekolah,
+            'tahun_surat' => $jenissurat->tahun_surat,
+            //detailsurat
+            'tanggal_surat' => $suratkeluar->tanggal_surat,
+            'perihal' => $suratkeluar->perihal,
+            'lampiran' => $suratkeluar->lampiran,
+            'nama_ortu' => $suratkeluar->nama_ortu,
+            'kelas_siswa' => $suratkeluar->kelas_siswa,
+            'nama_kegiatan' => $suratkeluar->nama_kegiatan,
+            'hari_kegiatan' => $suratkeluar->hari_kegiatan,
+            'tanggal_kegiatan' => $suratkeluar->tanggal_kegiatan,
+            'waktu_mulai_kegiatan' => $suratkeluar->waktu_mulai_kegiatan,
+            'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
+            'masalah_kegiatan' => $suratkeluar->masalah_kegiatan
+
+        ]);
+
+        $template->saveAs('arsip/Surat_Panggilan_Orang_Tua.docx');
+        return response()->download(public_path('arsip/Surat_Panggilan_Orang_Tua.docx'));
+    }
+
+    protected function cetakSuratMonitoring($jenissurat, $suratkeluar, $request)
+    {
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Monitoring.docx");
+        $template->setValues([
+            // surat
+            'kode_surat' => $jenissurat->kode_surat,
+            'kode_sekolah' => $jenissurat->kode_sekolah,
+            'tahun_surat' => $jenissurat->tahun_surat,
+            //detailsurat
+            'kepada' => $suratkeluar->kepada,
+            'nip' => $suratkeluar->nip,
+            'jabatan' => $suratkeluar->jabatan,
+            'pangkat' => $suratkeluar->pangkat,
+            'gol' => $suratkeluar->gol,
+            'jurusan' => $suratkeluar->jurusan,
+            'tempat_kegiatan' => $suratkeluar->tanggal_kegiatan,
+            'nama_industri' => $suratkeluar->nama_industri,
+            'alamat_indsutri' => $suratkeluar->alamat_industri
+
+
+        ]);
+
+        $template->saveAs('arsip/Surat_Monitoring.docx');
+        return response()->download(public_path('arsip/Surat_Monitoring.docx'));
+    }
+    protected function cetakSuratPanggilanPegawai($jenissurat, $suratkeluar, $request)
+    {
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_pegawai.docx");
+        $template->setValues([
+            // surat
+            'kode_surat' => $jenissurat->kode_surat,
+            'kode_sekolah' => $jenissurat->kode_sekolah,
+            'tahun_surat' => $jenissurat->tahun_surat,
+            //detailsurat
+            'kepada' => $suratkeluar->kepada,
+            'nip' => $suratkeluar->nip,
+            'jabatan' => $suratkeluar->jabatan,
+            'hari_kegiatan' => $suratkeluar->hari_kegiatan,
+            'tanggal_kegiatan' => $suratkeluar->tanggal_kegiatan,
+            'waktu_mulai_kegiatan' => $suratkeluar->waktu_mulai_kegiatan,
+            'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
+            'nama_kegiatan' => $suratkeluar->nama_kegiatan
+
 
         ]);
 
         $template->saveAs('arsip/Surat_Panggilan_pegawai.docx');
         return response()->download(public_path('arsip/Surat_Panggilan_pegawai.docx'));
     }
-
-    // protected function cetakSuratAudit($jenissurat, $request)
-    // {
-    //     $template = new \PhpOffice\PhpWord\TemplateProcessor("./coba.docx");
-    //     $template->setValues([
-    //         // Surat
-
-
-    //     ]);
-
-    //     $template->saveAs('dokumen/coba.docx');
-    //     return response()->download(public_path('dokumen/coba.docx'));
-    // }
-
-    // protected function cetakSuratPeringatan($database) {
-    //     $template = new \PhpOffice\PhpWord\TemplateProcessor("./coba.docx");
-    //     $template->setValues([
-    //         // Surat
-    //         'nomorSurat' => $nomor_surat,
-    //         'lampiran' => $lampiran,
-    //         'perihal' => $perihal,
-    //         'kepada' => $kepada,
-
-    //     ]);
-
-    //     $template->saveAs('dokumen/coba.docx');
-    //     return response()->download(public_path('dokumen/coba.docx'));
-    // }
-
 }
