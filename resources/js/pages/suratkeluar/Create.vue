@@ -223,8 +223,7 @@ export default {
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <form
-                                >
+                                <form>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="">Jenis Surat *</label>

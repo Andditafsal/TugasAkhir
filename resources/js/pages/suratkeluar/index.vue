@@ -358,8 +358,13 @@ export default {
                                                     class="d-flex alignt-items-start"
                                                 >
                                                     <router-link
-                                                        to="/user/cretae"
                                                         class="btn btn-sm btn-eye m-1"
+                                                        :to="{
+                                                            name: 'ViewsSuratKeluar',
+                                                            params: {
+                                                                id: suratkeluars.id,
+                                                            },
+                                                        }"
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"

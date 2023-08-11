@@ -33,44 +33,50 @@ export default {
             isDisabled: false,
             jenissurat: [],
             datacheck: {},
+            suratId: 1,
         };
     },
     created() {
-        this.getsuratKeluar();
+        this.getSuratKeluar();
     },
     methods: {
         setForm(suratkeluars) {
             this.form = {
-                jenis_surat_id: suratkeluars.jenis_surat_id,
+                jenisSuratId: suratkeluars.jenisSuratId,
+                name: suratkeluars.jenisSurat?.name,
+                kodeSurat: suratkeluars.jenisSurat?.kodeSurat,
+                kodeSekolah: suratkeluars.jenisSurat?.kodeSekolah,
+                tahunSurat: suratkeluars.jenisSurat?.tahunSurat,
                 perihal: suratkeluars.perihal,
                 lampiran: suratkeluars.lampiranSurat,
                 kepada: suratkeluars.kepada,
-                tanggal_surat: suratkeluars.tanggalSurat,
-                nama_kegiatan: suratkeluars.namaKegiatan,
-                hari_kegiatan: suratkeluars.hariKegiatan,
-                tanggal_kegiatan: suratkeluars.tanggalKegiatan,
-                waktu_mulai_kegiatan: suratkeluars.waktuMulaiKegiatan,
-                waktu_selesai_kegiatan: suratkeluars.waktuSelesaiKegiatan,
-                tempat_kegiatan: suratkeluars.tempatKegiatan,
-                catatan_kegiatan: suratkeluars.catatanKegiatan,
-                masalah_kegiatan: suratkeluars.masalahKegiatan,
-                nama_industri: suratkeluars.namaIndustri,
-                alamat_industri: suratkeluars.alamatIndustri,
-                jurusan_siswa: suratkeluars.jurusanSiswa,
-                tahun_ajaran: suratkeluars.tahunAjaran,
+                tanggalSurat: suratkeluars.tanggalSurat,
+                namaKegiatan: suratkeluars.namaKegiatan,
+                hariKegiatan: suratkeluars.hariKegiatan,
+                tanggalKegiatan: suratkeluars.tanggalKegiatan,
+                waktuMulaiKegiatan: suratkeluars.waktuMulaiKegiatan,
+                waktuSelesaikegiatan: suratkeluars.waktuSelesaiKegiatan,
+                tempatKegiatan: suratkeluars.tempatKegiatan,
+                catatanKegiatan: suratkeluars.catatanKegiatan,
+                masalahKegiatan: suratkeluars.masalahKegiatan,
+                namaIndustri: suratkeluars.namaIndustri,
+                alamatIndustri: suratkeluars.alamatIndustri,
+                jurusanSiswa: suratkeluars.jurusanSiswa,
+                tahunAjaran: suratkeluars.tahunAjaran,
                 nip: suratkeluars.nip,
                 pangkat: suratkeluars.pangkat,
                 jabatan: suratkeluars.jabatan,
                 gol: suratkeluars.gol,
-                nama_ortu: suratkeluars.namaOrtu,
+                namaOrtu: suratkeluars.namaOrtu,
             };
+            this.suratId = suratkeluars.jenisSuratId;
         },
-        getsuratKeluar() {
+        getSuratKeluar() {
             this.$store
                 .dispatch("showData", ["suratkeluar", this.id])
                 .then((response) => {
                     console.log(response);
-                    this.setForm = response.data;
+                    this.setForm(response.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -159,6 +165,7 @@ export default {
 </script>
 
 <template>
+    {{ form }}
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -201,27 +208,15 @@ export default {
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="">Jenis Surat *</label>
-                                            <select
+
+                                            <input
+                                                type="text"
                                                 class="form-control"
                                                 @change="chooseSurat($event)"
-                                            >
-                                                <option
-                                                    value=""
-                                                    disabled
-                                                    selected
-                                                >
-                                                    Pilih Jenis Surat Yang
-                                                    Dibuat
-                                                </option>
-                                                <option
-                                                    v-for="(
-                                                        surat, index
-                                                    ) in jenissurat"
-                                                    :key="index"
-                                                    v-html="surat.name"
-                                                    :value="surat.id"
-                                                ></option>
-                                            </select>
+                                                id="jenis surat"
+                                                :value="form.name"
+                                                disabled
+                                            />
                                         </div>
                                         <div class="row col-12">
                                             <div class="col-md-0">
@@ -254,7 +249,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 id="name"
-                                                :value="datacheck.kodeSurat"
+                                                :value="form.kodeSurat"
                                                 :class="{
                                                     'is-invalid':
                                                         error.kodeSurat,
@@ -277,7 +272,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 id="name"
-                                                :value="datacheck.kodeSekolah"
+                                                :value="form.kodeSekolah"
                                                 :class="{
                                                     'is-invalid':
                                                         error.kodeSekolah,
@@ -299,7 +294,7 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                :value="datacheck.tahunSurat"
+                                                :value="form.tahunSurat"
                                                 :class="{
                                                     'is-invalid':
                                                         error.tahunSurat,
@@ -733,6 +728,10 @@ export default {
                                                     v-model="
                                                         form.waktuMulaiKegiatan
                                                     "
+                                                    :class="{
+                                                        'is-invalid':
+                                                            error.waktuMulaiKegiatan,
+                                                    }"
                                                 />
                                             </div>
                                             <div
@@ -779,7 +778,7 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <!-- <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <label>Nama Lengkap *</label>
                                             <input
@@ -812,7 +811,7 @@ export default {
                                                 required
                                             />
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">
                                             <button
