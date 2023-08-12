@@ -143,7 +143,7 @@ class SuratKeluarController extends Controller
         $perihal = 'Perihal Surat';
 
         $kepada = 'Penerima Surat';
-        //   'kode_surat',
+        $kode_surat = 'kode_surat';
         // 'kode_sekolah',
         // 'tahun_surat',
         // 'perihal',
@@ -159,8 +159,25 @@ class SuratKeluarController extends Controller
 
         if ($suratKeluar->jenisSurat->kode_surat == "005") {
 
+            return $this->cetakSuratUndangan($suratKeluar->jenisSurat, $suratKeluar, $request);
+        }
+
+        if ($suratKeluar->jenisSurat->kode_surat == "005") {
+
             return $this->cetakSuratPanggilanOrangTua($suratKeluar->jenisSurat, $suratKeluar, $request);
         }
+
+        if ($suratKeluar->jenisSurat->kode_surat == "488") {
+
+            return $this->cetakSuratTugasMonitoring($suratKeluar->jenisSurat, $suratKeluar, $request);
+        }
+
+
+        if ($suratKeluar->jenisSurat->kode_surat == "800") {
+
+            return $this->cetakSuratPanggilanPegawai($suratKeluar->jenisSurat, $suratKeluar, $request);
+        }
+
         // else if ($databse->hemalsasb) {
         //     # code...
         // }
@@ -172,11 +189,12 @@ class SuratKeluarController extends Controller
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
             // surat
-
+            'id' => $suratkeluar->id,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+            'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
             'lampiran' => $suratkeluar->lampiran,
             'tahun_ajaran' => $suratkeluar->tahun_ajaran,
@@ -221,15 +239,17 @@ class SuratKeluarController extends Controller
         return response()->download(public_path('arsip/Surat_Panggilan_Orang_Tua.docx'));
     }
 
-    protected function cetakSuratMonitoring($jenissurat, $suratkeluar, $request)
+    protected function cetakSuratTugasMonitoring($jenissurat, $suratkeluar, $request)
     {
-        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Monitoring.docx");
+        $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Tugas_Monitoring.docx");
         $template->setValues([
             // surat
+            'id' => $suratkeluar->id,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+            'tanggal_surat' => $suratkeluar->tanggal_surat,
             'kepada' => $suratkeluar->kepada,
             'nip' => $suratkeluar->nip,
             'jabatan' => $suratkeluar->jabatan,
@@ -238,13 +258,13 @@ class SuratKeluarController extends Controller
             'jurusan' => $suratkeluar->jurusan,
             'tempat_kegiatan' => $suratkeluar->tanggal_kegiatan,
             'nama_industri' => $suratkeluar->nama_industri,
-            'alamat_indsutri' => $suratkeluar->alamat_industri
+            'alamat_industri' => $suratkeluar->alamat_industri
 
 
         ]);
 
-        $template->saveAs('arsip/Surat_Monitoring.docx');
-        return response()->download(public_path('arsip/Surat_Monitoring.docx'));
+        $template->saveAs('arsip/Surat_Tugas_Monitoring.docx');
+        return response()->download(public_path('arsip/Surat_Tugas_Monitoring.docx'));
     }
     protected function cetakSuratPanggilanPegawai($jenissurat, $suratkeluar, $request)
     {

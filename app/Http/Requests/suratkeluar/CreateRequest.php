@@ -51,6 +51,8 @@ class CreateRequest extends FormRequest
             'pangkat'  => '',
             'jabatan'  => '',
             'gol'  => '',
+            'nama_ortu' => '',
+            'kelas_siswa' => '',
 
 
         ];

@@ -77,6 +77,11 @@ export default {
         exportData() {
             window.location.href = "/exportsuratkeluar";
         },
+        dateNow() {
+            let ms = dayjs().locale("id");
+            this.form.tanggalKegiatan = ms.format("DD-MMMM-YYYY").toLowerCase();
+            this.form.tanggalSurat = ms.format("DD-MMMM-YYYY").toLowerCase();
+        },
     },
 };
 </script>

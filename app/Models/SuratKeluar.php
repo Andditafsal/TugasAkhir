@@ -39,5 +39,6 @@ class SuratKeluar extends Model
         'pangkat',
         'jabatan',
         'gol',
+        'nama_ortu',
     ];
 }

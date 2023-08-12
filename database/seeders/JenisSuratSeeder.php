@@ -15,26 +15,26 @@ class JenisSuratSeeder extends Seeder
     {
         JenisSurat::create([
             'kode_surat' => '005',
-            'kode_sekolah' => 'SMKN2-CadisdikWil.IXSMKN2-CadisdikWil.IX',
+            'kode_sekolah' => 'SMKN2-CadisdikWil.IX',
             'tahun_surat' => '2023',
             'name' => 'Surat Undangan Persiapan Audit Internal ',
 
         ]);
         JenisSurat::create([
             'kode_surat' => '005',
-            'kode_sekolah' => 'SMKN2-CadisdikWil.IXSMKN2-CadisdikWil.IX',
+            'kode_sekolah' => 'SMKN2-CadisdikWil.IX',
             'tahun_surat' => '2023',
             'name' => 'Surat panggilan Orang Tua ',
         ]);
         JenisSurat::create([
             'kode_surat' => '488',
-            'kode_sekolah' => 'SMKN2-CadisdikWil.IXSMKN2-CadisdikWil.IX',
+            'kode_sekolah' => 'SMKN2-CadisdikWil.IX',
             'tahun_surat' => '2023',
             'name' => 'Surat Tugas Monitoring ',
         ]);
         JenisSurat::create([
             'kode_surat' => '800',
-            'kode_sekolah' => 'SMKN2-CadisdikWil.IXSMKN2-CadisdikWil.IX',
+            'kode_sekolah' => 'SMKN2-CadisdikWil.IX',
             'tahun_surat' => '2023',
             'name' => 'Surat Panggilan Pegawai ',
         ]);

@@ -68,6 +68,7 @@ export default {
                 jabatan: suratkeluars.jabatan,
                 gol: suratkeluars.gol,
                 namaOrtu: suratkeluars.namaOrtu,
+                kelasSiswa: suratkeluars.kelasSiswa,
             };
             this.suratId = suratkeluars.jenisSuratId;
         },
@@ -734,6 +735,19 @@ export default {
                                                     }"
                                                 />
                                             </div>
+                                            <!-- <div
+                                                class="col-md-6 mb-3"
+                                                v-show="suratId == 2"
+                                            >
+                                                <label>Masalah *</label>
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    v-model="
+                                                        form.masalahKegiatan
+                                                    "
+                                                />
+                                            </div> -->
                                             <div
                                                 class="col-md-6 mb-3"
                                                 v-show="suratId == 2"

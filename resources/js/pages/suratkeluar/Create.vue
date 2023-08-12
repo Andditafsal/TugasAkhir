@@ -82,7 +82,7 @@ export default {
             );
             formData.append("tempat_kegiatan", this.form.tempatKegiatan);
             formData.append("catatan_kegiatan", this.form.catatanKegiatan);
-            formData.append("masalah_Kegiatan", this.form.masalahKegiatan);
+            formData.append("masalah_kegiatan", this.form.masalahKegiatan);
             formData.append("nama_industri", this.form.namaIndustri);
             formData.append("alamat_industri", this.form.alamatIndustri);
             formData.append("jurusan_siswa", this.form.jurusanSiswa);
@@ -92,6 +92,7 @@ export default {
             formData.append("jabatan", this.form.jabatan);
             formData.append("gol", this.form.gol);
             formData.append("nama_ortu", this.form.namaOrtu);
+            formData.append("kelas_siswa", this.form.kelasSiswa);
 
             if (this.form.lampiranSurat) {
                 formData.append("lampiran_surat", this.form.lampiranSurat);
@@ -143,10 +144,15 @@ export default {
             this.form.lampiranSurat = e.target.files[0];
             //console.log(this.form.dokumenSurat);
         },
+        // dateNow() {
+        //     let ms = dayjs().locale("id");
+        //     this.form.tanggalKegiatan = ms.format("DD-MM-YYY");
+        //     this.form.tanggalSurat = ms.format("DD-MMMM-YYY");
+        // },
         dateNow() {
             let ms = dayjs().locale("id");
-            this.form.tanggalKegiatan = ms.format("YYYY-MM-DD");
-            this.form.tanggalSurat = ms.format("YYYY-MM-DD");
+            this.form.tanggalKegiatan = ms.format("DD-MMMM-YYYY").toLowerCase();
+            this.form.tanggalSurat = ms.format("DD-MMMM-YYYY").toLowerCase();
         },
         timeNow() {
             let ms = dayjs().locale("id");
@@ -520,7 +526,8 @@ export default {
                                                         <label
                                                             for=""
                                                             class="px-1 mb-0"
-                                                            >Menugaskan,kepada:</label
+                                                        >
+                                                            kepada:</label
                                                         >
                                                     </div>
                                                 </div>
@@ -761,7 +768,7 @@ export default {
                                                     "
                                                 />
                                             </div>
-                                            <div
+                                            <!-- <div
                                                 class="col-md-6 mb-3"
                                                 v-show="suratId == 2"
                                             >
@@ -773,17 +780,17 @@ export default {
                                                         form.masalahKegiatan
                                                     "
                                                 />
-                                            </div>
+                                            </div> -->
                                             <div
                                                 class="col-md-6 mb-3"
                                                 v-show="suratId == 2"
                                             >
-                                                <label>Catatan *</label>
+                                                <label>Masalah *</label>
                                                 <input
                                                     class="form-control"
                                                     type="text"
                                                     v-model="
-                                                        form.ctatanKegiatan
+                                                        form.masalahKegiatan
                                                     "
                                                 />
                                             </div>

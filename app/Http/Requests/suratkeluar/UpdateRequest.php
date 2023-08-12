@@ -50,6 +50,9 @@ class UpdateRequest extends FormRequest
             'pangkat'  => '',
             'jabatan'  => '',
             'gol'  => '',
+            'nama_ortu' => '',
+            'kelas_siswa' => '',
+
         ];
     }
     protected function failedValidation(Validator $validator)
