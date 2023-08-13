@@ -169,11 +169,6 @@ export default {
     {{ form }}
     <!-- Start Component -->
     <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="col-12 card-judul">
-            <h5 class="h5 mb-2 text-gray-800">Edit Surat Keluar</h5>
-        </div>
-
         <!-- DataTales Example -->
         <div class="card shadow col-lg-12 mb-4">
             <div class="card-header">
