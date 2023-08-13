@@ -151,8 +151,8 @@ export default {
         // },
         dateNow() {
             let ms = dayjs().locale("id");
-            this.form.tanggalKegiatan = ms.format("DD-MMMM-YYYY").toLowerCase();
-            this.form.tanggalSurat = ms.format("DD-MMMM-YYYY").toLowerCase();
+            this.form.tanggalKegiatan = ms.format("DD-MM-YYYY");
+            this.form.tanggalSurat = ms.format("DD-MM-YYYY");
         },
         timeNow() {
             let ms = dayjs().locale("id");

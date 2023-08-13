@@ -1,4 +1,5 @@
 <script>
+import SignaturePad from "./SignaturePad.vue";
 export default {
     props: ["id"],
     data() {
@@ -6,13 +7,39 @@ export default {
             suratkeluar: {},
             jenissurat: {},
             suratId: 1,
+            showingSignaturePad: false,
         };
+    },
+    components: {
+        SignaturePad,
     },
     mounted() {
         this.getSuratKeluar();
         this.getJenisSurat();
     },
     methods: {
+        showSignaturePad() {
+            this.showingSignaturePad = true;
+        },
+        saveSignature(dataURL) {
+            this.$store
+                .dispatch("postData", [
+                    "/signature",
+                    {
+                        signature: dataURL,
+                    },
+                ])
+                .then((response) => {
+                    this.showingSignaturePad = false;
+                    console.log("ok");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        cancelSignature() {
+            this.showingSignaturePad = false;
+        },
         getJenisSurat() {
             this.$store
                 .dispatch("showData", ["jenissurat", ""])
@@ -53,11 +80,31 @@ export default {
             };
             this.suratId = suratkeluars.jenisSuratId;
         },
+        onClick(id) {
+            this.$store
+                .dispatch("postData", ["suratkeluar/" + id, {}])
+                .then((response) => {
+                    console.log("response");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        clikOn(id) {
+            this.$store
+                .dispatch("postData", ["suratkeluar/" + id, {}])
+                .then((response) => {
+                    console.log("response");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
 };
 </script>
 <template>
-    <!-- {{ suratkeluar }} -->
+    {{ suratkeluar }}
     <div class="container-fluid">
         <!-- DataTales Example -->
         <div class="card shadow col-lg-12 mb-4">
@@ -71,10 +118,11 @@ export default {
                         type="submit"
                         class="btn btn-tindaklanjut text-center w-80 my-1"
                         v-if="$can('action', 'Petugas')"
+                        @click="onClick(suratkeluar.id)"
                     >
                         Tindak Lanjuti
                     </button>
-                    <div
+                    <!-- <div
                         class="dropdown show"
                         v-if="$can('action', 'Pemimpin')"
                     >
@@ -101,7 +149,50 @@ export default {
                             >
                             <a class="dropdown-item" href="#">qrCode</a>
                             <a class="dropdown-item" href="#">ttd pen</a>
+                            <a
+                                class="dropdown-item"
+                                href="#"
+                                @click="showSignaturePad"
+                                >Tanda Tangan Digital</a
+                            >
                         </div>
+                    </div> -->
+                    <div class="dropdown" v-if="$can('action', 'Pemimpin')">
+                        <button
+                            class="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            @click="clikOn(suratkeluar.id)"
+                        >
+                            Tanda Tangan
+                        </button>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                        >
+                            <a
+                                class="dropdown-item"
+                                href="https://oauth.privy.id/login"
+                                >Privy</a
+                            >
+                            <a class="dropdown-item" href="#">qrCode</a>
+                            <a class="dropdown-item" href="#">ttd pen</a>
+                            <a
+                                class="dropdown-item"
+                                href="#"
+                                @click="showSignaturePad"
+                                >Tanda Tangan Digital</a
+                            >
+                        </div>
+                    </div>
+                    <div v-if="showingSignaturePad">
+                        <signature-pad
+                            @save="saveSignature"
+                            @cancel="cancelSignature"
+                        />
                     </div>
                 </div>
             </div>
@@ -124,8 +215,8 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 @change="chooseSurat($event)"
-                                                v-model="
-                                                    suratkeluar.jenisSuratId
+                                                :value="
+                                                    suratkeluar.jenisSurat?.name
                                                 "
                                                 disabled
                                             />
@@ -161,6 +252,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 disabled
+                                                :value="
+                                                    suratkeluar.jenisSurat
+                                                        ?.kodeSurat
+                                                "
                                             />
                                         </div>
                                         <div class="form-group col-md-4">
@@ -169,6 +264,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 disabled
+                                                :value="
+                                                    suratkeluar.jenisSurat
+                                                        ?.kodeSekolah
+                                                "
                                             />
                                         </div>
                                         <div class="form-group col-md-4">
@@ -177,6 +276,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 disabled
+                                                :value="
+                                                    suratkeluar.jenisSurat
+                                                        ?.tahunSurat
+                                                "
                                             />
                                         </div>
                                         <div class="form-group col-md-12">
@@ -654,13 +757,12 @@ export default {
                                             </router-link>
                                         </div>
                                         <div class="col-6 col-md-2 mt-3">
-                                            <button
+                                            <a
                                                 :href="'/cetak/' + id"
-                                                type="submit"
                                                 class="btn btn-cetak text-center w-100 my-1"
                                             >
                                                 Cetak
-                                            </button>
+                                            </a>
                                         </div>
 
                                         <div class="col-6 col-md-2 mt-3">

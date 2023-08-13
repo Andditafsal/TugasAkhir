@@ -322,16 +322,33 @@ export default {
                                             <td>
                                                 <button
                                                     class="badge bg-inverse-statuss"
+                                                    v-if="
+                                                        suratkeluars.status == 1
+                                                    "
                                                 >
                                                     <i
                                                         class="fa fa-check"
                                                         aria-hidden="true"
                                                     ></i>
-                                                    Dibaca
+                                                    Dibaca Petugas
                                                 </button>
-
+                                                <button
+                                                    class="badge bg-inverse-ttd"
+                                                    v-if="
+                                                        suratkeluars.status == 3
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fa fa-check"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Selesai TTD
+                                                </button>
                                                 <button
                                                     class="badge bg-inverse-status"
+                                                    v-if="
+                                                        suratkeluars.status == 0
+                                                    "
                                                 >
                                                     <i
                                                         class="fa fa-spinner"
@@ -341,6 +358,9 @@ export default {
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-lanjut"
+                                                    v-if="
+                                                        suratkeluars.status == 2
+                                                    "
                                                 >
                                                     <i
                                                         class="fa fa-arrow-up"
@@ -348,7 +368,7 @@ export default {
                                                     ></i>
                                                     Ditindaklanjuti
                                                 </button>
-                                                <button
+                                                <!-- <button
                                                     class="badge bg-inverse-batal"
                                                 >
                                                     <i
@@ -356,7 +376,7 @@ export default {
                                                         aria-hidden="true"
                                                     ></i>
                                                     Dibatalkan
-                                                </button>
+                                                </button> -->
                                             </td>
                                             <td>
                                                 <div
@@ -677,6 +697,11 @@ export default {
     background-color: #e7e117 !important;
     color: white !important;
     border-color: #e7e117;
+}
+.bg-inverse-ttd {
+    background-color: #cd4151 !important;
+    color: white !important;
+    border-color: #cd4151;
 }
 .bg-inverse-batal {
     background-color: red !important;

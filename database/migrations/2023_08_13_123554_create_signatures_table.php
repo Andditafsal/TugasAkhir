@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('surat_keluar', function (Blueprint $table) {
-        //     $table->string('')->nullable()->after('gol');
-        // });
+        Schema::create('signatures', function (Blueprint $table) {
+            $table->id();
+            $table->text('signature_data');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('surat_keluar', function (Blueprint $table) {
-        //     //
-        // });
+        Schema::dropIfExists('signatures');
     }
 };

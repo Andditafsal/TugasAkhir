@@ -8,12 +8,14 @@ use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\TtdjsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\PemohonController;
+use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
@@ -42,6 +44,12 @@ use Illuminate\Support\Facades\Route;
 // //Search
 // Route::get('/search', 'SearchController@search');
 
+//update status surat keluar
+
+//api td js
+Route::post('/uploadImg', [SignatureController::class, 'uploadSignatureImage']);
+Route::post('/signature',  [SignatureController::class, 'store']);
+Route::post('/save-', [TtdjsController::class, 'store']);
 
 
 Route::prefix("count")->group(function () {
@@ -140,12 +148,14 @@ Route::prefix('suratmasuk')->middleware("auth:sanctum")->group(function () {
 });
 
 //Router SuratKeluar
-Route::prefix('suratkeluar')->group(function () {
+Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::get('/', [SuratKeluarController::class, 'index']);
     Route::post('/', [SuratKeluarController::class, 'store']);
     Route::get('/{suratkeluar}', [SuratKeluarController::class, 'show']);
     Route::put('/{id}', [SuratKeluarController::class, 'update']);
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
+    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
+    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatettd']);
 });
 
 

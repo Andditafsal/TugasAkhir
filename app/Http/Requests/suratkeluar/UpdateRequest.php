@@ -52,6 +52,8 @@ class UpdateRequest extends FormRequest
             'gol'  => '',
             'nama_ortu' => '',
             'kelas_siswa' => '',
+            'nama_pegawai' => '',
+            'wali_murid' => '',
 
         ];
     }

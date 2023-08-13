@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SuratKeluarExport;
+use App\Models\Signature;
 use Illuminate\Support\Facades\Storage;
 
 class SuratKeluarController extends Controller
@@ -91,14 +92,30 @@ class SuratKeluarController extends Controller
             if ($user->id_role === 2 && $suratkeluar->status === 0) {
                 $suratkeluar->update([
                     "status" => 1
+
                 ]);
             }
         }
+
+
         $suratkeluar->load(["jenisSurat"]);
         return new SuratKeluarDetail($suratkeluar);
     }
 
+    public function updatestatus(SuratKeluar $suratkeluar)
+    {
+        $suratkeluar->update([
+            "status" => 2
 
+        ]);
+    }
+    public function updatettd(SuratKeluar $suratkeluar)
+    {
+        $suratkeluar->update([
+            "status" => 3
+
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -148,7 +165,9 @@ class SuratKeluarController extends Controller
         // 'tahun_surat',
         // 'perihal',
         // $hari_kegiatan = 'Senin';
-        // $tanggal_kegiatan = '2023-06-13';
+        $tanggal_surat = '19-Oktober-2023';
+
+        $tanggal_kegiatan = '19-Oktober-2023';
         // $waktu = '09:00 - 12:00';
         // $tempat_kegiatan = 'Gedung Serbaguna';
         // $catatan_kegiatan = 'Catatan Kegiatan';
@@ -157,15 +176,23 @@ class SuratKeluarController extends Controller
         // $jabatan = 'Jabatan';
         // $nip = '123456789';
 
-        if ($suratKeluar->jenisSurat->kode_surat == "005") {
+        // if ($suratKeluar->jenisSurat->kode_surat == "005") {
 
+        //     return $this->cetakSuratUndangan($suratKeluar->jenisSurat, $suratKeluar, $request);
+        // }
+
+        // if ($suratKeluar->jenisSurat->id == "2") {
+
+        //     return $this->cetakSuratPanggilanOrangTua($suratKeluar->jenisSurat, $suratKeluar, $request);
+        // }
+        if ($suratKeluar->jenisSurat->kode_surat == "005" && $suratKeluar->jenisSurat->id == 2) {
+            return $this->cetakSuratPanggilanOrangTua($suratKeluar->jenisSurat, $suratKeluar, $request);
+        } elseif ($suratKeluar->jenisSurat->kode_surat == "005") {
             return $this->cetakSuratUndangan($suratKeluar->jenisSurat, $suratKeluar, $request);
         }
 
-        if ($suratKeluar->jenisSurat->kode_surat == "005") {
 
-            return $this->cetakSuratPanggilanOrangTua($suratKeluar->jenisSurat, $suratKeluar, $request);
-        }
+
 
         if ($suratKeluar->jenisSurat->kode_surat == "488") {
 
@@ -184,8 +211,9 @@ class SuratKeluarController extends Controller
 
 
     }
-    protected function cetakSuratUndangan($jenissurat, $suratkeluar, $request)
+    protected function cetakSuratUndangan($jenissurat, $suratkeluar,  $request)
     {
+        $signature = Signature::first();
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
             // surat
@@ -194,6 +222,7 @@ class SuratKeluarController extends Controller
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
             'lampiran' => $suratkeluar->lampiran,
@@ -207,7 +236,7 @@ class SuratKeluarController extends Controller
             'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
 
         ]);
-
+        $template->setImageValue('ttd', $signature->signature_data);
         $template->saveAs('arsip/Surat_Undangan.docx');
         return response()->download(public_path('arsip/Surat_Undangan.docx'));
     }
