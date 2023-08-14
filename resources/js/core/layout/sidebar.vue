@@ -41,62 +41,32 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider" />
-
-        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <router-link
-                class="nav-link"
-                :to="{}"
-                data-toggle="collapse"
-                data-target="#collapsePages"
-                aria-expanded="true"
-                aria-controls="collapsePages"
-            >
-                <i class="fa fa-book" aria-hidden="true"></i>
-                <span>Surat</span>
+            <router-link :to="{ name: 'JenisSurat' }" class="nav-link">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                <span>Jenis Surat</span>
             </router-link>
-            <div
-                id="collapsePages"
-                class="collapse"
-                aria-labelledby="headingPages"
-                data-parent="#accordionSidebar"
-            >
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="text-center">Surat</h6>
-
-                    <router-link
-                        :to="{ name: 'SuratMasuk' }"
-                        class="list-group-item list-group-item-action"
-                        id="list-suratMasuk-list"
-                        data-toggle="list"
-                        role="tab"
-                        aria-controls="suratMasuk"
-                        >Surat Masuk</router-link
-                    >
-                    <router-link
-                        class="list-group-item list-group-item-action"
-                        id="list-suratKeluar-list"
-                        data-toggle="list"
-                        :to="{ name: 'SuratKeluar' }"
-                        role="tab"
-                        aria-controls="suratKeluar"
-                        >Surat Keluar</router-link
-                    >
-                </div>
-            </div>
         </li>
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'SuratMasuk' }">
+                <i class="fas fa-envelope fa-2x text-gray-300"></i>
+                <span>Surat Masuk</span></router-link
+            >
+        </li>
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'SuratKeluar' }">
+                <i class="fas fa-envelope-open fa-2x text-gray-300"></i>
+                <span>Surat Keluar</span></router-link
+            >
+        </li>
+
         <!-- <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Arsip' }">
                 <i class="fas fa-archive"></i>
                 <span>Arsip Surat</span></router-link
             >
         </li> -->
-        <!-- <li class="nav-item">
-            <router-link :to="{ name: 'Disposisi' }" class="nav-link">
-                <i class="fa fa-archive" aria-hidden="true"></i>
-                <span>Disposisi</span>
-            </router-link>
-        </li> -->
+
         <hr class="sidebar-divider" />
         <li class="nav-item">
             <router-link
