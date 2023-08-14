@@ -342,7 +342,7 @@ export default {
                                                         class="fa fa-check"
                                                         aria-hidden="true"
                                                     ></i>
-                                                    Selesai TTD
+                                                    Ditindak Lanjuti
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-status"

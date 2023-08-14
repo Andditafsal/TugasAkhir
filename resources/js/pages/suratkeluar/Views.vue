@@ -22,20 +22,21 @@ export default {
             this.showingSignaturePad = true;
         },
         saveSignature(dataURL) {
-            this.$store
-                .dispatch("postData", [
-                    "/signature",
-                    {
-                        signature: dataURL,
-                    },
-                ])
-                .then((response) => {
-                    this.showingSignaturePad = false;
-                    console.log("ok");
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            console.log("Ada");
+            // this.$store
+            //     .dispatch("postData", [
+            //         "/signature",
+            //         {
+            //             signature: dataURL,
+            //         },
+            //     ])
+            //     .then((response) => {
+            //         this.showingSignaturePad = false;
+            //         console.log("ok");
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
         },
         cancelSignature() {
             this.showingSignaturePad = false;

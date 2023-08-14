@@ -37,23 +37,27 @@ class JenisSuratController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        // $file = "";
-        // if ($request->hasFile('document')) {
-        //     $file = $request->file('document')->store('file_document');
-        // }
-        // $request->merge([
-        //     'file_document' => $file
-        // ]);
-        // return $this->jenissurat->create($request->all());
+        $cek = JenisSurat::count();
+
+        if ($cek == 0) {
+            $nomer = 1;
+        } else {
+            $jenis = JenisSurat::where("kode_surat", $request->kode_surat)->max("nomor_surat");
+
+            $nomer = $jenis + 1;
+        }
+
         return DB::transaction(
-            function () use ($request) {
+            function () use ($request, $nomer) {
                 $file = "";
                 if ($request->hasFile('template_dokumen')) {
                     $file = $request->file('template_dokumen')->store('dokumen');
                 }
                 $request->merge([
-                    'dokumen' => $file
+                    'dokumen' => $file,
+                    "nomor_surat" => $nomer
                 ]);
+
                 return $this->jenissurat->create($request->all());
             }
         );

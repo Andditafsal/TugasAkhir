@@ -10,6 +10,7 @@ class Signature extends Model
     use HasFactory;
 
     protected $fillable = [
-        'signature_data'
+        'signature_data',
+        "surat_keluar_id"
     ];
 }

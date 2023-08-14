@@ -31,8 +31,6 @@ class CreateRequest extends FormRequest
             'kode_sekolah' => 'required',
             'tahun_surat' => 'required',
             'name' => 'required',
-
-
         ];
     }
 

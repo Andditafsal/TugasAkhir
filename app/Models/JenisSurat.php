@@ -23,11 +23,10 @@ class JenisSurat extends Model
 
     protected $fillable = [
         'kode_surat',
+        'nomor_surat',
         'kode_sekolah',
         'tahun_surat',
         'name',
         'id_jenis_surat',
-
-
     ];
 }

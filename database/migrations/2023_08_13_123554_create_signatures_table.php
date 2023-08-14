@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('signatures', function (Blueprint $table) {
             $table->id();
             $table->text('signature_data');
+            $table->integer("surat_keluar_id");
             $table->timestamps();
         });
     }
