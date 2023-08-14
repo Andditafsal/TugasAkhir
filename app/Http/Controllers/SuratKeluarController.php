@@ -260,7 +260,10 @@ class SuratKeluarController extends Controller
             'tanggal_kegiatan' => $suratkeluar->tanggal_kegiatan,
             'waktu_mulai_kegiatan' => $suratkeluar->waktu_mulai_kegiatan,
             'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
-            'masalah_kegiatan' => $suratkeluar->masalah_kegiatan
+            'masalah_kegiatan' => $suratkeluar->masalah_kegiatan,
+            'nama_pengaju' => $suratkeluar->nama_pengaju,
+            'nip_pengaju' => $suratkeluar->nip_pengaju,
+            'wali_murid' => $suratkeluar->wali_murid
 
         ]);
 
@@ -280,6 +283,7 @@ class SuratKeluarController extends Controller
             //detailsurat
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'kepada' => $suratkeluar->kepada,
+            'nama_pegawai' => $suratkeluar->nama_pegawai,
             'nip' => $suratkeluar->nip,
             'jabatan' => $suratkeluar->jabatan,
             'pangkat' => $suratkeluar->pangkat,
@@ -305,6 +309,7 @@ class SuratKeluarController extends Controller
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
             'kepada' => $suratkeluar->kepada,
+            'nama_pegawai' => $suratkeluar->nama_pegawai,
             'nip' => $suratkeluar->nip,
             'jabatan' => $suratkeluar->jabatan,
             'hari_kegiatan' => $suratkeluar->hari_kegiatan,
