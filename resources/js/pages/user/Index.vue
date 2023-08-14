@@ -242,6 +242,9 @@ export default {
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"
+                                                    v-if="
+                                                        $can('action', 'Admin')
+                                                    "
                                                 >
                                                     <router-link
                                                         class="btn btn-sm btn-eye m-1"

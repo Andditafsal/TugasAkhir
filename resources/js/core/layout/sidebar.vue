@@ -85,12 +85,12 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Arsip' }">
                 <i class="fas fa-archive"></i>
                 <span>Arsip Surat</span></router-link
             >
-        </li>
+        </li> -->
         <!-- <li class="nav-item">
             <router-link :to="{ name: 'Disposisi' }" class="nav-link">
                 <i class="fa fa-archive" aria-hidden="true"></i>
@@ -99,7 +99,11 @@
         </li> -->
         <hr class="sidebar-divider" />
         <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'User' }">
+            <router-link
+                class="nav-link"
+                :to="{ name: 'User' }"
+                v-if="$can('action', 'Admin')"
+            >
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>User</span></router-link
             >

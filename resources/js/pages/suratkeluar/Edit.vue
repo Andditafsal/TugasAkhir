@@ -28,6 +28,12 @@ export default {
                 jabatan: "",
                 gol: "",
                 namaOrtu: "",
+                namaPegawai: "",
+                waliMurid: "",
+                namaPengaju: "",
+                nipPengaju: "",
+                jabatanPengaju: "",
+                kontakPengaju: "",
             },
             error: {},
             isDisabled: false,
@@ -69,6 +75,13 @@ export default {
                 gol: suratkeluars.gol,
                 namaOrtu: suratkeluars.namaOrtu,
                 kelasSiswa: suratkeluars.kelasSiswa,
+
+                namaPegawai: suratkeluars.namaPegawai,
+                waliMurid: suratkeluars.waliMurid,
+                namaPengaju: suratkeluars.namaPengaju,
+                nipPengaju: suratkeluars.nipPengaju,
+                jabatanPengaju: suratkeluars.jabatanPengaju,
+                kontakPengaju: suratkeluars.kontakPengaju,
             };
             this.suratId = suratkeluars.jenisSuratId;
         },
@@ -124,6 +137,12 @@ export default {
             formData.append("jabatan", this.form.jabatan);
             formData.append("gol", this.form.gol);
             formData.append("nama_ortu", this.form.namaOrtu);
+            formData.append("nama_pegawai", this.form.namaPegawai);
+            formData.append("wali_murid", this.form.waliMurid);
+            formData.append("nama_pengaju", this.form.namaPengaju);
+            formData.append("nip_pengaju", this.form.nipPengaju);
+            formData.append("jabatan_pengaju", this.form.jabatanPengaju);
+            formData.append("kontak_pengaju", this.form.kontakPengaju);
             if (this.form.lampiranSurat) {
                 formData.append("lampiran_surat", this.form.lampiranSurat);
             }
@@ -395,9 +414,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
-                                                v-model="form.kepada"
+                                                v-model="form.namaPegawai"
                                                 :class="{
-                                                    'is-invalid': error.kepada,
+                                                    'is-invalid':
+                                                        error.namaPegawai,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -785,6 +805,44 @@ export default {
                                                     :</label
                                                 >
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Nama Lengkap *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.namaPengaju"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label>Nip *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.nipPengaju"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label>Jabatan *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.jabatanPengaju"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>No Hp *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.kontakPengaju"
+                                            />
                                         </div>
                                     </div>
                                     <!-- <div class="form-row">

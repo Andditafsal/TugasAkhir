@@ -54,6 +54,10 @@ class UpdateRequest extends FormRequest
             'kelas_siswa' => '',
             'nama_pegawai' => '',
             'wali_murid' => '',
+            'nama_pengaju' => '',
+            'nip_pengaju' => '',
+            'jabatan_pengaju' => '',
+            'kontak_pengaju' => '',
 
         ];
     }

@@ -228,7 +228,7 @@ export default {
                                                 Kantor Instansi/Yang Dituju
                                             </th>
 
-                                            <th
+                                            <!-- <th
                                                 class="sorting"
                                                 tabindex="0"
                                                 aria-controls="dataTable"
@@ -238,7 +238,7 @@ export default {
                                                 style="width: 25%"
                                             >
                                                 Nomor Surat
-                                            </th>
+                                            </th> -->
                                             <th
                                                 class="sorting"
                                                 tabindex="0"
@@ -308,7 +308,7 @@ export default {
                                             <td
                                                 v-html="suratkeluars.kepada"
                                             ></td>
-                                            <td>belomm</td>
+                                            <!-- <td>belomm</td> -->
 
                                             <td
                                                 v-html="
@@ -415,6 +415,12 @@ export default {
                                                                 id: suratkeluars.id,
                                                             },
                                                         }"
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Petugas'
+                                                            )
+                                                        "
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -500,6 +506,12 @@ export default {
                                                         data-target="#deletSuratMasukModal"
                                                         @click="
                                                             id = suratkeluars.id
+                                                        "
+                                                        v-if="
+                                                            $can(
+                                                                'action',
+                                                                'Petugas'
+                                                            )
                                                         "
                                                     >
                                                         <svg

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SuratKeluarExport;
 use App\Models\Signature;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class SuratKeluarController extends Controller
@@ -62,9 +63,28 @@ class SuratKeluarController extends Controller
                 if ($request->hasFile('lampiran_surat')) {
                     $file = $request->file('lampiran_surat')->store('lampiran');
                 }
+
+                $dateFields = ['tanggal_surat', 'tanggal_kegiatan'];
+
+                foreach ($dateFields as $dateField) {
+                    $dateInput = $request->input($dateField);
+                    $selectedDate = Carbon::createFromFormat("Y-m-d", $dateInput);
+                    $formattedDate = $selectedDate->translatedFormat('d F Y');
+
+                    $request->merge([
+                        $dateField => $formattedDate,
+                    ]);
+                }
                 $request->merge([
+
                     'lampiran' => $file
+
                 ]);
+
+
+
+
+
                 return $this->suratkeluar->create($request->all());
             }
         );

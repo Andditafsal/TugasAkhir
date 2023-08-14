@@ -17,7 +17,7 @@ export default [
         name: "Views User",
         component: () => import("../../pages/user/Views.vue"),
         meta: {
-            requiresAuth: true,
+            middleware: checkRoles(roles.admin)
         },
         props: true,
     },
@@ -26,7 +26,7 @@ export default [
         name: "Create User",
         component: () => import("../../pages/user/Create.vue"),
         meta: {
-            requiresAuth: true,
+            middleware: checkRoles(roles.admin)
         },
         props: true,
     },

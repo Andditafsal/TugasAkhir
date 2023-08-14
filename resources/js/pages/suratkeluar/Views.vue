@@ -5,9 +5,10 @@ export default {
     data() {
         return {
             suratkeluar: {},
-            jenissurat: {},
+            jenissurat: [],
             suratId: 1,
             showingSignaturePad: false,
+            datacheck: {},
         };
     },
     components: {
@@ -15,7 +16,6 @@ export default {
     },
     mounted() {
         this.getSuratKeluar();
-        this.getJenisSurat();
     },
     methods: {
         showSignaturePad() {
@@ -40,16 +40,16 @@ export default {
         cancelSignature() {
             this.showingSignaturePad = false;
         },
-        getJenisSurat() {
-            this.$store
-                .dispatch("showData", ["jenissurat", ""])
-                .then((response) => {
-                    this.jenissurat = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
+        // getJenisSurat() {
+        //     this.$store
+        //         .dispatch("showData", ["jenissurat", ""])
+        //         .then((response) => {
+        //             this.jenissurat = response.data;
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
         getSuratKeluar() {
             this.$store
                 .dispatch("showData", ["suratkeluar", this.id])
@@ -178,8 +178,7 @@ export default {
                                 href="https://oauth.privy.id/login"
                                 >Privy</a
                             >
-                            <a class="dropdown-item" href="#">qrCode</a>
-                            <a class="dropdown-item" href="#">ttd pen</a>
+
                             <a
                                 class="dropdown-item"
                                 href="#"
@@ -340,7 +339,7 @@ export default {
                                                 *</label
                                             >
                                             <input
-                                                v-model="suratkeluar.namaOrtu"
+                                                v-model="suratkeluar.waliMurid"
                                                 disabled
                                                 type="text"
                                                 class="form-control"
@@ -357,7 +356,9 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
-                                                v-model="suratkeluar.kepada"
+                                                v-model="
+                                                    suratkeluar.namaPegawai
+                                                "
                                                 disabled
                                             />
                                         </div>
@@ -709,13 +710,16 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="form-row">
+                                    <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <label>Nama Lengkap *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                required
+                                                disabled
+                                                v-model="
+                                                    suratkeluar.namaPengaju
+                                                "
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
@@ -723,7 +727,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                required
+                                                disabled
+                                                v-model="suratkeluar.nipPengaju"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
@@ -731,7 +736,10 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                required
+                                                disabled
+                                                v-model="
+                                                    suratkeluar.jabatanPengaju
+                                                "
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -739,32 +747,14 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                required
+                                                disabled
+                                                v-model="
+                                                    suratkeluar.kontakPengaju
+                                                "
                                             />
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="row">
-                                        <div class="col-6 col-md-2 mt-3">
-                                            <router-link
-                                                :to="{
-                                                    name: 'Edit Surat Keluar',
-                                                }"
-                                                type="submit"
-                                                class="btn btn-primary text-center w-100 my-1"
-                                                :disabled="isDisabled"
-                                            >
-                                                Edit
-                                            </router-link>
-                                        </div>
-                                        <div class="col-6 col-md-2 mt-3">
-                                            <a
-                                                :href="'/cetak/' + id"
-                                                class="btn btn-cetak text-center w-100 my-1"
-                                            >
-                                                Cetak
-                                            </a>
-                                        </div>
-
                                         <div class="col-6 col-md-2 mt-3">
                                             <router-link
                                                 :to="{ name: 'SuratKeluar' }"
@@ -776,6 +766,28 @@ export default {
                                             >
                                                 Kembali
                                             </router-link>
+                                        </div>
+                                        <div class="col-6 col-md-2 mt-3">
+                                            <router-link
+                                                :to="{
+                                                    name: 'Edit Surat Keluar',
+                                                }"
+                                                type="submit"
+                                                class="btn btn-primary text-center w-100 my-1"
+                                                :disabled="isDisabled"
+                                                v-if="$can('action', 'Petugas')"
+                                            >
+                                                Edit
+                                            </router-link>
+                                        </div>
+                                        <div class="col-6 col-md-2 mt-3">
+                                            <a
+                                                :href="'/cetak/' + id"
+                                                class="btn btn-cetak text-center w-100 my-1"
+                                                v-if="$can('action', 'Petugas')"
+                                            >
+                                                Cetak
+                                            </a>
                                         </div>
                                     </div>
                                 </form>

@@ -16,7 +16,7 @@ export default [{
         name: "SuratMasukCreate",
         component: () => import("../../pages/suratmasuk/Create.vue"),
         meta: {
-            middleware: checkRoles(roles.adminPetugas)
+            middleware: checkRoles(roles.petugas)
 
         },
     },
@@ -26,7 +26,7 @@ export default [{
         name: "EditSuratMasuk",
         component: () => import("../../pages/suratmasuk/Edit.vue"),
         meta: {
-            requiresAuth: true,
+            middleware: checkRoles(roles.petugas)
         },
         props: true,
     },

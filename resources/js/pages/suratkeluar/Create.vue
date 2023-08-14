@@ -30,6 +30,12 @@ export default {
                 jabatan: "",
                 gol: "",
                 namaOrtu: "",
+                namaPegawai: "",
+                waliMurid: "",
+                namaPengaju: "",
+                nipPengaju: "",
+                jabatanPengaju: "",
+                kontakPengaju: "",
             },
             suratId: 1,
             jenissurat: [],
@@ -93,7 +99,12 @@ export default {
             formData.append("gol", this.form.gol);
             formData.append("nama_ortu", this.form.namaOrtu);
             formData.append("kelas_siswa", this.form.kelasSiswa);
-
+            formData.append("nama_pegawai", this.form.namaPegawai);
+            formData.append("wali_murid", this.form.waliMurid);
+            formData.append("nama_pengaju", this.form.namaPengaju);
+            formData.append("nip_pengaju", this.form.nipPengaju);
+            formData.append("jabatan_pengaju", this.form.jabatanPengaju);
+            formData.append("kontak_pengaju", this.form.kontakPengaju);
             if (this.form.lampiranSurat) {
                 formData.append("lampiran_surat", this.form.lampiranSurat);
             }
@@ -414,10 +425,10 @@ export default {
                                                 *</label
                                             >
                                             <input
-                                                v-model="form.namaOrtu"
+                                                v-model="form.waliMurid"
                                                 :class="{
                                                     'is-invalid':
-                                                        error.namaOrtu,
+                                                        error.waliMurid,
                                                 }"
                                                 :disabled="isDisabled"
                                                 type="text"
@@ -436,9 +447,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
-                                                v-model="form.kepada"
+                                                v-model="form.namaPegawai"
                                                 :class="{
-                                                    'is-invalid': error.kepada,
+                                                    'is-invalid':
+                                                        error.namaPegawai,
                                                 }"
                                                 :disabled="isDisabled"
                                             />
@@ -812,13 +824,14 @@ export default {
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="form-row">
+                                    <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <label>Nama Lengkap *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.namaPengaju"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
@@ -827,6 +840,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.nipPengaju"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-6">
@@ -835,6 +849,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.jabatanPengaju"
                                             />
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -843,9 +858,10 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
+                                                v-model="form.kontakPengaju"
                                             />
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">
                                             <button
