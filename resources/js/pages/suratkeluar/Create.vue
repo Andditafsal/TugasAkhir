@@ -29,7 +29,7 @@ export default {
                 pangkat: "",
                 jabatan: "",
                 gol: "",
-                namaOrtu: "",
+                // namaOrtu: "",
                 namaPegawai: "",
                 waliMurid: "",
                 namaPengaju: "",
@@ -97,7 +97,7 @@ export default {
             formData.append("pangkat", this.form.pangkat);
             formData.append("jabatan", this.form.jabatan);
             formData.append("gol", this.form.gol);
-            formData.append("nama_ortu", this.form.namaOrtu);
+            // formData.append("nama_ortu", this.form.namaOrtu);
             formData.append("kelas_siswa", this.form.kelasSiswa);
             formData.append("nama_pegawai", this.form.namaPegawai);
             formData.append("wali_murid", this.form.waliMurid);

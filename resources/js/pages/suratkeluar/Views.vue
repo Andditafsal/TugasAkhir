@@ -308,12 +308,13 @@ export default {
                                                 disabled
                                             />
                                         </div>
+                                        {{ suratkeluar }}
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Tanggal Surat *</label
                                             >
                                             <input
-                                                type="date"
+                                                type="text"
                                                 class="form-control"
                                                 v-model="
                                                     suratkeluar.tanggalSurat

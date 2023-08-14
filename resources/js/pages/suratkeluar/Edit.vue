@@ -110,7 +110,7 @@ export default {
             this.isDisabled = true;
             let formData = new FormData();
             formData.append("_method", "put");
-            formData.append("jenis_surat_id", this.datacheck.id);
+            formData.append("jenis_surat_id", this.form.jenisSuratId);
             formData.append("perihal", this.form.perihal);
             formData.append("kepada", this.form.kepada);
             formData.append("tanggal_surat", this.form.tanggalSurat);
@@ -136,7 +136,7 @@ export default {
             formData.append("pangkat", this.form.pangkat);
             formData.append("jabatan", this.form.jabatan);
             formData.append("gol", this.form.gol);
-            formData.append("nama_ortu", this.form.namaOrtu);
+            // formData.append("nama_ortu", this.form.namaOrtu);
             formData.append("nama_pegawai", this.form.namaPegawai);
             formData.append("wali_murid", this.form.waliMurid);
             formData.append("nama_pengaju", this.form.namaPengaju);
@@ -216,13 +216,20 @@ export default {
                         <div class="row">
                             <div class="col-sm">
                                 <p>Pilih Jenis Surat :</p>
-                                <form
-                                    @submit.prevent="handleSubmit"
-                                    method="post"
-                                >
+                                <form>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="">Jenis Surat *</label>
+
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                @change="chooseSurat($event)"
+                                                id="jenis surat"
+                                                :value="form.jenisSuratId"
+                                                hidden
+                                                disabled
+                                            />
 
                                             <input
                                                 type="text"
@@ -387,7 +394,7 @@ export default {
                                             class="col-md-6 mb-3"
                                             v-show="suratId == 2"
                                         >
-                                            <label
+                                            <!-- <label
                                                 >Nama Orang Tua Siswa atau Wali
                                                 *</label
                                             >
@@ -401,7 +408,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 required
-                                            />
+                                            /> -->
                                         </div>
                                         <div
                                             class="col-md-6 mb-3"
@@ -739,7 +746,7 @@ export default {
                                                     *</label
                                                 >
                                                 <input
-                                                    type="time"
+                                                    type="text"
                                                     class="form-control"
                                                     v-model="
                                                         form.waktuMulaiKegiatan
@@ -885,6 +892,7 @@ export default {
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
+                                                @click="handleSubmit"
                                             >
                                                 Simpan
                                             </button>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kelas_siswa')->nullable()->after('alamat_industri');
             $table->string('jurusan_siswa')->nullable()->after('kelas_siswa');
             $table->string('tahun_ajaran')->nullable()->after('jurusan_siswa');
-            $table->integer('nip')->nullable()->after('tahun_ajaran');
+            $table->string('nip')->nullable()->after('tahun_ajaran');
             $table->string('pangkat')->nullable()->after('nip');
             $table->string('jabatan')->nullable()->after('pangkat');
             $table->string('gol')->nullable()->after('jabatan');

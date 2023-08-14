@@ -51,7 +51,7 @@ class CreateRequest extends FormRequest
             'pangkat'  => '',
             'jabatan'  => '',
             'gol'  => '',
-            'nama_ortu' => '',
+            // 'nama_ortu' => '',
             'kelas_siswa' => '',
             'nama_pegawai' => '',
             'wali_murid' => '',

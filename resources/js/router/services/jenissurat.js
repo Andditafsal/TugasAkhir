@@ -7,7 +7,7 @@ export default [{
         name: "JenisSurat",
         component: () => import("../../pages/jenissurat/Index.vue"),
         meta: {
-           middleware: checkRoles(roles.admin, roles.petugas ) 
+            middleware: checkRoles(roles.adminPetugas)
         },
     },
     {

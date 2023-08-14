@@ -42,7 +42,7 @@ class SuratKeluar extends Model
         'nama_pegawai',
         'wali_murid',
         'status',
-        'nama_ortu',
+        // 'nama_ortu',
         'nama_pengaju',
         'nip_pengaju',
         'jabatan_pengaju',

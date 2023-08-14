@@ -4,15 +4,31 @@ export default {
     data() {
         return {
             jenissurats: [],
-            successDelet: false,
+            paginate: {
+                total: 0,
+                perPage: 10,
+                currentPage: 1,
+                lastPage: 0,
+                page: 1,
+            },
+            isLoading: false,
         };
+    },
+    components: {
+        paginate,
+        loading,
     },
     mounted() {
         this.getJenisSurats();
-        this.getUser();
     },
     methods: {
         getJenisSurats() {
+            const params = [
+                `search=${this.search}`,
+                `page=${this.paginate.page}`,
+                `per_page=${this.paginate.perPage}`,
+            ].join("&");
+            this.isLoading = true;
             this.$store
                 .dispatch("getData", ["jenissurat", {}])
                 .then((response) => {
@@ -53,10 +69,7 @@ export default {
         <div class="col-12 card-judul">
             <i class="fa fa-folder" aria-hidden="true"></i>
 
-            <span
-                class="h5 mb-0 text-gray-800 ml-2 mt-2"
-                >Jenis Surat
-            </span>
+            <span class="h5 mb-0 text-gray-800 ml-2 mt-2">Jenis Surat </span>
         </div>
 
         <!-- DataTales Example -->
@@ -75,18 +88,13 @@ export default {
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
                     >
                         <span class="btn-inner--icon m-1"
-                            ><i
-                                class="fas fa-plus-square"
-                                aria-hidden="true"
-                            ></i>
+                            ><i class="fa fa-list" aria-hidden="true"></i>
                         </span>
                         <span class="btn-inner--text m-1">Tambah Data</span>
                     </router-link>
                 </div>
             </div>
-            <div v-if="successDelet" class="alert alert-success">
-                Data berhasil dihapus
-            </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <div

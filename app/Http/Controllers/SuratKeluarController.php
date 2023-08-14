@@ -237,7 +237,7 @@ class SuratKeluarController extends Controller
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
             // surat
-            'id' => $suratkeluar->id,
+            'id' => $jenissurat->suratkeluar->jenis_surat_id,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
@@ -273,7 +273,7 @@ class SuratKeluarController extends Controller
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
             'lampiran' => $suratkeluar->lampiran,
-            'nama_ortu' => $suratkeluar->nama_ortu,
+            // 'nama_ortu' => $suratkeluar->nama_ortu,
             'kelas_siswa' => $suratkeluar->kelas_siswa,
             'nama_kegiatan' => $suratkeluar->nama_kegiatan,
             'hari_kegiatan' => $suratkeluar->hari_kegiatan,

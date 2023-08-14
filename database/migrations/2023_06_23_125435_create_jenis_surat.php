@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jenis_surat', function (Blueprint $table) {
             $table->id();
+            $table->integer("nomor_surat");
             $table->string('kode_surat');
             $table->string('kode_sekolah');
             $table->integer('tahun_surat');
