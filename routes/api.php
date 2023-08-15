@@ -156,6 +156,7 @@ Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
     Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
     Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatettd']);
+    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'selesaittd']);
 });
 
 

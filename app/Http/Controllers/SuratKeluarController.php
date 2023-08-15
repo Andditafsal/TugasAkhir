@@ -136,6 +136,12 @@ class SuratKeluarController extends Controller
 
         ]);
     }
+    public function selesaittd(SuratKeluar $suratkeluar)
+    {
+        $suratkeluar->update([
+            "status" => 4
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -237,7 +243,7 @@ class SuratKeluarController extends Controller
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
         $template->setValues([
             // surat
-            'id' => $jenissurat->suratkeluar->jenis_surat_id,
+            'nomor_surat' => $jenissurat->nomor_surat,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
@@ -265,7 +271,7 @@ class SuratKeluarController extends Controller
     {
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_Orang_Tua.docx");
         $template->setValues([
-            'id' => $suratkeluar->id,
+            'nomor_surat' => $jenissurat->nomor_surat,
             'kode_surat' => $jenissurat->kode_surat,
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
