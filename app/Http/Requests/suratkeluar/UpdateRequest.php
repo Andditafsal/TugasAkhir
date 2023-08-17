@@ -58,6 +58,7 @@ class UpdateRequest extends FormRequest
             'nip_pengaju' => '',
             'jabatan_pengaju' => '',
             'kontak_pengaju' => '',
+            'no_surat' => '',
 
         ];
     }

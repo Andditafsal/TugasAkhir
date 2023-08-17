@@ -44,17 +44,17 @@ class UserController extends Controller
     public function store(CreateRequest $request)
     {
         return DB::transaction(function () use ($request) {
-            $file = "";
-            if ($request->hasFile('picture')) {
-                $file = $request->file('picture')->store('profile_picture');
-                $profilePictureUrl = url('/storage/' . $file);
-            }
+            // $file = "";
+            // if ($request->hasFile('picture')) {
+            //     $file = $request->file('picture')->store('profile_picture');
+            //     $profilePictureUrl = url('/storage/' . $file);
+            // }
 
             $role = Role::where("name", $request->role)->first();
 
             $request->merge([
                 'password' => Hash::make($request->password),
-                'profile_picture' => $profilePictureUrl,
+                //'profile_picture' => $profilePictureUrl,
                 'id_role' => $role->id
             ]);
 
@@ -98,7 +98,7 @@ class UserController extends Controller
             $request->offsetUnset('password');
         }
 
-        return DB::transaction(function() use($request, $user){
+        return DB::transaction(function () use ($request, $user) {
             return $user->update($request->except('password'));
         });
 

@@ -18,33 +18,37 @@ class JenisSuratController extends Controller
     {
         $this->jenissurat = $jenissurat;
     }
-    public function index()
+    // public function index()
+    // {
+    //     $query = $this->jenissurat->query();
+
+    //     if (auth()->user()->id_role == 5) {
+    //         $query->whereIn("id", [1, 3]);
+    //     }
+
+    //     $jenissurats = $query->get();
+
+    //     return new JenisSuratCollection($jenissurats);
+    // }
+
+    public function index(Request $request)
     {
         $query = $this->jenissurat->query();
 
-        if (auth()->user()->id_role == 5) {
-            $query->whereIn("id", [1, 3]);
+        if ($request->has('search')) {
+            $query->where("name", "like", "%" . $request->search . "%")
+                ->orWhere("email", "like", "%" . $request->search . "%");
         }
-
-        $jenissurats = $query->get();
+        $jenissurats = $query->paginate($request->per_page);
 
         return new JenisSuratCollection($jenissurats);
     }
-
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(CreateRequest $request)
     {
-        // $file = "";
-        // if ($request->hasFile('document')) {
-        //     $file = $request->file('document')->store('file_document');
-        // }
-        // $request->merge([
-        //     'file_document' => $file
-        // ]);
-        // return $this->jenissurat->create($request->all());
+
         return DB::transaction(
             function () use ($request) {
                 $file = "";

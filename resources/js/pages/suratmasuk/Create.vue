@@ -48,7 +48,7 @@ export default {
                     this.isDisabled = false;
                     iziToast.success({
                         title: "success",
-                        message: "berhasil tambah data",
+                        message: "Berhasil tambah data",
                         position: "topRight",
                         timeout: 1000,
                     });

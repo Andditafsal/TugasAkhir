@@ -7,12 +7,14 @@ const permisionsByRole = {
     "1": [
         'action_Admin',
         'action_Admin Petugas',
-        'action_Admin Petugas Pemimpin'
+        'action_Admin Petugas Pemimpin',
+
     ],
     "2": [
         'action_Petugas',
         'action_Admin Petugas',
-        'action_Admin Petugas Pemimpin'
+        'action_Admin Petugas Pemimpin',
+        'action_Petugas Wakasek Guru'
     ],
     "3": [
         'action_Pemimpin',
@@ -20,10 +22,12 @@ const permisionsByRole = {
     ],
     "4": [
         'action_Wakasek',
+        'action_Petugas Wakasek Guru'
 
     ],
     "5": [
         'action_Guru',
+        'action_Petugas Wakasek Guru'
 
     ],
 

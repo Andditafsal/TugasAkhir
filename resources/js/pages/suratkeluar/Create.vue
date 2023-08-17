@@ -36,6 +36,7 @@ export default {
                 nipPengaju: "",
                 jabatanPengaju: "",
                 kontakPengaju: "",
+                noSurat: "",
             },
             suratId: 1,
             jenissurat: [],
@@ -78,6 +79,7 @@ export default {
             formData.append("nama_kegiatan", this.form.namaKegiatan);
             formData.append("hari_kegiatan", this.form.hariKegiatan);
             formData.append("tanggal_kegiatan", this.form.tanggalKegiatan);
+            formData.append("no_surat", this.form.noSurat);
             formData.append(
                 "waktu_mulai_kegiatan",
                 this.form.waktuMulaiKegiatan
@@ -291,7 +293,7 @@ export default {
                                             >
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
@@ -314,7 +316,21 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Nomor Surat*</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Diisi oleh petugas TU"
+                                                v-model="form.noSurat"
+                                                :class="{
+                                                    'is-invalid': error.noSurat,
+                                                }"
+                                                :disabled="isDisabled"
+                                            />
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Sekolah *</label>
                                             <input
                                                 type="text"
@@ -337,7 +353,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
@@ -359,6 +375,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
+
                                         <div class="form-group col-md-12">
                                             <label for=""
                                                 >Data-Data Surat :</label
@@ -552,10 +569,10 @@ export default {
                                             >
                                                 <label>Nama *</label>
                                                 <input
-                                                    v-model="form.kepada"
+                                                    v-model="form.namaPegawai"
                                                     :class="{
                                                         'is-invalid':
-                                                            error.kepada,
+                                                            error.namaPegawai,
                                                     }"
                                                     :disabled="isDisabled"
                                                     type="text"

@@ -47,5 +47,6 @@ class SuratKeluar extends Model
         'nip_pengaju',
         'jabatan_pengaju',
         'kontak_pengaju',
+        'no_surat',
     ];
 }

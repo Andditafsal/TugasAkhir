@@ -42,7 +42,11 @@
         <!-- Divider -->
         <hr class="sidebar-divider" />
         <li class="nav-item">
-            <router-link :to="{ name: 'JenisSurat' }" class="nav-link">
+            <router-link
+                :to="{ name: 'JenisSurat' }"
+                class="nav-link"
+                v-if="$can('action', 'Petugas')"
+            >
                 <i class="fa fa-list" aria-hidden="true"></i>
                 <span>Jenis Surat</span>
             </router-link>

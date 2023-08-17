@@ -104,7 +104,6 @@ export default {
 };
 </script>
 <template>
-    {{ suratkeluar }}
     <div class="container-fluid">
         <!-- DataTales Example -->
         <div class="card shadow col-lg-12 mb-4">
@@ -114,14 +113,14 @@ export default {
                 >
                     <h5 class="mb-0 text-gray-900 mb-2">Detail Surat Keluar</h5>
 
-                    <button
+                    <router-link
                         type="submit"
                         class="btn btn-tindaklanjut text-center w-80 my-1"
                         v-if="$can('action', 'Petugas')"
-                        @click="onClick(suratkeluar.id)"
+                        to="/suratkeluar"
                     >
                         Tindak Lanjuti
-                    </button>
+                    </router-link>
                     <!-- <div
                         class="dropdown show"
                         v-if="$can('action', 'Pemimpin')"
@@ -245,7 +244,7 @@ export default {
                                             >
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
@@ -257,7 +256,16 @@ export default {
                                                 "
                                             />
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Nomor Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                disabled
+                                                :value="suratkeluar.noSurat"
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Sekolah *</label>
                                             <input
                                                 type="text"
@@ -269,7 +277,7 @@ export default {
                                                 "
                                             />
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
@@ -308,7 +316,7 @@ export default {
                                                 disabled
                                             />
                                         </div>
-                                        {{ suratkeluar }}
+
                                         <div class="form-group col-md-6">
                                             <label for=""
                                                 >Tanggal Surat *</label

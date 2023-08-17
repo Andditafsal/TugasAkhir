@@ -1,10 +1,15 @@
 <script>
+import "dayjs/locale/id";
+import iziToast from "izitoast";
 export default {
     data() {
         return {
             form: {
-                nama: "",
-                nomorSurat: "",
+                kodeSurat: "",
+                kodeSekolah: "",
+                tahunSurat: "",
+                name: "",
+                templateDokumen: "",
             },
             error: {},
             isDisabled: false,
@@ -15,21 +20,36 @@ export default {
             this.isDisabled = true;
 
             let formData = new FormData();
-            formData.append("nama", this.form.nama);
-            formData.append("nomor_surat", this.form.nomorSurat);
-
+            formData.append("name", this.form.name);
+            formData.append("kode_surat", this.form.kodeSurat);
+            formData.append("tahun_surat", this.form.tahunSurat);
+            formData.append("kode_sekolah", this.form.kodeSekolah);
+            if (this.form.templateDokumen) {
+                formData.append("template_dokumen", this.form.templateDokumen);
+            }
             this.$store
                 .dispatch("postDataUpload", ["jenissurat", formData])
                 .then((result) => {
                     this.isDisabled = false;
-                    this.$router.push({ name: "JenisSurat" });
+                    iziToast.success({
+                        title: "success",
+                        message: "Berhasil tambah data",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
+                    setTimeout(() => {
+                        this.$router.push({ name: "JenisSurat" });
+                    });
                     //console.log(result);
                 })
                 .catch((error) => {
                     this.isDisabled = false;
-                    //console.log(error);
                     this.error = error.response.data.messages;
                 });
+        },
+        uploadDokumen(e) {
+            this.form.templateDokumen = e.target.files[0];
+            //console.log(this.form.dokumenSurat);
         },
     },
 };
@@ -71,14 +91,36 @@ export default {
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <label for="name">Nomor Surat *</label>
+                                        <label for="name"
+                                            >NamaJenis Surat *</label
+                                        >
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="name"
-                                            v-model="form.nomorSurat"
+                                            v-model="form.name"
                                             :class="{
-                                                'is-invalid': error.nomorSurat,
+                                                'is-invalid': error.name,
+                                            }"
+                                            :disabled="isDisabled"
+                                        />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(erorr, index) in error.name"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="text">Kode Surat *</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            v-model="form.kodeSurat"
+                                            :class="{
+                                                'is-invalid': error.kodeSurat,
                                             }"
                                             :disabled="isDisabled"
                                         />
@@ -86,31 +128,62 @@ export default {
                                             class="invalid-feedback"
                                             v-for="(
                                                 erorr, index
-                                            ) in error.nomorSurat"
+                                            ) in error.kodeSurat"
                                             :key="index"
                                         >
                                             {{ erorr }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="text">Nama Surat *</label>
+                                        <label for="text">Kode Sekolah *</label>
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="name"
-                                            v-model="form.nama"
+                                            v-model="form.kodeSekolah"
                                             :class="{
-                                                'is-invalid': error.nama,
+                                                'is-invalid': error.kodeSekolah,
                                             }"
                                             :disabled="isDisabled"
                                         />
                                         <div
                                             class="invalid-feedback"
-                                            v-for="(erorr, index) in error.nama"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.kodeSekolah"
                                             :key="index"
                                         >
                                             {{ erorr }}
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="text">Tahun Surat *</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="form.tahunSurat"
+                                            :class="{
+                                                'is-invalid': error.tahunSurat,
+                                            }"
+                                            :disabled="isDisabled"
+                                        />
+                                        <div
+                                            class="invalid-feedback"
+                                            v-for="(
+                                                erorr, index
+                                            ) in error.tahunSurat"
+                                            :key="index"
+                                        >
+                                            {{ erorr }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Upload Surat *</label>
+                                        <input
+                                            type="file"
+                                            class="form-control"
+                                            id="upload dokumen"
+                                            @change="uploadDokumen"
+                                        />
                                     </div>
                                     <div class="row">
                                         <div class="col-4 col-md-2">

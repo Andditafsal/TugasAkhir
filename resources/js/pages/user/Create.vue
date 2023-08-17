@@ -12,7 +12,7 @@ export default {
                 alamat: "",
                 noHp: "",
                 password: "",
-                picture: "",
+                // picture: "",
             },
             error: {},
             isDisabled: false,
@@ -30,7 +30,7 @@ export default {
             formData.append("alamat", this.form.alamat);
             formData.append("no_hp", this.form.noHp);
             formData.append("password", this.form.password);
-            formData.append("picture", this.form.picture);
+            //formData.append("picture", this.form.picture);
 
             this.isSuccess = true;
             this.$store
@@ -53,9 +53,9 @@ export default {
                     this.error = error.response.data.messages;
                 });
         },
-        uploadPicture(e) {
-            this.form.picture = e.target.files[0];
-        },
+        // uploadPicture(e) {
+        //     this.form.picture = e.target.files[0];
+        // },
     },
 };
 </script>
@@ -229,7 +229,7 @@ export default {
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="picture"
                                             >Profile Picture *</label
                                         >
@@ -252,7 +252,7 @@ export default {
                                         >
                                             {{ erorr }}
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label for="alamat">Alamat *</label>

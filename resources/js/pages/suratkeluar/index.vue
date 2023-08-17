@@ -106,6 +106,7 @@ export default {
                         to="/suratkeluar/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
+                        v-if="$can('action', 'Petugas Wakasek Guru')"
                     >
                         <span class="btn-inner--icon m-1"
                             ><i
@@ -212,7 +213,7 @@ export default {
                                                 colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Number: activate to sort column descending"
-                                                style="width: 13%"
+                                                style="width: 15%"
                                             >
                                                 Tanggal
                                             </th>
@@ -257,11 +258,32 @@ export default {
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 40%"
+                                                style="width: 30%"
                                             >
                                                 Perihal
                                             </th>
-
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 20%"
+                                            >
+                                                Pengaju
+                                            </th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="dataTable"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-label="teks: activate to sort column ascending"
+                                                style="width: 2%"
+                                            >
+                                                nosurat
+                                            </th>
                                             <th
                                                 class="sorting sorting_asc"
                                                 tabindex="0"
@@ -319,23 +341,31 @@ export default {
                                             <td
                                                 v-html="suratkeluars.perihal"
                                             ></td>
+                                            <td
+                                                v-html="
+                                                    suratkeluars.namaPengaju
+                                                "
+                                            ></td>
+                                            <td
+                                                v-html="suratkeluars.noSurat"
+                                            ></td>
                                             <td>
                                                 <button
-                                                    class="badge bg-inverse-statuss"
+                                                    class="badge bg-inverse-lanjut"
                                                     v-if="
                                                         suratkeluars.status == 1
                                                     "
                                                 >
                                                     <i
-                                                        class="fa fa-check"
+                                                        class="fa fa-arrow-up"
                                                         aria-hidden="true"
                                                     ></i>
-                                                    Dibaca Petugas
+                                                    Ditindak lanjuti
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-ttd"
                                                     v-if="
-                                                        suratkeluars.status == 3
+                                                        suratkeluars.status == 4
                                                     "
                                                 >
                                                     <i
@@ -356,10 +386,10 @@ export default {
                                                     ></i>
                                                     Diproses
                                                 </button>
-                                                <button
+                                                <!-- <button
                                                     class="badge bg-inverse-lanjut"
                                                     v-if="
-                                                        suratkeluars.status == 2
+                                                        suratkeluars.status == 3
                                                     "
                                                 >
                                                     <i
@@ -367,7 +397,7 @@ export default {
                                                         aria-hidden="true"
                                                     ></i>
                                                     Ditindaklanjuti
-                                                </button>
+                                                </button> -->
                                                 <!-- <button
                                                     class="badge bg-inverse-batal"
                                                 >

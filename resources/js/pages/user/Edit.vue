@@ -33,7 +33,7 @@ export default {
                 email: user.email,
                 jenis_kelamin: user.jenisKelamin,
                 noHp: user.noHp,
-                role: user.idRole,
+                role: user.role,
                 alamat: user.alamat,
                 password: user.password,
                 previewpicture: user.previewpicture,
@@ -320,6 +320,7 @@ export default {
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
                                                 style="display: block"
+                                                v-if="suratkeluars.status == 3"
                                             >
                                                 Simpan
                                             </button>

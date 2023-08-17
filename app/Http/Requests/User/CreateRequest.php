@@ -29,10 +29,10 @@ class CreateRequest extends FormRequest
             'name' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required',
-            'jenis_kelamin' => 'required',
+            'jenis_kelamin' => '',
             'password' => 'required|min:8|max:255',
             'role' => 'required',
-            'picture' => 'required|image|mimes:png,jpg,jpeg'
+            'picture' => '|image|mimes:png,jpg,jpeg'
         ];
     }
     protected function failedValidation(Validator $validator)

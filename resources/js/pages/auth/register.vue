@@ -5,7 +5,7 @@ export default {
             form: {
                 name: "",
                 email: "",
-                id_role: "",
+                // id_role: "",
                 jenis_kelamin: "",
                 alamat: "",
                 noHp: "",
@@ -89,7 +89,7 @@ export default {
                                         {{ erorr }}
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input
                                         type="teks"
                                         class="form-control form-control-user"
@@ -107,7 +107,7 @@ export default {
                                     >
                                         {{ erorr }}
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <input
                                         type="teks"
@@ -196,7 +196,7 @@ export default {
                             <div class="text-center">
                                 <span
                                     >Sudah Punya Aku?
-                                    <router-link to="/auth/login" class="small">
+                                    <router-link to="/" class="small">
                                         <span
                                             >Masuk Sekarang!</span
                                         ></router-link

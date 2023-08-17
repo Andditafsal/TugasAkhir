@@ -94,7 +94,7 @@ export default {
                                 </button>
                             </form>
                             <hr />
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <span
                                     >Belum Punya Aku?
                                     <router-link
@@ -106,7 +106,7 @@ export default {
                                         ></router-link
                                     >
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

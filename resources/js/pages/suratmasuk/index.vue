@@ -682,6 +682,12 @@ export default {
 </template>
 
 <style>
+.notification {
+    display: none;
+    color: red;
+    font-weight: bold;
+}
+
 .btn-pengguna {
     background-color: #303137 !important;
 }

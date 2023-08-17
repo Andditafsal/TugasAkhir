@@ -64,7 +64,7 @@ export default {
                                         disabled
                                     />
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="name">Id Role *</label
                                     ><input
                                         type="text"
@@ -73,7 +73,7 @@ export default {
                                         v-model="user.idRole"
                                         disabled
                                     />
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="email">Email *</label
                                     ><input

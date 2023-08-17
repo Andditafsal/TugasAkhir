@@ -34,6 +34,7 @@ export default {
                 nipPengaju: "",
                 jabatanPengaju: "",
                 kontakPengaju: "",
+                noSurat: "",
             },
             error: {},
             isDisabled: false,
@@ -49,10 +50,12 @@ export default {
         setForm(suratkeluars) {
             this.form = {
                 jenisSuratId: suratkeluars.jenisSuratId,
+
                 name: suratkeluars.jenisSurat?.name,
                 kodeSurat: suratkeluars.jenisSurat?.kodeSurat,
                 kodeSekolah: suratkeluars.jenisSurat?.kodeSekolah,
                 tahunSurat: suratkeluars.jenisSurat?.tahunSurat,
+                noSurat: suratkeluars.noSurat,
                 perihal: suratkeluars.perihal,
                 lampiran: suratkeluars.lampiranSurat,
                 kepada: suratkeluars.kepada,
@@ -111,6 +114,7 @@ export default {
             let formData = new FormData();
             formData.append("_method", "put");
             formData.append("jenis_surat_id", this.form.jenisSuratId);
+            formData.append("no_surat", this.form.noSurat);
             formData.append("perihal", this.form.perihal);
             formData.append("kepada", this.form.kepada);
             formData.append("tanggal_surat", this.form.tanggalSurat);
@@ -265,7 +269,7 @@ export default {
                                             >
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
@@ -288,7 +292,28 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Nomor Surat*</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                :value="form.noSurat"
+                                                :class="{
+                                                    'is-invalid': error.noSurat,
+                                                }"
+                                                placeholder="Diisi oleh petugas TU"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.noSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
                                             <label for="">Kode Sekolah *</label>
                                             <input
                                                 type="text"
@@ -311,7 +336,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"

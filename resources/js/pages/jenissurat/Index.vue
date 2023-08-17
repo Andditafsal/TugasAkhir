@@ -1,5 +1,7 @@
 <script>
 import Cookies from "js-cookie";
+import loading from "../../core/layout/table-loading.vue";
+import paginate from "../../core/layout/paginate.vue";
 export default {
     data() {
         return {
@@ -33,32 +35,44 @@ export default {
                 .dispatch("getData", ["jenissurat", {}])
                 .then((response) => {
                     this.jenissurats = response.data;
+                    this.paginate.total = response.meta.total;
+                    this.paginate.perPage = response.meta.perPage;
+                    this.paginate.currentPage = response.meta.currentPage;
+                    this.paginate.lastPage = response.meta.lastPage;
+                    this.isLoading = false;
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         handleDelet() {
+            this.successDelet = true;
             this.$store
-                .dispatch("deleteData", ["jenissurat", this.id])
+                .dispatch("deleteData", ["/jenissurat", this.id])
                 .then((response) => {
-                    this.successDelet = true;
+                    iziToast.success({
+                        title: "success",
+                        message: "data berhasil dihapus",
+                        position: "topRight",
+                        timeout: 1000,
+                    });
 
                     this.getJenisSurats();
                     $("#deletJenissuratModal").modal("hide");
-                    setTimeout(() => {
-                        this.successDelet = false;
-                    }, 3000);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
-        getUser() {
-            const data = Cookies.get("user");
-            const parsing = JSON.parse(data);
-            const role = parsing.data.idRole;
-            console.log(role);
+        // getUser() {
+        //     const data = Cookies.get("user");
+        //     const parsing = JSON.parse(data);
+        //     const role = parsing.data.idRole;
+        //     console.log(role);
+        // },
+        onPageChange(page) {
+            this.paginate.page = page;
+            this.getSuratMasuks();
         },
     },
 };
@@ -189,10 +203,10 @@ export default {
                                         >
                                             <td v-html="index + 1"></td>
 
-                                            <td v-html="jenissurats.nama"></td>
+                                            <td v-html="jenissurats.name"></td>
 
                                             <td
-                                                v-html="jenissurats.nomorSurat"
+                                                v-html="jenissurats.kodeSekolah"
                                             ></td>
                                             <td>
                                                 <div

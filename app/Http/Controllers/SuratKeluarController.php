@@ -122,20 +122,46 @@ class SuratKeluarController extends Controller
         return new SuratKeluarDetail($suratkeluar);
     }
 
+    // public function updatestatus(SuratKeluar $suratkeluar)
+    // {
+    //     $suratkeluar->update([
+    //         "status" => 2
+
+    //     ]);
+    // }
     public function updatestatus(SuratKeluar $suratkeluar)
     {
-        $suratkeluar->update([
-            "status" => 2
+        if (auth()->check()) {
+            $user = auth()->user();
 
-        ]);
-    }
-    public function updatettd(SuratKeluar $suratkeluar)
-    {
-        $suratkeluar->update([
-            "status" => 3
+            if ($user->id_role === 2 && $suratkeluar->status === 1) {
+                $suratkeluar->update([
+                    "status" => 2
 
-        ]);
+                ]);
+            }
+        }
     }
+    // public function tindaklanjut(SuratKeluar $suratkeluar)
+    // {
+    //     if (auth()->check()) {
+    //         $user = auth()->user();
+
+    //         if ($user->id_role === 2 && $suratkeluar->status === 2) {
+    //             $suratkeluar->update([
+    //                 "status" => 3
+
+    //             ]);
+    //         }
+    //     }
+    // }
+    // public function updatettd(SuratKeluar $suratkeluar)
+    // {
+    //     $suratkeluar->update([
+    //         "status" => 3
+
+    //     ]);
+    // }
     public function selesaittd(SuratKeluar $suratkeluar)
     {
         $suratkeluar->update([
@@ -248,7 +274,7 @@ class SuratKeluarController extends Controller
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
-
+            'no_surat' => $suratkeluar->no_surat,
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
             'lampiran' => $suratkeluar->lampiran,
@@ -276,6 +302,7 @@ class SuratKeluarController extends Controller
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+            'no_surat' => $suratkeluar->no_surat,
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
             'lampiran' => $suratkeluar->lampiran,
@@ -307,6 +334,7 @@ class SuratKeluarController extends Controller
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+            'no_surat' => $suratkeluar->no_surat,
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'kepada' => $suratkeluar->kepada,
             'nama_pegawai' => $suratkeluar->nama_pegawai,
@@ -334,6 +362,7 @@ class SuratKeluarController extends Controller
             'kode_sekolah' => $jenissurat->kode_sekolah,
             'tahun_surat' => $jenissurat->tahun_surat,
             //detailsurat
+            'no_surat' => $suratkeluar->no_surat,
             'kepada' => $suratkeluar->kepada,
             'nama_pegawai' => $suratkeluar->nama_pegawai,
             'nip' => $suratkeluar->nip,
