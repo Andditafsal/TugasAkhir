@@ -154,6 +154,7 @@ export default {
                                     <button
                                         @click="exportData"
                                         class="d-flex px-12 align-items-center margin-100px-bottom exportData"
+                                        v-if="$can('action', 'Petugas')"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

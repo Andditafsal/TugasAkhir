@@ -98,6 +98,7 @@ export default {
                             @click="id = suratmasuk.id"
                             type="button"
                             class="btn btn btn-sm btn-round btn-icon btn-pengguna"
+                            v-if="$can('action', 'Pemimpin')"
                         >
                             <span class="btn-inner--icon m-1"
                                 ><i

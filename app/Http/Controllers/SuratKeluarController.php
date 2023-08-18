@@ -155,13 +155,24 @@ class SuratKeluarController extends Controller
     //         }
     //     }
     // }
-    // public function updatettd(SuratKeluar $suratkeluar)
-    // {
-    //     $suratkeluar->update([
-    //         "status" => 3
+    public function lihatpemimpin(SuratKeluar $suratkeluar)
+    {
+        // $suratkeluar->update([
+        //     "status" => 3
 
-    //     ]);
-    // }
+        // ]);
+
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            if ($user->id_role === 3 && $suratkeluar->status === 2) {
+                $suratkeluar->update([
+                    "status" => 3
+
+                ]);
+            }
+        }
+    }
     public function selesaittd(SuratKeluar $suratkeluar)
     {
         $suratkeluar->update([

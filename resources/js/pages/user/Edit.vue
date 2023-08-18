@@ -320,7 +320,6 @@ export default {
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
                                                 style="display: block"
-                                                v-if="suratkeluars.status == 3"
                                             >
                                                 Simpan
                                             </button>

@@ -135,6 +135,7 @@ export default {
                                     <button
                                         @click="exportData"
                                         class="d-flex px-12 align-items-center margin-100px-bottom exportData"
+                                        v-if="$can('action', 'Petugas')"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -280,9 +281,9 @@ export default {
                                                 rowspan="1"
                                                 colspan="1"
                                                 aria-label="teks: activate to sort column ascending"
-                                                style="width: 2%"
+                                                style="width: 5%"
                                             >
-                                                nosurat
+                                                Ket.Surat
                                             </th>
                                             <th
                                                 class="sorting sorting_asc"
@@ -309,11 +310,21 @@ export default {
                                             </th>
                                         </tr>
                                     </thead>
-
                                     <tbody v-if="isLoading">
                                         <loading />
                                     </tbody>
-                                    <tbody>
+                                    <tbody v-else-if="!suratkeluars.length">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <strong
+                                                        >Tidak ada Data</strong
+                                                    >
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
                                         <tr
                                             class="odd"
                                             v-for="(
@@ -347,7 +358,7 @@ export default {
                                                 "
                                             ></td>
                                             <td
-                                                v-html="suratkeluars.noSurat"
+                                                v-html="suratkeluars.status"
                                             ></td>
                                             <td>
                                                 <button
@@ -360,7 +371,19 @@ export default {
                                                         class="fa fa-arrow-up"
                                                         aria-hidden="true"
                                                     ></i>
-                                                    Ditindak lanjuti
+                                                    Dilihat petugas
+                                                </button>
+                                                <button
+                                                    class="badge bg-inverse-lanjut"
+                                                    v-if="
+                                                        suratkeluars.status == 2
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fa fa-arrow-up"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Ditindaklanjuti
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-ttd"
