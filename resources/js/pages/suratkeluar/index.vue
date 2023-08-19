@@ -315,6 +315,13 @@ export default {
                                     </tbody>
                                     <tbody v-else-if="!suratkeluars.length">
                                         <tr>
+                                            <td colspan="12" class="text-center">
+                                                <div class="alert alert-info w-100">
+                                                    <strong><i>
+                                                        Kosong Lur
+                                                    </i></strong>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div>
                                                     <strong
