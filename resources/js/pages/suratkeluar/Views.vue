@@ -19,9 +19,9 @@ export default {
         getUsers() {
             const user = Cookies.get('user');
             const parse = JSON.parse(user);
-            const roleId = parse.data.role.id; // Changed variable name to roleId
+            const roleId = parse.data.role.id; 
             console.log(roleId);
-            return roleId; // Return the roleId
+            return roleId; 
         },
     },
     mounted() {
@@ -32,7 +32,6 @@ export default {
             this.showingSignaturePad = true;
         },
         saveSignature(dataURL) {
-            // console.log();
             this.$store
                 .dispatch("postData", [
                     `/signature/${this.$route.params.id}`,
