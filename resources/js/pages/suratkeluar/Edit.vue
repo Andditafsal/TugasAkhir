@@ -41,8 +41,8 @@ export default {
             jenissurat: [],
             datacheck: {},
             suratId: 1,
-            showdokumenSurat: "",
-            previewdokumenSurat: "",
+            showlampiran: "",
+            previewlampiran: "",
         };
     },
     created() {
