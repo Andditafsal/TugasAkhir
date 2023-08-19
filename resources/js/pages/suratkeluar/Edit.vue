@@ -50,7 +50,6 @@ export default {
         setForm(suratkeluars) {
             this.form = {
                 jenisSuratId: suratkeluars.jenisSuratId,
-
                 name: suratkeluars.jenisSurat?.name,
                 kodeSurat: suratkeluars.jenisSurat?.kodeSurat,
                 kodeSekolah: suratkeluars.jenisSurat?.kodeSekolah,

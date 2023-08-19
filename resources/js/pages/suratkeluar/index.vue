@@ -313,7 +313,18 @@ export default {
                                     <tbody v-if="isLoading">
                                         <loading />
                                     </tbody>
-                                    <tbody>
+                                    <tbody v-else-if="!suratkeluars.length">
+                                        <tr>
+                                            <td colspan="12" class="text-center">
+                                                <div class="alert alert-info w-100">
+                                                    <strong><i>
+                                                        Kosong Lur
+                                                    </i></strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
                                         <tr
                                             class="odd"
                                             v-for="(
