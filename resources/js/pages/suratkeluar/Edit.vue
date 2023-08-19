@@ -188,7 +188,6 @@ export default {
 </script>
 
 <template>
-    {{ form }}
     <!-- Start Component -->
     <div class="container-fluid">
         <!-- DataTales Example -->
@@ -296,7 +295,7 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                :value="form.noSurat"
+                                                v-model="form.noSurat"
                                                 :class="{
                                                     'is-invalid': error.noSurat,
                                                 }"

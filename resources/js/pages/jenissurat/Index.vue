@@ -1,5 +1,6 @@
 <script>
 import Cookies from "js-cookie";
+import iziToast from "izitoast";
 import loading from "../../core/layout/table-loading.vue";
 import paginate from "../../core/layout/paginate.vue";
 export default {
@@ -116,25 +117,6 @@ export default {
                         class="dataTables_wrapper dt-bootstrap4"
                     >
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
-                                <div
-                                    class="d-flex px-12 align-items-center margin-100px-bottom"
-                                >
-                                    <label for="" class="px-3 mb-0"
-                                        >Cari
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name=""
-                                        email=""
-                                        placeholder="Masukan Data Surat"
-                                        class="form-control form-control-sm"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-sm-12">
                                 <table
                                     class="table table-bordered dataTable"
@@ -168,7 +150,7 @@ export default {
                                             >
                                                 Nama Surat
                                             </th>
-                                            <th
+                                            <!-- <th
                                                 class="sorting"
                                                 tabindex="0"
                                                 aria-controls="dataTable"
@@ -178,7 +160,7 @@ export default {
                                                 style="width: 10%"
                                             >
                                                 Nomor Surat
-                                            </th>
+                                            </th> -->
 
                                             <th
                                                 class="sorting"
@@ -205,9 +187,9 @@ export default {
 
                                             <td v-html="jenissurats.name"></td>
 
-                                            <td
+                                            <!-- <td
                                                 v-html="jenissurats.kodeSekolah"
-                                            ></td>
+                                            ></td> -->
                                             <td>
                                                 <div
                                                     class="d-flex alignt-items-start"

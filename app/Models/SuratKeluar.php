@@ -48,5 +48,6 @@ class SuratKeluar extends Model
         'jabatan_pengaju',
         'kontak_pengaju',
         'no_surat',
+        'keterangan_surat'
     ];
 }

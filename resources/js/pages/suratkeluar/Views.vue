@@ -1,5 +1,6 @@
 <script>
 import SignaturePad from "./SignaturePad.vue";
+import Cookies from "js-cookie";
 export default {
     props: ["id"],
     data() {
@@ -13,6 +14,9 @@ export default {
     },
     components: {
         SignaturePad,
+    },
+    computed: {
+        getUsers() {},
     },
     mounted() {
         this.getSuratKeluar();
@@ -51,14 +55,32 @@ export default {
         //         });
         // },
         getSuratKeluar() {
-            this.$store
-                .dispatch("showData", ["suratkeluar", this.id])
-                .then((response) => {
-                    this.suratkeluar = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            const roles = Cookies.get("user");
+            const parse = JSON.parse(roles);
+            const user = parse.data.role.id;
+            console.log(user);
+            if (user === 2) {
+                this.$store
+                    .dispatch("showData", ["suratkeluar", this.id])
+                    .then((response) => {
+                        this.suratkeluar = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else if (user === 3) {
+                this.$store
+                    .dispatch("showData", [
+                        "suratkeluar/update_pemimpin/",
+                        this.id,
+                    ])
+                    .then((response) => {
+                        this.suratkeluar = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         },
         chooseSurat(e) {
             this.$store
@@ -100,6 +122,13 @@ export default {
                     console.log(error);
                 });
         },
+        updateStatus(id) {
+            let type = "postData";
+            let url = [`suratkeluar/update/${id}`, {}];
+            this.$store.dispatch(type, url).then((result) => {
+                this.$router.push({ name: "SuratKeluar" });
+            });
+        },
     },
 };
 </script>
@@ -113,14 +142,22 @@ export default {
                 >
                     <h5 class="mb-0 text-gray-900 mb-2">Detail Surat Keluar</h5>
 
-                    <router-link
+                    <!-- <router-link
                         type="submit"
                         class="btn btn-tindaklanjut text-center w-80 my-1"
                         v-if="$can('action', 'Petugas')"
                         to="/suratkeluar"
+                        @click="updateStatus(suratkeluar.status)"
                     >
                         Tindak Lanjuti
-                    </router-link>
+                    </router-link> -->
+                    <button
+                        type="submit"
+                        class="btn btn-sm btn-primary"
+                        @click="updateStatus(suratkeluar.id)"
+                    >
+                        tindak lanjuti
+                    </button>
                     <!-- <div
                         class="dropdown show"
                         v-if="$can('action', 'Pemimpin')"
@@ -172,11 +209,11 @@ export default {
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenuLink"
                         >
-                            <a
+                            <!-- <a
                                 class="dropdown-item"
                                 href="https://oauth.privy.id/login"
                                 >Privy</a
-                            >
+                            > -->
 
                             <a
                                 class="dropdown-item"
@@ -262,7 +299,7 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 disabled
-                                                :value="suratkeluar.noSurat"
+                                                v-model="suratkeluar.noSurat"
                                             />
                                         </div>
                                         <div class="form-group col-md-3">
@@ -336,6 +373,7 @@ export default {
                                                 type="file"
                                                 class="form-control"
                                                 @change="uploadDokumen"
+                                                disabled
                                             />
                                         </div>
 

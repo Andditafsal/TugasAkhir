@@ -192,7 +192,7 @@ export default {
                                                 class="btn btn-primary text-center w-100 my-1"
                                                 :disabled="isDisabled"
                                             >
-                                                Save
+                                                Simpan
                                             </button>
                                         </div>
                                         <div class="col-4 col-md-2">
@@ -204,7 +204,7 @@ export default {
                                                     disabled: isDisabled,
                                                 }"
                                             >
-                                                Cancle
+                                                Batal
                                             </router-link>
                                         </div>
                                     </div>

@@ -37,6 +37,7 @@ export default {
                 jabatanPengaju: "",
                 kontakPengaju: "",
                 noSurat: "",
+                keterangaSurat: "",
             },
             suratId: 1,
             jenissurat: [],
@@ -80,6 +81,7 @@ export default {
             formData.append("hari_kegiatan", this.form.hariKegiatan);
             formData.append("tanggal_kegiatan", this.form.tanggalKegiatan);
             formData.append("no_surat", this.form.noSurat);
+            formData.append("keterangan_surat", this.form.keterangaSurat);
             formData.append(
                 "waktu_mulai_kegiatan",
                 this.form.waktuMulaiKegiatan
@@ -293,7 +295,7 @@ export default {
                                             >
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
@@ -316,21 +318,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="">Nomor Surat*</label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="Diisi oleh petugas TU"
-                                                v-model="form.noSurat"
-                                                :class="{
-                                                    'is-invalid': error.noSurat,
-                                                }"
-                                                :disabled="isDisabled"
-                                            />
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="">Kode Sekolah *</label>
                                             <input
                                                 type="text"
@@ -353,7 +341,7 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
@@ -876,6 +864,15 @@ export default {
                                                 class="form-control"
                                                 required
                                                 v-model="form.kontakPengaju"
+                                            />
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Keterangan Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                required
+                                                v-model="form.keterangaSurat"
                                             />
                                         </div>
                                     </div>

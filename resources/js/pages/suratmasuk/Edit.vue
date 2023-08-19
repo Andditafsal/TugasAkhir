@@ -330,7 +330,7 @@ export default {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6 col-md-3">
+                                        <div class="col-4 col-md-2">
                                             <button
                                                 type="submit"
                                                 class="btn btn-primary text-center w-100 my-1"
@@ -340,7 +340,8 @@ export default {
                                                 Simpan
                                             </button>
                                         </div>
-                                        <div class="col-6 col-md-3">
+
+                                        <div class="col-4 col-md-2">
                                             <router-link
                                                 :to="{ name: 'SuratMasuk' }"
                                                 type="submit"

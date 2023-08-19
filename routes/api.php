@@ -154,10 +154,10 @@ Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::get('/{suratkeluar}', [SuratKeluarController::class, 'show']);
     Route::put('/{id}', [SuratKeluarController::class, 'update']);
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
-    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
-    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'tindaklanjut']);
-    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'updatettd']);
-    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'selesaittd']);
+    Route::post('/update/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
+    // Route::post('/show/{suratkeluar}', [SuratKeluarController::class, 'lihatpetugas']);
+    Route::get('/update_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'lihatpemimpin']);
+    Route::post('/update_status_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'selesaittd']);
 });
 
 
