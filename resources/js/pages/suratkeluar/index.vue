@@ -135,7 +135,7 @@ export default {
                                     <button
                                         @click="exportData"
                                         class="d-flex px-12 align-items-center margin-100px-bottom exportData"
-                                        v-if="$can('action', 'Petugas')"
+                                        v-if="$can('action', 'Admin Petugas')"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -358,17 +358,19 @@ export default {
                                                 "
                                             ></td>
                                             <td
-                                                v-html="suratkeluars.status"
+                                                v-html="
+                                                    suratkeluars.keteranganSurat
+                                                "
                                             ></td>
                                             <td>
                                                 <button
-                                                    class="badge bg-inverse-lanjut"
+                                                    class="badge bg-inverse-diliatpetugas"
                                                     v-if="
                                                         suratkeluars.status == 1
                                                     "
                                                 >
                                                     <i
-                                                        class="fa fa-arrow-up"
+                                                        class="fa fa-eye"
                                                         aria-hidden="true"
                                                     ></i>
                                                     Dilihat petugas
@@ -396,6 +398,18 @@ export default {
                                                         aria-hidden="true"
                                                     ></i>
                                                     Ditindaklanjuti
+                                                </button>
+                                                <button
+                                                    class="badge bg-inverse-diliatkepsek"
+                                                    v-if="
+                                                        suratkeluars.status == 3
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fa fa-check"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Dilihat Kepsek
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-ttd"
@@ -472,7 +486,7 @@ export default {
                                                             />
                                                         </svg>
                                                     </router-link>
-                                                    <router-link
+                                                    <!-- <router-link
                                                         class="btn btn-sm btn-create m-1"
                                                         :to="{
                                                             name: 'Edit Surat Keluar',
@@ -503,7 +517,7 @@ export default {
                                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                                                             />
                                                         </svg>
-                                                    </router-link>
+                                                    </router-link> -->
                                                     <!-- <router-link
                                                         :to="{
                                                             name: 'CetakSuratKeluar',
@@ -775,10 +789,20 @@ export default {
     color: white !important;
     border-color: #e7e117;
 }
-.bg-inverse-ttd {
-    background-color: #cd4151 !important;
+.bg-inverse-diliatpetugas {
+    background-color: #59e717 !important;
     color: white !important;
-    border-color: #cd4151;
+    border-color: #59e717;
+}
+.bg-inverse-diliatkepsek {
+    background-color: #59e717 !important;
+    color: white !important;
+    border-color: #59e717;
+}
+.bg-inverse-ttd {
+    background-color: blue !important;
+    color: white !important;
+    border-color: blue;
 }
 .bg-inverse-batal {
     background-color: red !important;
