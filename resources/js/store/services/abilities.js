@@ -22,12 +22,14 @@ const permisionsByRole = {
     ],
     "4": [
         'action_Wakasek',
-        'action_Petugas Wakasek Guru'
+        'action_Petugas Wakasek Guru',
+        'action_Wakasek Guru'
 
     ],
     "5": [
         'action_Guru',
-        'action_Petugas Wakasek Guru'
+        'action_Petugas Wakasek Guru',
+        'action_Wakasek Guru'
 
     ],
 

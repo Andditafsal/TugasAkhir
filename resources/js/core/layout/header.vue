@@ -78,7 +78,6 @@ export default {
                     <i
                         class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                     ></i>
-                    logout
                 </a>
                 <!-- Dropdown - User Information -->
             </li>

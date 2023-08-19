@@ -34,14 +34,14 @@ export default {
         saveSignature(dataURL) {
             this.$store
                 .dispatch("postData", [
-                    `/signature/${this.$route.params.id}`,
+                    "/signature",
                     {
                         signature: dataURL,
                     },
                 ])
                 .then((response) => {
                     this.showingSignaturePad = false;
-                    console.log("ok");
+                    console.log(dataURL);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -133,6 +133,7 @@ export default {
                         type="submit"
                         class="btn btn-sm btn-primary"
                         @click="updateStatus(suratkeluar.id)"
+                        v-if="$can('action', 'Petugas')"
                     >
                         tindak lanjuti
                     </button>
@@ -179,7 +180,6 @@ export default {
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false"
-                            @click="clikOn"
                         >
                             Tanda Tangan
                         </button>
@@ -203,7 +203,7 @@ export default {
                     </div>
                     <div v-if="showingSignaturePad">
                         <signature-pad
-                            @save="saveSignature(suratkeluar.id)"
+                            @save="saveSignature"
                             @cancel="cancelSignature"
                         />
                     </div>
@@ -778,6 +778,17 @@ export default {
                                                 "
                                             />
                                         </div>
+                                        <!-- <div class="col-md-6 mb-3">
+                                            <label>No Hp *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                disabled
+                                                v-model="
+                                                    suratkeluar.keteranganSurat
+                                                "
+                                            />
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">

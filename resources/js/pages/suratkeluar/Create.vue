@@ -295,7 +295,12 @@ export default {
                                             >
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div
+                                            class="form-group col-md-4"
+                                            v-if="
+                                                $can('action', 'Wakasek Guru')
+                                            "
+                                        >
                                             <label for="">Kode Surat *</label>
                                             <input
                                                 type="text"
@@ -318,7 +323,12 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div
+                                            class="form-group col-md-4"
+                                            v-if="
+                                                $can('action', 'Wakasek Guru')
+                                            "
+                                        >
                                             <label for="">Kode Sekolah *</label>
                                             <input
                                                 type="text"
@@ -341,7 +351,12 @@ export default {
                                                 {{ erorr }}
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div
+                                            class="form-group col-md-4"
+                                            v-if="
+                                                $can('action', 'Wakasek Guru')
+                                            "
+                                        >
                                             <label for="">Tahun Surat*</label>
                                             <input
                                                 type="text"
@@ -364,6 +379,106 @@ export default {
                                             </div>
                                         </div>
 
+                                        <div
+                                            class="form-group col-md-3"
+                                            v-if="$can('action', 'Petugas')"
+                                        >
+                                            <label for="">Kode Surat *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                :value="datacheck.kodeSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.kodeSurat,
+                                                }"
+                                                disabled
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.kodeSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group col-md-3"
+                                            v-if="$can('action', 'Petugas')"
+                                        >
+                                            <label for="">Nomor Surat*</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                v-model="form.noSurat"
+                                                :class="{
+                                                    'is-invalid': error.noSurat,
+                                                }"
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.noSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group col-md-3"
+                                            v-if="$can('action', 'Petugas')"
+                                        >
+                                            <label for="">Kode Sekolah *</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                :value="datacheck.kodeSekolah"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.kodeSekolah,
+                                                }"
+                                                disabled
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.KodeSekolah"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group col-md-3"
+                                            v-if="$can('action', 'Petugas')"
+                                        >
+                                            <label for="">Tahun Surat*</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                :value="datacheck.tahunSurat"
+                                                :class="{
+                                                    'is-invalid':
+                                                        error.tahunSurat,
+                                                }"
+                                                disabled
+                                            />
+                                            <div
+                                                class="invalid-feedback"
+                                                v-for="(
+                                                    erorr, index
+                                                ) in error.tahunSurat"
+                                                :key="index"
+                                            >
+                                                {{ erorr }}
+                                            </div>
+                                        </div>
                                         <div class="form-group col-md-12">
                                             <label for=""
                                                 >Data-Data Surat :</label
@@ -866,7 +981,7 @@ export default {
                                                 v-model="form.kontakPengaju"
                                             />
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <!-- <div class="col-md-6 mb-3">
                                             <label>Keterangan Surat *</label>
                                             <input
                                                 type="text"
@@ -874,7 +989,7 @@ export default {
                                                 required
                                                 v-model="form.keterangaSurat"
                                             />
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">

@@ -128,7 +128,7 @@ export default {
                         to="/suratmasuk/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
-                        v-if="$can('action', ' Petugas')"
+                        v-if="$can('action', 'Petugas')"
                     >
                         <span class="btn-inner--icon m-1"
                             ><i
@@ -327,7 +327,24 @@ export default {
                                     <tbody v-if="isLoading">
                                         <loading />
                                     </tbody>
-                                    <tbody>
+                                    <tbody v-else-if="!suratmasuks.length">
+                                        <tr>
+                                            <td
+                                                colspan="12"
+                                                class="text-center"
+                                            >
+                                                <div class="alert-info w-100">
+                                                    <strong
+                                                        ><i>
+                                                            Tidak Ada Data Surat
+                                                            Masuk
+                                                        </i></strong
+                                                    >
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
                                         <tr
                                             class="odd"
                                             v-for="(
@@ -555,14 +572,14 @@ export default {
                         class="btn btn-pengguna"
                         data-dismiss="modal"
                     >
-                        Close
+                        Tutup
                     </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="handleDelet"
                     >
-                        Delet
+                        Hapus
                     </button>
                 </div>
             </div>
@@ -858,5 +875,16 @@ export default {
     line-height: 0;
 
     border: 1px solid #04aa6d;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+
+    /* border: 1px solid transparent; */
+}
+.alert-info {
+    color: #434646;
+    background-color: #ffffff;
+    border-color: #c7ebf1;
 }
 </style>

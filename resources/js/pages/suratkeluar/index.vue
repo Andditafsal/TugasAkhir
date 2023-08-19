@@ -315,11 +315,17 @@ export default {
                                     </tbody>
                                     <tbody v-else-if="!suratkeluars.length">
                                         <tr>
-                                            <td colspan="12" class="text-center">
-                                                <div class="alert alert-info w-100">
-                                                    <strong><i>
-                                                        Tidak Ada Data
-                                                    </i></strong>
+                                            <td
+                                                colspan="12"
+                                                class="text-center"
+                                            >
+                                                <div class="alert-info w-100">
+                                                    <strong
+                                                        ><i>
+                                                            Tidak Ada Data Surat
+                                                            Keluar
+                                                        </i></strong
+                                                    >
                                                 </div>
                                             </td>
                                         </tr>
@@ -397,7 +403,7 @@ export default {
                                                         class="fa fa-check"
                                                         aria-hidden="true"
                                                     ></i>
-                                                    Dilihat Kepsek
+                                                    Ditandatangani
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-ttd"
@@ -650,7 +656,7 @@ export default {
                         class="btn btn-danger"
                         @click="handleDelet"
                     >
-                        Delet
+                        Hapus
                     </button>
                 </div>
             </div>
@@ -783,9 +789,9 @@ export default {
     border-color: #59e717;
 }
 .bg-inverse-diliatkepsek {
-    background-color: #59e717 !important;
+    background-color: #4ba3f0 !important;
     color: white !important;
-    border-color: #59e717;
+    border-color: #4ba3f0;
 }
 .bg-inverse-ttd {
     background-color: blue !important;
@@ -821,5 +827,16 @@ export default {
     text-decoration: none;
     background-color: #eaecf4;
     border-color: #dddfeb;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+
+    /* border: 1px solid transparent; */
+}
+.alert-info {
+    color: #434646;
+    background-color: #ffffff;
+    border-color: #c7ebf1;
 }
 </style>

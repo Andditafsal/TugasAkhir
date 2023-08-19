@@ -23,7 +23,6 @@ export default {
             this.signaturePad = new SignaturePad(canvas, {
                 backgroundColor: "white",
                 penColor: "black",
-                // Add more options here if needed
             });
         },
         clear() {
