@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Signature;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 
 class SignatureController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         // $signature = new Signature();
         // $signature->signature_data = $request->input('signature');
         // $signature->save();
 
         $signature = Signature::first();
-
+        $surat = SuratKeluar::where("id", $id)->first();
         if ($signature) {
             $signature->update([
                 'signature_data' => $request->input('signature')
@@ -24,6 +25,10 @@ class SignatureController extends Controller
                 'signature_data' => $request->input('signature')
             ]);
         }
+
+        $surat->update([
+            "status" => 4
+        ]);
 
         return response()->json(['message' => 'Signature saved successfully'], 201);
     }

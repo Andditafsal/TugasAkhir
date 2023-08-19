@@ -142,6 +142,29 @@ class SuratKeluarController extends Controller
             }
         }
     }
+    public function lihatpemimpin(SuratKeluar $suratkeluar)
+    {
+
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            if ($user->id_role === 3 && $suratkeluar->status === 2) {
+                $suratkeluar->update([
+                    "status" => 3
+
+                ]);
+            }
+        }
+        $suratkeluar->load(["jenisSurat"]);
+
+        return new SuratKeluarDetail($suratkeluar);
+    }
+    public function selesaittd(SuratKeluar $suratkeluar)
+    {
+        $suratkeluar->update([
+            "status" => 4
+        ]);
+    }
     // public function tindaklanjut(SuratKeluar $suratkeluar)
     // {
     //     if (auth()->check()) {
@@ -155,30 +178,8 @@ class SuratKeluarController extends Controller
     //         }
     //     }
     // }
-    public function lihatpemimpin(SuratKeluar $suratkeluar)
-    {
-        // $suratkeluar->update([
-        //     "status" => 3
-
-        // ]);
-
-        if (auth()->check()) {
-            $user = auth()->user();
-
-            if ($user->id_role === 3 && $suratkeluar->status === 2) {
-                $suratkeluar->update([
-                    "status" => 3
-
-                ]);
-            }
-        }
-    }
-    public function selesaittd(SuratKeluar $suratkeluar)
-    {
-        $suratkeluar->update([
-            "status" => 4
-        ]);
-    }
+    
+    
 
     /**
      * Update the specified resource in storage.

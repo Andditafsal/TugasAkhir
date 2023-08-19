@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('surat_keluar', function (Blueprint $table) {
-            $table->string('no_surat')->after('perihal');
-        });
+        // Schema::table('surat_keluar', function (Blueprint $table) {
+        //     $table->string('no_surat')->after('perihal');
+        // });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('surat_keluar', function (Blueprint $table) {
-            $table->dropColumn('no_surat');
-        });
+        // Schema::table('surat_keluar', function (Blueprint $table) {
+        //     $table->dropColumn('no_surat');
+        // });
     }
 };
