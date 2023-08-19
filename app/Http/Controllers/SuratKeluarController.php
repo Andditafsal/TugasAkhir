@@ -46,7 +46,7 @@ class SuratKeluarController extends Controller
 
     public function suratkeluarexport()
     {
-        return Excel::download(new SuratKeluarExport, 'suratkeluarcobaa.xlsx');
+        return Excel::download(new SuratKeluarExport, 'suratkeluar.xlsx');
     }
 
 
@@ -254,30 +254,25 @@ class SuratKeluarController extends Controller
             return $this->cetakSuratUndangan($suratKeluar->jenisSurat, $suratKeluar, $request);
         }
 
-
-
-
         if ($suratKeluar->jenisSurat->kode_surat == "488") {
 
             return $this->cetakSuratTugasMonitoring($suratKeluar->jenisSurat, $suratKeluar, $request);
         }
 
-
         if ($suratKeluar->jenisSurat->kode_surat == "800") {
 
             return $this->cetakSuratPanggilanPegawai($suratKeluar->jenisSurat, $suratKeluar, $request);
         }
-
-        // else if ($databse->hemalsasb) {
-        //     # code...
-        // }
-
-
     }
     protected function cetakSuratUndangan($jenissurat, $suratkeluar,  $request)
     {
         $signature = Signature::first();
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Undangan.docx");
+        if ($suratkeluar->lampiran) {
+            $lampiran_value = '1';
+        } else {
+            $lampiran_value = '-';
+        }
         $template->setValues([
             // surat
             'nomor_surat' => $jenissurat->nomor_surat,
@@ -288,7 +283,7 @@ class SuratKeluarController extends Controller
             'no_surat' => $suratkeluar->no_surat,
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
-            'lampiran' => $suratkeluar->lampiran,
+            'lampiran' => $lampiran_value,
             'tahun_ajaran' => $suratkeluar->tahun_ajaran,
             'nama_kegiatan' => $suratkeluar->nama_kegiatan,
             'kepada' => $suratkeluar->kepada,
@@ -299,14 +294,24 @@ class SuratKeluarController extends Controller
             'tempat_kegiatan' => $suratkeluar->tempat_kegiatan,
 
         ]);
-        $template->setImageValue('ttd', $signature->signature_data);
+        // $template->setImageValue('ttd', $signature->signature_data);
+        if ($signature) {
+            $template->setImageValue('ttd', $signature->signature_data);
+        }
         $template->saveAs('arsip/Surat_Undangan.docx');
         return response()->download(public_path('arsip/Surat_Undangan.docx'));
     }
 
     protected function cetakSuratPanggilanOrangTua($jenissurat, $suratkeluar, $request)
     {
+        $signature = Signature::first();
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_Orang_Tua.docx");
+
+        if ($suratkeluar->lampiran) {
+            $lampiran_value = '1';
+        } else {
+            $lampiran_value = '-';
+        }
         $template->setValues([
             'nomor_surat' => $jenissurat->nomor_surat,
             'kode_surat' => $jenissurat->kode_surat,
@@ -316,7 +321,7 @@ class SuratKeluarController extends Controller
             'no_surat' => $suratkeluar->no_surat,
             'tanggal_surat' => $suratkeluar->tanggal_surat,
             'perihal' => $suratkeluar->perihal,
-            'lampiran' => $suratkeluar->lampiran,
+            'lampiran' => $lampiran_value,
             // 'nama_ortu' => $suratkeluar->nama_ortu,
             'kelas_siswa' => $suratkeluar->kelas_siswa,
             'nama_kegiatan' => $suratkeluar->nama_kegiatan,
@@ -330,13 +335,17 @@ class SuratKeluarController extends Controller
             'wali_murid' => $suratkeluar->wali_murid
 
         ]);
-
+        if ($signature) {
+            $template->setImageValue('ttd', $signature->signature_data);
+        }
         $template->saveAs('arsip/Surat_Panggilan_Orang_Tua.docx');
         return response()->download(public_path('arsip/Surat_Panggilan_Orang_Tua.docx'));
     }
 
     protected function cetakSuratTugasMonitoring($jenissurat, $suratkeluar, $request)
     {
+
+        $signature = Signature::first();
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Tugas_Monitoring.docx");
         $template->setValues([
             // surat
@@ -357,15 +366,16 @@ class SuratKeluarController extends Controller
             'tempat_kegiatan' => $suratkeluar->tanggal_kegiatan,
             'nama_industri' => $suratkeluar->nama_industri,
             'alamat_industri' => $suratkeluar->alamat_industri
-
-
         ]);
-
+        if ($signature) {
+            $template->setImageValue('ttd', $signature->signature_data);
+        }
         $template->saveAs('arsip/Surat_Tugas_Monitoring.docx');
         return response()->download(public_path('arsip/Surat_Tugas_Monitoring.docx'));
     }
     protected function cetakSuratPanggilanPegawai($jenissurat, $suratkeluar, $request)
     {
+        $signature = Signature::first();
         $template = new \PhpOffice\PhpWord\TemplateProcessor("./img/dokumen/Surat_Panggilan_pegawai.docx");
         $template->setValues([
             // surat
@@ -386,7 +396,9 @@ class SuratKeluarController extends Controller
 
 
         ]);
-
+        if ($signature) {
+            $template->setImageValue('ttd', $signature->signature_data);
+        }
         $template->saveAs('arsip/Surat_Panggilan_pegawai.docx');
         return response()->download(public_path('arsip/Surat_Panggilan_pegawai.docx'));
     }

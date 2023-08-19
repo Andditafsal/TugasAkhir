@@ -41,6 +41,8 @@ export default {
             jenissurat: [],
             datacheck: {},
             suratId: 1,
+            showdokumenSurat: "",
+            previewdokumenSurat: "",
         };
     },
     created() {
@@ -57,7 +59,7 @@ export default {
                 tahunSurat: suratkeluars.jenisSurat?.tahunSurat,
                 noSurat: suratkeluars.noSurat,
                 perihal: suratkeluars.perihal,
-                lampiran: suratkeluars.lampiranSurat,
+
                 kepada: suratkeluars.kepada,
                 tanggalSurat: suratkeluars.tanggalSurat,
                 namaKegiatan: suratkeluars.namaKegiatan,
@@ -87,6 +89,8 @@ export default {
                 kontakPengaju: suratkeluars.kontakPengaju,
             };
             this.suratId = suratkeluars.jenisSuratId;
+            this.showdokumenSurat = suratkeluars.lampiran;
+            this.previewdokumenSurat = suratkeluars.lampiran;
         },
         getSuratKeluar() {
             this.$store
@@ -148,7 +152,7 @@ export default {
             formData.append("jabatan_pengaju", this.form.jabatanPengaju);
             formData.append("kontak_pengaju", this.form.kontakPengaju);
             if (this.form.lampiranSurat) {
-                formData.append("lampiran_surat", this.form.lampiranSurat);
+                formData.append("lampiran_surat", this.form.lampiran);
             }
             this.isSuccess = true;
             this.$store
@@ -407,6 +411,16 @@ export default {
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="file">Lampiran *</label>
+                                            <span class="px-2">
+                                                <a
+                                                    :href="form.lampiran"
+                                                    class="btn btn-sm btn-danger"
+                                                    target="_blank"
+                                                >
+                                                    lihat surat
+                                                </a></span
+                                            >
+
                                             <input
                                                 type="file"
                                                 class="form-control"

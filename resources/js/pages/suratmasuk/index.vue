@@ -128,7 +128,7 @@ export default {
                         to="/suratmasuk/create"
                         type="button"
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
-                        v-if="$can('action', 'Petugas')"
+                        v-if="$can('action', ' Petugas')"
                     >
                         <span class="btn-inner--icon m-1"
                             ><i
@@ -154,7 +154,7 @@ export default {
                                     <button
                                         @click="exportData"
                                         class="d-flex px-12 align-items-center margin-100px-bottom exportData"
-                                        v-if="$can('action', 'Petugas')"
+                                        v-if="$can('action', 'Admin Petugas')"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
