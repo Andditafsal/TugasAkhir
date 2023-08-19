@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Route;
 
 //api td js
 Route::post('/uploadImg', [SignatureController::class, 'uploadSignatureImage']);
-Route::post('/signature',  [SignatureController::class, 'store']);
+Route::post('/signature/{id}',  [SignatureController::class, 'store']);
 Route::post('/save-', [TtdjsController::class, 'store']);
 
 
@@ -151,12 +151,11 @@ Route::prefix('suratmasuk')->middleware("auth:sanctum")->group(function () {
 Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::get('/', [SuratKeluarController::class, 'index']);
     Route::post('/', [SuratKeluarController::class, 'store']);
-    Route::get('/{suratkeluar}', [SuratKeluarController::class, 'show']);
+    Route::post('/{suratkeluar}', [SuratKeluarController::class, 'show']);
     Route::put('/{id}', [SuratKeluarController::class, 'update']);
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
     Route::post('/update/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
-    // Route::post('/show/{suratkeluar}', [SuratKeluarController::class, 'lihatpetugas']);
-    Route::get('/update_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'lihatpemimpin']);
+    Route::post('/update_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'lihatpemimpin']);
     Route::post('/update_status_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'selesaittd']);
 });
 

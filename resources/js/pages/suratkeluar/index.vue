@@ -318,15 +318,8 @@ export default {
                                             <td colspan="12" class="text-center">
                                                 <div class="alert alert-info w-100">
                                                     <strong><i>
-                                                        Kosong Lur
+                                                        Tidak Ada Data
                                                     </i></strong>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <strong
-                                                        >Tidak ada Data</strong
-                                                    >
                                                 </div>
                                             </td>
                                         </tr>
@@ -381,6 +374,18 @@ export default {
                                                         aria-hidden="true"
                                                     ></i>
                                                     Dilihat petugas
+                                                </button>
+                                                <button
+                                                    class="badge bg-inverse-lanjut"
+                                                    v-if="
+                                                        suratkeluars.status == 3
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fa fa-arrow-up"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                    Dilihat pemimpin
                                                 </button>
                                                 <button
                                                     class="badge bg-inverse-lanjut"
