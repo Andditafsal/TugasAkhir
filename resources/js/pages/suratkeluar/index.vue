@@ -378,18 +378,6 @@ export default {
                                                 <button
                                                     class="badge bg-inverse-lanjut"
                                                     v-if="
-                                                        suratkeluars.status == 3
-                                                    "
-                                                >
-                                                    <i
-                                                        class="fa fa-arrow-up"
-                                                        aria-hidden="true"
-                                                    ></i>
-                                                    Dilihat pemimpin
-                                                </button>
-                                                <button
-                                                    class="badge bg-inverse-lanjut"
-                                                    v-if="
                                                         suratkeluars.status == 2
                                                     "
                                                 >
