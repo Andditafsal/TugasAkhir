@@ -981,7 +981,7 @@ export default {
                                                 v-model="form.kontakPengaju"
                                             />
                                         </div>
-                                        <!-- <div class="col-md-6 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label>Keterangan Surat *</label>
                                             <input
                                                 type="text"
@@ -989,7 +989,7 @@ export default {
                                                 required
                                                 v-model="form.keterangaSurat"
                                             />
-                                        </div> -->
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">

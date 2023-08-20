@@ -135,43 +135,9 @@ export default {
                         @click="updateStatus(suratkeluar.id)"
                         v-if="$can('action', 'Petugas')"
                     >
-                        tindak lanjuti
+                        Tindak lanjuti
                     </button>
-                    <!-- <div
-                        class="dropdown show"
-                        v-if="$can('action', 'Pemimpin')"
-                    >
-                        <a
-                            class="btn btn-secondary dropdown-toggle"
-                            href="#"
-                            role="button"
-                            id="dropdownMenuLink"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            Tanda Tangan
-                        </a>
 
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownMenuLink"
-                        >
-                            <a
-                                class="dropdown-item"
-                                href="https://oauth.privy.id/login"
-                                >Privy</a
-                            >
-                            <a class="dropdown-item" href="#">qrCode</a>
-                            <a class="dropdown-item" href="#">ttd pen</a>
-                            <a
-                                class="dropdown-item"
-                                href="#"
-                                @click="showSignaturePad"
-                                >Tanda Tangan Digital</a
-                            >
-                        </div>
-                    </div> -->
                     <div class="dropdown" v-if="$can('action', 'Pemimpin')">
                         <button
                             class="btn btn-secondary dropdown-toggle"
@@ -676,19 +642,7 @@ export default {
                                                     disabled
                                                 />
                                             </div>
-                                            <!-- <div
-                                                class="col-md-6 mb-3"
-                                                v-show="suratId == 2"
-                                            >
-                                                <label>Masalah *</label>
-                                                <input
-                                                    class="form-control"
-                                                    type="text"
-                                                    v-model="
-                                                        form.masalahKegiatan
-                                                    "
-                                                />
-                                            </div> -->
+
                                             <div
                                                 class="col-md-6 mb-3"
                                                 v-show="suratId == 2"
@@ -703,19 +657,6 @@ export default {
                                                     disabled
                                                 />
                                             </div>
-                                            <!-- <div
-                                                class="col-md-6 mb-3"
-                                                v-show="suratId == 2"
-                                            >
-                                                <label>Catatan *</label>
-                                                <input
-                                                    class="form-control"
-                                                    type="text"
-                                                    v-model="
-                                                        form.ctatanKegiatan
-                                                    "
-                                                />
-                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -777,17 +718,17 @@ export default {
                                                 "
                                             />
                                         </div>
-                                        <!-- <div class="col-md-6 mb-3">
-                                            <label>No Hp *</label>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Keterangan Surat *</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
                                                 disabled
                                                 v-model="
-                                                    suratkeluar.keteranganSurat
+                                                    suratkeluar.keterangaSurat
                                                 "
                                             />
-                                        </div> -->
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 col-md-2 mt-3">
@@ -822,6 +763,15 @@ export default {
                                                 v-if="$can('action', 'Petugas')"
                                             >
                                                 Cetak
+                                            </a>
+                                        </div>
+                                        <div class="col-6 col-md-2 mt-3">
+                                            <a
+                                                href="https://oauth.privy.id/login"
+                                                class="btn btn-privy text-center w-100 my-1"
+                                                v-if="$can('action', 'Petugas')"
+                                            >
+                                                Privy
                                             </a>
                                         </div>
                                     </div>
@@ -888,6 +838,10 @@ export default {
 
 .btn-tindaklanjut:hover {
     background-color: #b0ac3f;
+    color: white !important;
+}
+.btn-privy {
+    background-color: #cc1c1a;
     color: white !important;
 }
 </style>
