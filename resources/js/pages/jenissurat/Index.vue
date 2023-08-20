@@ -82,7 +82,7 @@ export default {
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="col-12 card-judul">
-            <i class="fa fa-folder" aria-hidden="true"></i>
+            <i class="fa fa-list" aria-hidden="true"></i>
 
             <span class="h5 mb-0 text-gray-800 ml-2 mt-2">Jenis Surat </span>
         </div>
@@ -103,7 +103,10 @@ export default {
                         class="btn btn btn-sm btn-round btn-icon btn-pengguna"
                     >
                         <span class="btn-inner--icon m-1"
-                            ><i class="fa fa-list" aria-hidden="true"></i>
+                            ><i
+                                class="fas fa-plus-square"
+                                aria-hidden="true"
+                            ></i>
                         </span>
                         <span class="btn-inner--text m-1">Tambah Data</span>
                     </router-link>
@@ -278,14 +281,14 @@ export default {
                             class="btn btn-pengguna"
                             data-dismiss="modal"
                         >
-                            Close
+                            Batal
                         </button>
                         <button
                             type="button"
                             class="btn btn-danger"
                             @click="handleDelet"
                         >
-                            Delet
+                            Hapus
                         </button>
                     </div>
                 </div>

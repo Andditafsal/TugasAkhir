@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Route;
 
 //api td js
 Route::post('/uploadImg', [SignatureController::class, 'uploadSignatureImage']);
-Route::post('/signature/{id}',  [SignatureController::class, 'store']);
+Route::post('/signature',  [SignatureController::class, 'store']);
 Route::post('/save-', [TtdjsController::class, 'store']);
 
 
@@ -156,7 +156,7 @@ Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);
     Route::post('/update/{suratkeluar}', [SuratKeluarController::class, 'updatestatus']);
     Route::post('/update_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'lihatpemimpin']);
-    Route::post('/update_status_pemimpin/{suratkeluar}', [SuratKeluarController::class, 'selesaittd']);
+    Route::post('/update_status_pemimpin', [SuratKeluarController::class, 'selesaittd']);
 });
 
 

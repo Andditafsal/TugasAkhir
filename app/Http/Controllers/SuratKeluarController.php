@@ -178,8 +178,8 @@ class SuratKeluarController extends Controller
     //         }
     //     }
     // }
-    
-    
+
+
 
     /**
      * Update the specified resource in storage.
@@ -201,6 +201,7 @@ class SuratKeluarController extends Controller
         }
         return DB::transaction(function () use ($request, $suratkeluar) {
             return $suratkeluar->update($request->all());
+            DB::commit();
         });
     }
 

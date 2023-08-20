@@ -117,10 +117,10 @@ export default {
                             type="button"
                             data-dismiss="modal"
                         >
-                            Cancel
+                            Batal
                         </button>
                         <button class="btn btn-primary" @click="handleLogout()">
-                            Logout
+                            Keluar
                         </button>
                     </div>
                 </div>
@@ -128,3 +128,10 @@ export default {
         </div>
     </body>
 </template>
+
+<style>
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+</style>

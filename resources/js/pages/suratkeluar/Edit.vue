@@ -45,8 +45,9 @@ export default {
             previewlampiran: "",
         };
     },
-    created() {
-        this.getSuratKeluar();
+
+    mounted() {
+        this.getsuratkeluar();
     },
     methods: {
         setForm(suratkeluars) {
@@ -58,6 +59,7 @@ export default {
                 tahunSurat: suratkeluars.jenisSurat?.tahunSurat,
                 noSurat: suratkeluars.noSurat,
                 perihal: suratkeluars.perihal,
+                lampiranSurat: suratkeluars.lampiranSurat,
 
                 kepada: suratkeluars.kepada,
                 tanggalSurat: suratkeluars.tanggalSurat,
@@ -88,15 +90,15 @@ export default {
                 kontakPengaju: suratkeluars.kontakPengaju,
             };
             this.suratId = suratkeluars.jenisSuratId;
-            this.showdokumenSurat = suratkeluars.lampiran;
-            this.previewdokumenSurat = suratkeluars.lampiran;
+            // this.showdokumenSurat = suratkeluars.lampiran;
+            // this.previewdokumenSurat = suratkeluars.lampiran;
         },
-        getSuratKeluar() {
+        getsuratkeluar() {
             this.$store
                 .dispatch("showData", ["suratkeluar", this.id])
                 .then((response) => {
-                    console.log(response);
                     this.setForm(response.data);
+                    //this.form = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -177,16 +179,16 @@ export default {
                     //  console.log(error);
                 });
         },
-        chooseSurat(e) {
-            this.$store
-                .dispatch("showData", ["jenissurat", e.target.value])
-                .then((response) => {
-                    this.datacheck = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
+        // chooseSurat(e) {
+        //     this.$store
+        //         .dispatch("showData", ["jenissurat", e.target.value])
+        //         .then((response) => {
+        //             this.datacheck = response.data;
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // },
     },
 };
 </script>
@@ -410,14 +412,14 @@ export default {
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="file">Lampiran *</label>
-                                            <span class="px-2">
+                                            <!-- <span class="px-2">
                                                 <a
                                                     :href="form.lampiran"
                                                     class="btn btn-sm btn-danger"
                                                     target="_blank"
                                                 >
                                                     lihat surat
-                                                </a></span
+                                                </a></span -->
                                             >
 
                                             <input

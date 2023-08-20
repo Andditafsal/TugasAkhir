@@ -38,7 +38,7 @@ export default {
                     <div class="col-lg">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Masuk</h1>
                                 <h6 class="text-gray-500 mb-4">
                                     Gunakan akun anda untuk akses lebih lanjut!
                                 </h6>
@@ -90,7 +90,7 @@ export default {
                                 <button
                                     class="btn btn-primary btn-user btn-block"
                                 >
-                                    Login
+                                    Masuk
                                 </button>
                             </form>
                             <hr />
