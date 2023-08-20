@@ -95,7 +95,7 @@ export default {
         },
         getsuratkeluar() {
             this.$store
-                .dispatch("showData", ["suratkeluar", this.id])
+                .dispatch("postData", [`suratkeluar/${this.$route.params.id}`, {}])
                 .then((response) => {
                     this.setForm(response.data);
                     //this.form = response.data;
