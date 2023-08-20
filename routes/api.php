@@ -151,6 +151,7 @@ Route::prefix('suratmasuk')->middleware("auth:sanctum")->group(function () {
 Route::prefix('suratkeluar')->middleware("auth:sanctum")->group(function () {
     Route::get('/', [SuratKeluarController::class, 'index']);
     Route::post('/', [SuratKeluarController::class, 'store']);
+    // Route::get('/get/{id}', [SuratKeluarController::class, 'lihat']);
     Route::post('/{suratkeluar}', [SuratKeluarController::class, 'show']);
     Route::put('/{id}', [SuratKeluarController::class, 'update']);
     Route::delete('/{suratkeluar}', [SuratKeluarController::class, 'destroy']);

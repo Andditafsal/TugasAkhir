@@ -101,6 +101,14 @@ class SuratKeluarController extends Controller
         return $this->suratkeluar->create($request->all());
     }
 
+    // public function lihat(SuratKeluar $suratKeluar, $id){
+    //     return DB::transaction(function () use($id) {
+    //         $surat = SuratKeluar::where("id", $id)->first();
+
+    //     });
+    //     return new SuratKeluarDetail($suratKeluar, $surat);
+    // }
+
     /**
      * Display the specified resource.
      */
