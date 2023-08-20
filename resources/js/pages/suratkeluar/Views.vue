@@ -187,17 +187,16 @@ export default {
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenuLink"
                         >
-                            <!-- <a
-                                class="dropdown-item"
-                                href="https://oauth.privy.id/login"
-                                >Privy</a
-                            > -->
-
                             <a
                                 class="dropdown-item"
                                 href="#"
                                 @click="showSignaturePad"
-                                >Tanda Tangan Digital</a
+                                >Tanda Tangan Pad</a
+                            >
+                            <a
+                                class="dropdown-item"
+                                href="https://oauth.privy.id/login"
+                                >Privy</a
                             >
                         </div>
                     </div>

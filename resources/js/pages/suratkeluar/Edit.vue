@@ -95,7 +95,7 @@ export default {
         },
         getsuratkeluar() {
             this.$store
-                .dispatch("showData", ["suratkeluar", this.id])
+                .dispatch("Data", ["suratkeluar", this.id])
                 .then((response) => {
                     this.setForm(response.data);
                     //this.form = response.data;
