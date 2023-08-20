@@ -117,7 +117,6 @@ export default {
 };
 </script>
 <template>
-    {{ suratkeluar }}
     <div class="container-fluid">
         <!-- DataTales Example -->
         <div class="card shadow col-lg-12 mb-4">
