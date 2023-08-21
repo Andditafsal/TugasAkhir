@@ -369,6 +369,7 @@ class SuratKeluarController extends Controller
             'kepada' => $suratkeluar->kepada,
             'nama_pegawai' => $suratkeluar->nama_pegawai,
             'nip' => $suratkeluar->nip,
+            'tanggal_kegiatan' => $suratkeluar->tanggal_kegiatan,
             'jabatan' => $suratkeluar->jabatan,
             'pangkat' => $suratkeluar->pangkat,
             'gol' => $suratkeluar->gol,

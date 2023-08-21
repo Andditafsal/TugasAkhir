@@ -725,7 +725,7 @@ export default {
                                                 class="form-control"
                                                 disabled
                                                 v-model="
-                                                    suratkeluar.keterangaSurat
+                                                    suratkeluar.keteranganSurat
                                                 "
                                             />
                                         </div>
